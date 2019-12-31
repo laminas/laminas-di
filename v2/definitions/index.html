@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/v2/definitions/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Dependency Definitions - laminas-di - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-di</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-di/" class="header__link header__link--github" title="Go to repository of laminas-di">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#definitionlist" class="toc__link">DefinitionList</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#runtimedefinition" class="toc__link">RuntimeDefinition</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#compilerdefinition" class="toc__link">CompilerDefinition</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#classdefinition" class="toc__link">ClassDefinition</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">v2 Documentation</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Dependency Definitions</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">v2 Documentation</h2>
+    
+
+    <h1 id="dependency-definitions">Dependency Definitions</h1>
+<blockquote>
+<h3>Version 2</h3>
+<p>This is documentation for the legacy version (2.x) of laminas-di.</p>
+</blockquote>
+<p>Definitions are what laminas-di uses to understand the structure of the code it is
+attempting to wire. This means that if you've written non-ambiguous, clear, and
+concise code, laminas-di has a very good chance of understanding how to wire things
+up without much added complexity.</p>
+<h2 id="definitionlist">DefinitionList</h2>
+<p>Definitions are introduced to the <code>Laminas\Di\Di</code> object through a definition list
+implemented as <code>Laminas\Di\DefinitionList</code> (which extends <code>SplDoublyLinkedList</code>).
+Order is important. Definitions in the front of the list will be consulted on a
+class before definitions at the end of the list.</p>
+<blockquote>
+<h3>Autoloading</h3>
+<p>Regardless of what kind of <code>DefinitionList</code> strategy you decide to use, it is
+important that your autoloaders are already setup and ready to use.</p>
+</blockquote>
+<h2 id="runtimedefinition">RuntimeDefinition</h2>
+<p>The default <code>DefinitionList</code> instantiated by <code>Laminas\Di\Di</code> when no other
+DefinitionList is provided is <code>Laminas\Di\Definition\RuntimeDefinition</code>. The
+<code>RuntimeDefinition</code> will respond to queries about classes by using PHP's
+Reflection API. The <code>RuntimeDefinition</code> uses any available information inside
+methods &mdash; including their signature, the names of parameters, the
+type-hints of the parameters, and the default values &mdash; to determine if
+something is optional or required when making a call to that method. The more
+explicit you can be in your method naming and method signatures, the more likely
+<code>Laminas\Di\Definition\RuntimeDefinition</code> will accurately understand the structure
+of your code.</p>
+<p>The constructor of <code>RuntimeDefinition</code> looks like the following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function __construct(</span>
+<span class=x>    IntrospectionStrategy $introspectionStrategy = null,</span>
+<span class=x>    array $explicitClasses = null</span>
+<span class=x>) {</span>
+<span class=x>    $this-&gt;introspectionStrategy = $introspectionStrategy ?: new IntrospectionStrategy();</span>
+<span class=x>    if ($explicitClasses) {</span>
+<span class=x>        $this-&gt;setExplicitClasses($explicitClasses);</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>The <code>IntrospectionStrategy</code> object is an object that defines the rules by which
+the <code>RuntimeDefinition</code> will introspect information about your classes. Here are
+the things it knows how to do:</p>
+<ul>
+<li>
+<p>Whether or not to use annotations (scanning and parsing annotations is
+  expensive, and thus disabled by default).</p>
+</li>
+<li>
+<p>Which method names to include in the introspection; this is a list of
+  patterns. By default, it registers the pattern <code>/^set\[A-Z\]{1}\\w\*/</code>.</p>
+</li>
+<li>
+<p>Which interface names represent the interface injection pattern; this is a
+  list of patterns. By default, the pattern <code>/\\w\*Aware\\w\*/</code> is registered.</p>
+</li>
+</ul>
+<p>The constructor for the <code>IntrospectionStrategy</code> looks like this:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>public function __construct(AnnotationManager $annotationManager = null)</span>
+<span class=x>{</span>
+<span class=x>    $this-&gt;annotationManager = $annotationManager ?: $this-&gt;createDefaultAnnotationManager();</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>The <code>AnnotationManager</code> is not required. If you wish to create a special
+<code>AnnotationManager</code> with your own annotations, and also wish to extend the
+<code>RuntimeDefinition</code> to look for those annotations, this is the place to do it.</p>
+<p>The <code>RuntimeDefinition</code> also can be used to look up either all classes
+(implicitly, which is default), or explicitly look up for particular pre-defined
+classes. This is useful when your strategy for inspecting one set of classes
+might differ from those of another strategy for another set of classes. This can
+be achieved by using the <code>setExplicitClasses()</code> method or by passing a list of
+classes as the second constructor argument of the <code>RuntimeDefinition</code>.</p>
+<h2 id="compilerdefinition">CompilerDefinition</h2>
+<p>The <code>CompilerDefinition</code> is similar in nature to the <code>RuntimeDefinition</code> with
+the exception that it can be seeded with more information for the purposes of
+"compiling" a definition. Compiled definitions eliminate reflection calls and
+annotation scannning, which can be a performance bottleneck in your production
+applications.</p>
+<p>For example, let's assume we want to create a script that will create
+definitions for some of our library code:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// in &quot;package name&quot; format</span>
+<span class=x>$components = [</span>
+<span class=x>    &#39;My_MovieApp&#39;,</span>
+<span class=x>    &#39;My_OtherClasses&#39;,</span>
+<span class=x>];</span>
+
+<span class=x>foreach ($components as $component) {</span>
+<span class=x>    $diCompiler = new Laminas\Di\Definition\CompilerDefinition;</span>
+<span class=x>    $diCompiler-&gt;addDirectory(&#39;/path/to/classes/&#39; . str_replace(&#39;_&#39;, &#39;/&#39;, $component));</span>
+
+<span class=x>    $diCompiler-&gt;compile();</span>
+<span class=x>    file_put_contents(</span>
+<span class=x>        __DIR__ . &#39;/../data/di/&#39; . $component . &#39;-definition.php&#39;,</span>
+<span class=x>        &#39;</span><span class=cp>&lt;?php</span> <span class=k>return</span> <span class=s1>&#39; . var_export($diCompiler-&gt;toArrayDefinition()-&gt;toArray(), true) . &#39;</span><span class=p>;</span><span class=err>&#39;</span>
+    <span class=p>);</span>
+<span class=p>}</span>
+</pre></div></p>
+<p>The above creates a file for each "package", containing the full definition for
+the classes defined for each. To utilize this in an application, use the
+following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>protected function setupDi(Application $app)</span>
+<span class=x>{</span>
+<span class=x>    $definitionList = new DefinitionList([</span>
+<span class=x>        new Definition\ArrayDefinition(include __DIR__ .  &#39;/path/to/data/di/My_MovieApp-definition.php&#39;),</span>
+<span class=x>        new Definition\ArrayDefinition(include __DIR__ .  &#39;/path/to/data/di/My_OtherClasses-definition.php&#39;),</span>
+<span class=x>        $runtime = new Definition\RuntimeDefinition(),</span>
+<span class=x>    ]);</span>
+<span class=x>    $di = new Di($definitionList, null, new Config($this-&gt;config-&gt;di));</span>
+<span class=x>    $di-&gt;instanceManager()-&gt;addTypePreference(&#39;Laminas\Di\LocatorInterface&#39;, $di);</span>
+<span class=x>    $app-&gt;setLocator($di);</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>The above code would more than likely go inside your application's bootstrap or
+within a <code>Module</code> class. This represents the simplest and most performant way
+of configuring your DiC for usage.</p>
+<h2 id="classdefinition">ClassDefinition</h2>
+<p>The idea behind using a <code>ClassDefinition</code> is two-fold. First, you may want to
+override some information inside of a <code>RuntimeDefinition</code>. Secondly, you might
+want to simply define your complete class's definition with an xml, ini, or php
+file describing the structure. This class definition can be fed in via
+<code>Configuration</code> or by directly instantiating and registering the <code>Definition</code>
+with the <code>DefinitionList</code>.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../codegen/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../instance-manager/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v2/definitions.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../..',
+            project  = "components",
+            siteName = 'laminas-di';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-di" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

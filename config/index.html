@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/config/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Configuration - laminas-di - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-di</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-di/" class="header__link header__link--github" title="Go to repository of laminas-di">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#type-preferences" class="toc__link">Type Preferences</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#parameters" class="toc__link">Parameters</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#aliases" class="toc__link">Aliases</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Configuration</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="configuration">Configuration</h1>
+<p>Configuration detailing how types are constructed and dependencies should be
+resolved can be provided as an associative array when instantiating
+<code>Laminas\Di\Config</code>. A type may be an actual class name or an alias to a class
+name.</p>
+<p>The configuration array respects the following keys (unknown keys are ignored):</p>
+<ul>
+<li>
+<p><code>preferences</code>: Associative nested array that maps class or interface names to
+  a service name that should be used to provide a dependency. See the
+  <a href="#type-preferences">Type Preferences</a> section below for details.</p>
+</li>
+<li>
+<p><code>types</code>: Associative array defining how classes or aliases should be
+  constructed. Each key in this array is a class or alias name, and its value is
+  another associative array with the following keys:</p>
+</li>
+<li>
+<p><code>preferences</code>: The same as <code>preferences</code> above, but only for the associated
+    class.</p>
+</li>
+<li>
+<p><code>parameters</code>: Associative array declaring the values to inject for the
+    declared construction parameters.  Each key is the parameter name as
+    declared in the constructor method of the associated class name. See the
+    <a href="#parameters">Parameters</a> section below for details.</p>
+</li>
+<li>
+<p><code>typeOf</code>: String that contains a class name. It declares that the
+    associated key is an alias of the given class name. This class must exist.
+    It cannot not be another alias.</p>
+</li>
+</ul>
+<p>Below is an example of injector configuration.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$config = new \Laminas\Di\Config([</span>
+<span class=x>    // Declares global preferences to use when resolving</span>
+<span class=x>    // dependencies of the specified type</span>
+<span class=x>    &#39;preferences&#39; =&gt; [</span>
+<span class=x>        // A map of classname =&gt; preferred type</span>
+<span class=x>        MyInterface::class =&gt; MyImplementation::class,</span>
+<span class=x>    ],</span>
+
+<span class=x>    // Declares how types should be constructed.</span>
+<span class=x>    // This also allows declaring aliases of a specific class</span>
+<span class=x>    &#39;types&#39; =&gt; [</span>
+<span class=x>        ClassName::class =&gt; [</span>
+<span class=x>            // Declaration in the same way as global preferences</span>
+<span class=x>            // but these will aply when the type of the associated key</span>
+<span class=x>            // should be instanciated</span>
+<span class=x>            &#39;preferences&#39; =&gt; [],</span>
+
+<span class=x>            // Constructor parameters to inject. This option will define</span>
+<span class=x>            // the injections directly by the parameter name of the constructor</span>
+<span class=x>            // used as key.</span>
+<span class=x>            //</span>
+<span class=x>            // If the parameter is type-hinted by a class/interface name, you can</span>
+<span class=x>            // provide the injection by string. The injector will use the IoC</span>
+<span class=x>            // container to obtain it.</span>
+<span class=x>            &#39;parameters&#39; =&gt; [</span>
+<span class=x>                &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
+<span class=x>            ],</span>
+<span class=x>        ],</span>
+
+<span class=x>        // Define an alias</span>
+<span class=x>        &#39;Alias.Name&#39; =&gt; [</span>
+<span class=x>            &#39;typeOf&#39; =&gt; ClassName::class,</span>
+
+<span class=x>            &#39;preferences&#39; =&gt; [],</span>
+<span class=x>            &#39;parameters&#39; =&gt; [],</span>
+<span class=x>        ],</span>
+<span class=x>    ],</span>
+<span class=x>]);</span>
+</pre></div></p>
+<h2 id="type-preferences">Type Preferences</h2>
+<p>In many cases, you might be using interfaces as type hints as opposed to
+concrete types. Even though type preferences are not limited to interfaces or
+abstract class names, they provide hints to the injector on how such types
+should be resolved.</p>
+<p>The resolver will look up the name finally passed to the container in the
+following way (the first match will be used):</p>
+<ol>
+<li>The preference defined in the type configuration of  the class if it satifies
+   the typehint (implements, extends, or typeOf).</li>
+<li>If there is a global preference defined and it satisfies the typehint.</li>
+<li>Use the typehinted name directly.</li>
+</ol>
+<p> <div class=codehilite><pre><span></span><span class=x>// Assume the following classes are declared:</span>
+
+<span class=x>interface FooInterface</span>
+<span class=x>{}</span>
+
+<span class=x>class Foo implements FooInterface</span>
+<span class=x>{}</span>
+
+<span class=x>class SpecialFoo implements FooInterface</span>
+<span class=x>{}</span>
+
+<span class=x>class Bar</span>
+<span class=x>{}</span>
+
+<span class=x>class MyClass</span>
+<span class=x>{</span>
+<span class=x>    public function __construct(FooInterface $foo)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+
+<span class=x>// With the following configuration:</span>
+
+<span class=x>use Laminas\Di\Injector;</span>
+<span class=x>use Laminas\Di\Config;</span>
+
+<span class=x>$injector = new Injector(new Config([</span>
+<span class=x>    &#39;preferences&#39; =&gt; [</span>
+<span class=x>        FooInterface::class =&gt; Foo::class,</span>
+<span class=x>    ],</span>
+<span class=x>    &#39;types&#39; =&gt; [</span>
+<span class=x>        &#39;MyClass.A&#39; =&gt; [</span>
+<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class</span>
+<span class=x>            &#39;preferences&#39; =&gt; [</span>
+<span class=x>               FooInterface::class =&gt; SpecialFoo::class,,</span>
+<span class=x>            ],</span>
+<span class=x>        ],</span>
+<span class=x>        &#39;MyClass.B&#39; =&gt; [</span>
+<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class</span>
+<span class=x>            &#39;preferences&#39; =&gt; [</span>
+<span class=x>               FooInterface::class =&gt; Bar::class,,</span>
+<span class=x>            ],</span>
+<span class=x>        ],</span>
+<span class=x>    ],</span>
+<span class=x>]);</span>
+
+
+<span class=x>// The results are:</span>
+<span class=x>$a = $injector-&gt;create(MyClass::class); // Constructed with Foo</span>
+<span class=x>$b = $injector-&gt;create(&#39;MyClass.A&#39;); // Constructed with SpecialFoo</span>
+<span class=x>$c = $injector-&gt;create(&#39;MyClass.B&#39;); // Constructed with Foo (since Bar does not satisfy FooInterface)</span>
+</pre></div></p>
+<h2 id="parameters">Parameters</h2>
+<p>In contrast to type preferences, the resolver will not perform checks if the
+provided value satisfies the required type. It will be used directly to inject
+the value.</p>
+<p>There are several ways to define injections.</p>
+<ul>
+<li>
+<p>An IoC container service name as string: This is only possible if the required
+  type is a class or interface. For other types (scalars, <code>iterable</code>,
+  <code>callable</code>, etc) or typeless parameters, the string value is passed <strong>as is</strong>.</p>
+</li>
+<li>
+<p>An instance of <code>Laminas\Di\Resolver\ValueInjection</code>: Injects the value returned
+  by <code>getValue()</code> as is.</p>
+</li>
+<li>
+<p>An instance of <code>Laminas\Di\Resolver\TypeInjection</code>: Obtains the injected value
+  from the IoC container by passing the return value of <code>getType()</code> to the
+  container's <code>get()</code> method.</p>
+</li>
+<li>
+<p>The string literal <code>'*'</code>: This requests the injector to ignore any previously
+  defined parameter and use the type preference resolution as described in
+  <a href="#type-preferences">Type Preferences</a>.</p>
+</li>
+<li>
+<p>Any other value will be used as is and encapsulated in a
+  <code>Laminas\Di\Resolver\ValueInjection</code>. If the provided value's type does not fit
+  the required parameter type, an exception is thrown.</p>
+</li>
+</ul>
+<h2 id="aliases">Aliases</h2>
+<p>Aliases allow you to configure the same class with different construction
+options. Aliases can directly be created with the injector or declared as type
+preferences.</p>
+<p>An alias must refer to an actual class or an interface, therefore you cannot
+declare aliases for another alias.</p>
+<p>For example the following the following class should be instantiated in two
+different ways:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Assume the following classes are declared:</span>
+
+<span class=x>class Foo</span>
+<span class=x>{}</span>
+
+<span class=x>class SpecialFoo extends Foo</span>
+<span class=x>{}</span>
+
+<span class=x>class MyClass</span>
+<span class=x>{</span>
+<span class=x>    public function __construct(Foo $foo, string $bar)</span>
+<span class=x>    {</span>
+<span class=x>        // ...</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+
+<span class=x>// With the following injection config:</span>
+
+<span class=x>use Laminas\Di\Injector;</span>
+<span class=x>use Laminas\Di\Config;</span>
+
+<span class=x>$injector = new Injector(new Config([</span>
+<span class=x>    &#39;types&#39; =&gt; [</span>
+<span class=x>        MyClass::class =&gt; [</span>
+<span class=x>            &#39;parameters&#39; =&gt; [</span>
+<span class=x>               &#39;foo&#39; =&gt; SpecialFoo::class,</span>
+<span class=x>               &#39;bar&#39; =&gt; &#39;Stringvalue&#39;,</span>
+<span class=x>            ],</span>
+<span class=x>        ],</span>
+<span class=x>        &#39;MyClass.Alias&#39; =&gt; [</span>
+<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class,</span>
+<span class=x>            &#39;parameters&#39; =&gt; [</span>
+<span class=x>               &#39;foo&#39; =&gt; &#39;*&#39;,</span>
+<span class=x>               &#39;bar&#39; =&gt; &#39;Stringvalue&#39;,</span>
+<span class=x>            ],</span>
+<span class=x>        ],</span>
+<span class=x>    ],</span>
+<span class=x>]);</span>
+
+<span class=x>// The results are:</span>
+<span class=x>$a = $injector-&gt;create(MyClass::class); // Constructed with SpecialFoo</span>
+<span class=x>$b = $injector-&gt;create(&#39;MyClass.Alias&#39;); // Constructed with Foo (since there are no type preferences for Foo)</span>
+</pre></div></p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../psr-11/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../injector/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/config.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '..',
+            project  = "components",
+            siteName = 'laminas-di';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-di" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

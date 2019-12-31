@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/cookbook/aot-guide/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Using AoT with Mezzio and laminas-servicemanager - laminas-di - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-di</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-di/" class="header__link header__link--github" title="Go to repository of laminas-di">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#1-create-project-and-add-laminas-di" class="toc__link">1. Create project and add laminas-di</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#2-make-your-project-ready-for-aot" class="toc__link">2. Make your project ready for AoT</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#3-add-some-auto-wiring" class="toc__link">3. Add some auto-wiring</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#4-add-a-code-generator-command-script" class="toc__link">4. Add a code generator command script</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#5-add-aot-to-the-service-manager" class="toc__link">5. Add AoT to the service manager</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Cookbook</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Using AoT with Mezzio and laminas-servicemanager</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Cookbook</h2>
+    
+
+    <h1 id="using-aot-with-mezzio-and-laminas-servicemanager">Using AoT with Mezzio and laminas-servicemanager</h1>
+<p>This guide will show you how you can use laminas-di's Ahead-of-Time (AoT) compiler
+to make your <a href="https://docs.mezzio.dev/mezzio">Mezzio</a>
+application production ready when it uses laminas-di.</p>
+<p>You will learn how to:</p>
+<ul>
+<li>Add a script to run the compilation.</li>
+<li>Use the generated injector with laminas-servicemanager.</li>
+<li>Use the generated factories with laminas-servicemanager.</li>
+</ul>
+<h2 id="1-create-project-and-add-laminas-di">1. Create project and add laminas-di</h2>
+<p>For this guide, we will use an <a href="https://docs.mezzio.dev/mezzio/">mezzio application</a>
+built from the skeleton with laminas-servicemanager as its IoC container.</p>
+<p>If you have already set up a project with laminas-di, you can skip this step.</p>
+<p>First, we'll create a new project:</p>
+<p> <div class=codehilite><pre><span></span>$ composer create-project mezzio/mezzio-skeleton laminas-di-aot-example
+</pre></div></p>
+<p>Pick the components you want to use. We will be using laminas-servicemanager
+and a "Modular" layout for this example.</p>
+<p>Once you are done, enter the newly created project's working directory:</p>
+<p> <div class=codehilite><pre><span></span>$ <span class=nb>cd</span> laminas-di-aot-example
+</pre></div></p>
+<p>Now add laminas-di with composer:</p>
+<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-di
+</pre></div></p>
+<blockquote>
+<h3>Possible version conflicts</h3>
+<p>Please make sure that laminas-di version 3.x is installed. When you are
+upgrading from laminas-di version 2.x, you may have to remove
+<code>laminas-servicemanager-di</code> because version 3.x makes this package obsolete and
+therefore conflicts with it.</p>
+<p>You can ensure version 3.x is installed by adding a version constraint to
+composer's require command:</p>
+<pre class=codehilite><code class=language-bash>
+$ composer require laminas/laminas-di:^3.0
+</code></pre>
+<p>This approach will also notify you if there are conflicts with installing v3.</p>
+<h3>Additional requirements for version 3.0.x</h3>
+<p>Before version 3.1, <code>laminas/laminas-code</code> was required to be
+added individually to your project for generating AoT code. Since version
+3.1 this is no longer necessary.</p>
+</blockquote>
+<p>The component installer should ask you where to inject the config provider. Pick
+option 1, which usually is <code>config/config.php</code>. If not, or you cannot use the
+component installer, you will need to add it manually by adding an entry for
+<code>\Laminas\Di\ConfigProvider::class</code> within your application configuration
+example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// config/config.php:</span>
+
+<span class=x>use Laminas\ConfigAggregator\ArrayProvider;</span>
+<span class=x>use Laminas\ConfigAggregator\ConfigAggregator;</span>
+<span class=x>use Laminas\ConfigAggregator\PhpFileProvider;</span>
+
+<span class=x>// ...</span>
+
+<span class=x>$aggregator = new ConfigAggregator([</span>
+<span class=x>    // Add Laminas\Di</span>
+<span class=x>    \Laminas\Di\ConfigProvider::class,</span>
+
+<span class=x>    // ...</span>
+<span class=x>], $cacheConfig[&#39;config_cache_path&#39;]);</span>
+
+<span class=x>// ...</span>
+</pre></div></p>
+<h2 id="2-make-your-project-ready-for-aot">2. Make your project ready for AoT</h2>
+<p>To follow the modular principle of our mezzio app, we will put the AoT
+related configurations and generated code in a separate module called <code>AppAoT</code>.</p>
+<p>By default, skeleton applications include the mezzio-tooling component,
+which allows you to do this in a single step:</p>
+<p> <div class=codehilite><pre><span></span>$ ./vendor/bin/mezzio module:create AppAoT
+</pre></div></p>
+<p>If the tooling is present and the above command is successful, you can now skip
+to the next step. Otherwise, continue on to manually create your module.</p>
+<p>First, create the initial directory structure:</p>
+<p> <div class=codehilite><pre><span></span>$ mkdir src/AppAoT/src
+</pre></div></p>
+<p>Next, create a config provider class in <code>src/AppAoT/src/ConfigProvider.php</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace AppAoT;</span>
+
+<span class=x>class ConfigProvider</span>
+<span class=x>{</span>
+<span class=x>    public function __invoke()</span>
+<span class=x>    {</span>
+<span class=x>        return [</span>
+<span class=x>            &#39;dependencies&#39; =&gt; $this-&gt;getDependencies(),</span>
+<span class=x>        ];</span>
+<span class=x>    }</span>
+
+<span class=x>    public function getDependencies()</span>
+<span class=x>    {</span>
+<span class=x>        return [</span>
+<span class=x>            &#39;auto&#39; =&gt; [</span>
+<span class=x>                &#39;aot&#39; =&gt; [</span>
+<span class=x>                    &#39;namespace&#39; =&gt; __NAMESPACE__ . &#39;\\Generated&#39;,</span>
+<span class=x>                    &#39;directory&#39; =&gt; __DIR__ . &#39;/../gen&#39;,</span>
+<span class=x>                ],</span>
+<span class=x>            ],</span>
+<span class=x>        ];</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Add this new class to the the beginning of your <code>config/config.php</code> file's
+<code>ConfigAggregator</code> settings:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$aggregator = new ConfigAggregator([</span>
+<span class=x>    \AppAoT\ConfigProvider::class</span>
+<span class=x>    // Add Laminas\Di</span>
+<span class=x>    \Laminas\Di\ConfigProvider::class,</span>
+
+<span class=x>    // ...</span>
+<span class=x>]);</span>
+</pre></div></p>
+<p>In order for your application to find this class, we need to add an autoloading
+rule. Find the <code>psr-4</code> autoloader section of your <code>composer.json</code>, and add an
+entry for your new <code>AppAot</code> namespace as follows:</p>
+<p> <div class=codehilite><pre><span></span><span class=p>{</span>
+    <span class=nt>&quot;autoload&quot;</span><span class=p>:</span> <span class=p>{</span>
+        <span class=nt>&quot;psr-4&quot;</span><span class=p>:</span> <span class=p>{</span>
+            <span class=nt>&quot;App\\&quot;</span><span class=p>:</span> <span class=s2>&quot;src/App/src/&quot;</span><span class=p>,</span>
+            <span class=nt>&quot;AppAoT\\&quot;</span><span class=p>:</span> <span class=s2>&quot;src/AppAoT/src/&quot;</span><span class=p>,</span>
+            <span class=nt>&quot;AppAoT\\Generated\\&quot;</span><span class=p>:</span> <span class=s2>&quot;src/AppAoT/gen/&quot;</span>
+        <span class=p>}</span>
+    <span class=p>},</span>
+    <span class=err>...</span>
+<span class=p>}</span>
+</pre></div></p>
+<blockquote>
+<p>Note that we defined <code>AppAoT\\Generated\\</code> which will point to the code
+we generate from laminas-di in the next steps.</p>
+</blockquote>
+<p>Finally, update your autoloader:</p>
+<p> <div class=codehilite><pre><span></span>$ composer dump-autoload
+</pre></div></p>
+<h2 id="3-add-some-auto-wiring">3. Add some auto-wiring</h2>
+<p>Because laminas-di can provide autowiring for us, we can remove configuration that
+already exists within our <code>App</code> module. Edit the file
+<code>src/App/src/ConfigProvider.php</code> and comment out the entries shown below:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>    public function getDependencies()</span>
+<span class=x>    {</span>
+<span class=x>        return [</span>
+<span class=x>            &#39;invokables&#39; =&gt; [</span>
+<span class=x>                // Action\PingAction::class =&gt; Action\PingAction::class,</span>
+<span class=x>            ],</span>
+<span class=x>            &#39;factories&#39;  =&gt; [</span>
+<span class=x>                // Action\HomePageAction::class =&gt; Action\HomePageFactory::class,</span>
+<span class=x>            ],</span>
+<span class=x>        ];</span>
+<span class=x>    }</span>
+</pre></div></p>
+<p>We can also now remove the <code>HomePageFactory</code> referenced in that method:</p>
+<p> <div class=codehilite><pre><span></span>$ rm src/App/src/HomePageFactory.php
+</pre></div></p>
+<p>The default actions (<code>HomePageAction</code> and <code>PingAction</code>) now use auto wiring!</p>
+<h2 id="4-add-a-code-generator-command-script">4. Add a code generator command script</h2>
+<p>We will now add a simple script in the <code>bin/</code> directory, which we will also add
+to our <code>composer.json</code>scripts section, to generate factories.</p>
+<p>In the real world, you might use a console implementation such as
+symfony/console for scripts such as these.</p>
+<p>Add the generator script <code>bin/di-generate-aot.php</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace AppAoT;</span>
+
+<span class=x>use Psr\Container\ContainerInterface;</span>
+<span class=x>use Laminas\Code\Scanner\DirectoryScanner;</span>
+<span class=x>use Laminas\Di\CodeGenerator\InjectorGenerator;</span>
+<span class=x>use Laminas\Di\Config;</span>
+
+<span class=x>require __DIR__ . &#39;/../vendor/autoload.php&#39;;</span>
+
+<span class=x>// Define the source directories to scan for classes for which</span>
+<span class=x>// to generate AoT factories:</span>
+<span class=x>$directories = [</span>
+<span class=x>    __DIR__ . &#39;/../src/App/src&#39;,</span>
+<span class=x>];</span>
+
+<span class=x>/** @var ContainerInterface $container */</span>
+<span class=x>$container = require __DIR__ . &#39;/../config/container.php&#39;;</span>
+<span class=x>$scanner = new DirectoryScanner($directories);</span>
+<span class=x>$generator = $container-&gt;get(InjectorGenerator::class);</span>
+
+<span class=x>$generator-&gt;generate($scanner-&gt;getClassNames());</span>
+</pre></div></p>
+<blockquote>
+<h3>Manually creating a generator instance</h3>
+<p>Before version 3.1, no service factory existed for the generator. Below is an
+example demonstrating manual creation of the generator:</p>
+<pre class=codehilite><code class=language-php>
+namespace AppAoT;
+
+use Psr\Container\ContainerInterface;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$directories = [
+    __DIR__ . '/../src/App/src',
+];
+
+// Generator dependencies. You might put this in a service factory
+// in a real-life scenario.
+
+/** @var ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
+$config = $container-&gt;get(ConfigInterface::class);
+$resolver = new DependencyResolver(new RuntimeDefinition(), $config);
+
+// This is important; we want to use configured aliases of the service manager.
+$resolver-&gt;setContainer($container);
+
+$scanner = new DirectoryScanner($directories);
+$generator = new InjectorGenerator($config, $resolver, __NAMESPACE__ . '\Generated');
+$generator-&gt;setOutputDirectory(__DIR__ . '/../src/AppAoT/gen');
+$generator-&gt;generate($scanner-&gt;getClassNames());
+</code></pre>
+</blockquote>
+<p>To add the Composer script, edit <code>composer.json</code> and add the following to the
+<code>scripts</code> section:</p>
+<p> <div class=codehilite><pre><span></span><span class=p>{</span>
+    <span class=nt>&quot;scripts&quot;</span><span class=p>:</span> <span class=p>{</span>
+        <span class=nt>&quot;di-generate-aot&quot;</span><span class=p>:</span> <span class=p>[</span>
+            <span class=s2>&quot;rm -vfr src/AppAoT/gen&quot;</span><span class=p>,</span>
+            <span class=s2>&quot;php bin/di-generate-aot.php&quot;</span>
+        <span class=p>]</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</pre></div></p>
+<p>When running the compiler with <code>composer di-generate-aot</code>, it will generate
+the following files:</p>
+<p><img alt="screenshot-gen-result" src="../img/aot-gen-result.png" class="img-responsive"/></p>
+<h2 id="5-add-aot-to-the-service-manager">5. Add AoT to the service manager</h2>
+<p>Now we need to make the service manager use the AoT code.</p>
+<p>First, we'll create a delegate factory to decorate the DI injector with the AoT
+version. Decorating the injector ensures that your factories that utilize
+<code>Laminas\Di\Container\AutowireFactory</code> will benefit from AoT as well.</p>
+<p>Create the file <code>src/AppAoT/src/InjectorDecoratorFactory.php</code> with the following
+contents:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace AppAoT;</span>
+
+<span class=x>use AppAoT\Generated\GeneratedInjector;</span>
+<span class=x>use Interop\Container\ContainerInterface;</span>
+<span class=x>use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;</span>
+
+<span class=x>class InjectorDecoratorFactory implements DelegatorFactoryInterface</span>
+<span class=x>{</span>
+<span class=x>    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null)</span>
+<span class=x>    {</span>
+<span class=x>        $injector = $callback();</span>
+
+<span class=x>        if (class_exists(GeneratedInjector::class)) {</span>
+<span class=x>            return new GeneratedInjector($injector);</span>
+<span class=x>        }</span>
+
+<span class=x>        return $injector;</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>After this we need to add configuration to the <code>ConfigProvider</code> class we created
+in step 2:</p>
+<blockquote>
+<p><strong>Important:</strong> After this step, the application will <strong>always</strong> use the
+generated factories, if present. If you change any dependencies, you will need
+to run <code>composer di-aot-generation</code> again, or remove the generated code in
+<code>src/AppAoT/gen/</code> and use runtime wiring.</p>
+</blockquote>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace AppAoT;</span>
+
+<span class=x>use Laminas\Di\InjectorInterface;</span>
+
+<span class=x>class ConfigProvider</span>
+<span class=x>{</span>
+<span class=x>    public function __invoke()</span>
+<span class=x>    {</span>
+<span class=x>        return [</span>
+<span class=x>            &#39;dependencies&#39; =&gt; $this-&gt;getDependencies(),</span>
+<span class=x>        ];</span>
+<span class=x>    }</span>
+
+<span class=x>    public function getDependencies()</span>
+<span class=x>    {</span>
+<span class=x>        return [</span>
+<span class=x>            &#39;auto&#39; =&gt; [</span>
+<span class=x>                &#39;aot&#39; =&gt; [</span>
+<span class=x>                    &#39;namespace&#39; =&gt; __NAMESPACE__ . &#39;\\Generated&#39;,</span>
+<span class=x>                    &#39;directory&#39; =&gt; __DIR__ . &#39;/../gen&#39;,</span>
+<span class=x>                ],</span>
+<span class=x>            ],</span>
+<span class=x>            &#39;factories&#39; =&gt; $this-&gt;getGeneratedFactories(),</span>
+<span class=x>            &#39;delegators&#39; =&gt; [</span>
+<span class=x>                InjectorInterface::class =&gt; [</span>
+<span class=x>                    InjectorDecoratorFactory::class,</span>
+<span class=x>                ],</span>
+<span class=x>            ],</span>
+<span class=x>        ];</span>
+<span class=x>    }</span>
+
+<span class=x>    private function getGeneratedFactories()</span>
+<span class=x>    {</span>
+<span class=x>        // The generated factories.php file is compatible with</span>
+<span class=x>        // laminas-servicemanager&#39;s factory configuration.</span>
+<span class=x>        // This avoids using the abstract AutowireFactory, which</span>
+<span class=x>        // improves performance a bit since we spare some lookups.</span>
+
+<span class=x>        if (file_exists(__DIR__ . &#39;/../gen/factories.php&#39;)) {</span>
+<span class=x>            return include __DIR__ . &#39;/../gen/factories.php&#39;;</span>
+<span class=x>        }</span>
+
+<span class=x>        return [];</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../use-with-servicemanager/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../migration/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/cookbook/aot-guide.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-di</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reference</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">v2 Documentation</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Cookbook</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../..',
+            project  = "components",
+            siteName = 'laminas-di';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-di" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
