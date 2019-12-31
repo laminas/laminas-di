@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\ServiceLocator;
+namespace LaminasTest\Di\ServiceLocator;
 
-use Zend\Di\Di;
-use Zend\Di\Config;
-use Zend\Di\ServiceLocator\Generator as ContainerGenerator;
-use Zend\Di\Definition\BuilderDefinition as Definition;
-use Zend\Di\Definition\Builder;
+use Laminas\Di\Config;
+use Laminas\Di\Definition\Builder;
+use Laminas\Di\Definition\BuilderDefinition as Definition;
+use Laminas\Di\Di;
+use Laminas\Di\ServiceLocator\Generator as ContainerGenerator;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class GeneratorTest extends TestCase
@@ -21,7 +20,7 @@ class GeneratorTest extends TestCase
     protected $tmpFile = false;
 
     /**
-     * @var \Zend\Di\Di
+     * @var \Laminas\Di\Di
      */
     protected $di = null;
 
@@ -48,7 +47,7 @@ class GeneratorTest extends TestCase
     public function createDefinitions()
     {
         $inspect = new Builder\PhpClass();
-        $inspect->setName('ZendTest\Di\TestAsset\InspectedClass');
+        $inspect->setName('LaminasTest\Di\TestAsset\InspectedClass');
         $inspectCtor = new Builder\InjectionMethod();
         $inspectCtor->setName('__construct')
                     ->addParameter('foo', 'composed')
@@ -56,10 +55,10 @@ class GeneratorTest extends TestCase
         $inspect->addInjectionMethod($inspectCtor);
 
         $composed = new Builder\PhpClass();
-        $composed->setName('ZendTest\Di\TestAsset\ComposedClass');
+        $composed->setName('LaminasTest\Di\TestAsset\ComposedClass');
 
         $struct = new Builder\PhpClass();
-        $struct->setName('ZendTest\Di\TestAsset\Struct');
+        $struct->setName('LaminasTest\Di\TestAsset\Struct');
         $structCtor = new Builder\InjectionMethod();
         $structCtor->setName('__construct')
                    ->addParameter('param1', null)
@@ -74,19 +73,19 @@ class GeneratorTest extends TestCase
         $data = array(
             'instance' => array(
                 'alias' => array(
-                    'composed' => 'ZendTest\Di\TestAsset\ComposedClass',
-                    'inspect'  => 'ZendTest\Di\TestAsset\InspectedClass',
-                    'struct'   => 'ZendTest\Di\TestAsset\Struct',
+                    'composed' => 'LaminasTest\Di\TestAsset\ComposedClass',
+                    'inspect'  => 'LaminasTest\Di\TestAsset\InspectedClass',
+                    'struct'   => 'LaminasTest\Di\TestAsset\Struct',
                 ),
                 'preferences' => array(
                     'composed' => array('composed'),
                     'inspect'  => array('inspect'),
                     'struct'   => array('struct'),
                 ),
-                'ZendTest\Di\TestAsset\InspectedClass' => array( 'parameters' => array(
+                'LaminasTest\Di\TestAsset\InspectedClass' => array( 'parameters' => array(
                     'baz' => 'BAZ',
                 )),
-                'ZendTest\Di\TestAsset\Struct' => array( 'parameters' => array(
+                'LaminasTest\Di\TestAsset\Struct' => array( 'parameters' => array(
                     'param1' => 'foo',
                 )),
             ),
@@ -171,11 +170,11 @@ class GeneratorTest extends TestCase
         }
         $expected = array(
             'composed',
-            'ZendTest\Di\TestAsset\ComposedClass',
+            'LaminasTest\Di\TestAsset\ComposedClass',
             'inspect',
-            'ZendTest\Di\TestAsset\InspectedClass',
+            'LaminasTest\Di\TestAsset\InspectedClass',
             'struct',
-            'ZendTest\Di\TestAsset\Struct',
+            'LaminasTest\Di\TestAsset\Struct',
         );
         $this->assertEquals(count($expected), count($services), var_export($services, 1));
         foreach ($expected as $service) {
@@ -212,11 +211,11 @@ class GeneratorTest extends TestCase
         }
         $expected = array(
             'get',
-            'getZendTestDiTestAssetComposedClass',
+            'getLaminasTestDiTestAssetComposedClass',
             'getComposed',
-            'getZendTestDiTestAssetInspectedClass',
+            'getLaminasTestDiTestAssetInspectedClass',
             'getInspect',
-            'getZendTestDiTestAssetStruct',
+            'getLaminasTestDiTestAssetStruct',
             'getStruct',
         );
         $this->assertEquals(count($expected), count($methods), var_export($methods, 1));
@@ -231,7 +230,7 @@ class GeneratorTest extends TestCase
         $builder = new ContainerGenerator($this->di);
         $builder->setContainerClass('Application');
         $codegen = $builder->getCodeGenerator();
-        $this->assertInstanceOf('Zend\Code\Generator\FileGenerator', $codegen);
+        $this->assertInstanceOf('Laminas\Code\Generator\FileGenerator', $codegen);
     }
 
     public function testCanSpecifyNamespaceForGeneratedPhpClassfile()
@@ -251,7 +250,7 @@ class GeneratorTest extends TestCase
     {
         $this->markTestIncomplete('Null arguments are currently unsupported');
         $opt = new Builder\PhpClass();
-        $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
+        $opt->setName('LaminasTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();
         $optCtor->setName('__construct')
                 ->addParameter('param', null);
@@ -262,10 +261,10 @@ class GeneratorTest extends TestCase
 
         $cfg = new Config(array(
             'instance' => array(
-                'alias' => array('optional' => 'ZendTest\Di\TestAsset\OptionalArg'),
+                'alias' => array('optional' => 'LaminasTest\Di\TestAsset\OptionalArg'),
             ),
             'properties' => array(
-                'ZendTest\Di\TestAsset\OptionalArg' => array('param' => null),
+                'LaminasTest\Di\TestAsset\OptionalArg' => array('param' => null),
             ),
         ));
         $cfg->configure($this->di);
@@ -284,7 +283,7 @@ class GeneratorTest extends TestCase
     {
         $this->markTestIncomplete('Null arguments are currently unsupported');
         $struct = new Builder\PhpClass();
-        $struct->setName('ZendTest\Di\TestAsset\Struct');
+        $struct->setName('LaminasTest\Di\TestAsset\Struct');
         $structCtor = new Builder\InjectionMethod();
         $structCtor->setName('__construct')
                    ->addParameter('param1', null)
@@ -292,11 +291,11 @@ class GeneratorTest extends TestCase
         $struct->addInjectionMethod($structCtor);
 
         $dummy = new Builder\PhpClass();
-        $dummy->setName('ZendTest\Di\TestAsset\DummyParams')
-              ->setInstantiator(array('ZendTest\Di\TestAsset\StaticFactory', 'factory'));
+        $dummy->setName('LaminasTest\Di\TestAsset\DummyParams')
+              ->setInstantiator(array('LaminasTest\Di\TestAsset\StaticFactory', 'factory'));
 
         $staticFactory = new Builder\PhpClass();
-        $staticFactory->setName('ZendTest\Di\TestAsset\StaticFactory');
+        $staticFactory->setName('LaminasTest\Di\TestAsset\StaticFactory');
         $factory = new Builder\InjectionMethod();
         $factory->setName('factory')
                 ->addParameter('struct', 'struct')
@@ -313,16 +312,16 @@ class GeneratorTest extends TestCase
         $cfg = new Config(array(
             'instance' => array(
                 'alias' => array(
-                    'struct'  => 'ZendTest\Di\TestAsset\Struct',
-                    'dummy'   => 'ZendTest\Di\TestAsset\DummyParams',
-                    'factory' => 'ZendTest\Di\TestAsset\StaticFactory',
+                    'struct'  => 'LaminasTest\Di\TestAsset\Struct',
+                    'dummy'   => 'LaminasTest\Di\TestAsset\DummyParams',
+                    'factory' => 'LaminasTest\Di\TestAsset\StaticFactory',
                 ),
                 'properties' => array(
-                    'ZendTest\Di\TestAsset\Struct' => array(
+                    'LaminasTest\Di\TestAsset\Struct' => array(
                         'param1' => 'foo',
                         'param2' => 'bar',
                     ),
-                    'ZendTest\Di\TestAsset\StaticFactory' => array(
+                    'LaminasTest\Di\TestAsset\StaticFactory' => array(
                         'params' => null,
                     ),
                 ),
@@ -344,7 +343,7 @@ class GeneratorTest extends TestCase
     {
         $this->markTestIncomplete('Null arguments are currently unsupported');
         $opt = new Builder\PhpClass();
-        $opt->setName('ZendTest\Di\TestAsset\OptionalArg');
+        $opt->setName('LaminasTest\Di\TestAsset\OptionalArg');
         $optCtor = new Builder\InjectionMethod();
         $optCtor->setName('__construct')
                 ->addParameter('param', null);
@@ -361,10 +360,10 @@ class GeneratorTest extends TestCase
 
         $cfg = new Config(array(
             'instance' => array(
-                'alias' => array('optional' => 'ZendTest\Di\TestAsset\OptionalArg'),
+                'alias' => array('optional' => 'LaminasTest\Di\TestAsset\OptionalArg'),
             ),
             'properties' => array(
-                'ZendTest\Di\TestAsset\OptionalArg' => array(
+                'LaminasTest\Di\TestAsset\OptionalArg' => array(
                     'param'  => null,
                     'param1' => null,
                     'param2' => null,
@@ -387,7 +386,7 @@ class GeneratorTest extends TestCase
         $builder->setContainerClass('Context')
                 ->setNamespace('Application');
         $content = $builder->getCodeGenerator()->generate();
-        $count   = substr_count($content, '\ZendTest\Di\TestAsset\\');
+        $count   = substr_count($content, '\LaminasTest\Di\TestAsset\\');
         $this->assertEquals(3, $count, $content);
         $this->assertNotContains('\\\\', $content);
     }

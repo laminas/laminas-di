@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition;
+namespace Laminas\Di\Definition;
 
-use Zend\Code\Annotation\AnnotationCollection;
-use Zend\Code\Reflection;
-use Zend\Code\Scanner\AggregateDirectoryScanner;
-use Zend\Code\Scanner\DerivedClassScanner;
-use Zend\Code\Scanner\DirectoryScanner;
-use Zend\Code\Scanner\FileScanner;
-use Zend\Di\Definition\Annotation;
+use Laminas\Code\Annotation\AnnotationCollection;
+use Laminas\Code\Reflection;
+use Laminas\Code\Scanner\AggregateDirectoryScanner;
+use Laminas\Code\Scanner\DerivedClassScanner;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Code\Scanner\FileScanner;
+use Laminas\Di\Definition\Annotation;
 
 /**
  * Class definitions based on a set of directories to be scanned
@@ -115,7 +114,7 @@ class CompilerDefinition implements DefinitionInterface
      */
     public function compile()
     {
-        /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
+        /* @var $classScanner \Laminas\Code\Scanner\DerivedClassScanner */
         foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
@@ -166,13 +165,13 @@ class CompilerDefinition implements DefinitionInterface
             $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
 
             if (($annotations instanceof AnnotationCollection)
-                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')
+                && $annotations->hasAnnotation('Laminas\Di\Definition\Annotation\Instantiator')
             ) {
                 // @todo Instantiator support in annotations
             }
         }
 
-        /* @var $rTarget \Zend\Code\Reflection\ClassReflection */
+        /* @var $rTarget \Laminas\Code\Reflection\ClassReflection */
         $rTarget = $rClass;
         $supertypes = array();
         do {
@@ -217,7 +216,7 @@ class CompilerDefinition implements DefinitionInterface
                 $annotations = $rMethod->getAnnotations($strategy->getAnnotationManager());
 
                 if (($annotations instanceof AnnotationCollection)
-                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')
+                    && $annotations->hasAnnotation('Laminas\Di\Definition\Annotation\Inject')
                 ) {
 
                     $def['methods'][$methodName] = true;
@@ -270,8 +269,8 @@ class CompilerDefinition implements DefinitionInterface
 
     /**
      * @param array                                  $def
-     * @param \Zend\Code\Reflection\ClassReflection  $rClass
-     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     * @param \Laminas\Code\Reflection\ClassReflection  $rClass
+     * @param \Laminas\Code\Reflection\MethodReflection $rMethod
      */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {

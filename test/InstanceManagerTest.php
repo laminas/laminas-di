@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
-use Zend\Di\InstanceManager;
+use Laminas\Di\InstanceManager;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class InstanceManagerTest extends TestCase
@@ -19,9 +18,9 @@ class InstanceManagerTest extends TestCase
     {
         $im = new InstanceManager();
         $obj = new TestAsset\BasicClass();
-        $im->addSharedInstance($obj, 'ZendTest\Di\TestAsset\BasicClass');
-        $this->assertTrue($im->hasSharedInstance('ZendTest\Di\TestAsset\BasicClass'));
-        $this->assertSame($obj, $im->getSharedInstance('ZendTest\Di\TestAsset\BasicClass'));
+        $im->addSharedInstance($obj, 'LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertTrue($im->hasSharedInstance('LaminasTest\Di\TestAsset\BasicClass'));
+        $this->assertSame($obj, $im->getSharedInstance('LaminasTest\Di\TestAsset\BasicClass'));
     }
 
     public function testInstanceManagerCanPersistInstancesWithParameters()
@@ -61,7 +60,7 @@ class InstanceManagerTest extends TestCase
         $im->addAlias('bar-alias', 'foo-alias');
         $im->addAlias('foo-alias', 'bar-alias');
 
-        $this->setExpectedException('Zend\Di\Exception\RuntimeException', 'recursion');
+        $this->setExpectedException('Laminas\Di\Exception\RuntimeException', 'recursion');
         $im->getClassFromAlias('foo-alias');
     }
 

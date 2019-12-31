@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition;
+namespace Laminas\Di\Definition;
 
-use Zend\Code\Annotation\AnnotationCollection;
-use Zend\Code\Reflection;
-use Zend\Di\Definition\Annotation;
-use Zend\Di\Di;
+use Laminas\Code\Annotation\AnnotationCollection;
+use Laminas\Code\Reflection;
+use Laminas\Di\Definition\Annotation;
+use Laminas\Di\Di;
 
 /**
  * Class definitions based on runtime reflection
@@ -204,7 +203,7 @@ class RuntimeDefinition implements DefinitionInterface
     {
         $strategy = $this->introspectionStrategy; // localize for readability
 
-        /** @var $rClass \Zend\Code\Reflection\ClassReflection */
+        /** @var $rClass \Laminas\Code\Reflection\ClassReflection */
         $rClass = new Reflection\ClassReflection($class);
         $className = $rClass->getName();
         $matches = null; // used for regex below
@@ -224,7 +223,7 @@ class RuntimeDefinition implements DefinitionInterface
             $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
 
             if (($annotations instanceof AnnotationCollection)
-                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
+                && $annotations->hasAnnotation('Laminas\Di\Definition\Annotation\Instantiator')) {
                 // @todo Instantiator support in annotations
             }
         }
@@ -265,7 +264,7 @@ class RuntimeDefinition implements DefinitionInterface
                 $annotations = $rMethod->getAnnotations($strategy->getAnnotationManager());
 
                 if (($annotations instanceof AnnotationCollection)
-                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
+                    && $annotations->hasAnnotation('Laminas\Di\Definition\Annotation\Inject')) {
 
                     // use '@inject' and search for parameters
                     $def['methods'][$methodName] = Di::METHOD_IS_EAGER;
@@ -304,7 +303,7 @@ class RuntimeDefinition implements DefinitionInterface
                     foreach ($rIface->getMethods() as $rMethod) {
                         if (($rMethod->getName() === '__construct') || !count($rMethod->getParameters())) {
                             // constructor not allowed in interfaces
-                            // Don't call interface methods without a parameter (Some aware interfaces define setters in ZF2)
+                            // Don't call interface methods without a parameter (Some aware interfaces define setters in Laminas)
                             continue;
                         }
                         $def['methods'][$rMethod->getName()] = Di::METHOD_IS_AWARE;
@@ -318,8 +317,8 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @param array                                  $def
-     * @param \Zend\Code\Reflection\ClassReflection  $rClass
-     * @param \Zend\Code\Reflection\MethodReflection $rMethod
+     * @param \Laminas\Code\Reflection\ClassReflection  $rClass
+     * @param \Laminas\Code\Reflection\MethodReflection $rMethod
      */
     protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
     {
