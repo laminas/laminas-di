@@ -1,27 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition\Builder;
+namespace Laminas\Di\Definition\Builder;
 
 /**
  * Object containing definitions for a single class
  *
- * @category   Zend
- * @package    Zend_Di
+ * @category   Laminas
+ * @package    Laminas_Di
  */
 class PhpClass
 {
     /**
      * @var string
      */
-    protected $defaultMethodBuilder = 'Zend\Di\Definition\Builder\InjectionMethod';
+    protected $defaultMethodBuilder = 'Laminas\Di\Definition\Builder\InjectionMethod';
 
     /**
      * @var null|string
