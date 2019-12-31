@@ -1,4 +1,4 @@
-# Introduction to Zend\\Di
+# Introduction to Laminas\\Di
 
 ## Dependency Injection
 
@@ -19,19 +19,19 @@ DI](http://ralphschindler.com/2011/05/18/learning-about-dependency-injection-and
 Potencier's Series](http://fabien.potencier.org/article/11/what-is-dependency-injection) on DI.
 
 > ## Note
-`Zend\Di` is an example of an Inversion of Control (IoC) container. IoC containers are widely used
+`Laminas\Di` is an example of an Inversion of Control (IoC) container. IoC containers are widely used
 to create object instances that have all dependencies resolved and injected. Dependency Injection
 containers are one form of IoC -- but not the only form.
-Zend Framework 2 ships with another form of IoC as well,
-\[ZendServiceManager\](zend.service-manager.intro). Unlike `Zend\Di`, The ServiceManager is
+Laminas ships with another form of IoC as well,
+\[LaminasManager\](laminas.service-manager.intro). Unlike `Laminas\Di`, The ServiceManager is
 code-driven, meaning that you typically tell it what class to instantiate, or provide a factory for
 the given class. This approach offers several benefits:
 - Easier to debug (error stacks take you into your factories, not the dependency injection
 container).
 - Easier to setup (write code to instantiate objects, instead of configuration).
-- Faster (`Zend\Di` has known performance issues due to the approaches used).
+- Faster (`Laminas\Di` has known performance issues due to the approaches used).
 Unless you have specific needs for a dependency injection container versus more general Inversion of
-Control, we recommend using `Zend\ServiceManager` for the above reasons.
+Control, we recommend using `Laminas\ServiceManager` for the above reasons.
 
 ## Dependency Injection Containers
 
@@ -46,6 +46,6 @@ required dependencies, for those requested objects. Since the patterns that deve
 writing DI capable code vary, DiC's are generally either in the form of smallish objects that suit a
 very specific pattern, or larger DiC frameworks.
 
-Zend\\Di is a DiC framework. While for the simplest code there is no configuration needed, and the
-use cases are quite simple; for more complex code, Zend\\Di is capable of being configured to wire
+Laminas\\Di is a DiC framework. While for the simplest code there is no configuration needed, and the
+use cases are quite simple; for more complex code, Laminas\\Di is capable of being configured to wire
 these complex use cases

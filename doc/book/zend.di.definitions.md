@@ -1,14 +1,14 @@
-# Zend\\Di Definition
+# Laminas\\Di Definition
 
-Definitions are the place where Zend\\Di attempts to understand the structure of the code it is
+Definitions are the place where Laminas\\Di attempts to understand the structure of the code it is
 attempting to wire. This means that if you've written non-ambiguous, clear and concise code;
-Zend\\Di has a very good chance of understanding how to wire things up without much added
+Laminas\\Di has a very good chance of understanding how to wire things up without much added
 complexity.
 
 ## DefinitionList
 
-Definitions are introduced to the Zend\\Di\\Di object through a definition list implemented as
-Zend\\Di\\DefinitionList (SplDoublyLinkedList). Order is important. Definitions in the front of the
+Definitions are introduced to the Laminas\\Di\\Di object through a definition list implemented as
+Laminas\\Di\\DefinitionList (SplDoublyLinkedList). Order is important. Definitions in the front of the
 list will be consulted on a class before definitions at the end of the list.
 
 > ## Note
@@ -17,13 +17,13 @@ autoloaders are already setup and ready to use.
 
 ## RuntimeDefinition
 
-The default DefinitionList instantiated by Zend\\Di\\Di, when no other DefinitionList is provided,
+The default DefinitionList instantiated by Laminas\\Di\\Di, when no other DefinitionList is provided,
 has as Definition\\RuntimeDefinition baked-in. The RuntimeDefinition will respond to query's about
 classes by using Reflection. This Runtime definitions uses any available information inside methods:
 their signature, the names of parameters, the type-hints of the parameters, and the default values
 to determine if something is optional or required when making a call to that method. The more
 explicit you can be in your method naming and method signatures, the easier of a time
-Zend\\Di\\Definition\\RuntimeDefinition will have determining the structure of your code.
+Laminas\\Di\\Definition\\RuntimeDefinition will have determining the structure of your code.
 
 This is what the constructor of a RuntimeDefinition looks like:
 
@@ -88,7 +88,7 @@ $components = array(
 );
 
 foreach ($components as $component) {
-    $diCompiler = new Zend\Di\Definition\CompilerDefinition;
+    $diCompiler = new Laminas\Di\Definition\CompilerDefinition;
     $diCompiler->addDirectory('/path/to/classes/' . str_replace('_', '/', $component));
 
     $diCompiler->compile();
@@ -113,7 +113,7 @@ protected function setupDi(Application $app)
         $runtime = new Definition\RuntimeDefinition(),
     ));
     $di = new Di($definitionList, null, new Config($this->config->di));
-    $di->instanceManager()->addTypePreference('Zend\Di\LocatorInterface', $di);
+    $di->instanceManager()->addTypePreference('Laminas\Di\LocatorInterface', $di);
     $app->setLocator($di);
 }
 ```

@@ -1,6 +1,6 @@
-# Zend\\Di InstanceManager
+# Laminas\\Di InstanceManager
 
-The InstanceManager is responsible for any runtime information associated with the Zend\\Di\\Di DiC.
+The InstanceManager is responsible for any runtime information associated with the Laminas\\Di\\Di DiC.
 This means that the information that goes into the instance manager is specific to both how the
 particular consuming Application's needs and even more specifically to the environment in which the
 application is running.
@@ -126,7 +126,7 @@ namespace MyMovieApp
 What you'll notice above is that now the MovieLister type minimally expects that the dependency
 injected implements the MovieFinderInterface. This allows multiple implementations of this base
 interface to be used as a dependency, if that is what the consumer decides they want to do. As you
-can imagine, Zend\\Di, by itself would not be able to determine what kind of concrete object to use
+can imagine, Laminas\\Di, by itself would not be able to determine what kind of concrete object to use
 fulfill this dependency, so this type of 'preference' needs to be made known to the instance
 manager.
 

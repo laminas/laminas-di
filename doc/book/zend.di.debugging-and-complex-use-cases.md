@@ -1,4 +1,4 @@
-# Zend\\Di Debugging & Complex Use Cases
+# Laminas\\Di Debugging & Complex Use Cases
 
 ## Debugging a DiC
 
@@ -8,14 +8,14 @@ a Di instance.
 The easiest way is to do the following:
 
 ```php
-Zend\Di\Display\Console::export($di);
+Laminas\Di\Display\Console::export($di);
 ```
 
 If you are using a RuntimeDefinition where upon you expect a particular definition to be resolve at
 the first-call, you can see that information to the console display to force it to read that class:
 
 ```php
-Zend\Di\Display\Console::export($di, array('A\ClassIWantTo\GetTheDefinitionFor'));
+Laminas\Di\Display\Console::export($di, array('A\ClassIWantTo\GetTheDefinitionFor'));
 ```
 
 ## Complex Use Cases
@@ -43,8 +43,8 @@ namespace Foo\Bar {
 }
 
 namespace {
-    include 'zf2bootstrap.php';
-    $di = new Zend\Di\Di;
+    include 'laminasbootstrap.php';
+    $di = new Laminas\Di\Di;
     $baz = $di->get('Foo\Bar\Baz');
 }
 ```
@@ -67,8 +67,8 @@ namespace Foo\Bar {
 }
 
 namespace {
-    $di = new Zend\Di\Di;
-    $di->configure(new Zend\Di\Config(array(
+    $di = new Laminas\Di\Di;
+    $di->configure(new Laminas\Di\Config(array(
         'definition' => array(
             'class' => array(
                 'Foo\Bar\Baz' => array(
@@ -105,9 +105,9 @@ namespace MyModule {
 }
 
 namespace {
-    include 'zf2bootstrap.php';
-    $di = new Zend\Di\Di;
-    $di->configure(new Zend\Di\Config(array(
+    include 'laminasbootstrap.php';
+    $di = new Laminas\Di\Di;
+    $di->configure(new Laminas\Di\Config(array(
         'definition' => array(
             'class' => array(
                 'Application\Page' => array(

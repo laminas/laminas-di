@@ -1,12 +1,12 @@
 {
-    "title": "Zend\\Di",
+    "title": "Laminas\\Di",
     "target": "html/",
     "content": [
-        "book/zend.di.introduction.md",
-        "book/zend.di.quick-start.md",
-        "book/zend.di.definitions.md",
-        "book/zend.di.instance-manager.md",
-        "book/zend.di.configuration.md",
-        "book/zend.di.debugging-and-complex-use-cases.md"
+        "book/laminas.di.introduction.md",
+        "book/laminas.di.quick-start.md",
+        "book/laminas.di.definitions.md",
+        "book/laminas.di.instance-manager.md",
+        "book/laminas.di.configuration.md",
+        "book/laminas.di.debugging-and-complex-use-cases.md"
     ]
 }

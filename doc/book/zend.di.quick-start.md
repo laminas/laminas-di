@@ -1,6 +1,6 @@
-# Zend\\Di Quickstart
+# Laminas\\Di Quickstart
 
-This QuickStart is intended to get developers familiar with the concepts of the Zend\\Di DiC.
+This QuickStart is intended to get developers familiar with the concepts of the Laminas\\Di DiC.
 Generally speaking, code is never as simple as it is inside this example, so working knowledge of
 the other sections of the manual is suggested.
 
@@ -62,11 +62,11 @@ can this become repetitive and boring to write, but also unmaintainable if for e
 swap out one of these dependencies on a wholesale scale.
 
 Since this example of code already practices good dependency injection, with constructor injection,
-it is a great candidate for using Zend\\Di. The usage is as simple as:
+it is a great candidate for using Laminas\\Di. The usage is as simple as:
 
 ```php
 // inside a bootstrap somewhere
-$di = new Zend\Di\Di();
+$di = new Laminas\Di\Di();
 $di->instanceManager()->setParameters('MyLibrary\DbAdapter', array(
     'username' => $config->username,
     'password' => $config->password
@@ -79,9 +79,9 @@ foreach ($movieLister as $movie) {
 }
 ```
 
-In the above example, we are obtaining a default instance of Zend\\Di\\Di. By 'default', we mean
-that Zend\\Di\\Di is constructed with a DefinitionList seeded with a RuntimeDefinition (uses
-Reflection) and an empty instance manager and no configuration. Here is the Zend\\Di\\Di
+In the above example, we are obtaining a default instance of Laminas\\Di\\Di. By 'default', we mean
+that Laminas\\Di\\Di is constructed with a DefinitionList seeded with a RuntimeDefinition (uses
+Reflection) and an empty instance manager and no configuration. Here is the Laminas\\Di\\Di
 constructor:
 
 ```php
@@ -100,7 +100,7 @@ null, Configuration $config = null)
 This means that when $di-&gt;get() is called, it will be consulting the RuntimeDefinition, which
 uses reflection to understand the structure of the code. Once it knows the structure of the code, it
 can then know how the dependencies fit together and how to go about wiring your objects for you.
-Zend\\Di\\Definition\\RuntimeDefinition will utilize the names of the parameters in the methods as
+Laminas\\Di\\Definition\\RuntimeDefinition will utilize the names of the parameters in the methods as
 the class parameter names. This is how both username and password key are mapped to the first and
 second parameter, respectively, of the constructor consuming these named parameters.
 
@@ -109,7 +109,7 @@ them as the second argument of get():
 
 ```php
 // inside each controller
-$di = new Zend\Di\Di();
+$di = new Laminas\Di\Di();
 $movieLister = $di->get('MyMovieApp\MovieLister', array(
     'username' => $config->username,
     'password' => $config->password

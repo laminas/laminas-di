@@ -1,4 +1,4 @@
-# Zend\\Di Configuration
+# Laminas\\Di Configuration
 
 Most of the configuration for both the setup of Definitions as well as the setup of the Instance
 Manager can be attained by a configuration file. This file will produce an array (typically) and
