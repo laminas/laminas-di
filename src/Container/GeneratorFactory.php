@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Container;
+namespace Laminas\Di\Container;
 
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
 use Psr\Container\ContainerInterface;
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Resolver\DependencyResolver;
 
 class GeneratorFactory
 {
@@ -19,6 +20,10 @@ class GeneratorFactory
     {
         if ($container->has(ConfigInterface::class)) {
             return $container->get(ConfigInterface::class);
+        }
+
+        if ($container->has(\Zend\Di\ConfigInterface::class)) {
+            return $container->get(\Zend\Di\ConfigInterface::class);
         }
 
         return (new ConfigFactory())->create($container);

@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Container\ServiceManager;
+namespace LaminasTest\Di\Container\ServiceManager;
 
 use Interop\Container\ContainerInterface;
+use Laminas\Di\Container\AutowireFactory as GenericAutowireFactory;
+use Laminas\Di\Container\ServiceManager\AutowireFactory;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\Container\AutowireFactory as GenericAutowireFactory;
-use Zend\Di\Container\ServiceManager\AutowireFactory;
 use stdClass;
 
 /**
  * AutowireFactory test case.
  *
- * @coversDefaultClass Zend\Di\Container\ServiceManager\AutowireFactory
+ * @coversDefaultClass Laminas\Di\Container\ServiceManager\AutowireFactory
  */
 class AutowireFactoryTest extends TestCase
 {

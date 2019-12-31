@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Container\ServiceManager;
+namespace Laminas\Di\Container\ServiceManager;
 
 use Interop\Container\ContainerInterface;
-use Zend\Di\Container\AutowireFactory as GenericAutowireFactory;
-use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Laminas\Di\Container\AutowireFactory as GenericAutowireFactory;
+use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 
 /**
  * Create instances with autowiring
  *
- * This class is purely for compatibility with Zend\ServiceManager interface which requires container-interop
+ * This class is purely for compatibility with Laminas\ServiceManager interface which requires container-interop
  */
 class AutowireFactory implements AbstractFactoryInterface
 {
@@ -37,7 +38,7 @@ class AutowireFactory implements AbstractFactoryInterface
     }
 
     /**
-     * Make invokable and implement the zend-service factory pattern
+     * Make invokable and implement the laminas-service factory pattern
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

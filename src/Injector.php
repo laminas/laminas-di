@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
+use Laminas\Di\Resolver\InjectionInterface;
+use Laminas\Di\Resolver\TypeInjection;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Zend\Di\Resolver\InjectionInterface;
-use Zend\Di\Resolver\TypeInjection;
 
 use function in_array;
 
@@ -51,7 +52,7 @@ class Injector implements InjectorInterface
      * @param ConfigInterface|null $config A custom configuration to utilize. An empty configuration is used
      *      when null is passed or the parameter is omitted.
      * @param ContainerInterface|null $container The IoC container to retrieve dependency instances.
-     *      `Zend\Di\DefaultContainer` is used when null is passed or the parameter is omitted.
+     *      `Laminas\Di\DefaultContainer` is used when null is passed or the parameter is omitted.
      * @param Definition\DefinitionInterface $definition A custom definition instance for creating requested instances.
      *      The runtime definition is used when null is passed or the parameter is omitted.
      * @param Resolver\DependencyResolverInterface|null $resolver A custom resolver instance to resolve dependencies.

@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
-use Zend\Di\Exception;
-use Zend\Di\LegacyConfig;
 use ArrayIterator;
 use GlobIterator;
+use Laminas\Di\Exception;
+use Laminas\Di\LegacyConfig;
+use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 /**
- * @coversDefaultClass Zend\Di\LegacyConfig
+ * @coversDefaultClass Laminas\Di\LegacyConfig
  */
 class LegacyConfigTest extends TestCase
 {

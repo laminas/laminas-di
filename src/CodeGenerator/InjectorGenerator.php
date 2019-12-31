@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\CodeGenerator;
+namespace Laminas\Di\CodeGenerator;
 
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\DefinitionInterface;
+use Laminas\Di\Resolver\DependencyResolverInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SplFileObject;
 use Throwable;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Definition\DefinitionInterface;
-use Zend\Di\Resolver\DependencyResolverInterface;
 
 use function array_keys;
 use function array_map;
@@ -80,7 +81,7 @@ class InjectorGenerator
      * @param ConfigInterface $config The configuration to compile from
      * @param DependencyResolverInterface $resolver The resolver to utilize
      * @param string|null $namespace Namespace to use for generated class; defaults
-     *     to Zend\Di\Generated.
+     *     to Laminas\Di\Generated.
      * @param LoggerInterface|null $logger An optional logger instance to log failures
      *     and processed classes.
      */
@@ -92,7 +93,7 @@ class InjectorGenerator
     ) {
         $this->config = $config;
         $this->resolver = $resolver;
-        $this->namespace = $namespace ? : 'Zend\Di\Generated';
+        $this->namespace = $namespace ? : 'Laminas\Di\Generated';
         $this->factoryGenerator = new FactoryGenerator($config, $resolver, $this->namespace . '\Factory');
         $this->autoloadGenerator = new AutoloadGenerator($this->namespace);
         $this->logger = $logger ?? new NullLogger();

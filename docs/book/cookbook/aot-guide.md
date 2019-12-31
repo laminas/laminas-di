@@ -1,83 +1,83 @@
-# Using AoT with Expressive and zend-servicemanager
+# Using AoT with Mezzio and laminas-servicemanager
 
-This guide will show you how you can use zend-di's Ahead-of-Time (AoT) compiler
-to make your [Expressive](https://docs.zendframework.com/zend-expressive)
-application production ready when it uses zend-di.
+This guide will show you how you can use laminas-di's Ahead-of-Time (AoT) compiler
+to make your [Mezzio](https://docs.mezzio.dev/mezzio)
+application production ready when it uses laminas-di.
 
 You will learn how to:
 
 - Add a script to run the compilation.
-- Use the generated injector with zend-servicemanager.
-- Use the generated factories with zend-servicemanager.
+- Use the generated injector with laminas-servicemanager.
+- Use the generated factories with laminas-servicemanager.
 
-## 1. Create project and add zend-di
+## 1. Create project and add laminas-di
 
-For this guide, we will use an [expressive application](https://docs.zendframework.com/zend-expressive/)
-built from the skeleton with zend-servicemanager as its IoC container.
+For this guide, we will use an [mezzio application](https://docs.mezzio.dev/mezzio/)
+built from the skeleton with laminas-servicemanager as its IoC container.
 
-If you have already set up a project with zend-di, you can skip this step.
+If you have already set up a project with laminas-di, you can skip this step.
 
 First, we'll create a new project:
 
 ```bash
-$ composer create-project zendframework/zend-expressive-skeleton zend-di-aot-example
+$ composer create-project mezzio/mezzio-skeleton laminas-di-aot-example
 ```
 
-Pick the components you want to use. We will be using zend-servicemanager
+Pick the components you want to use. We will be using laminas-servicemanager
 and a "Modular" layout for this example.
 
 Once you are done, enter the newly created project's working directory:
 
 ```bash
-$ cd zend-di-aot-example
+$ cd laminas-di-aot-example
 ```
 
-Now add zend-di with composer:
+Now add laminas-di with composer:
 
 ```bash
-$ composer require zendframework/zend-di
+$ composer require laminas/laminas-di
 ```
 
 > ### Possible version conflicts
 >
-> Please make sure that zend-di version 3.x is installed. When you are
-> upgrading from zend-di version 2.x, you may have to remove
-> `zend-servicemanager-di` because version 3.x makes this package obsolete and
+> Please make sure that laminas-di version 3.x is installed. When you are
+> upgrading from laminas-di version 2.x, you may have to remove
+> `laminas-servicemanager-di` because version 3.x makes this package obsolete and
 > therefore conflicts with it.
 >
 > You can ensure version 3.x is installed by adding a version constraint to
 > composer's require command:
 >
 > ```bash
-> $ composer require zendframework/zend-di:^3.0
+> $ composer require laminas/laminas-di:^3.0
 > ```
 >
 > This approach will also notify you if there are conflicts with installing v3. 
 
 > ### Additional requirements for version 3.0.x
 >
-> Before version 3.1, `zendframework/zend-code` was required to be
+> Before version 3.1, `laminas/laminas-code` was required to be
 > added individually to your project for generating AoT code. Since version 
 > 3.1 this is no longer necessary.
 
 The component installer should ask you where to inject the config provider. Pick
 option 1, which usually is `config/config.php`. If not, or you cannot use the
 component installer, you will need to add it manually by adding an entry for
-`\Zend\Di\ConfigProvider::class` within your application configuration
+`\Laminas\Di\ConfigProvider::class` within your application configuration
 example:
 
 ```php
 // config/config.php:
 
-use Zend\ConfigAggregator\ArrayProvider;
-use Zend\ConfigAggregator\ConfigAggregator;
-use Zend\ConfigAggregator\PhpFileProvider;
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
 
 // ...
 
 $aggregator = new ConfigAggregator([
-    // Add Zend\Di
-    \Zend\Di\ConfigProvider::class,
+    // Add Laminas\Di
+    \Laminas\Di\ConfigProvider::class,
 
     // ...
 ], $cacheConfig['config_cache_path']);
@@ -87,14 +87,14 @@ $aggregator = new ConfigAggregator([
 
 ## 2. Make your project ready for AoT
 
-To follow the modular principle of our expressive app, we will put the AoT
+To follow the modular principle of our mezzio app, we will put the AoT
 related configurations and generated code in a separate module called `AppAoT`.
 
-By default, skeleton applications include the zend-expressive-tooling component,
+By default, skeleton applications include the mezzio-tooling component,
 which allows you to do this in a single step:
 
 ```bash
-$ ./vendor/bin/expressive module:create AppAoT
+$ ./vendor/bin/mezzio module:create AppAoT
 ```
 
 If the tooling is present and the above command is successful, you can now skip
@@ -140,8 +140,8 @@ Add this new class to the the beginning of your `config/config.php` file's
 ```php
 $aggregator = new ConfigAggregator([
     \AppAoT\ConfigProvider::class
-    // Add Zend\Di
-    \Zend\Di\ConfigProvider::class,
+    // Add Laminas\Di
+    \Laminas\Di\ConfigProvider::class,
 
     // ...
 ]);
@@ -165,7 +165,7 @@ entry for your new `AppAot` namespace as follows:
 ```
 
 > Note that we defined `AppAoT\\Generated\\` which will point to the code
-> we generate from zend-di in the next steps.
+> we generate from laminas-di in the next steps.
 
 Finally, update your autoloader:
 
@@ -175,7 +175,7 @@ $ composer dump-autoload
 
 ## 3. Add some auto-wiring
 
-Because zend-di can provide autowiring for us, we can remove configuration that
+Because laminas-di can provide autowiring for us, we can remove configuration that
 already exists within our `App` module. Edit the file
 `src/App/src/ConfigProvider.php` and comment out the entries shown below:
 
@@ -215,9 +215,9 @@ Add the generator script `bin/di-generate-aot.php`:
 namespace AppAoT;
 
 use Psr\Container\ContainerInterface;
-use Zend\Code\Scanner\DirectoryScanner;
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\Config;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -244,12 +244,12 @@ $generator->generate($scanner->getClassNames());
 > namespace AppAoT;
 >
 > use Psr\Container\ContainerInterface;
-> use Zend\Code\Scanner\DirectoryScanner;
-> use Zend\Di\CodeGenerator\InjectorGenerator;
-> use Zend\Di\Config;
-> use Zend\Di\ConfigInterface;
-> use Zend\Di\Definition\RuntimeDefinition;
-> use Zend\Di\Resolver\DependencyResolver;
+> use Laminas\Code\Scanner\DirectoryScanner;
+> use Laminas\Di\CodeGenerator\InjectorGenerator;
+> use Laminas\Di\Config;
+> use Laminas\Di\ConfigInterface;
+> use Laminas\Di\Definition\RuntimeDefinition;
+> use Laminas\Di\Resolver\DependencyResolver;
 >
 > require __DIR__ . '/../vendor/autoload.php';
 >
@@ -299,7 +299,7 @@ Now we need to make the service manager use the AoT code.
 
 First, we'll create a delegate factory to decorate the DI injector with the AoT
 version. Decorating the injector ensures that your factories that utilize
-`Zend\Di\Container\AutowireFactory` will benefit from AoT as well.
+`Laminas\Di\Container\AutowireFactory` will benefit from AoT as well.
 
 Create the file `src/AppAoT/src/InjectorDecoratorFactory.php` with the following
 contents:
@@ -309,7 +309,7 @@ namespace AppAoT;
 
 use AppAoT\Generated\GeneratedInjector;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\DelegatorFactoryInterface;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 
 class InjectorDecoratorFactory implements DelegatorFactoryInterface
 {
@@ -337,7 +337,7 @@ in step 2:
 ```php
 namespace AppAoT;
 
-use Zend\Di\InjectorInterface;
+use Laminas\Di\InjectorInterface;
 
 class ConfigProvider
 {
@@ -369,7 +369,7 @@ class ConfigProvider
     private function getGeneratedFactories()
     {
         // The generated factories.php file is compatible with
-        // zend-servicemanager's factory configuration.
+        // laminas-servicemanager's factory configuration.
         // This avoids using the abstract AutowireFactory, which
         // improves performance a bit since we spare some lookups.
 
