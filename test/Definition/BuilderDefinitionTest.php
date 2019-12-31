@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Definition;
+namespace LaminasTest\Di\Definition;
 
-use Zend\Di\Definition\BuilderDefinition;
-use Zend\Di\Definition\Builder;
-use Zend\Config\Factory as ConfigFactory;
+use Laminas\Config\Factory as ConfigFactory;
+use Laminas\Di\Definition\Builder;
+use Laminas\Di\Definition\BuilderDefinition;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class BuilderDefinitionTest extends TestCase
@@ -19,7 +18,7 @@ class BuilderDefinitionTest extends TestCase
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
-        $this->assertInstanceOf('Zend\Di\Definition\DefinitionInterface', $builder);
+        $this->assertInstanceOf('Laminas\Di\Definition\DefinitionInterface', $builder);
     }
 
     public function testBuilderCanBuildClassWithMethods()
@@ -53,7 +52,7 @@ class BuilderDefinitionTest extends TestCase
     {
         $definition = new BuilderDefinition();
 
-        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Di\Exception\RuntimeException');
         $definition->hasMethods('Foo');
     }
 
@@ -142,7 +141,7 @@ class BuilderDefinitionTest extends TestCase
     public function testBuilderCanSpecifyClassToUseWithCreateClass()
     {
         $builder = new BuilderDefinition();
-        $this->assertEquals('Zend\Di\Definition\Builder\PhpClass', $builder->getClassBuilder());
+        $this->assertEquals('Laminas\Di\Definition\Builder\PhpClass', $builder->getClassBuilder());
 
         $builder->setClassBuilder('Foo');
         $this->assertEquals('Foo', $builder->getClassBuilder());
@@ -153,7 +152,7 @@ class BuilderDefinitionTest extends TestCase
         $builder = new BuilderDefinition();
         $class   = $builder->createClass('Foo');
 
-        $this->assertEquals('Zend\Di\Definition\Builder\InjectionMethod', $class->getMethodBuilder());
+        $this->assertEquals('Laminas\Di\Definition\Builder\InjectionMethod', $class->getMethodBuilder());
 
         $class->setMethodBuilder('Foo');
         $this->assertEquals('Foo', $class->getMethodBuilder());
