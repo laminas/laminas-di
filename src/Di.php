@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
 use Closure;
-use Zend\Di\Exception\RuntimeException as DiRuntimeException;
-use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
+use Laminas\Di\Exception\RuntimeException as DiRuntimeException;
+use Laminas\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
 
 /**
  * Dependency injector that can generate instances using class definitions and configured instance parameters
@@ -832,7 +831,7 @@ class Di implements DependencyInjectionInterface
                         return false;
                     }
                 } catch (ServiceManagerException $e) {
-                    // Zend\ServiceManager\Exception\ServiceNotCreatedException
+                    // Laminas\ServiceManager\Exception\ServiceNotCreatedException
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
@@ -889,7 +888,7 @@ class Di implements DependencyInjectionInterface
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
-     * @deprecated since zf 2.3 requires PHP >= 5.3.23
+     * @deprecated since laminas 2.3 requires PHP >= 5.3.23
      *
      * @param string $className
      * @param $type
