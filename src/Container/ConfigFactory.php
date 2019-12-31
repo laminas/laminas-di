@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Container;
+namespace Laminas\Di\Container;
 
+use Laminas\Di\Config;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\LegacyConfig;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Config;
-use Zend\Di\ConfigInterface;
-use Zend\Di\LegacyConfig;
 
 /**
  * Factory implementation for creating the definition list
@@ -29,7 +30,7 @@ class ConfigFactory
         if (isset($config['di'])) {
             trigger_error(
                 'Detected legacy DI configuration, please upgrade to v3. '
-                . 'See https://docs.zendframework.com/zend-di/migration/ for details.',
+                . 'See https://docs.laminas.dev/laminas-di/migration/ for details.',
                 E_USER_DEPRECATED
             );
 

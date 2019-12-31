@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Resolver;
+namespace LaminasTest\Di\Resolver;
 
+use Laminas\Di\Resolver\AbstractInjection;
+use Laminas\Di\Resolver\InjectionInterface;
 use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\Resolver\AbstractInjection;
-use Zend\Di\Resolver\InjectionInterface;
 
 class AbstractInjectionTest extends TestCase
 {

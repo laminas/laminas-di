@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition\Reflection;
+namespace Laminas\Di\Definition\Reflection;
 
+use Laminas\Di\Definition\ParameterInterface;
 use ReflectionParameter;
-use Zend\Di\Definition\ParameterInterface;
 
 /**
  * This class specifies a method parameter for the di definition

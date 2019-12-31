@@ -17,31 +17,17 @@ matrix:
         - DEPS=lowest
     - php: 7.1
       env:
-        - DEPS=locked
-        - LEGACY_DEPS="phpunit/phpunit"
-        - TEST_COVERAGE=true
-        - CHECK_CS=true
-    - php: 7.1
-      env:
         - DEPS=latest
+        - TEST_COVERAGE=true
     - php: 7.2
       env:
         - DEPS=lowest
     - php: 7.2
       env:
-        - DEPS=locked
-    - php: 7.2
-      env:
         - DEPS=latest
     - php: 7.3
       env:
-        - DEPS=locked
-    - php: 7.3
-      env:
         - DEPS=latest
-    - php: 7.4
-      env:
-        - DEPS=locked
     - php: 7.4
       env:
         - DEPS=latest
@@ -58,8 +44,9 @@ install:
   - stty cols 120 && composer show
 
 script:
+  - find . -path ./vendor -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected")
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
-  - if [[ $CHECK_CS == 'true' ]]; then composer cs-check ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry php vendor/bin/php-coveralls -v ; fi

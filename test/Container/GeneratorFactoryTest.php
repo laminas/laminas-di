@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Container;
+namespace LaminasTest\Di\Container;
 
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Container\GeneratorFactory;
+use Laminas\Di\Injector;
+use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\Config;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Container\GeneratorFactory;
-use Zend\Di\Injector;
-use Zend\ServiceManager\ServiceManager;
 
 /**
- * @covers Zend\Di\Container\GeneratorFactory
+ * @covers Laminas\Di\Container\GeneratorFactory
  */
 class GeneratorFactoryTest extends TestCase
 {
@@ -49,7 +50,7 @@ class GeneratorFactoryTest extends TestCase
 
     public function testSetsOutputDirectoryFromConfig() : void
     {
-        $vfs = vfsStream::setup(uniqid('zend-di'));
+        $vfs = vfsStream::setup(uniqid('laminas-di'));
         $expected = $vfs->url();
         $container = new ServiceManager();
         $container->setService('config', [
@@ -68,7 +69,7 @@ class GeneratorFactoryTest extends TestCase
 
     public function testSetsNamespaceFromConfig() : void
     {
-        $expected = 'ZendTest\\Di\\' . uniqid('Generated');
+        $expected = 'LaminasTest\\Di\\' . uniqid('Generated');
         $container = new ServiceManager();
         $container->setService('config', [
             'dependencies' => [

@@ -1,9 +1,10 @@
 <?php
+
 /**
- * Generated autoloader for Zend\Di
+ * Generated autoloader for Laminas\Di
  */
 
-namespace ZendTest\Di\Generated;
+namespace LaminasTest\Di\Generated;
 
 use function spl_autoload_register;
 use function spl_autoload_unregister;

@@ -2,7 +2,7 @@
 
 Configuration detailing how types are constructed and dependencies should be
 resolved can be provided as an associative array when instantiating
-`Zend\Di\Config`. A type may be an actual class name or an alias to a class
+`Laminas\Di\Config`. A type may be an actual class name or an alias to a class
 name.
 
 The configuration array respects the following keys (unknown keys are ignored):
@@ -30,7 +30,7 @@ The configuration array respects the following keys (unknown keys are ignored):
 Below is an example of injector configuration.
 
 ```php
-$config = new \Zend\Di\Config([
+$config = new \Laminas\Di\Config([
     // Declares global preferences to use when resolving
     // dependencies of the specified type
     'preferences' => [
@@ -110,8 +110,8 @@ class MyClass
 
 // With the following configuration:
 
-use Zend\Di\Injector;
-use Zend\Di\Config;
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
 
 $injector = new Injector(new Config([
     'preferences' => [
@@ -153,10 +153,10 @@ There are several ways to define injections.
   type is a class or interface. For other types (scalars, `iterable`,
   `callable`, etc) or typeless parameters, the string value is passed __as is__.
 
-- An instance of `Zend\Di\Resolver\ValueInjection`: Injects the value returned
+- An instance of `Laminas\Di\Resolver\ValueInjection`: Injects the value returned
   by `getValue()` as is.
 
-- An instance of `Zend\Di\Resolver\TypeInjection`: Obtains the injected value
+- An instance of `Laminas\Di\Resolver\TypeInjection`: Obtains the injected value
   from the IoC container by passing the return value of `getType()` to the
   container's `get()` method.
 
@@ -165,7 +165,7 @@ There are several ways to define injections.
   [Type Preferences](#type-preferences).
 
 - Any other value will be used as is and encapsulated in a
-  `Zend\Di\Resolver\ValueInjection`. If the provided value's type does not fit
+  `Laminas\Di\Resolver\ValueInjection`. If the provided value's type does not fit
   the required parameter type, an exception is thrown.
 
 ## Aliases
@@ -199,8 +199,8 @@ class MyClass
 
 // With the following injection config:
 
-use Zend\Di\Injector;
-use Zend\Di\Config;
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
 
 $injector = new Injector(new Config([
     'types' => [

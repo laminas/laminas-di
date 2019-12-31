@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Generated factory for %class%
  */
 
 %namespace%
 use Psr\Container\ContainerInterface;
-use Zend\Di\CodeGenerator\FactoryInterface;
+use Laminas\Di\CodeGenerator\FactoryInterface;
 %use_array_key_exists%
 use function is_array;
 

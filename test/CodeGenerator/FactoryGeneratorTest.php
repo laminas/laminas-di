@@ -1,25 +1,26 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\CodeGenerator;
+namespace LaminasTest\Di\CodeGenerator;
 
+use Laminas\Di\CodeGenerator\FactoryGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\CodeGenerator\FactoryGenerator;
-use Zend\Di\Config;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Resolver\DependencyResolver;
-use ZendTest\Di\TestAsset;
 
 /**
  * FactoryGenerator test case.
  */
 class FactoryGeneratorTest extends TestCase
 {
-    const DEFAULT_NAMESPACE = 'ZendTest\Di\Generated\Factory';
+    const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated\Factory';
 
     use GeneratorTestTrait;
 
@@ -32,7 +33,7 @@ class FactoryGeneratorTest extends TestCase
         $generator->setOutputDirectory($this->dir . '/Factory');
         $generator->generate(TestAsset\RequiresA::class);
 
-        $this->assertFileExists($this->dir . '/Factory/ZendTest/Di/TestAsset/RequiresAFactory.php');
+        $this->assertFileExists($this->dir . '/Factory/LaminasTest/Di/TestAsset/RequiresAFactory.php');
     }
 
     public function testGenerateBuildsUpClassMap()
@@ -65,7 +66,7 @@ class FactoryGeneratorTest extends TestCase
 
         $this->assertFileEquals(
             __DIR__ . '/../_files/expected-codegen-results/factories/without-params.php',
-            $this->dir . '/Factory/ZendTest/Di/TestAsset/AFactory.php'
+            $this->dir . '/Factory/LaminasTest/Di/TestAsset/AFactory.php'
         );
     }
 
@@ -80,7 +81,7 @@ class FactoryGeneratorTest extends TestCase
 
         $this->assertFileEquals(
             __DIR__ . '/../_files/expected-codegen-results/factories/with-params.php',
-            $this->dir . '/Factory/ZendTest/Di/TestAsset/Constructor/MixedArgumentsFactory.php'
+            $this->dir . '/Factory/LaminasTest/Di/TestAsset/Constructor/MixedArgumentsFactory.php'
         );
     }
 }
