@@ -1,30 +1,22 @@
 {
-    "name": "zendframework/zend-di",
+    "name": "laminas/laminas-di",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "di"
     ],
-    "homepage": "https://github.com/zendframework/zend-di",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Di\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-di/",
+        "issues": "https://github.com/laminas/laminas-di/issues",
+        "source": "https://github.com/laminas/laminas-di",
+        "rss": "https://github.com/laminas/laminas-di/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": ">=5.3.23",
-        "zendframework/zend-code": "self.version",
-        "zendframework/zend-stdlib": "self.version"
-    },
-    "require-dev": {
-        "zendframework/zend-servicemanager": "self.version",
-        "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
-    },
-    "suggest": {
-        "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -32,9 +24,32 @@
             "dev-develop": "2.5-dev"
         }
     },
+    "require": {
+        "php": ">=5.3.23",
+        "laminas/laminas-code": "self.version",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "1.7.*",
+        "laminas/laminas-servicemanager": "self.version",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "suggest": {
+        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Di\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Di\\": "test/"
+            "LaminasTest\\Di\\": "test/"
         }
+    },
+    "replace": {
+        "zendframework/zend-di": "self.version"
     }
 }
