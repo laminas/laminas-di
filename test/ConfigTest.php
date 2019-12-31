@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
-use Zend\Di\Config;
-use Zend\Di\Di;
-use Zend\Config\Factory as ConfigFactory;
+use Laminas\Config\Factory as ConfigFactory;
+use Laminas\Di\Config;
+use Laminas\Di\Di;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class ConfigTest extends TestCase
@@ -86,8 +85,8 @@ class ConfigTest extends TestCase
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
-        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
-        $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $definition);
+        $definition = $di->definitions()->getDefinitionByType('Laminas\Di\Definition\RuntimeDefinition');
+        $this->assertInstanceOf('Laminas\Di\Definition\RuntimeDefinition', $definition);
         $this->assertFalse($definition->getIntrospectionStrategy()->getUseAnnotations());
     }
 
@@ -97,7 +96,7 @@ class ConfigTest extends TestCase
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
-        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
+        $definition = $di->definitions()->getDefinitionByType('Laminas\Di\Definition\RuntimeDefinition');
         $this->assertFalse($definition);
     }
 
@@ -107,7 +106,7 @@ class ConfigTest extends TestCase
         $config = new Config($ini->di);
         $di = new Di();
         $di->configure($config);
-        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\RuntimeDefinition');
+        $definition = $di->definitions()->getDefinitionByType('Laminas\Di\Definition\RuntimeDefinition');
         $this->assertTrue($definition->getIntrospectionStrategy()->getUseAnnotations());
     }
 
@@ -117,8 +116,8 @@ class ConfigTest extends TestCase
         $config = new Config($config->di);
         $di = new Di();
         $di->configure($config);
-        $definition = $di->definitions()->getDefinitionByType('Zend\Di\Definition\ArrayDefinition');
-        $this->assertInstanceOf('Zend\Di\Definition\ArrayDefinition', $definition);
+        $definition = $di->definitions()->getDefinitionByType('Laminas\Di\Definition\ArrayDefinition');
+        $this->assertInstanceOf('Laminas\Di\Definition\ArrayDefinition', $definition);
         $this->assertTrue($di->definitions()->hasClass('My\DbAdapter'));
         $this->assertTrue($di->definitions()->hasClass('My\EntityA'));
         $this->assertTrue($di->definitions()->hasClass('My\Mapper'));
