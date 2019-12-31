@@ -1,27 +1,28 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
+use Laminas\Di\Config;
+use Laminas\Di\DefaultContainer;
+use Laminas\Di\Definition\DefinitionInterface;
+use Laminas\Di\Exception;
+use Laminas\Di\Injector;
+use Laminas\Di\Resolver\DependencyResolverInterface;
+use Laminas\Di\Resolver\TypeInjection;
+use LaminasTest\Di\TestAsset\DependencyTree as TreeTestAsset;
 use PHPUnit\Framework\Constraint;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Config;
-use Zend\Di\DefaultContainer;
-use Zend\Di\Exception;
-use Zend\Di\Injector;
-use Zend\Di\Resolver\DependencyResolverInterface;
-use ZendTest\Di\TestAsset\DependencyTree as TreeTestAsset;
 use stdClass;
-use Zend\Di\Definition\DefinitionInterface;
-use Zend\Di\Resolver\TypeInjection;
 
 /**
- * @coversDefaultClass Zend\Di\Injector
+ * @coversDefaultClass Laminas\Di\Injector
  */
 class InjectorTest extends TestCase
 {
@@ -102,7 +103,7 @@ class InjectorTest extends TestCase
     public function testCanCreateReturnsFalseForNonExistingClassOrAlias()
     {
         $injector = new Injector();
-        $this->assertFalse($injector->canCreate('Zend\Di\TestAsset\NoSuchClass'));
+        $this->assertFalse($injector->canCreate('Laminas\Di\TestAsset\NoSuchClass'));
         $this->assertFalse($injector->canCreate('Some.Alias.Name'));
     }
 
@@ -138,7 +139,7 @@ class InjectorTest extends TestCase
         $config = new Config([
             'types' => [
                 'Some.Custom.Name' => [
-                    'typeOf' => 'ZendTest\Di\TestAsset\NoSuchClassName',
+                    'typeOf' => 'LaminasTest\Di\TestAsset\NoSuchClassName',
                 ],
             ],
         ]);
@@ -161,7 +162,7 @@ class InjectorTest extends TestCase
         $container->setInstance(TestAsset\A::class, $expectedA);
         $injector->setContainer($container);
 
-        /** @var \ZendTest\Di\TestAsset\B $result */
+        /** @var \LaminasTest\Di\TestAsset\B $result */
         $result = $injector->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
@@ -170,7 +171,7 @@ class InjectorTest extends TestCase
 
     public function testCreateSimpleDependency()
     {
-        /** @var \ZendTest\Di\TestAsset\B $result */
+        /** @var \LaminasTest\Di\TestAsset\B $result */
         $result = (new Injector())->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
@@ -360,7 +361,7 @@ class InjectorTest extends TestCase
             ->willReturn(true);
 
         $this->expectException(Exception\ClassNotFoundException::class);
-        (new Injector(null, null, $definition))->create('ZendTest\Di\TestAsset\No\Such\Class');
+        (new Injector(null, null, $definition))->create('LaminasTest\Di\TestAsset\No\Such\Class');
     }
 
     public function provideUnexpectedResolverValues()

@@ -1,26 +1,27 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\CodeGenerator;
+namespace LaminasTest\Di\CodeGenerator;
 
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\InjectorInterface;
+use Laminas\Di\Resolver\DependencyResolver;
+use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\Config;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Resolver\DependencyResolver;
-use ZendTest\Di\TestAsset;
-use Zend\Di\InjectorInterface;
 
 /**
  * FactoryGenerator test case.
  */
 class InjectorGeneratorTest extends TestCase
 {
-    const DEFAULT_NAMESPACE = 'ZendTest\Di\Generated';
+    const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
     use GeneratorTestTrait;
 
@@ -35,7 +36,7 @@ class InjectorGeneratorTest extends TestCase
             TestAsset\RequiresA::class
         ]);
 
-        $this->assertFileExists($this->dir . '/Factory/ZendTest/Di/TestAsset/RequiresAFactory.php');
+        $this->assertFileExists($this->dir . '/Factory/LaminasTest/Di/TestAsset/RequiresAFactory.php');
         $this->assertFileExists($this->dir . '/GeneratedInjector.php');
         $this->assertFileExists($this->dir . '/factories.php');
         $this->assertFileExists($this->dir . '/autoload.php');

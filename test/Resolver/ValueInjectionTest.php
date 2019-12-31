@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Resolver;
+namespace LaminasTest\Di\Resolver;
 
+use Laminas\Di\Exception;
+use Laminas\Di\Resolver\ValueInjection;
+use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zend\Di\Exception;
-use Zend\Di\Resolver\ValueInjection;
-use ZendTest\Di\TestAsset;
 
 /**
- * @coversDefaultClass Zend\Di\Resolver\ValueInjection
+ * @coversDefaultClass Laminas\Di\Resolver\ValueInjection
  */
 class ValueInjectionTest extends TestCase
 {

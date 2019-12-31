@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\CodeGenerator;
+namespace Laminas\Di\CodeGenerator;
 
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\FileGenerator;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\PropertyGenerator;
-use Zend\Code\Generator\PropertyValueGenerator;
+use Laminas\Code\Generator\ClassGenerator;
+use Laminas\Code\Generator\DocBlockGenerator;
+use Laminas\Code\Generator\FileGenerator;
+use Laminas\Code\Generator\MethodGenerator;
+use Laminas\Code\Generator\PropertyGenerator;
+use Laminas\Code\Generator\PropertyValueGenerator;
 
 class AutoloadGenerator
 {
@@ -63,7 +64,7 @@ class AutoloadGenerator
 
         $file = new FileGenerator();
         $file
-            ->setDocBlock(new DocBlockGenerator('Generated autoloader for Zend\Di'))
+            ->setDocBlock(new DocBlockGenerator('Generated autoloader for Laminas\Di'))
             ->setNamespace($this->namespace)
             ->setClass($class)
             ->setFilename($this->outputDirectory . '/Autoloader.php');
@@ -84,7 +85,7 @@ class AutoloadGenerator
 
         $file = new FileGenerator();
         $file
-            ->setDocBlock(new DocBlockGenerator('Generated autoload file for Zend\Di'))
+            ->setDocBlock(new DocBlockGenerator('Generated autoload file for Laminas\Di'))
             ->setNamespace($this->namespace)
             ->setBody($code)
             ->setFilename($this->outputDirectory.'/autoload.php')

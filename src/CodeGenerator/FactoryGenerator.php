@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\CodeGenerator;
+namespace Laminas\Di\CodeGenerator;
 
+use Laminas\Code\Generator\ClassGenerator;
+use Laminas\Code\Generator\DocBlockGenerator;
+use Laminas\Code\Generator\FileGenerator;
+use Laminas\Code\Generator\MethodGenerator;
+use Laminas\Code\Generator\ParameterGenerator;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Resolver\AbstractInjection;
+use Laminas\Di\Resolver\DependencyResolverInterface;
+use Laminas\Di\Resolver\TypeInjection;
 use Psr\Container\ContainerInterface;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\FileGenerator;
-use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\ParameterGenerator;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Resolver\AbstractInjection;
-use Zend\Di\Resolver\DependencyResolverInterface;
-use Zend\Di\Resolver\TypeInjection;
 
 /**
  * Generates factory classes
@@ -55,7 +56,7 @@ class FactoryGenerator
     ) {
         $this->resolver = $resolver;
         $this->config = $config;
-        $this->namespace = $namespace ?: 'ZendDiGenerated';
+        $this->namespace = $namespace ?: 'LaminasDiGenerated';
     }
 
     /**
@@ -175,14 +176,14 @@ class FactoryGenerator
     private function buildInvokeMethod(ClassGenerator $generator)
     {
         $code = 'if (is_string($options)) {' . PHP_EOL
-            . '    $options = is_array($zfCompatibleOptions) ? $zfCompatibleOptions : [];' . PHP_EOL
+            . '    $options = is_array($laminasCompatibleOptions) ? $laminasCompatibleOptions : [];' . PHP_EOL
             . '}' . PHP_EOL . PHP_EOL
             . 'return $this->create($container, $options);';
 
         $args = [
             new ParameterGenerator('container', ContainerInterface::class),
             new ParameterGenerator('options', null, []),
-            new ParameterGenerator('zfCompatibleOptions', null, []),
+            new ParameterGenerator('laminasCompatibleOptions', null, []),
         ];
 
         $generator->addMethod('__invoke', $args, MethodGenerator::FLAG_PUBLIC, $code);

@@ -1,6 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - index.md
     - Intro: intro.md
     - "Quick Start": quick-start.md
@@ -16,10 +16,9 @@ pages:
             - "Debugging And Complex Use Cases": v2/debugging-and-complex-use-cases.md
     - Cookbook:
         - "Usage with PSR-11 Containers": cookbook/use-with-psr-containers.md
-        - "Usage with zend-servicemanager": cookbook/use-with-servicemanager.md
-        - "Using AoT with Expressive and zend-servicemanager": cookbook/aot-guide.md
+        - "Usage with laminas-servicemanager": cookbook/use-with-servicemanager.md
+        - "Using AoT with Mezzio and laminas-servicemanager": cookbook/aot-guide.md
     - "Migration Guide": migration.md
-site_name: zend-di
-site_description: zend-di
-repo_url: 'https://github.com/zendframework/zend-di'
-copyright: 'Copyright (c) 2005-2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-di
+site_description: laminas-di
+repo_url: 'https://github.com/laminas/laminas-di'

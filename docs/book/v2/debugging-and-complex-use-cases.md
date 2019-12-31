@@ -2,17 +2,17 @@
 
 > ### Version 2
 >
-> This is documentation for the legacy version (2.x) of zend-di.
+> This is documentation for the legacy version (2.x) of laminas-di.
 
 ## Debugging a DiC
 
 It is possible to dump the information contained within both the `Definition`
-and `InstanceManager` for a `Zend\Di\Di` instance.
+and `InstanceManager` for a `Laminas\Di\Di` instance.
 
 The easiest way is to do the following:
 
 ```php
-Zend\Di\Display\Console::export($di);
+Laminas\Di\Display\Console::export($di);
 ```
 
 If you are using a `RuntimeDefinition` where upon you expect a particular
@@ -20,7 +20,7 @@ definition to be resolve at the first-call, you can see that information to the
 console display to force it to read that class:
 
 ```php
-Zend\Di\Display\Console::export($di, ['A\ClassIWantTo\GetTheDefinitionFor']);
+Laminas\Di\Display\Console::export($di, ['A\ClassIWantTo\GetTheDefinitionFor']);
 ```
 
 ## Complex Use Cases
@@ -51,8 +51,8 @@ namespace Foo\Bar
 }
 
 namespace {
-    include 'zf2bootstrap.php';
-    $di = new Zend\Di\Di;
+    include 'laminasbootstrap.php';
+    $di = new Laminas\Di\Di;
     $baz = $di->get('Foo\Bar\Baz');
 }
 ```
@@ -77,8 +77,8 @@ namespace Foo\Bar
 }
 
 namespace {
-    $di = new Zend\Di\Di;
-    $di->configure(new Zend\Di\Config([
+    $di = new Laminas\Di\Di;
+    $di->configure(new Laminas\Di\Config([
         'definition' => [
             'class' => [
                 'Foo\Bar\Baz' => [
@@ -117,9 +117,9 @@ namespace MyModule {
 }
 
 namespace {
-    include 'zf2bootstrap.php';
-    $di = new Zend\Di\Di;
-    $di->configure(new Zend\Di\Config([
+    include 'laminasbootstrap.php';
+    $di = new Laminas\Di\Di;
+    $di->configure(new Laminas\Di\Config([
         'definition' => [
             'class' => [
                 'Application\Page' => [
