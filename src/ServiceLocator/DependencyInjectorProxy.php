@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\ServiceLocator;
+namespace Laminas\Di\ServiceLocator;
 
-use Zend\Di\Di;
-use Zend\Di\Exception;
+use Laminas\Di\Di;
+use Laminas\Di\Exception;
 
 /**
- * Proxy used to analyze how instances are created by a given Di. Overrides Zend\Di\Di to produce artifacts that
+ * Proxy used to analyze how instances are created by a given Di. Overrides Laminas\Di\Di to produce artifacts that
  * represent the process used to instantiate a particular instance
  */
 class DependencyInjectorProxy extends Di
@@ -84,7 +83,7 @@ class DependencyInjectorProxy extends Di
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\InvalidCallbackException
+     * @throws \Laminas\Di\Exception\InvalidCallbackException
      * @return GeneratorInstance
      */
     public function createInstanceViaCallback($callback, $params, $alias)
