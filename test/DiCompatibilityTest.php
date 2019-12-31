@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
 use BadMethodCallException;
 use Exception;
+use Laminas\Di\Config;
+use Laminas\Di\Di;
 use PHPUnit_Framework_Error;
-use Zend\Di\Config;
-use Zend\Di\Di;
 
 class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,13 +41,13 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     public function providesSimpleClasses()
     {
         return array(
-            array('Zend\Di\Di'),
-            array('Zend\EventManager\EventManager'),
-            array('Zend\Filter\ToNull'),
-            array('Zend\Form\Form'),
-            array('Zend\Log\Logger'),
-            array('Zend\Stdlib\SplStack'),
-            array('Zend\View\Model\ViewModel'),
+            array('Laminas\Di\Di'),
+            array('Laminas\EventManager\EventManager'),
+            array('Laminas\Filter\ToNull'),
+            array('Laminas\Form\Form'),
+            array('Laminas\Log\Logger'),
+            array('Laminas\Stdlib\SplStack'),
+            array('Laminas\View\Model\ViewModel'),
         );
     }
 
@@ -89,7 +88,7 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
     /**
      *
      * @dataProvider providesClassWithConstructionParameters
-     * @expectedException \Zend\Di\Exception\MissingPropertyException
+     * @expectedException \Laminas\Di\Exception\MissingPropertyException
      * @param string $class
      */
     public function testWillThrowExceptionMissingConstructorRequiredParameterWithDi($class)
@@ -124,15 +123,15 @@ class DiCompatibilityTest extends \PHPUnit_Framework_TestCase
 
     public function providesClassWithConstructionParameters()
     {
-        $serviceManager = new \Zend\ServiceManager\ServiceManager;
-        $serviceManager->setService('EventManager', new \Zend\EventManager\EventManager);
+        $serviceManager = new \Laminas\ServiceManager\ServiceManager;
+        $serviceManager->setService('EventManager', new \Laminas\EventManager\EventManager);
         $serviceManager->setService('Request', new \stdClass);
         $serviceManager->setService('Response', new \stdClass);
 
         return array(
-            array('Zend\Config\Config', array('array' => array())),
-            array('Zend\Db\Adapter\Adapter', array('driver' => array('driver' => 'Pdo_Sqlite'))),
-            array('Zend\Mvc\Application', array('configuration' => array(), 'serviceManager' => $serviceManager)),
+            array('Laminas\Config\Config', array('array' => array())),
+            array('Laminas\Db\Adapter\Adapter', array('driver' => array('driver' => 'Pdo_Sqlite'))),
+            array('Laminas\Mvc\Application', array('configuration' => array(), 'serviceManager' => $serviceManager)),
         );
     }
 }
