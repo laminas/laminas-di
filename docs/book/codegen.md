@@ -1,32 +1,32 @@
 # Code Generator
 
-zend-di comes with [Ahead-of-Time (AoT)](https://en.wikipedia.org/wiki/Ahead-of-time_compilation)
+laminas-di comes with [Ahead-of-Time (AoT)](https://en.wikipedia.org/wiki/Ahead-of-time_compilation)
 generators to create optimized code for production. These generators will
 inspect the provided classes, resolve their dependencies, and generate factories
 based on these results.
 
-> ### Removal of zend-code dependencies
+> ### Removal of laminas-code dependencies
 >
-> Before version 3.1, this feature required [zend-code](https://docs.zendframework.com/zend-code/),
+> Before version 3.1, this feature required [laminas-code](https://docs.laminas.dev/laminas-code/),
 > which you can add to your project using Composer:
 >
 > ```bash
-> $ composer require --dev zendframework/zend-code
+> $ composer require --dev laminas/laminas-code
 > ```
 >
 > **Since version 3.1 and up, this is no longer required.**
 
 ## Generating an optimized injector
 
-The `Zend\Di\CodeGenerator\InjectorGenerator` class offers an implementation to
+The `Laminas\Di\CodeGenerator\InjectorGenerator` class offers an implementation to
 generate an optimized injector based on the runtime configuration and a resolver
 instance.
 
 ```php
-use Zend\Di\Config;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Resolver\DependencyResolver;
-use Zend\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
 
 $config = new Config();
 $resolver = new DependencyResolver(new RuntimeDefinition(), $config)
@@ -42,21 +42,21 @@ $generator->generate([
 ]);
 ```
 
-You can also utilize `Zend\Code\Scanner` to scan your code for classes:
+You can also utilize `Laminas\Code\Scanner` to scan your code for classes:
 
 ```php
 $scanner = new DirectoryScanner(__DIR__);
 $generator->generate($scanner->getClassNames());
 ```
 
-## MVC and Expressive integration
+## MVC and Mezzio integration
 
-When you are using zend-di's `ConfigProvider` with Expressive or consuming the
-`Module` class via zend-mvc, you can obtain the generator instance from the
+When you are using laminas-di's `ConfigProvider` with Mezzio or consuming the
+`Module` class via laminas-mvc, you can obtain the generator instance from the
 service manager:
 
 ```php
-$generator = $serviceManager->get(\Zend\Di\CodeGenerator\InjectorGenerator::class);
+$generator = $serviceManager->get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);
 ```
 
 ### AoT Config Options
@@ -68,8 +68,8 @@ following keys (unknown keys are ignored):
 
 - `namespace`: This will be used as base namespace to prefix the namespace of
   the generated classes.  It will be passed to the constructor of
-  `Zend\Di\CodeGenerator\InjectorGenerator`; the default value is
-  `Zend\Di\Generated`.
+  `Laminas\Di\CodeGenerator\InjectorGenerator`; the default value is
+  `Laminas\Di\Generated`.
 
 - `directory`: The directory where the generated PHP files will be stored. If
   this value is not provided, you will need to set it with the generator's

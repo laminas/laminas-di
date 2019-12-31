@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
+use Laminas\Di\DefaultContainer;
+use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zend\Di\DefaultContainer;
-use Zend\Di\InjectorInterface;
 
 /**
- * @coversDefaultClass Zend\Di\DefaultContainer
+ * @coversDefaultClass Laminas\Di\DefaultContainer
  */
 class DefaultContainerTest extends TestCase
 {

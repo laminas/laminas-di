@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Resolver;
+namespace Laminas\Di\Resolver;
 
+use Laminas\Di\Exception\LogicException;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Exception\LogicException;
 
 /**
  * Encapsulates the injection to perform for a parameter
@@ -26,7 +27,7 @@ use Zend\Di\Exception\LogicException;
  *
  * @internal
  * @see DependencyResolverInterface::resolveParameters() The resolver method's return type
- * @see \Zend\Di\Injector::getInjectionValue()           The default injector implementation
+ * @see \Laminas\Di\Injector::getInjectionValue()           The default injector implementation
  * @see TypeInjection                                    Implementation for injecting an instance of a specific type
  * @see ValueInjection                                   Implementation for injection an existing value
  */
@@ -58,7 +59,7 @@ interface InjectionInterface
      * of php code.
      *
      * When this method returns false, a call to `export()` should throw a
-     * `Zend\Di\Exception\LogicException`
+     * `Laminas\Di\Exception\LogicException`
      */
     public function isExportable() : bool;
 }

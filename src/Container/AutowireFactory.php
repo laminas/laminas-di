@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Container;
+namespace Laminas\Di\Container;
 
+use Laminas\Di\Exception;
+use Laminas\Di\InjectorInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Exception;
-use Zend\Di\InjectorInterface;
 
 /**
  * Create instances with autowiring
@@ -57,7 +58,7 @@ class AutowireFactory
     }
 
     /**
-     * Make invokable and implement the zend-service factory pattern
+     * Make invokable and implement the laminas-service factory pattern
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

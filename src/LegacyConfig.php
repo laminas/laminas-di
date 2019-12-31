@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\Stdlib\Parameters;
 use Traversable;
-use Zend\Stdlib\ArrayUtils;
-use Zend\Stdlib\Parameters;
 
 /**
- * Provides a migration config from zend-di 2.x configuration arrays
+ * Provides a migration config from laminas-di 2.x configuration arrays
  */
 class LegacyConfig extends Config
 {

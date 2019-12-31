@@ -1,28 +1,29 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\CodeGenerator;
+namespace LaminasTest\Di\CodeGenerator;
 
+use Laminas\Di\CodeGenerator\AbstractInjector;
+use Laminas\Di\CodeGenerator\FactoryInterface;
+use Laminas\Di\DefaultContainer;
+use Laminas\Di\InjectorInterface;
+use LaminasTest\Di\TestAsset\CodeGenerator\StdClassFactory;
+use LaminasTest\Di\TestAsset\InvokableInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use stdClass;
-use Zend\Di\CodeGenerator\AbstractInjector;
-use Zend\Di\CodeGenerator\FactoryInterface;
-use Zend\Di\DefaultContainer;
-use Zend\Di\InjectorInterface;
-use ZendTest\Di\TestAsset\CodeGenerator\StdClassFactory;
-use ZendTest\Di\TestAsset\InvokableInterface;
 
 use function uniqid;
 
 /**
- * @covers \Zend\Di\CodeGenerator\AbstractInjector
+ * @covers \Laminas\Di\CodeGenerator\AbstractInjector
  */
 class AbstractInjectorTest extends TestCase
 {
