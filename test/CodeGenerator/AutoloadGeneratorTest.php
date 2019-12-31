@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di\CodeGenerator;
+namespace LaminasTest\Di\CodeGenerator;
 
+use Laminas\Di\CodeGenerator\AutoloadGenerator;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\CodeGenerator\AutoloadGenerator;
 
 /**
  * AutoloadGenerator test case.
  */
 class AutoloadGeneratorTest extends TestCase
 {
-    const DEFAULT_NAMESPACE = 'ZendTest\Di\Generated';
+    const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
     use GeneratorTestTrait;
 

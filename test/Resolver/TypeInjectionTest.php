@@ -1,26 +1,27 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di\Resolver;
+namespace LaminasTest\Di\Resolver;
 
+use Laminas\Di\Resolver\InjectionInterface;
+use Laminas\Di\Resolver\TypeInjection;
+use Laminas\Di\Resolver\ValueInjection;
 use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
-use Zend\Di\Resolver\InjectionInterface;
-use Zend\Di\Resolver\TypeInjection;
-use Zend\Di\Resolver\ValueInjection;
 
 use function uniqid;
 
 /**
- * @covers \Zend\Di\Resolver\TypeInjection
+ * @covers \Laminas\Di\Resolver\TypeInjection
  */
 class TypeInjectionTest extends TestCase
 {

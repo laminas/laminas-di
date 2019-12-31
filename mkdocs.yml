@@ -1,6 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - Home: index.md
     - Introduction: intro.md
     - "Quick Start": quick-start.md
@@ -16,9 +16,9 @@ pages:
             - "Debugging And Complex Use Cases": v2/debugging-and-complex-use-cases.md
     - Cookbook:
         - "Usage with PSR-11 Containers": cookbook/use-with-psr-containers.md
-        - "Usage with zend-servicemanager": cookbook/use-with-servicemanager.md
-        - "Using AoT with Expressive and zend-servicemanager": cookbook/aot-guide.md
+        - "Usage with laminas-servicemanager": cookbook/use-with-servicemanager.md
+        - "Using AoT with Mezzio and laminas-servicemanager": cookbook/aot-guide.md
     - "Migration Guide": migration.md
-site_name: zend-di
+site_name: laminas-di
 site_description: "Automated dependency injection for PSR-11 containers"
-repo_url: 'https://github.com/zendframework/zend-di'
+repo_url: 'https://github.com/laminas/laminas-di'

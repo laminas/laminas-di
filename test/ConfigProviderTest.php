@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\ConfigProvider;
+use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\ConfigInterface;
-use Zend\Di\ConfigProvider;
-use Zend\Di\InjectorInterface;
 
 /**
- * @coversDefaultClass Zend\Di\Module
+ * @coversDefaultClass Laminas\Di\Module
  */
 class ConfigProviderTest extends TestCase
 {

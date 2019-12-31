@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
+use Laminas\Di\ConfigProvider;
+use Laminas\Di\Module;
 use PHPUnit\Framework\TestCase;
-use Zend\Di\Module;
-use Zend\Di\ConfigProvider;
 
 /**
- * @coversDefaultClass Zend\Di\Module
+ * @coversDefaultClass Laminas\Di\Module
  */
 class ModuleTest extends TestCase
 {

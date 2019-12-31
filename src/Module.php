@@ -1,26 +1,27 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
 /**
- * Provides Module functionality for Zend Framework 3 applications
+ * Provides Module functionality for Laminas applications
  *
- * To add the DI integration to your application use zend frameworks component installer or
- * add `Zend\\Di` to the ZF modules list:
+ * To add the DI integration to your application use laminas frameworks component installer or
+ * add `Laminas\\Di` to the Laminas modules list:
  *
  * <code>
  *  // application.config.php
  *  return [
  *      // ...
  *      'modules' => [
- *          'Zend\\Di',
+ *          'Laminas\\Di',
  *          // ...
  *      ]
  *  ];
@@ -29,7 +30,7 @@ namespace Zend\Di;
 class Module
 {
     /**
-     * Returns the configuration for zend-mvc
+     * Returns the configuration for laminas-mvc
      */
     public function getConfig() : array
     {

@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di\Definition\Reflection;
+namespace Laminas\Di\Definition\Reflection;
 
+use Laminas\Di\Definition\ClassDefinitionInterface;
+use Laminas\Di\Definition\ParameterInterface;
 use ReflectionClass;
-use Zend\Di\Definition\ClassDefinitionInterface;
-use Zend\Di\Definition\ParameterInterface;
 
 class ClassDefinition implements ClassDefinitionInterface
 {

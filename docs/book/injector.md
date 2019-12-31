@@ -1,13 +1,13 @@
 # Injector
 
-The `Zend\Di\Injector` is responsible for creating instances by providing the
+The `Laminas\Di\Injector` is responsible for creating instances by providing the
 dependencies required by the class.
 
 The dependencies are resolved by analyzing the constructor parameters of the
 requested class via reflection. For parameters defined with a class or interface
 typehint, the configured preferences are taken into account.
 
-A `Zend\Di\ConfigInterface` can be provided to configure the injector.
+A `Laminas\Di\ConfigInterface` can be provided to configure the injector.
 See the [Configuration](config.md) chapter for details.
 
 ## Create instances
@@ -15,7 +15,7 @@ See the [Configuration](config.md) chapter for details.
 Instances can be created by calling `create()`:
 
 ```php
-use Zend\Di\Injector;
+use Laminas\Di\Injector;
 
 $injector = new Injector()
 $injector->create(MyClass::class);
@@ -66,8 +66,8 @@ class Bar
 }
 
 // Usage
-use Zend\Di\Resolver\ValueInjection;
-use Zend\Di\Resolver\TypeInjection;
+use Laminas\Di\Resolver\ValueInjection;
+use Laminas\Di\Resolver\TypeInjection;
 
 // Creates Bar with an instance of SpecialFoo from the IoC container:
 $injector->create(Bar::class, [
@@ -102,12 +102,12 @@ If you uncertain whether or not the injector can create a specific type, you can
 test it with the `canCreate()` method.
 
 For example, if you were to consume the class name in a generic service factory
-for zend-servicemanager:
+for laminas-servicemanager:
 
 ```php
-use Zend\Di\Injector;
+use Laminas\Di\Injector;
 
-/** @var \Zend\ServiceManager\ServiceManager $container */
+/** @var \Laminas\ServiceManager\ServiceManager $container */
 $factory = function($container, $requestedName, array $options = null) {
     $injector = $container->get(Injector::class);
 

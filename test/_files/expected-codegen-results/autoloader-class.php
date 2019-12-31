@@ -1,11 +1,12 @@
 <?php
+
 /**
- * Generated autoloader for Zend\Di
+ * Generated autoloader for Laminas\Di
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di\Generated;
+namespace LaminasTest\Di\Generated;
 
 use function spl_autoload_register;
 use function spl_autoload_unregister;

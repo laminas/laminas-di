@@ -1,14 +1,15 @@
 <?php
+
 /**
- * Generated factory for \ZendTest\Di\TestAsset\Constructor\MixedArguments
+ * Generated factory for \LaminasTest\Di\TestAsset\Constructor\MixedArguments
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di\Generated\Factory\ZendTest\Di\TestAsset\Constructor;
+namespace LaminasTest\Di\Generated\Factory\LaminasTest\Di\TestAsset\Constructor;
 
+use Laminas\Di\CodeGenerator\FactoryInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Di\CodeGenerator\FactoryInterface;
 
 use function array_key_exists;
 use function is_array;
@@ -19,15 +20,15 @@ final class MixedArgumentsFactory implements FactoryInterface
     {
         $args = empty($options)
             ? [
-                $container->get('ZendTest\\Di\\TestAsset\\Constructor\\NoConstructor'), // objectDep
+                $container->get('LaminasTest\\Di\\TestAsset\\Constructor\\NoConstructor'), // objectDep
                 null, // anyDep
             ]
             : [
-                array_key_exists('objectDep', $options) ? $options['objectDep'] : $container->get('ZendTest\\Di\\TestAsset\\Constructor\\NoConstructor'),
+                array_key_exists('objectDep', $options) ? $options['objectDep'] : $container->get('LaminasTest\\Di\\TestAsset\\Constructor\\NoConstructor'),
                 array_key_exists('anyDep', $options) ? $options['anyDep'] : null,
             ];
 
-        return new \ZendTest\Di\TestAsset\Constructor\MixedArguments(...$args);
+        return new \LaminasTest\Di\TestAsset\Constructor\MixedArguments(...$args);
     }
 
     public function __invoke(ContainerInterface $container, $name = null, array $options = null)

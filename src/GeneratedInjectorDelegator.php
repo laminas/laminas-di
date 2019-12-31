@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
+use Laminas\Di\Exception\InvalidServiceConfigException;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Exception\InvalidServiceConfigException;
+
 use function class_exists;
 
 class GeneratedInjectorDelegator
@@ -20,7 +22,7 @@ class GeneratedInjectorDelegator
     {
         $config = $container->has('config') ? $container->get('config') : [];
         $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
-        $namespace = empty($aotConfig['namespace']) ? 'Zend\Di\Generated' : $aotConfig['namespace'];
+        $namespace = empty($aotConfig['namespace']) ? 'Laminas\Di\Generated' : $aotConfig['namespace'];
 
         if (! is_string($namespace)) {
             throw new InvalidServiceConfigException('Provided namespace is not a string.');

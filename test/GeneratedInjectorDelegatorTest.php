@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
+use Laminas\Di\Exception\InvalidServiceConfigException;
+use Laminas\Di\GeneratedInjectorDelegator;
+use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Di\Exception\InvalidServiceConfigException;
-use Zend\Di\GeneratedInjectorDelegator;
-use Zend\Di\InjectorInterface;
 
 class GeneratedInjectorDelegatorTest extends TestCase
 {
@@ -63,7 +64,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
             ->willReturn(true)
             ->shouldBeCalledTimes(1);
         $container->get('config')
-            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => 'ZendTest\Di\TestAsset']]]])
+            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => 'LaminasTest\Di\TestAsset']]]])
             ->shouldBeCalledTimes(1);
 
         $delegator = new GeneratedInjectorDelegator();

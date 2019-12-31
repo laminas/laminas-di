@@ -1,34 +1,35 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Di\Resolver;
+namespace LaminasTest\Di\Resolver;
 
 use ArrayIterator;
 use ArrayObject;
 use IteratorAggregate;
+use Laminas\Di\Config;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\ClassDefinitionInterface;
+use Laminas\Di\Definition\DefinitionInterface;
+use Laminas\Di\Definition\ParameterInterface;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Exception;
+use Laminas\Di\Resolver\DependencyResolver;
+use Laminas\Di\Resolver\TypeInjection;
+use Laminas\Di\Resolver\ValueInjection;
+use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
-use Zend\Di\Config;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Definition\ClassDefinitionInterface;
-use Zend\Di\Definition\DefinitionInterface;
-use Zend\Di\Definition\ParameterInterface;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Exception;
-use Zend\Di\Resolver\DependencyResolver;
-use Zend\Di\Resolver\TypeInjection;
-use Zend\Di\Resolver\ValueInjection;
-use ZendTest\Di\TestAsset;
 
 /**
- * @coversDefaultClass Zend\Di\Resolver\DependencyResolver
+ * @coversDefaultClass Laminas\Di\Resolver\DependencyResolver
  */
 class DependencyResolverTest extends TestCase
 {
@@ -646,7 +647,7 @@ class DependencyResolverTest extends TestCase
     /**
      * Ensures the documented preference resolver behavior as documented
      *
-     * @see https://docs.zendframework.com/zend-di/config/#type-preferences
+     * @see https://docs.laminas.dev/laminas-di/config/#type-preferences
      */
     public function testResolvePreferenceFallsBackToGlobalPreferenceWhenNotSuitableForClassRequirement()
     {
@@ -665,7 +666,7 @@ class DependencyResolverTest extends TestCase
     /**
      * Ensures the documented preference resolver behavior as documented
      *
-     * @see https://docs.zendframework.com/zend-di/config/#type-preferences
+     * @see https://docs.laminas.dev/laminas-di/config/#type-preferences
      */
     public function testResolvePreferenceReturnsNullWhenNothingIsSuitableForClassRequirement()
     {
@@ -681,7 +682,7 @@ class DependencyResolverTest extends TestCase
     /**
      * Ensures the documented preference resolver behavior as documented
      *
-     * @see https://docs.zendframework.com/zend-di/config/#type-preferences
+     * @see https://docs.laminas.dev/laminas-di/config/#type-preferences
      */
     public function testResolvePreferenceFallsBackToGlobalPreferenceWhenNotSuitableForInterfaceRequirement()
     {
@@ -704,7 +705,7 @@ class DependencyResolverTest extends TestCase
     /**
      * Ensures the documented preference resolver behavior as documented
      *
-     * @see https://docs.zendframework.com/zend-di/config/#type-preferences
+     * @see https://docs.laminas.dev/laminas-di/config/#type-preferences
      */
     public function testResolvePreferenceReturnsNullWhenNothingIsSuitableForInterfaceRequirement()
     {

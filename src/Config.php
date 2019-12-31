@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
 use ArrayAccess;
 
@@ -73,8 +74,8 @@ use function is_array;
  * For classes known from the definitions, a type preference might be the
  * better approach
  *
- * @see Zend\Di\Resolver\ValueInjection A container to force injection of a value
- * @see Zend\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
+ * @see Laminas\Di\Resolver\ValueInjection A container to force injection of a value
+ * @see Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
  */
 class Config implements ConfigInterface
 {
@@ -115,7 +116,7 @@ class Config implements ConfigInterface
 
     /**
      * {@inheritDoc}
-     * @see Zend\Di\ConfigInterface::getClassForAlias()
+     * @see Laminas\Di\ConfigInterface::getClassForAlias()
      */
     public function getClassForAlias(string $name) : ?string
     {
@@ -143,7 +144,7 @@ class Config implements ConfigInterface
 
     /**
      * {@inheritDoc}
-     * @see Zend\Di\ConfigInterface::setParameters()
+     * @see Laminas\Di\ConfigInterface::setParameters()
      */
     public function setParameters(string $type, array $params)
     {
@@ -172,7 +173,7 @@ class Config implements ConfigInterface
 
     /**
      * {@inheritDoc}
-     * @see Zend\Di\ConfigInterface::getTypePreferencesForClass()
+     * @see Laminas\Di\ConfigInterface::getTypePreferencesForClass()
      */
     private function getTypePreferenceForClass(string $type, ?string $context) : ?string
     {

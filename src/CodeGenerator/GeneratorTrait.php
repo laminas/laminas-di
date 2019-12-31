@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di\CodeGenerator;
+namespace Laminas\Di\CodeGenerator;
 
-use Zend\Di\Exception\GenerateCodeException;
-use Zend\Di\Exception\LogicException;
+use Laminas\Di\Exception\GenerateCodeException;
+use Laminas\Di\Exception\LogicException;
 
 /**
  * Trait with generic generator utility methods
@@ -63,7 +64,7 @@ trait GeneratorTrait
     /**
      * Set the output directory
      *
-     * You should configure a psr-4 autoloader with the namespace `Zend\Di\Generated`
+     * You should configure a psr-4 autoloader with the namespace `Laminas\Di\Generated`
      * to src/ in this directory.
      *
      * The compiler will attempt to create this directory if it does not exist

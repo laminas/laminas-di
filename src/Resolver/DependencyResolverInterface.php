@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di\Resolver;
+namespace Laminas\Di\Resolver;
 
 use Psr\Container\ContainerInterface;
 
@@ -47,7 +48,7 @@ interface DependencyResolverInterface
      * @param array $parameters Parameters to use as provided.
      * @return InjectionInterface[] Returns the injection parameters as indexed array. This
      *     array contains either TypeInjection or ValueInjection instances
-     * @throws \Zend\Di\Exception\MissingPropertyException  When a parameter
+     * @throws \Laminas\Di\Exception\MissingPropertyException  When a parameter
      *     could not be resolved
      */
     public function resolveParameters(string $class, array $parameters = []) : array;

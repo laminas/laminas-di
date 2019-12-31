@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
 /**
- * Implements the config provider for zend-expressive
+ * Implements the config provider for mezzio
  */
 class ConfigProvider
 {
     /**
      * Implements the config provider
      *
-     * @return array The configuration for zend-expressive
+     * @return array The configuration for mezzio
      */
     public function __invoke() : array
     {
@@ -34,6 +35,12 @@ class ConfigProvider
     public function getDependencyConfig() : array
     {
         return [
+            // Legacy Zend Framework aliases
+            'aliases' => [
+                \Zend\Di\InjectorInterface::class => InjectorInterface::class,
+                \Zend\Di\ConfigInterface::class => ConfigInterface::class,
+                \Zend\Di\CodeGenerator\InjectorGenerator::class => CodeGenerator\InjectorGenerator::class,
+            ],
             'factories' => [
                 InjectorInterface::class => Container\InjectorFactory::class,
                 ConfigInterface::class => Container\ConfigFactory::class,

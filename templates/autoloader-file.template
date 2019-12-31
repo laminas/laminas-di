@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Generated autoload file for Zend\Di
+ * Generated autoload file for Laminas\Di
  */
 
 declare(strict_types=1);
