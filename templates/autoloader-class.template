@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Generated autoloader for Zend\Di
+ * Generated autoloader for Laminas\Di
  */
 
 %namespace%

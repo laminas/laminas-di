@@ -1,21 +1,22 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di\Definition;
+namespace LaminasTest\Di\Definition;
 
+use Laminas\Di\Definition\ClassDefinitionInterface;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Exception;
+use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Zend\Di\Definition\ClassDefinitionInterface;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Di\Exception;
-use ZendTest\Di\TestAsset;
 
 /**
- * @coversDefaultClass Zend\Di\Definition\RuntimeDefinition
+ * @coversDefaultClass Laminas\Di\Definition\RuntimeDefinition
  */
 class RuntimeDefinitionTest extends TestCase
 {

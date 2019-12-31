@@ -1,49 +1,20 @@
 {
-    "name": "zendframework/zend-di",
+    "name": "laminas/laminas-di",
     "description": "Automated dependency injection and instance manager",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "di",
         "psr-11"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-di/",
-        "issues": "https://github.com/zendframework/zend-di/issues",
-        "source": "https://github.com/zendframework/zend-di",
-        "rss": "https://github.com/zendframework/zend-di/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^7.1",
-        "psr/container": "^1.0",
-        "psr/log": "^1.0",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
-    },
-    "require-dev": {
-        "container-interop/container-interop": "^1.2.0",
-        "mikey179/vfsStream": "^1.6",
-        "phpunit/phpunit": "^7.3",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-servicemanager": "^3.0"
-    },
-    "conflict": {
-        "zendframework/zend-servicemanager-di": "*"
-    },
-    "suggest": {
-        "zendframework/zend-servicemanager": "An IoC container without auto wiring capabilities"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Di\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Di\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-di/",
+        "issues": "https://github.com/laminas/laminas-di/issues",
+        "source": "https://github.com/laminas/laminas-di",
+        "rss": "https://github.com/laminas/laminas-di/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -53,9 +24,39 @@
             "dev-master": "3.1-dev",
             "dev-develop": "3.2-dev"
         },
-        "zf": {
-            "component": "Zend\\Di",
-            "config-provider": "Zend\\Di\\ConfigProvider"
+        "laminas": {
+            "component": "Laminas\\Di",
+            "config-provider": "Laminas\\Di\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "laminas/laminas-zendframework-bridge": "^0.4.5 || ^1.0",
+        "psr/container": "^1.0",
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "container-interop/container-interop": "^1.2.0",
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-servicemanager": "^3.0",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^7.3"
+    },
+    "conflict": {
+        "laminas/laminas-servicemanager-di": "*"
+    },
+    "suggest": {
+        "laminas/laminas-servicemanager": "An IoC container without auto wiring capabilities"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Di\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Di\\": "test/"
         }
     },
     "scripts": {
@@ -67,5 +68,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-di": "self.version"
     }
 }

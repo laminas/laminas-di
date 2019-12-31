@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-di for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-di/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Resolver;
+namespace Laminas\Di\Resolver;
 
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\ClassDefinitionInterface;
+use Laminas\Di\Definition\DefinitionInterface;
+use Laminas\Di\Exception;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use Traversable;
-use Zend\Di\ConfigInterface;
-use Zend\Di\Definition\ClassDefinitionInterface;
-use Zend\Di\Definition\DefinitionInterface;
-use Zend\Di\Exception;
 
 /**
  * The default resolver implementation

@@ -1,14 +1,14 @@
-# zend-di
+# laminas-di
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-di.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-di)
-[![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-di/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-di?branch=master)
+[![Build Status](https://travis-ci.org/laminas/laminas-di.svg?branch=master)](https://travis-ci.org/laminas/laminas-di)
+[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-di/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-di?branch=master)
 
-zend-di provides autowiring to implement Inversion of Control (IoC) containers.
+laminas-di provides autowiring to implement Inversion of Control (IoC) containers.
 IoC containers are widely used to create object instances that have all
 dependencies resolved and injected. Dependency Injection containers are one form
 of IoC – but not the only form.
 
-zend-di is designed to be simple, fast and reusable. It provides the following features:
+laminas-di is designed to be simple, fast and reusable. It provides the following features:
 
 - Constructor injection
 - Autowiring:
@@ -16,7 +16,7 @@ zend-di is designed to be simple, fast and reusable. It provides the following f
   - With configured type preferences
   - with configured injections
   - With injections passed in the create() call
-- Code generators to create factories usable by other IoC containers like Zend\ServiceManager
+- Code generators to create factories usable by other IoC containers like Laminas\ServiceManager
 
 It does __not__ provide:
 
@@ -28,7 +28,7 @@ It does __not__ provide:
 - Support for variadic arguments in __construct
 
 If you need these features combine it with another IoC container such as
-[zend-servicemanager](https://docs.zendframework.com/zend-servicemanager/).
+[laminas-servicemanager](https://docs.laminas.dev/laminas-servicemanager/).
 
-- File issues at https://github.com/zendframework/zend-di/issues
-- Documentation is at https://docs.zendframework.com/zend-di/
+- File issues at https://github.com/laminas/laminas-di/issues
+- Documentation is at https://docs.laminas.dev/laminas-di/
