@@ -1,21 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Di;
+namespace LaminasTest\Di;
 
-use Zend\Di\Di;
-use Zend\Di\DefinitionList;
-use Zend\Di\InstanceManager;
-use Zend\Di\Config;
-use Zend\Di\Definition;
-
+use Laminas\Di\Config;
+use Laminas\Di\Definition;
+use Laminas\Di\DefinitionList;
+use Laminas\Di\Di;
+use Laminas\Di\InstanceManager;
 
 class DiTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,12 +20,12 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testDiHasBuiltInImplementations()
     {
         $di = new Di();
-        $this->assertInstanceOf('Zend\Di\InstanceManager', $di->instanceManager());
+        $this->assertInstanceOf('Laminas\Di\InstanceManager', $di->instanceManager());
 
         $definitions = $di->definitions();
 
-        $this->assertInstanceOf('Zend\Di\DefinitionList', $definitions);
-        $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $definitions->top());
+        $this->assertInstanceOf('Laminas\Di\DefinitionList', $definitions);
+        $this->assertInstanceOf('Laminas\Di\Definition\RuntimeDefinition', $definitions->top());
     }
 
     public function testDiConstructorCanTakeDependencies()
@@ -51,24 +48,24 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testGetRetrievesObjectWithMatchingClassDefinition()
     {
         $di = new Di();
-        $obj = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj);
+        $obj = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj);
     }
 
     public function testGetRetrievesSameInstanceOnSubsequentCalls()
     {
         $config = new Config(array(
             'instance' => array(
-                'ZendTest\Di\TestAsset\BasicClass' => array(
+                'LaminasTest\Di\TestAsset\BasicClass' => array(
                     'shared' => true,
                     ),
                 ),
         ));
         $di = new Di(null, null, $config);
-        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $obj1 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $obj2 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertSame($obj1, $obj2);
     }
 
@@ -76,16 +73,16 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config(array(
             'instance' => array(
-                'ZendTest\Di\TestAsset\BasicClass' => array(
+                'LaminasTest\Di\TestAsset\BasicClass' => array(
                     'shared' => false,
                 ),
             ),
         ));
         $di = new Di(null, null, $config);
-        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $obj1 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $obj2 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertNotSame($obj1, $obj2);
     }
 
@@ -93,21 +90,21 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $config = new Config(array(
             'instance' => array(
-                'ZendTest\Di\TestAsset\BasicClass' => array(
+                'LaminasTest\Di\TestAsset\BasicClass' => array(
                     'shared' => true,
                 ),
             ),
         ));
         $di = new Di(null, null, $config);
-        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 0));
-        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 1));
-        $obj3 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParent', array('foo' => 2, 'non_exists' => 1));
-        $objParent1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $objParent2 = $di->get('ZendTest\Di\TestAsset\BasicClass', array('foo' => 1));
+        $obj1 = $di->get('LaminasTest\Di\TestAsset\BasicClassWithParent', array('foo' => 0));
+        $obj2 = $di->get('LaminasTest\Di\TestAsset\BasicClassWithParent', array('foo' => 1));
+        $obj3 = $di->get('LaminasTest\Di\TestAsset\BasicClassWithParent', array('foo' => 2, 'non_exists' => 1));
+        $objParent1 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $objParent2 = $di->get('LaminasTest\Di\TestAsset\BasicClass', array('foo' => 1));
 
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj2);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClassWithParent', $obj3);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClassWithParent', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClassWithParent', $obj2);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClassWithParent', $obj3);
         $this->assertSame($obj1->parent, $obj2->parent);
         $this->assertSame($obj2->parent, $obj3->parent);
         $this->assertSame($obj3->parent, $objParent1);
@@ -118,78 +115,78 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
 
-        $this->setExpectedException('Zend\Di\Exception\ClassNotFoundException', 'could not be located in');
-        $obj1 = $di->get('ZendTest\Di\TestAsset\NonExistentClass');
+        $this->setExpectedException('Laminas\Di\Exception\ClassNotFoundException', 'could not be located in');
+        $obj1 = $di->get('LaminasTest\Di\TestAsset\NonExistentClass');
     }
 
     public function testGetThrowsExceptionWhenMissingParametersAreEncountered()
     {
         $di = new Di();
 
-        $this->setExpectedException('Zend\Di\Exception\MissingPropertyException', 'Missing instance/object for ');
-        $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParam');
+        $this->setExpectedException('Laminas\Di\Exception\MissingPropertyException', 'Missing instance/object for ');
+        $obj1 = $di->get('LaminasTest\Di\TestAsset\BasicClassWithParam');
     }
 
     public function testNewInstanceReturnsDifferentInstances()
     {
         $di = new Di();
-        $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
-        $obj2 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $obj1 = $di->newInstance('LaminasTest\Di\TestAsset\BasicClass');
+        $obj2 = $di->newInstance('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertNotSame($obj1, $obj2);
     }
 
     public function testNewInstanceReturnsInstanceThatIsSharedWithGet()
     {
         $di = new Di();
-        $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
-        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $obj1 = $di->newInstance('LaminasTest\Di\TestAsset\BasicClass');
+        $obj2 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertSame($obj1, $obj2);
     }
 
     public function testNewInstanceReturnsInstanceThatIsNotSharedWithGet()
     {
         $di = new Di();
-        $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass', array(), false);
-        $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
+        $obj1 = $di->newInstance('LaminasTest\Di\TestAsset\BasicClass', array(), false);
+        $obj2 = $di->get('LaminasTest\Di\TestAsset\BasicClass');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj1);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertNotSame($obj1, $obj2);
     }
 
     public function testNewInstanceCanHandleClassesCreatedByCallback()
     {
         $definitionList = new DefinitionList(array(
-            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\A'),
+            $classdef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\CallbackClasses\A'),
             new Definition\RuntimeDefinition()
         ));
-        $classdef->setInstantiator('ZendTest\Di\TestAsset\CallbackClasses\A::factory');
+        $classdef->setInstantiator('LaminasTest\Di\TestAsset\CallbackClasses\A::factory');
 
         $di = new Di($definitionList);
-        $a = $di->get('ZendTest\Di\TestAsset\CallbackClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\A', $a);
+        $a = $di->get('LaminasTest\Di\TestAsset\CallbackClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\CallbackClasses\A', $a);
     }
 
     public function testNewInstanceCanHandleComplexCallback()
     {
         $definitionList = new DefinitionList(array(
-            $classdefB = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\B'),
-            $classdefC = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\C'),
+            $classdefB = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\CallbackClasses\B'),
+            $classdefC = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\CallbackClasses\C'),
             new Definition\RuntimeDefinition()
         ));
 
-        $classdefB->setInstantiator('ZendTest\Di\TestAsset\CallbackClasses\B::factory');
+        $classdefB->setInstantiator('LaminasTest\Di\TestAsset\CallbackClasses\B::factory');
         $classdefB->addMethod('factory', true);
-        $classdefB->addMethodParameter('factory', 'c', array('type' => 'ZendTest\Di\TestAsset\CallbackClasses\C', 'required' => true));
+        $classdefB->addMethodParameter('factory', 'c', array('type' => 'LaminasTest\Di\TestAsset\CallbackClasses\C', 'required' => true));
         $classdefB->addMethodParameter('factory', 'params', array('type' => 'Array', 'required'=>false));
 
         $di = new Di($definitionList);
-        $b = $di->get('ZendTest\Di\TestAsset\CallbackClasses\B', array('params'=>array('foo' => 'bar')));
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\C', $b->c);
+        $b = $di->get('LaminasTest\Di\TestAsset\CallbackClasses\B', array('params'=>array('foo' => 'bar')));
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\CallbackClasses\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\CallbackClasses\C', $b->c);
         $this->assertEquals(array('foo' => 'bar'), $b->params);
     }
 
@@ -199,14 +196,14 @@ class DiTest extends \PHPUnit_Framework_TestCase
 //        $config = new Config(array(
 //            'definition' => array(
 //                'class' => array(
-//                    'ZendTest\Di\TestAsset\DummyParams' => array(
-//                        'instantiator' => array('ZendTest\Di\TestAsset\StaticFactory', 'factory'),
+//                    'LaminasTest\Di\TestAsset\DummyParams' => array(
+//                        'instantiator' => array('LaminasTest\Di\TestAsset\StaticFactory', 'factory'),
 //                    ),
-//                    'ZendTest\Di\TestAsset\StaticFactory' => array(
+//                    'LaminasTest\Di\TestAsset\StaticFactory' => array(
 //                        'methods' => array(
 //                            'factory' => array(
 //                                'struct' => array(
-//                                    'type' => 'ZendTest\Di\TestAsset\Struct',
+//                                    'type' => 'LaminasTest\Di\TestAsset\Struct',
 //                                    'required' => true,
 //                                ),
 //                                'params' => array(
@@ -218,15 +215,15 @@ class DiTest extends \PHPUnit_Framework_TestCase
 //                ),
 //            ),
 //            'instance' => array(
-//                'ZendTest\Di\TestAsset\DummyParams' => array(
+//                'LaminasTest\Di\TestAsset\DummyParams' => array(
 //                    'parameters' => array(
-//                        'struct' => 'ZendTest\Di\TestAsset\Struct',
+//                        'struct' => 'LaminasTest\Di\TestAsset\Struct',
 //                        'params' => array(
 //                            'foo' => 'bar',
 //                        ),
 //                    ),
 //                ),
-//                'ZendTest\Di\TestAsset\Struct' => array(
+//                'LaminasTest\Di\TestAsset\Struct' => array(
 //                    'parameters' => array(
 //                        'param1' => 'hello',
 //                        'param2' => 'world',
@@ -236,11 +233,11 @@ class DiTest extends \PHPUnit_Framework_TestCase
 //        ));
 //        $di = new Di();
 //        $di->configure($config);
-//        $dummyParams = $di->get('ZendTest\Di\TestAsset\DummyParams');
+//        $dummyParams = $di->get('LaminasTest\Di\TestAsset\DummyParams');
 //        $this->assertEquals($dummyParams->params['param1'], 'hello');
 //        $this->assertEquals($dummyParams->params['param2'], 'world');
 //        $this->assertEquals($dummyParams->params['foo'], 'bar');
-//        $this->assertArrayNotHasKey('methods', $di->definitions()->hasMethods('ZendTest\Di\TestAsset\StaticFactory'));
+//        $this->assertArrayNotHasKey('methods', $di->definitions()->hasMethods('LaminasTest\Di\TestAsset\StaticFactory'));
 //    }
 
     /**
@@ -249,9 +246,9 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testGetWillResolveConstructorInjectionDependencies()
     {
         $di = new Di();
-        $b = $di->get('ZendTest\Di\TestAsset\ConstructorInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
+        $b = $di->get('LaminasTest\Di\TestAsset\ConstructorInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\A', $b->a);
     }
 
     /**
@@ -260,13 +257,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testGetWillResolveConstructorInjectionDependenciesAndInstanceAreTheSame()
     {
         $di = new Di();
-        $b = $di->get('ZendTest\Di\TestAsset\ConstructorInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
+        $b = $di->get('LaminasTest\Di\TestAsset\ConstructorInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\A', $b->a);
 
-        $b2 = $di->get('ZendTest\Di\TestAsset\ConstructorInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b2);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b2->a);
+        $b2 = $di->get('LaminasTest\Di\TestAsset\ConstructorInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\B', $b2);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\A', $b2->a);
 
         $this->assertSame($b, $b2);
         $this->assertSame($b->a, $b2->a);
@@ -278,9 +275,9 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testNewInstanceWillResolveConstructorInjectionDependencies()
     {
         $di = new Di();
-        $b = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
+        $b = $di->newInstance('LaminasTest\Di\TestAsset\ConstructorInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\A', $b->a);
     }
 
     /**
@@ -291,9 +288,9 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         $im = $di->instanceManager();
-        $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
+        $im->setParameters('LaminasTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
 
-        $y = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\Y');
+        $y = $di->newInstance('LaminasTest\Di\TestAsset\ConstructorInjection\Y');
         $this->assertEquals(1, $y->x->one);
         $this->assertEquals(2, $y->x->two);
     }
@@ -305,8 +302,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
 
-        $this->setExpectedException('Zend\Di\Exception\MissingPropertyException', 'Missing instance/object for parameter');
-        $b = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\X');
+        $this->setExpectedException('Laminas\Di\Exception\MissingPropertyException', 'Missing instance/object for parameter');
+        $b = $di->newInstance('LaminasTest\Di\TestAsset\ConstructorInjection\X');
     }
 
     /**
@@ -317,11 +314,11 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         $im = $di->instanceManager();
-        $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
+        $im->setParameters('LaminasTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
 
-        $z = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\Z');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\Y', $z->y);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\X', $z->y->x);
+        $z = $di->newInstance('LaminasTest\Di\TestAsset\ConstructorInjection\Z');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\Y', $z->y);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\ConstructorInjection\X', $z->y->x);
     }
 
     /**
@@ -332,12 +329,12 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         // for setter injection, the dependency is not required, thus it must be forced
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\SetterInjection\B',
+            'LaminasTest\Di\TestAsset\SetterInjection\B',
             array('a' => new TestAsset\SetterInjection\A)
         );
-        $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+        $b = $di->get('LaminasTest\Di\TestAsset\SetterInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b->a);
     }
 
     /**
@@ -348,17 +345,17 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         // for setter injection, the dependency is not required, thus it must be forced
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\SetterInjection\B',
+            'LaminasTest\Di\TestAsset\SetterInjection\B',
             array('a' => $a = new TestAsset\SetterInjection\A)
         );
 
-        $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+        $b = $di->get('LaminasTest\Di\TestAsset\SetterInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b->a);
 
-        $b2 = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b2);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b2->a);
+        $b2 = $di->get('LaminasTest\Di\TestAsset\SetterInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\B', $b2);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b2->a);
 
         $this->assertSame($b, $b2);
         $this->assertSame($b->a, $a);
@@ -373,13 +370,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         // for setter injection, the dependency is not required, thus it must be forced
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\SetterInjection\B',
+            'LaminasTest\Di\TestAsset\SetterInjection\B',
             array('a' => new TestAsset\SetterInjection\A)
         );
 
-        $b = $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\B');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+        $b = $di->newInstance('LaminasTest\Di\TestAsset\SetterInjection\B');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\B', $b);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b->a);
     }
 
     /**
@@ -392,10 +389,10 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         $im = $di->instanceManager();
-        $im->setParameters('ZendTest\Di\TestAsset\SetterInjection\X', array('one' => 1, 'two' => 2));
+        $im->setParameters('LaminasTest\Di\TestAsset\SetterInjection\X', array('one' => 1, 'two' => 2));
 
-        $x = $di->get('ZendTest\Di\TestAsset\SetterInjection\X');
-        $y = $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\Y', array('x' => $x));
+        $x = $di->get('LaminasTest\Di\TestAsset\SetterInjection\X');
+        $y = $di->newInstance('LaminasTest\Di\TestAsset\SetterInjection\Y', array('x' => $x));
 
         $this->assertEquals(1, $y->x->one);
         $this->assertEquals(2, $y->x->two);
@@ -411,8 +408,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
 
-        $this->setExpectedException('Zend\Di\Exception\CircularDependencyException');
-        $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\A');
+        $this->setExpectedException('Laminas\Di\Exception\CircularDependencyException');
+        $di->newInstance('LaminasTest\Di\TestAsset\CircularClasses\A');
     }
 
     /**
@@ -426,10 +423,10 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         $this->setExpectedException(
-            'Zend\Di\Exception\CircularDependencyException',
-            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\E depends on ZendTest\Di\TestAsset\CircularClasses\C and viceversa'
+            'Laminas\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: LaminasTest\Di\TestAsset\CircularClasses\E depends on LaminasTest\Di\TestAsset\CircularClasses\C and viceversa'
         );
-        $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\C');
+        $di->newInstance('LaminasTest\Di\TestAsset\CircularClasses\C');
     }
 
     /**
@@ -443,10 +440,10 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         $this->setExpectedException(
-            'Zend\Di\Exception\CircularDependencyException',
-            'Circular dependency detected: ZendTest\Di\TestAsset\CircularClasses\C depends on ZendTest\Di\TestAsset\CircularClasses\D and viceversa'
+            'Laminas\Di\Exception\CircularDependencyException',
+            'Circular dependency detected: LaminasTest\Di\TestAsset\CircularClasses\C depends on LaminasTest\Di\TestAsset\CircularClasses\D and viceversa'
         );
-        $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\D');
+        $di->newInstance('LaminasTest\Di\TestAsset\CircularClasses\D');
     }
 
     /**
@@ -458,51 +455,51 @@ class DiTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
         $di->instanceManager()->addTypePreference(
-            'ZendTest\Di\TestAsset\PreferredImplClasses\A',
-            'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
+            'LaminasTest\Di\TestAsset\PreferredImplClasses\A',
+            'LaminasTest\Di\TestAsset\PreferredImplClasses\BofA'
         );
 
-        $c = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\C');
+        $c = $di->get('LaminasTest\Di\TestAsset\PreferredImplClasses\C');
         $a = $c->a;
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
-        $d = $di->get('ZendTest\Di\TestAsset\PreferredImplClasses\D');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\PreferredImplClasses\BofA', $a);
+        $d = $di->get('LaminasTest\Di\TestAsset\PreferredImplClasses\D');
         $this->assertSame($a, $d->a);
     }
 
     public function testInjectionInstancesCanBeInjectedMultipleTimes()
     {
         $definitionList = new DefinitionList(array(
-            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            $classdef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\InjectionClasses\A'),
             new Definition\RuntimeDefinition()
         ));
         $classdef->addMethod('addB');
-        $classdef->addMethodParameter('addB', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('addB', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
 
         $di = new Di($definitionList);
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
-                'ZendTest\Di\TestAsset\InjectionClasses\B'
+                'LaminasTest\Di\TestAsset\InjectionClasses\B'
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
 
         $di = new Di($definitionList);
-        $di->instanceManager()->addAlias('my-b1', 'ZendTest\Di\TestAsset\InjectionClasses\B');
-        $di->instanceManager()->addAlias('my-b2', 'ZendTest\Di\TestAsset\InjectionClasses\B');
+        $di->instanceManager()->addAlias('my-b1', 'LaminasTest\Di\TestAsset\InjectionClasses\B');
+        $di->instanceManager()->addAlias('my-b2', 'LaminasTest\Di\TestAsset\InjectionClasses\B');
 
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
                 'my-b1',
                 'my-b2'
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
 
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
         $this->assertNotSame(
             $a->bs[0],
             $a->bs[1]
@@ -512,63 +509,63 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testInjectionCanHandleDisambiguationViaPositions()
     {
         $definitionList = new DefinitionList(array(
-            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            $classdef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\InjectionClasses\A'),
             new Definition\RuntimeDefinition()
         ));
         $classdef->addMethod('injectBOnce');
         $classdef->addMethod('injectBTwice');
-        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
-        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
 
         $di = new Di($definitionList);
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
-                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBOnce:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('once'),
-                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBTwice:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('twice')
+                'LaminasTest\Di\TestAsset\InjectionClasses\A::injectBOnce:0' => new \LaminasTest\Di\TestAsset\InjectionClasses\B('once'),
+                'LaminasTest\Di\TestAsset\InjectionClasses\A::injectBTwice:0' => new \LaminasTest\Di\TestAsset\InjectionClasses\B('twice')
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
         $this->assertEquals('once', $a->bs[0]->id);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
         $this->assertEquals('twice', $a->bs[1]->id);
     }
 
     public function testInjectionCanHandleDisambiguationViaNames()
     {
         $definitionList = new DefinitionList(array(
-            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            $classdef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\InjectionClasses\A'),
             new Definition\RuntimeDefinition()
         ));
         $classdef->addMethod('injectBOnce');
         $classdef->addMethod('injectBTwice');
-        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
-        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
 
         $di = new Di($definitionList);
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
-                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBOnce:b' => new \ZendTest\Di\TestAsset\InjectionClasses\B('once'),
-                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBTwice:b' => new \ZendTest\Di\TestAsset\InjectionClasses\B('twice')
+                'LaminasTest\Di\TestAsset\InjectionClasses\A::injectBOnce:b' => new \LaminasTest\Di\TestAsset\InjectionClasses\B('once'),
+                'LaminasTest\Di\TestAsset\InjectionClasses\A::injectBTwice:b' => new \LaminasTest\Di\TestAsset\InjectionClasses\B('twice')
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
         $this->assertEquals('once', $a->bs[0]->id);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
         $this->assertEquals('twice', $a->bs[1]->id);
     }
 
     public function testInjectionCanHandleMultipleInjectionsWithMultipleArguments()
     {
         $definitionList = new DefinitionList(array(
-            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            $classdef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\InjectionClasses\A'),
             new Definition\RuntimeDefinition()
         ));
         $classdef->addMethod('injectSplitDependency');
-        $classdef->addMethodParameter('injectSplitDependency', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectSplitDependency', 'b', array('required' => true, 'type' => 'LaminasTest\Di\TestAsset\InjectionClasses\B'));
         $classdef->addMethodParameter('injectSplitDependency', 'somestring', array('required' => true, 'type' => null));
 
         /**
@@ -576,13 +573,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
          */
         $di = new Di($definitionList);
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
-                'injectSplitDependency' => array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id')
+                'injectSplitDependency' => array('b' => 'LaminasTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id')
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
         $this->assertEquals('bs-id', $a->bs[0]->id);
 
         /**
@@ -590,18 +587,18 @@ class DiTest extends \PHPUnit_Framework_TestCase
          */
         $di = new Di($definitionList);
         $di->instanceManager()->setInjections(
-            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            'LaminasTest\Di\TestAsset\InjectionClasses\A',
             array(
                 'injectSplitDependency' => array(
-                    array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id'),
-                    array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\C', 'somestring' => 'bs-id-for-c')
+                    array('b' => 'LaminasTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id'),
+                    array('b' => 'LaminasTest\Di\TestAsset\InjectionClasses\C', 'somestring' => 'bs-id-for-c')
                 )
             )
         );
-        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $a = $di->newInstance('LaminasTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
         $this->assertEquals('bs-id', $a->bs[0]->id);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\C', $a->bs[1]);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\InjectionClasses\C', $a->bs[1]);
         $this->assertEquals('bs-id-for-c', $a->bs[1]->id);
     }
 
@@ -614,12 +611,12 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         // for setter injection, the dependency is not required, thus it must be forced
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\SetterInjection\C',
+            'LaminasTest\Di\TestAsset\SetterInjection\C',
             array('a' => new TestAsset\SetterInjection\A)
         );
-        $c = $di->get('ZendTest\Di\TestAsset\SetterInjection\C');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\C', $c);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $c->a);
+        $c = $di->get('LaminasTest\Di\TestAsset\SetterInjection\C');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\C', $c);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $c->a);
     }
 
     /**
@@ -631,13 +628,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
 
         // for setter injection, the dependency is not required, thus it must be forced
-        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\B');
+        $classDef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\SetterInjection\B');
         $classDef->addMethod('setA', true);
         $di->definitions()->addDefinition($classDef, false); // top of stack b/c Runtime is already there
 
-        $c = $di->get('ZendTest\Di\TestAsset\SetterInjection\C');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\C', $c);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $c->a);
+        $c = $di->get('LaminasTest\Di\TestAsset\SetterInjection\C');
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\C', $c);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $c->a);
     }
 
     /**
@@ -648,13 +645,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         $di->configure(new Config(array(
             'instance' => array(
-                'ZendTest\Di\TestAsset\SharedInstance\Lister' => array(
+                'LaminasTest\Di\TestAsset\SharedInstance\Lister' => array(
                     'shared' => false
                 )
             )
         )));
-        $movie = $di->get('ZendTest\Di\TestAsset\SharedInstance\Movie');
-        $venue = $di->get('ZendTest\Di\TestAsset\SharedInstance\Venue');
+        $movie = $di->get('LaminasTest\Di\TestAsset\SharedInstance\Movie');
+        $venue = $di->get('LaminasTest\Di\TestAsset\SharedInstance\Venue');
 
         $this->assertNotSame($movie->lister, $venue->lister);
         $this->assertSame($movie->lister->sharedLister, $venue->lister->sharedLister);
@@ -665,13 +662,13 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di;
 
         // for setter injection, the dependency is not required, thus it must be forced
-        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\B');
+        $classDef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\SetterInjection\B');
         $classDef->addMethod('setA', true);
         $di->definitions()->addDefinition($classDef, false); // top of stack b/c Runtime is already there
 
         $b = new TestAsset\SetterInjection\B;
         $di->injectDependencies($b);
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b->a);
     }
 
     public function testDiWillInjectDependenciesForAlias()
@@ -679,15 +676,15 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di;
 
         // for setter injection, the dependency is not required, thus it must be forced
-        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\B');
+        $classDef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\SetterInjection\B');
         $classDef->addMethod('setA', false);
-        $classDef->addMethodParameter('setA', 'a', array('type' => 'ZendTest\Di\TestAsset\SetterInjection\A', 'required' => false));
+        $classDef->addMethodParameter('setA', 'a', array('type' => 'LaminasTest\Di\TestAsset\SetterInjection\A', 'required' => false));
         $di->definitions()->addDefinition($classDef, false);
-        $di->instanceManager()->addAlias('b_alias', 'ZendTest\Di\TestAsset\SetterInjection\B');
-        $di->instanceManager()->setInjections('b_alias', array('ZendTest\Di\TestAsset\SetterInjection\A'));
+        $di->instanceManager()->addAlias('b_alias', 'LaminasTest\Di\TestAsset\SetterInjection\B');
+        $di->instanceManager()->setInjections('b_alias', array('LaminasTest\Di\TestAsset\SetterInjection\A'));
 
         $b = $di->get('b_alias');
-        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
+        $this->assertInstanceOf('LaminasTest\Di\TestAsset\SetterInjection\A', $b->a);
     }
 
     /*
@@ -699,61 +696,61 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $di = new Di();
         // for setter injection, the dependency is not required, thus it must be forced
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\InheritanceClasses\B',
+            'LaminasTest\Di\TestAsset\InheritanceClasses\B',
             array('test' => 'b')
         );
         $di->instanceManager()->setParameters(
-            'ZendTest\Di\TestAsset\InheritanceClasses\A',
+            'LaminasTest\Di\TestAsset\InheritanceClasses\A',
             array('test' => 'a')
         );
 
-        $b = $di->get('ZendTest\Di\TestAsset\InheritanceClasses\B');
+        $b = $di->get('LaminasTest\Di\TestAsset\InheritanceClasses\B');
         $this->assertEquals('b', $b->test);
 
-        $c = $di->get('ZendTest\Di\TestAsset\InheritanceClasses\C');
+        $c = $di->get('LaminasTest\Di\TestAsset\InheritanceClasses\C');
         $this->assertEquals('b', $c->test);
     }
 
     /**
-     * @group ZF2-260
+     * @group Laminas-260
      */
     public function testDiWillInjectClassNameAsStringAtCallTime()
     {
         $di = new Di;
 
-        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\D');
+        $classDef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\SetterInjection\D');
         $classDef->addMethod('setA', true);
         $classDef->addMethodParameter('setA', 'a', array('type' => false, 'required' => true));
         $di->definitions()->addDefinition($classDef, false);
 
         $d = $di->get(
-            'ZendTest\Di\TestAsset\SetterInjection\D',
-            array('a' => 'ZendTest\Di\TestAsset\SetterInjection\A')
+            'LaminasTest\Di\TestAsset\SetterInjection\D',
+            array('a' => 'LaminasTest\Di\TestAsset\SetterInjection\A')
         );
 
-        $this->assertSame($d->a, 'ZendTest\Di\TestAsset\SetterInjection\A');
+        $this->assertSame($d->a, 'LaminasTest\Di\TestAsset\SetterInjection\A');
     }
 
     /**
-     * @group ZF2-308
+     * @group Laminas-308
      */
     public function testWillNotCallStaticInjectionMethods()
     {
         $di = new Di;
         $di->definitions()->addDefinition(new Definition\RuntimeDefinition(), false);
-        $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\StaticSetter', array('name' => 'testName'));
+        $di->newInstance('LaminasTest\Di\TestAsset\SetterInjection\StaticSetter', array('name' => 'testName'));
 
-        $this->assertSame(\ZendTest\Di\TestAsset\SetterInjection\StaticSetter::$name, 'originalName');
+        $this->assertSame(\LaminasTest\Di\TestAsset\SetterInjection\StaticSetter::$name, 'originalName');
     }
 
     /**
-     * @group ZF2-142
+     * @group Laminas-142
      */
     public function testDiWillInjectDefaultParameters()
     {
         $di = new Di;
 
-        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
+        $classDef = new Definition\ClassDefinition('LaminasTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
         $classDef->addMethod('__construct', true);
         $classDef->addMethodParameter(
             '__construct',
@@ -773,7 +770,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
         $di->definitions()->addDefinition($classDef, false);
 
-        $optionalParams = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
+        $optionalParams = $di->newInstance('LaminasTest\Di\TestAsset\ConstructorInjection\OptionalParameters');
 
         $this->assertSame(null, $optionalParams->a);
         $this->assertSame('defaultConstruct', $optionalParams->b);
