@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition;
+namespace Laminas\Di\Definition;
 
-use Zend\Code\Annotation\AnnotationManager;
-use Zend\Code\Annotation\Parser\GenericAnnotationParser;
+use Laminas\Code\Annotation\AnnotationManager;
+use Laminas\Code\Annotation\Parser\GenericAnnotationParser;
 
 /**
  * Strategy used to discover methods to be considered as endpoints for dependency injection based on implemented

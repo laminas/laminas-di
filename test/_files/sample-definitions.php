@@ -30,7 +30,7 @@ return [
         'di' => [
             'definitions' => [
                 1 => [
-                    'class' => Zend\Di\Definition\BuilderDefinition::class,
+                    'class' => Laminas\Di\Definition\BuilderDefinition::class,
                     'My\DbAdapter' => [
                         'methods' => [
                             '__construct' => [

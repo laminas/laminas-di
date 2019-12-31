@@ -1,7 +1,7 @@
 # Instance Manager
 
 The `InstanceManager` is responsible for any runtime information associated with
-the zend-di DiC.  This means that the information that goes into the instance
+the laminas-di DiC.  This means that the information that goes into the instance
 manager is specific to both how the particular consuming application's needs,
 and even more specifically to the environment in which the application is
 running.
@@ -135,7 +135,7 @@ namespace MyMovieApp
 What you'll notice above is that the `MovieLister` type now expects that the
 dependency injected implements the `MovieFinderInterface`. This allows multiple
 implementations of this base interface to be used as a dependency, if that is
-what the consumer decides they want to do. As you can imagine, zend-di, by
+what the consumer decides they want to do. As you can imagine, laminas-di, by
 itself would not be able to determine what kind of concrete object to use
 fulfill this dependency, so this type of 'preference' needs to be made known to
 the instance manager.

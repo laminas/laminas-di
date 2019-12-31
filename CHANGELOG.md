@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Adds all existing documentation and publishes it at
-  https://zendframework.github.io/zend-di/
+  https://docs.laminas.dev/laminas-di/
 
 ### Deprecated
 
@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#3](https://github.com/zendframework/zend-di/pull/3) fixes how
+- [zendframework/zend-di#3](https://github.com/zendframework/zend-di/pull/3) fixes how
   `InstanceManager::sharedInstancesWithParams()` behaves when multiple calls are
   made with different sets of parameters (it should return different instances
   in that situation).
@@ -28,12 +28,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#16](https://github.com/zendframework/zend-di/pull/16) adds container-interop
+- [zendframework/zend-di#16](https://github.com/zendframework/zend-di/pull/16) adds container-interop
   as a dependency, and updates the `LocatorInterface` to extend
   `Interop\Container\ContainerInterface`. This required adding the following
   methods:
-  - `Zend\Di\Di::has()`
-  - `Zend\Di\ServiceLocator::has()`
+  - `Laminas\Di\Di::has()`
+  - `Laminas\Di\ServiceLocator::has()`
 
 ### Deprecated
 
@@ -41,23 +41,23 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#15](https://github.com/zendframework/zend-di/pull/15) and
-  [#16](https://github.com/zendframework/zend-di/pull/16) remove most
+- [zendframework/zend-di#15](https://github.com/zendframework/zend-di/pull/15) and
+  [zendframework/zend-di#16](https://github.com/zendframework/zend-di/pull/16) remove most
   development dependencies, as the functionality could be reproduced with
   generic test assets or PHP built-in classes. These include:
-  - zend-config
-  - zend-db
-  - zend-filter
-  - zend-log
-  - zend-mvc
-  - zend-view
-  - zend-servicemanager
+  - laminas-config
+  - laminas-db
+  - laminas-filter
+  - laminas-log
+  - laminas-mvc
+  - laminas-view
+  - laminas-servicemanager
 
 ### Fixed
 
-- [#16](https://github.com/zendframework/zend-di/pull/16) updates the try/catch
-  block in `Zend\Di\Di::resolveMethodParameters()` to catch container-interop
-  exceptions instead of the zend-servicemanager-specific exception class. Since
-  all zend-servicemanager exceptions derive from container-interop, this
+- [zendframework/zend-di#16](https://github.com/zendframework/zend-di/pull/16) updates the try/catch
+  block in `Laminas\Di\Di::resolveMethodParameters()` to catch container-interop
+  exceptions instead of the laminas-servicemanager-specific exception class. Since
+  all laminas-servicemanager exceptions derive from container-interop, this
   provides more flexibility in using any container-interop implementation as a
   peering container.

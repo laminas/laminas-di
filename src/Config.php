@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
+use Laminas\Di\Definition\ArrayDefinition;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Stdlib\ArrayUtils;
 use Traversable;
-use Zend\Di\Definition\ArrayDefinition;
-use Zend\Di\Definition\RuntimeDefinition;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Configures Di instances
@@ -90,13 +89,13 @@ class Config
                         /* @var $runtimeDefinition Definition\RuntimeDefinition */
                         $runtimeDefinition = $di
                             ->definitions()
-                            ->getDefinitionByType('\Zend\Di\Definition\RuntimeDefinition');
+                            ->getDefinitionByType('\Laminas\Di\Definition\RuntimeDefinition');
                         $runtimeDefinition->getIntrospectionStrategy()->setUseAnnotations(true);
                     }
                     break;
                 case 'class':
                     foreach ($definitionData as $className => $classData) {
-                        $classDefinitions = $di->definitions()->getDefinitionsByType('Zend\Di\Definition\ClassDefinition');
+                        $classDefinitions = $di->definitions()->getDefinitionsByType('Laminas\Di\Definition\ClassDefinition');
                         foreach ($classDefinitions as $classDefinition) {
                             if (!$classDefinition->hasClass($className)) {
                                 unset($classDefinition);

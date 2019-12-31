@@ -1,14 +1,14 @@
 # Dependency Definitions
 
-Definitions are what zend-di uses to understand the structure of the code it is
+Definitions are what laminas-di uses to understand the structure of the code it is
 attempting to wire. This means that if you've written non-ambiguous, clear and
-concise code, zend-di has a very good chance of understanding how to wire things
+concise code, laminas-di has a very good chance of understanding how to wire things
 up without much added complexity.
 
 ## DefinitionList
 
-Definitions are introduced to the `Zend\Di\Di` object through a definition list
-implemented as `Zend\Di\DefinitionList` (which extends `SplDoublyLinkedList`).
+Definitions are introduced to the `Laminas\Di\Di` object through a definition list
+implemented as `Laminas\Di\DefinitionList` (which extends `SplDoublyLinkedList`).
 Order is important. Definitions in the front of the list will be consulted on a
 class before definitions at the end of the list.
 
@@ -19,15 +19,15 @@ class before definitions at the end of the list.
 
 ## RuntimeDefinition
 
-The default `DefinitionList` instantiated by `Zend\Di\Di` when no other
-DefinitionList is provided is `Zend\Di\Definition\RuntimeDefinition`. The
+The default `DefinitionList` instantiated by `Laminas\Di\Di` when no other
+DefinitionList is provided is `Laminas\Di\Definition\RuntimeDefinition`. The
 `RuntimeDefinition` will respond to queries about classes by using PHP's
 Reflection API. The `RuntimeDefinition` uses any available information inside
 methods &mdash; including their signature, the names of parameters, the
 type-hints of the parameters, and the default values &mdash; to determine if
 something is optional or required when making a call to that method. The more
 explicit you can be in your method naming and method signatures, the more likely
-`Zend\Di\Definition\RuntimeDefinition` will accurately understand the structure
+`Laminas\Di\Definition\RuntimeDefinition` will accurately understand the structure
 of your code.
 
 The constructor of `RuntimeDefinition` looks like the following:
@@ -94,7 +94,7 @@ $components = [
 ];
 
 foreach ($components as $component) {
-    $diCompiler = new Zend\Di\Definition\CompilerDefinition;
+    $diCompiler = new Laminas\Di\Definition\CompilerDefinition;
     $diCompiler->addDirectory('/path/to/classes/' . str_replace('_', '/', $component));
 
     $diCompiler->compile();
@@ -118,7 +118,7 @@ protected function setupDi(Application $app)
         $runtime = new Definition\RuntimeDefinition(),
     ]);
     $di = new Di($definitionList, null, new Config($this->config->di));
-    $di->instanceManager()->addTypePreference('Zend\Di\LocatorInterface', $di);
+    $di->instanceManager()->addTypePreference('Laminas\Di\LocatorInterface', $di);
     $app->setLocator($di);
 }
 ```

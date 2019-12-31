@@ -20,15 +20,15 @@ you are not familiar with the concept of DI, here are a couple of great reads:
 - [Ralph Schindler's Learning DI](http://ralphschindler.com/2011/05/18/learning-about-dependency-injection-and-php)
 - [Fabien Potencier's Series](http://fabien.potencier.org/article/11/what-is-dependency-injection) on DI
 
-> ### zend-servicemanager
+> ### laminas-servicemanager
 >
-> `Zend\Di` is an example of an Inversion of Control (IoC) container. IoC containers are widely used
+> `Laminas\Di` is an example of an Inversion of Control (IoC) container. IoC containers are widely used
 > to create object instances that have all dependencies resolved and injected. Dependency Injection
 > containers are one form of IoC, but not the only form.
 > 
-> Zend Framework ships with another form of IoC as well,
-> [zend-servicemanager](https://zendframework.github.io/zend-servicemanager/).
-> Unlike zend-di, zend-servicemanager is code-driven, meaning that you tell it
+> Laminas ships with another form of IoC as well,
+> [laminas-servicemanager](https://docs.laminas.dev/laminas-servicemanager/).
+> Unlike laminas-di, laminas-servicemanager is code-driven, meaning that you tell it
 > what class to instantiate, or provide a factory for the given class. This
 > approach offers several benefits:
 >
@@ -36,10 +36,10 @@ you are not familiar with the concept of DI, here are a couple of great reads:
 >   dependency injection container).
 > - Easier to setup (write code to instantiate objects, instead of
 >   configuration).
-> - Faster (zend-di has known performance issues due to the approaches used).
+> - Faster (laminas-di has known performance issues due to the approaches used).
 >
 > Unless you have specific needs for a dependency injection container versus
-> more general Inversion of Control, we recommend using zend-servicemanager for
+> more general Inversion of Control, we recommend using laminas-servicemanager for
 > the above reasons.
 
 # Dependency Injection Containers
@@ -57,6 +57,6 @@ requested objects. Since the patterns that developers employ in writing DI
 capable code vary, DiC's are generally either in the form of smallish objects
 that suit a very specific pattern, or larger DiC frameworks.
 
-zend-di is a DiC framework. While for the simplest code there is no
-configuration needed, and the use cases are quite simple, zend-di is capable of
+laminas-di is a DiC framework. While for the simplest code there is no
+configuration needed, and the use cases are quite simple, laminas-di is capable of
 being configured to wire these complex use cases
