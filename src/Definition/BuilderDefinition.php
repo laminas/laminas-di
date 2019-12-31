@@ -1,29 +1,27 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Di
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di\Definition;
+namespace Laminas\Di\Definition;
 
-use Zend\Di\Exception;
+use Laminas\Di\Exception;
 
 /**
  * Class definitions based on a configuration array
  *
- * @category   Zend
- * @package    Zend_Di
+ * @category   Laminas
+ * @package    Laminas_Di
  */
 class BuilderDefinition implements DefinitionInterface
 {
     /**
      * @var string
      */
-    protected $defaultClassBuilder = 'Zend\Di\Definition\Builder\PhpClass';
+    protected $defaultClassBuilder = 'Laminas\Di\Definition\Builder\PhpClass';
 
     /**
      * @var Builder\PhpClass[]
@@ -178,7 +176,7 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function getClassSupertypes($class)
     {
@@ -193,7 +191,7 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function getInstantiator($class)
     {
@@ -207,11 +205,11 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function hasMethods($class)
     {
-        /* @var $class \Zend\Di\Definition\Builder\PhpClass */
+        /* @var $class \Laminas\Di\Definition\Builder\PhpClass */
         $class = $this->getClass($class);
         if ($class === false) {
             throw new Exception\RuntimeException('Cannot find class object in this builder definition.');
@@ -222,7 +220,7 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function getMethods($class)
     {
@@ -243,7 +241,7 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function hasMethod($class, $method)
     {
@@ -290,7 +288,7 @@ class BuilderDefinition implements DefinitionInterface
 
     /**
      * {@inheritDoc}
-     * @throws \Zend\Di\Exception\RuntimeException
+     * @throws \Laminas\Di\Exception\RuntimeException
      */
     public function getMethodParameters($class, $method)
     {
