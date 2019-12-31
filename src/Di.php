@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-di for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-di/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Di;
+namespace Laminas\Di;
 
 use Closure;
+use Laminas\Di\Exception\RuntimeException as DiRuntimeException;
+use Laminas\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
 use ReflectionClass;
-use Zend\Di\Exception\RuntimeException as DiRuntimeException;
-use Zend\ServiceManager\Exception\ExceptionInterface as ServiceManagerException;
 
 /**
  * Dependency injector that can generate instances using class definitions and configured instance parameters
@@ -821,7 +820,7 @@ class Di implements DependencyInjectionInterface
                         return false;
                     }
                 } catch (ServiceManagerException $e) {
-                    // Zend\ServiceManager\Exception\ServiceNotCreatedException
+                    // Laminas\ServiceManager\Exception\ServiceNotCreatedException
                     if ($methodRequirementType & self::RESOLVE_STRICT) {
                         //finally ( be aware to do at the end of flow)
                         array_pop($this->currentDependencies);
