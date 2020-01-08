@@ -1,6 +1,6 @@
 # laminas-di
 
-[![Build Status](https://travis-ci.org/laminas/laminas-di.svg?branch=master)](https://travis-ci.org/laminas/laminas-di)
+[![Build Status](https://travis-ci.com/laminas/laminas-di.svg?branch=master)](https://travis-ci.com/laminas/laminas-di)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-di/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-di?branch=master)
 
 laminas-di provides autowiring to implement Inversion of Control (IoC) containers.
