@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -341,7 +345,7 @@ based on these results.</p>
 <h3>Removal of laminas-code dependencies</h3>
 <p>Before version 3.1, this feature required <a href="https://docs.laminas.dev/laminas-code/">laminas-code</a>,
 which you can add to your project using Composer:</p>
-<pre class=codehilite><code class=language-bash>
+<pre class="codehilite"><code class="language-bash">
 $ composer require --dev laminas/laminas-code
 </code></pre>
 <p><strong>Since version 3.1 and up, this is no longer required.</strong></p>
@@ -350,34 +354,31 @@ $ composer require --dev laminas/laminas-code
 <p>The <code>Laminas\Di\CodeGenerator\InjectorGenerator</code> class offers an implementation to
 generate an optimized injector based on the runtime configuration and a resolver
 instance.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Di\Config;</span>
-<span class=x>use Laminas\Di\Definition\RuntimeDefinition;</span>
-<span class=x>use Laminas\Di\Resolver\DependencyResolver;</span>
-<span class=x>use Laminas\Di\CodeGenerator\InjectorGenerator;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Di\Config;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
 
-<span class=x>$config = new Config();</span>
-<span class=x>$resolver = new DependencyResolver(new RuntimeDefinition(), $config)</span>
-<span class=x>$generator = new InjectorGenerator($config, $resolver);</span>
+$config = new Config();
+$resolver = new DependencyResolver(new RuntimeDefinition(), $config)
+$generator = new InjectorGenerator($config, $resolver);
 
-<span class=x>// It is highly recommended to set the container that is used at runtime:</span>
-<span class=x>$resolver-&gt;setContainer($container);</span>
-<span class=x>$generator-&gt;setOutputDirectory(&#39;/path/to/generated/files&#39;);</span>
-<span class=x>$generator-&gt;generate([</span>
-<span class=x>    MyClassA::class,</span>
-<span class=x>    MyClassB::class,</span>
-<span class=x>    // ...</span>
-<span class=x>]);</span>
-</pre></div></p>
+// It is highly recommended to set the container that is used at runtime:
+$resolver-&gt;setContainer($container);
+$generator-&gt;setOutputDirectory('/path/to/generated/files');
+$generator-&gt;generate([
+    MyClassA::class,
+    MyClassB::class,
+    // ...
+]);</code></pre>
 <p>You can also utilize <code>Laminas\Code\Scanner</code> to scan your code for classes:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$scanner = new DirectoryScanner(__DIR__);</span>
-<span class=x>$generator-&gt;generate($scanner-&gt;getClassNames());</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$scanner = new DirectoryScanner(__DIR__);
+$generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
 <h2 id="mvc-and-mezzio-integration">MVC and Mezzio integration</h2>
 <p>When you are using laminas-di's <code>ConfigProvider</code> with Mezzio or consuming the
 <code>Module</code> class via laminas-mvc, you can obtain the generator instance from the
 service manager:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$generator = $serviceManager-&gt;get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$generator = $serviceManager-&gt;get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);</code></pre>
 <h3>AoT Config Options</h3>
 <p>The service factory uses options in your <code>config</code> service, located under the key
 <code>dependencies.auto.aot</code>. This should be defined as an associative array of
@@ -397,17 +398,16 @@ following keys (unknown keys are ignored):</p>
 </li>
 </ul>
 <p>Below is an example detailing configuration of the generator factory:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>return [</span>
-<span class=x>    &#39;dependencies&#39; =&gt; [</span>
-<span class=x>        &#39;auto&#39; =&gt; [</span>
-<span class=x>            &#39;aot&#39; =&gt; [</span>
-<span class=x>                &#39;namespace&#39; =&gt; &#39;AppAoT\Generated&#39;,</span>
-<span class=x>                &#39;directory&#39; =&gt; __DIR__ . &#39;/../gen&#39;,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>];</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>return [
+    'dependencies' =&gt; [
+        'auto' =&gt; [
+            'aot' =&gt; [
+                'namespace' =&gt; 'AppAoT\Generated',
+                'directory' =&gt; __DIR__ . '/../gen',
+            ],
+        ],
+    ],
+];</code></pre>
 <h2 id="logging">Logging</h2>
 <p>The <code>InjectorGenerator</code> allows passing a <a href="http://www.php-fig.org/psr/psr-3/">PSR-3 logger</a> instance
 via an optional fourth constructor parameter.</p>
@@ -651,9 +651,10 @@ via an optional fourth constructor parameter.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -690,7 +691,7 @@ via an optional fourth constructor parameter.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-di/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -699,8 +700,8 @@ via an optional fourth constructor parameter.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

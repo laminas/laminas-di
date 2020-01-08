@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
-    <link rel="canonical" href="https://docs.laminas.dev/v2/config/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Configuration - laminas-di - Laminas Docs</title>
+    <title>laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -20,7 +19,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-di</a>
+            <a href="../.">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -74,7 +73,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -88,7 +87,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -107,25 +106,25 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
+        <a href="../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
+        <a href="../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                                     
@@ -136,25 +135,25 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../definitions/" class="subnavigation__link">Dependency Definitions</a>
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../instance-manager/" class="subnavigation__link">Instance Manager</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Configuration</a>
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
     </li>
 
             
@@ -181,19 +180,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
                                     
@@ -211,7 +210,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
                             </li>
                         
                     
@@ -276,125 +275,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
-
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
-                    
-                        
-                        
-                            <li class="breadcrumb-item">v2 Documentation</li>
-                        
-                    
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Configuration</li>
-            
-        
-    </ol>
-</nav>
-
-
-
-
-
-
-    
-    
-        <h2 class="chapter__headline">v2 Documentation</h2>
-    
-
-    <h1 id="configuration">Configuration</h1>
+<h1 class="content__title">404</h1>
 <blockquote>
-<h3>Version 2</h3>
-<p>This is documentation for the legacy version (2.x) of laminas-di.</p>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
 </blockquote>
-<p>Most of the configuration for both the setup of <code>Definition</code>s as well as the
-setup of the <code>InstanceManager</code> can be attained by a configuration file. This
-file will produce an array (typically) and have an iterable structure.</p>
-<p>The top two keys are 'definition' and 'instance', each specifying values for
-the definition setup and instance manager setup, respectively.</p>
-<p>The definition section expects the following information expressed as a PHP
-array:</p>
-<pre class=codehilite><code class=language-php>$config = [
-    'definition' =&gt; [
-        'compiler' =&gt; [/* @todo compiler information */],
-        'runtime'  =&gt; [/* @todo runtime information */],
-        'class' =&gt; [
-            'instantiator' =&gt; '', // the name of the instantiator, by default this is __construct
-            'supertypes'   =&gt; [], // an array of supertypes the class implements
-            'methods'      =&gt; [
-                'setSomeParameter' =&gt; [ // a method name
-                    'parameterName' =&gt; [
-                        'name',        // string parameter name
-                        'type',        // type or null
-                        'is-required', // bool
-                    ],
-                ],
-            ],
-        ],
-    ],
-];</code></pre>
+
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../instance-manager/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../debugging-and-complex-use-cases/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v2/config.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -409,7 +304,7 @@ array:</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-di</a>
+            <a href="../.">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -424,7 +319,7 @@ array:</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -438,7 +333,7 @@ array:</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -457,25 +352,25 @@ array:</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
+        <a href="../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
+        <a href="../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                                     
@@ -486,25 +381,25 @@ array:</p>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../definitions/" class="subnavigation__link">Dependency Definitions</a>
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../instance-manager/" class="subnavigation__link">Instance Manager</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Configuration</a>
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
     </li>
 
             
@@ -531,19 +426,19 @@ array:</p>
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
                                     
@@ -561,7 +456,7 @@ array:</p>
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
                             </li>
                         
                     
@@ -648,12 +543,12 @@ array:</p>
 </footer>
 
     <script>
-        let base_url = '../..',
+        let base_url = '..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="/js/scripts.js"></script>
-        <script src="../../search/main.js"></script>
+        <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

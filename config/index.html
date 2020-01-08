@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -366,45 +370,44 @@ name.</p>
 </li>
 </ul>
 <p>Below is an example of injector configuration.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$config = new \Laminas\Di\Config([</span>
-<span class=x>    // Declares global preferences to use when resolving</span>
-<span class=x>    // dependencies of the specified type</span>
-<span class=x>    &#39;preferences&#39; =&gt; [</span>
-<span class=x>        // A map of classname =&gt; preferred type</span>
-<span class=x>        MyInterface::class =&gt; MyImplementation::class,</span>
-<span class=x>    ],</span>
+<pre class=codehilite><code class=language-php>$config = new \Laminas\Di\Config([
+    // Declares global preferences to use when resolving
+    // dependencies of the specified type
+    'preferences' =&gt; [
+        // A map of classname =&gt; preferred type
+        MyInterface::class =&gt; MyImplementation::class,
+    ],
 
-<span class=x>    // Declares how types should be constructed.</span>
-<span class=x>    // This also allows declaring aliases of a specific class</span>
-<span class=x>    &#39;types&#39; =&gt; [</span>
-<span class=x>        ClassName::class =&gt; [</span>
-<span class=x>            // Declaration in the same way as global preferences</span>
-<span class=x>            // but these will aply when the type of the associated key</span>
-<span class=x>            // should be instanciated</span>
-<span class=x>            &#39;preferences&#39; =&gt; [],</span>
+    // Declares how types should be constructed.
+    // This also allows declaring aliases of a specific class
+    'types' =&gt; [
+        ClassName::class =&gt; [
+            // Declaration in the same way as global preferences
+            // but these will aply when the type of the associated key
+            // should be instanciated
+            'preferences' =&gt; [],
 
-<span class=x>            // Constructor parameters to inject. This option will define</span>
-<span class=x>            // the injections directly by the parameter name of the constructor</span>
-<span class=x>            // used as key.</span>
-<span class=x>            //</span>
-<span class=x>            // If the parameter is type-hinted by a class/interface name, you can</span>
-<span class=x>            // provide the injection by string. The injector will use the IoC</span>
-<span class=x>            // container to obtain it.</span>
-<span class=x>            &#39;parameters&#39; =&gt; [</span>
-<span class=x>                &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
+            // Constructor parameters to inject. This option will define
+            // the injections directly by the parameter name of the constructor
+            // used as key.
+            //
+            // If the parameter is type-hinted by a class/interface name, you can
+            // provide the injection by string. The injector will use the IoC
+            // container to obtain it.
+            'parameters' =&gt; [
+                'foo' =&gt; 'bar',
+            ],
+        ],
 
-<span class=x>        // Define an alias</span>
-<span class=x>        &#39;Alias.Name&#39; =&gt; [</span>
-<span class=x>            &#39;typeOf&#39; =&gt; ClassName::class,</span>
+        // Define an alias
+        'Alias.Name' =&gt; [
+            'typeOf' =&gt; ClassName::class,
 
-<span class=x>            &#39;preferences&#39; =&gt; [],</span>
-<span class=x>            &#39;parameters&#39; =&gt; [],</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>]);</span>
-</pre></div></p>
+            'preferences' =&gt; [],
+            'parameters' =&gt; [],
+        ],
+    ],
+]);</code></pre>
 <h2 id="type-preferences">Type Preferences</h2>
 <p>In many cases, you might be using interfaces as type hints as opposed to
 concrete types. Even though type preferences are not limited to interfaces or
@@ -418,59 +421,58 @@ following way (the first match will be used):</p>
 <li>If there is a global preference defined and it satisfies the typehint.</li>
 <li>Use the typehinted name directly.</li>
 </ol>
-<p> <div class=codehilite><pre><span></span><span class=x>// Assume the following classes are declared:</span>
+<pre class=codehilite><code class=language-php>// Assume the following classes are declared:
 
-<span class=x>interface FooInterface</span>
-<span class=x>{}</span>
+interface FooInterface
+{}
 
-<span class=x>class Foo implements FooInterface</span>
-<span class=x>{}</span>
+class Foo implements FooInterface
+{}
 
-<span class=x>class SpecialFoo implements FooInterface</span>
-<span class=x>{}</span>
+class SpecialFoo implements FooInterface
+{}
 
-<span class=x>class Bar</span>
-<span class=x>{}</span>
+class Bar
+{}
 
-<span class=x>class MyClass</span>
-<span class=x>{</span>
-<span class=x>    public function __construct(FooInterface $foo)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+class MyClass
+{
+    public function __construct(FooInterface $foo)
+    {
+        // ...
+    }
+}
 
-<span class=x>// With the following configuration:</span>
+// With the following configuration:
 
-<span class=x>use Laminas\Di\Injector;</span>
-<span class=x>use Laminas\Di\Config;</span>
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
 
-<span class=x>$injector = new Injector(new Config([</span>
-<span class=x>    &#39;preferences&#39; =&gt; [</span>
-<span class=x>        FooInterface::class =&gt; Foo::class,</span>
-<span class=x>    ],</span>
-<span class=x>    &#39;types&#39; =&gt; [</span>
-<span class=x>        &#39;MyClass.A&#39; =&gt; [</span>
-<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class</span>
-<span class=x>            &#39;preferences&#39; =&gt; [</span>
-<span class=x>               FooInterface::class =&gt; SpecialFoo::class,,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
-<span class=x>        &#39;MyClass.B&#39; =&gt; [</span>
-<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class</span>
-<span class=x>            &#39;preferences&#39; =&gt; [</span>
-<span class=x>               FooInterface::class =&gt; Bar::class,,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>]);</span>
+$injector = new Injector(new Config([
+    'preferences' =&gt; [
+        FooInterface::class =&gt; Foo::class,
+    ],
+    'types' =&gt; [
+        'MyClass.A' =&gt; [
+            'typeOf' =&gt; MyClass::class
+            'preferences' =&gt; [
+               FooInterface::class =&gt; SpecialFoo::class,,
+            ],
+        ],
+        'MyClass.B' =&gt; [
+            'typeOf' =&gt; MyClass::class
+            'preferences' =&gt; [
+               FooInterface::class =&gt; Bar::class,,
+            ],
+        ],
+    ],
+]);
 
 
-<span class=x>// The results are:</span>
-<span class=x>$a = $injector-&gt;create(MyClass::class); // Constructed with Foo</span>
-<span class=x>$b = $injector-&gt;create(&#39;MyClass.A&#39;); // Constructed with SpecialFoo</span>
-<span class=x>$c = $injector-&gt;create(&#39;MyClass.B&#39;); // Constructed with Foo (since Bar does not satisfy FooInterface)</span>
-</pre></div></p>
+// The results are:
+$a = $injector-&gt;create(MyClass::class); // Constructed with Foo
+$b = $injector-&gt;create('MyClass.A'); // Constructed with SpecialFoo
+$c = $injector-&gt;create('MyClass.B'); // Constructed with Foo (since Bar does not satisfy FooInterface)</code></pre>
 <h2 id="parameters">Parameters</h2>
 <p>In contrast to type preferences, the resolver will not perform checks if the
 provided value satisfies the required type. It will be used directly to inject
@@ -510,49 +512,48 @@ preferences.</p>
 declare aliases for another alias.</p>
 <p>For example the following the following class should be instantiated in two
 different ways:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Assume the following classes are declared:</span>
+<pre class=codehilite><code class=language-php>// Assume the following classes are declared:
 
-<span class=x>class Foo</span>
-<span class=x>{}</span>
+class Foo
+{}
 
-<span class=x>class SpecialFoo extends Foo</span>
-<span class=x>{}</span>
+class SpecialFoo extends Foo
+{}
 
-<span class=x>class MyClass</span>
-<span class=x>{</span>
-<span class=x>    public function __construct(Foo $foo, string $bar)</span>
-<span class=x>    {</span>
-<span class=x>        // ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+class MyClass
+{
+    public function __construct(Foo $foo, string $bar)
+    {
+        // ...
+    }
+}
 
-<span class=x>// With the following injection config:</span>
+// With the following injection config:
 
-<span class=x>use Laminas\Di\Injector;</span>
-<span class=x>use Laminas\Di\Config;</span>
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
 
-<span class=x>$injector = new Injector(new Config([</span>
-<span class=x>    &#39;types&#39; =&gt; [</span>
-<span class=x>        MyClass::class =&gt; [</span>
-<span class=x>            &#39;parameters&#39; =&gt; [</span>
-<span class=x>               &#39;foo&#39; =&gt; SpecialFoo::class,</span>
-<span class=x>               &#39;bar&#39; =&gt; &#39;Stringvalue&#39;,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
-<span class=x>        &#39;MyClass.Alias&#39; =&gt; [</span>
-<span class=x>            &#39;typeOf&#39; =&gt; MyClass::class,</span>
-<span class=x>            &#39;parameters&#39; =&gt; [</span>
-<span class=x>               &#39;foo&#39; =&gt; &#39;*&#39;,</span>
-<span class=x>               &#39;bar&#39; =&gt; &#39;Stringvalue&#39;,</span>
-<span class=x>            ],</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>]);</span>
+$injector = new Injector(new Config([
+    'types' =&gt; [
+        MyClass::class =&gt; [
+            'parameters' =&gt; [
+               'foo' =&gt; SpecialFoo::class,
+               'bar' =&gt; 'Stringvalue',
+            ],
+        ],
+        'MyClass.Alias' =&gt; [
+            'typeOf' =&gt; MyClass::class,
+            'parameters' =&gt; [
+               'foo' =&gt; '*',
+               'bar' =&gt; 'Stringvalue',
+            ],
+        ],
+    ],
+]);
 
-<span class=x>// The results are:</span>
-<span class=x>$a = $injector-&gt;create(MyClass::class); // Constructed with SpecialFoo</span>
-<span class=x>$b = $injector-&gt;create(&#39;MyClass.Alias&#39;); // Constructed with Foo (since there are no type preferences for Foo)</span>
-</pre></div></p>
+// The results are:
+$a = $injector-&gt;create(MyClass::class); // Constructed with SpecialFoo
+$b = $injector-&gt;create('MyClass.Alias'); // Constructed with Foo (since there are no type preferences for Foo)</code></pre>
 
 
 
@@ -788,9 +789,10 @@ different ways:</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -827,7 +829,7 @@ different ways:</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-di/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -836,8 +838,8 @@ different ways:</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

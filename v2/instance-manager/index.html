@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -357,44 +361,43 @@ parameter name twice in the same class when you expect that that parameters is
 used for either instance configuration or an object dependency. This leads to an
 ambiguous parameter, and is a situation best avoided.</p>
 <p>Our movie finder example can be further used to explain these concepts:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace MyLibrary</span>
-<span class=x>{</span>
-<span class=x>    class DbAdapter</span>
-<span class=x>    {</span>
-<span class=x>        protected $username = null;</span>
-<span class=x>        protected $password = null;</span>
+<pre class=codehilite><code class=language-php>namespace MyLibrary
+{
+    class DbAdapter
+    {
+        protected $username = null;
+        protected $password = null;
 
-<span class=x>        public function __construct($username, $password)</span>
-<span class=x>        {</span>
-<span class=x>            $this-&gt;username = $username;</span>
-<span class=x>            $this-&gt;password = $password;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+        public function __construct($username, $password)
+        {
+            $this-&gt;username = $username;
+            $this-&gt;password = $password;
+        }
+    }
+}
 
-<span class=x>namespace MyMovieApp</span>
-<span class=x>{</span>
-<span class=x>    class MovieFinder</span>
-<span class=x>    {</span>
-<span class=x>        protected $dbAdapter = null;</span>
+namespace MyMovieApp
+{
+    class MovieFinder
+    {
+        protected $dbAdapter = null;
 
-<span class=x>        public function __construct(\MyLibrary\DbAdapter $dbAdapter)</span>
-<span class=x>        {</span>
-<span class=x>            $this-&gt;dbAdapter = $dbAdapter;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
+        public function __construct(\MyLibrary\DbAdapter $dbAdapter)
+        {
+            $this-&gt;dbAdapter = $dbAdapter;
+        }
+    }
 
-<span class=x>    class MovieLister</span>
-<span class=x>    {</span>
-<span class=x>        protected $movieFinder = null;</span>
+    class MovieLister
+    {
+        protected $movieFinder = null;
 
-<span class=x>        public function __construct(MovieFinder $movieFinder)</span>
-<span class=x>        {</span>
-<span class=x>            $this-&gt;movieFinder = $movieFinder;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        public function __construct(MovieFinder $movieFinder)
+        {
+            $this-&gt;movieFinder = $movieFinder;
+        }
+    }
+}</code></pre>
 <p>In the above example, the class <code>DbAdapter</code> has 2 parameters: <code>username</code> and
 <code>password</code>; <code>MovieFinder</code> has one parameter: <code>dbAdapter</code>; and <code>MovieLister</code> has
 one parameter: <code>movieFinder</code>. Any of these can be utilized for injection of
@@ -408,59 +411,57 @@ scalar in nature. Since the DiC cannot reasonably know this information, it must
 be provided to the instance manager in the form of parameters. Not doing so will
 force <code>$di-&gt;get('MyMovieApp\\MovieLister')</code> to throw an exception.</p>
 <p>The following ways of using parameters are available:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Setting instance configuration into the instance manager:</span>
-<span class=x>$di-&gt;instanceManager()-&gt;setParameters(&#39;MyLibrary\DbAdapter&#39;, [</span>
-<span class=x>    &#39;username&#39; =&gt; &#39;myusername&#39;,</span>
-<span class=x>    &#39;password&#39; =&gt; &#39;mypassword&#39;,</span>
-<span class=x>]);</span>
+<pre class=codehilite><code class=language-php>// Setting instance configuration into the instance manager:
+$di-&gt;instanceManager()-&gt;setParameters('MyLibrary\DbAdapter', [
+    'username' =&gt; 'myusername',
+    'password' =&gt; 'mypassword',
+]);
 
-<span class=x>// Forcing a particular dependency to be used by the instance manager:</span>
-<span class=x>$di-&gt;instanceManager()-&gt;setParameters(&#39;MyMovieApp\MovieFinder&#39;, [</span>
-<span class=x>    &#39;dbAdapter&#39; =&gt; new MyLibrary\DbAdapter(&#39;myusername&#39;, &#39;mypassword&#39;),</span>
-<span class=x>]);</span>
+// Forcing a particular dependency to be used by the instance manager:
+$di-&gt;instanceManager()-&gt;setParameters('MyMovieApp\MovieFinder', [
+    'dbAdapter' =&gt; new MyLibrary\DbAdapter('myusername', 'mypassword'),
+]);
 
-<span class=x>// Passing instance parameters at call time:</span>
-<span class=x>$movieLister = $di-&gt;get(&#39;MyMovieApp\MovieLister&#39;, [</span>
-<span class=x>    &#39;username&#39; =&gt; $config-&gt;username,</span>
-<span class=x>    &#39;password&#39; =&gt; $config-&gt;password,</span>
-<span class=x>]);</span>
+// Passing instance parameters at call time:
+$movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
+    'username' =&gt; $config-&gt;username,
+    'password' =&gt; $config-&gt;password,
+]);
 
-<span class=x>// Passing a specific instance at call time:</span>
-<span class=x>$movieLister = $di-&gt;get(&#39;MyMovieApp\MovieLister&#39;, [</span>
-<span class=x>    &#39;dbAdapter&#39; =&gt; new MyLibrary\DbAdapter(&#39;myusername&#39;, &#39;mypassword&#39;),</span>
-<span class=x>]);</span>
-</pre></div></p>
+// Passing a specific instance at call time:
+$movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
+    'dbAdapter' =&gt; new MyLibrary\DbAdapter('myusername', 'mypassword'),
+]);</code></pre>
 <h2 id="preferences">Preferences</h2>
 <p>In many cases, you might be using interfaces as type hints as opposed to
 concrete types. Lets assume the movie example was modified in the following way:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace MyMovieApp</span>
-<span class=x>{</span>
-<span class=x>    interface MovieFinderInterface</span>
-<span class=x>    {</span>
-<span class=x>        // methods required for this type</span>
-<span class=x>    }</span>
+<pre class=codehilite><code class=language-php>namespace MyMovieApp
+{
+    interface MovieFinderInterface
+    {
+        // methods required for this type
+    }
 
-<span class=x>    class GenericMovieFinder implements MovieFinderInterface</span>
-<span class=x>    {</span>
-<span class=x>        protected $dbAdapter = null;</span>
+    class GenericMovieFinder implements MovieFinderInterface
+    {
+        protected $dbAdapter = null;
 
-<span class=x>        public function __construct(\MyLibrary\DbAdapter $dbAdapter)</span>
-<span class=x>        {</span>
-<span class=x>            $this-&gt;dbAdapter = $dbAdapter;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
+        public function __construct(\MyLibrary\DbAdapter $dbAdapter)
+        {
+            $this-&gt;dbAdapter = $dbAdapter;
+        }
+    }
 
-<span class=x>    class MovieLister</span>
-<span class=x>    {</span>
-<span class=x>        protected $movieFinder = null;</span>
+    class MovieLister
+    {
+        protected $movieFinder = null;
 
-<span class=x>        public function __construct(MovieFinderInterface $movieFinder)</span>
-<span class=x>        {</span>
-<span class=x>            $this-&gt;movieFinder = $movieFinder;</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        public function __construct(MovieFinderInterface $movieFinder)
+        {
+            $this-&gt;movieFinder = $movieFinder;
+        }
+    }
+}</code></pre>
 <p>What you'll notice above is that the <code>MovieLister</code> type now expects that the
 dependency injected implements the <code>MovieFinderInterface</code>. This allows multiple
 implementations of this base interface to be used as a dependency, if that is
@@ -470,14 +471,13 @@ fulfill this dependency, so this type of "preference" needs to be made known to
 the instance manager.</p>
 <p>To give this information to the instance manager, see the following code
 example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$di-&gt;instanceManager()-&gt;addTypePreference(</span>
-<span class=x>    \MyMovieApp\MovieFinderInterface::class,</span>
-<span class=x>    \MyMovieApp\GenericMovieFinder::class</span>
-<span class=x>);</span>
+<pre class=codehilite><code class=language-php>$di-&gt;instanceManager()-&gt;addTypePreference(
+    \MyMovieApp\MovieFinderInterface::class,
+    \MyMovieApp\GenericMovieFinder::class
+);
 
-<span class=x>// Assuming all instance config for username, password is setup:</span>
-<span class=x>$di-&gt;get(\MyMovieApp\MovieLister::class);</span>
-</pre></div></p>
+// Assuming all instance config for username, password is setup:
+$di-&gt;get(\MyMovieApp\MovieLister::class);</code></pre>
 <h2 id="aliases">Aliases</h2>
 <p>In some situations, you'll find that you need to alias an instance. There are
 two main reasons to do this. First, it creates a simpler, alternative name to
@@ -493,31 +493,30 @@ will be for read-write operations.</p>
 <h3>Alias parameters</h3>
 <p>Aliases can also have parameters registered at alias time.</p>
 </blockquote>
-<p> <div class=codehilite><pre><span></span><span class=x>// Assume the MovieLister example of code from the quick start.</span>
+<pre class=codehilite><code class=language-php>// Assume the MovieLister example of code from the quick start.
 
-<span class=x>$im = $di-&gt;instanceManager();</span>
+$im = $di-&gt;instanceManager();
 
-<span class=x>// add alias for short naming</span>
-<span class=x>$im-&gt;addAlias(&#39;movielister&#39;, &#39;MyMovieApp\MovieLister&#39;);</span>
+// add alias for short naming
+$im-&gt;addAlias('movielister', 'MyMovieApp\MovieLister');
 
-<span class=x>// add aliases for specific instances</span>
-<span class=x>$im-&gt;addAlias(&#39;dbadapter-readonly&#39;, &#39;MyLibrary\DbAdapter&#39;, [</span>
-<span class=x>    &#39;username&#39; =&gt; $config-&gt;db-&gt;readAdapter-&gt;username,</span>
-<span class=x>    &#39;password&#39; =&gt; $config-&gt;db-&gt;readAdapter-&gt;password,</span>
-<span class=x>]);</span>
-<span class=x>$im-&gt;addAlias(&#39;dbadapter-readwrite&#39;, &#39;MyLibrary\DbAdapter&#39;, [</span>
-<span class=x>    &#39;username&#39; =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;username,</span>
-<span class=x>    &#39;password&#39; =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;password,</span>
-<span class=x>]);</span>
+// add aliases for specific instances
+$im-&gt;addAlias('dbadapter-readonly', 'MyLibrary\DbAdapter', [
+    'username' =&gt; $config-&gt;db-&gt;readAdapter-&gt;username,
+    'password' =&gt; $config-&gt;db-&gt;readAdapter-&gt;password,
+]);
+$im-&gt;addAlias('dbadapter-readwrite', 'MyLibrary\DbAdapter', [
+    'username' =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;username,
+    'password' =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;password,
+]);
 
-<span class=x>// set a default type to use, pointing to an alias</span>
-<span class=x>$im-&gt;addTypePreference(&#39;MyLibrary\DbAdapter&#39;, &#39;dbadapter-readonly&#39;);</span>
+// set a default type to use, pointing to an alias
+$im-&gt;addTypePreference('MyLibrary\DbAdapter', 'dbadapter-readonly');
 
-<span class=x>$movieListerRead = $di-&gt;get(&#39;MyMovieApp\MovieLister&#39;);</span>
-<span class=x>$movieListerReadWrite = $di-&gt;get(&#39;MyMovieApp\MovieLister&#39;, [</span>
-<span class=x>    &#39;dbAdapter&#39; =&gt; &#39;dbadapter-readwrite&#39;,</span>
-<span class=x>]);</span>
-</pre></div></p>
+$movieListerRead = $di-&gt;get('MyMovieApp\MovieLister');
+$movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
+    'dbAdapter' =&gt; 'dbadapter-readwrite',
+]);</code></pre>
 
 
 
@@ -753,9 +752,10 @@ will be for read-write operations.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -792,7 +792,7 @@ will be for read-write operations.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-di/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -801,8 +801,8 @@ will be for read-write operations.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

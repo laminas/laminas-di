@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -374,16 +378,15 @@ explicit you can be in your method naming and method signatures, the more likely
 <code>Laminas\Di\Definition\RuntimeDefinition</code> will accurately understand the structure
 of your code.</p>
 <p>The constructor of <code>RuntimeDefinition</code> looks like the following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function __construct(</span>
-<span class=x>    IntrospectionStrategy $introspectionStrategy = null,</span>
-<span class=x>    array $explicitClasses = null</span>
-<span class=x>) {</span>
-<span class=x>    $this-&gt;introspectionStrategy = $introspectionStrategy ?: new IntrospectionStrategy();</span>
-<span class=x>    if ($explicitClasses) {</span>
-<span class=x>        $this-&gt;setExplicitClasses($explicitClasses);</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function __construct(
+    IntrospectionStrategy $introspectionStrategy = null,
+    array $explicitClasses = null
+) {
+    $this-&gt;introspectionStrategy = $introspectionStrategy ?: new IntrospectionStrategy();
+    if ($explicitClasses) {
+        $this-&gt;setExplicitClasses($explicitClasses);
+    }
+}</code></pre>
 <p>The <code>IntrospectionStrategy</code> object is an object that defines the rules by which
 the <code>RuntimeDefinition</code> will introspect information about your classes. Here are
 the things it knows how to do:</p>
@@ -402,11 +405,10 @@ the things it knows how to do:</p>
 </li>
 </ul>
 <p>The constructor for the <code>IntrospectionStrategy</code> looks like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>public function __construct(AnnotationManager $annotationManager = null)</span>
-<span class=x>{</span>
-<span class=x>    $this-&gt;annotationManager = $annotationManager ?: $this-&gt;createDefaultAnnotationManager();</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>public function __construct(AnnotationManager $annotationManager = null)
+{
+    $this-&gt;annotationManager = $annotationManager ?: $this-&gt;createDefaultAnnotationManager();
+}</code></pre>
 <p>The <code>AnnotationManager</code> is not required. If you wish to create a special
 <code>AnnotationManager</code> with your own annotations, and also wish to extend the
 <code>RuntimeDefinition</code> to look for those annotations, this is the place to do it.</p>
@@ -424,38 +426,36 @@ annotation scannning, which can be a performance bottleneck in your production
 applications.</p>
 <p>For example, let's assume we want to create a script that will create
 definitions for some of our library code:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// in &quot;package name&quot; format</span>
-<span class=x>$components = [</span>
-<span class=x>    &#39;My_MovieApp&#39;,</span>
-<span class=x>    &#39;My_OtherClasses&#39;,</span>
-<span class=x>];</span>
+<pre class=codehilite><code class=language-php>// in &quot;package name&quot; format
+$components = [
+    'My_MovieApp',
+    'My_OtherClasses',
+];
 
-<span class=x>foreach ($components as $component) {</span>
-<span class=x>    $diCompiler = new Laminas\Di\Definition\CompilerDefinition;</span>
-<span class=x>    $diCompiler-&gt;addDirectory(&#39;/path/to/classes/&#39; . str_replace(&#39;_&#39;, &#39;/&#39;, $component));</span>
+foreach ($components as $component) {
+    $diCompiler = new Laminas\Di\Definition\CompilerDefinition;
+    $diCompiler-&gt;addDirectory('/path/to/classes/' . str_replace('_', '/', $component));
 
-<span class=x>    $diCompiler-&gt;compile();</span>
-<span class=x>    file_put_contents(</span>
-<span class=x>        __DIR__ . &#39;/../data/di/&#39; . $component . &#39;-definition.php&#39;,</span>
-<span class=x>        &#39;</span><span class=cp>&lt;?php</span> <span class=k>return</span> <span class=s1>&#39; . var_export($diCompiler-&gt;toArrayDefinition()-&gt;toArray(), true) . &#39;</span><span class=p>;</span><span class=err>&#39;</span>
-    <span class=p>);</span>
-<span class=p>}</span>
-</pre></div></p>
+    $diCompiler-&gt;compile();
+    file_put_contents(
+        __DIR__ . '/../data/di/' . $component . '-definition.php',
+        '&lt;?php return ' . var_export($diCompiler-&gt;toArrayDefinition()-&gt;toArray(), true) . ';'
+    );
+}</code></pre>
 <p>The above creates a file for each "package", containing the full definition for
 the classes defined for each. To utilize this in an application, use the
 following:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>protected function setupDi(Application $app)</span>
-<span class=x>{</span>
-<span class=x>    $definitionList = new DefinitionList([</span>
-<span class=x>        new Definition\ArrayDefinition(include __DIR__ .  &#39;/path/to/data/di/My_MovieApp-definition.php&#39;),</span>
-<span class=x>        new Definition\ArrayDefinition(include __DIR__ .  &#39;/path/to/data/di/My_OtherClasses-definition.php&#39;),</span>
-<span class=x>        $runtime = new Definition\RuntimeDefinition(),</span>
-<span class=x>    ]);</span>
-<span class=x>    $di = new Di($definitionList, null, new Config($this-&gt;config-&gt;di));</span>
-<span class=x>    $di-&gt;instanceManager()-&gt;addTypePreference(&#39;Laminas\Di\LocatorInterface&#39;, $di);</span>
-<span class=x>    $app-&gt;setLocator($di);</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>protected function setupDi(Application $app)
+{
+    $definitionList = new DefinitionList([
+        new Definition\ArrayDefinition(include __DIR__ .  '/path/to/data/di/My_MovieApp-definition.php'),
+        new Definition\ArrayDefinition(include __DIR__ .  '/path/to/data/di/My_OtherClasses-definition.php'),
+        $runtime = new Definition\RuntimeDefinition(),
+    ]);
+    $di = new Di($definitionList, null, new Config($this-&gt;config-&gt;di));
+    $di-&gt;instanceManager()-&gt;addTypePreference('Laminas\Di\LocatorInterface', $di);
+    $app-&gt;setLocator($di);
+}</code></pre>
 <p>The above code would more than likely go inside your application's bootstrap or
 within a <code>Module</code> class. This represents the simplest and most performant way
 of configuring your DiC for usage.</p>
@@ -701,9 +701,10 @@ with the <code>DefinitionList</code>.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -740,7 +741,7 @@ with the <code>DefinitionList</code>.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-di/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -749,8 +750,8 @@ with the <code>DefinitionList</code>.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

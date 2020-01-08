@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -328,10 +332,9 @@
 <p>laminas-di is designed to utilize and work with any IoC container thet implements
 the PSR-11 <code>Psr\Container\ContainerInterface</code>. To achieve this you can pass any
 container instance as the second parameter to the injector:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Di\Injector;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Di\Injector;
 
-<span class=x>$injector = new Injector(null, $container);</span>
-</pre></div></p>
+$injector = new Injector(null, $container);</code></pre>
 <p>From that point forwards, the injector will use the provided <code>$container</code> to
 obtain the dependencies.</p>
 <h2 id="decorating-the-container">Decorating the container</h2>
@@ -341,44 +344,43 @@ fail with an exception that dependencies could not be resolved.</p>
 <p>If you want to pair the container with the injector and use the injector for
 dependencies the container it is not aware of, you may decorate the original
 container into a laminas-di-aware implementation. As an example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace MyApp;</span>
+<pre class=codehilite><code class=language-php>namespace MyApp;
 
-<span class=x>use Laminas\Di\Injector;</span>
-<span class=x>use Psr\Container\ContainerInterface;</span>
+use Laminas\Di\Injector;
+use Psr\Container\ContainerInterface;
 
-<span class=x>class MyContainer implements ContainerInterface</span>
-<span class=x>{</span>
-<span class=x>    private $container;</span>
+class MyContainer implements ContainerInterface
+{
+    private $container;
 
-<span class=x>    private $injector;</span>
+    private $injector;
 
-<span class=x>    public function __construct(ContainerInterface $container)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;container = $wrappedContainer;</span>
-<span class=x>        $this-&gt;injector = new Injector(null, $this);</span>
-<span class=x>    }</span>
+    public function __construct(ContainerInterface $container)
+    {
+        $this-&gt;container = $wrappedContainer;
+        $this-&gt;injector = new Injector(null, $this);
+    }
 
-<span class=x>    public function has($name)</span>
-<span class=x>    {</span>
-<span class=x>        retrun $this-&gt;container-&gt;has($name) || $this-&gt;injector-&gt;canCreate($name);</span>
-<span class=x>    }</span>
+    public function has($name)
+    {
+        retrun $this-&gt;container-&gt;has($name) || $this-&gt;injector-&gt;canCreate($name);
+    }
 
-<span class=x>    public function get($name)</span>
-<span class=x>    {</span>
-<span class=x>        if ($this-&gt;container-&gt;has($name)) {</span>
-<span class=x>            return $this-&gt;container-&gt;get($name);</span>
-<span class=x>        }</span>
+    public function get($name)
+    {
+        if ($this-&gt;container-&gt;has($name)) {
+            return $this-&gt;container-&gt;get($name);
+        }
 
-<span class=x>        $service = $this-&gt;injector-&gt;create($name);</span>
+        $service = $this-&gt;injector-&gt;create($name);
 
-<span class=x>        // You might make the service shared via the decorated container</span>
-<span class=x>        // as well:</span>
-<span class=x>        // $this-&gt;container-&gt;set($name, $service);</span>
+        // You might make the service shared via the decorated container
+        // as well:
+        // $this-&gt;container-&gt;set($name, $service);
 
-<span class=x>        return $service;</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        return $service;
+    }
+}</code></pre>
 
 
 
@@ -614,9 +616,10 @@ container into a laminas-di-aware implementation. As an example:</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -653,7 +656,7 @@ container into a laminas-di-aware implementation. As an example:</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-di//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-di/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -662,8 +665,8 @@ container into a laminas-di-aware implementation. As an example:</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-di//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
