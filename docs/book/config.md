@@ -119,19 +119,19 @@ $injector = new Injector(new Config([
     ],
     'types' => [
         'MyClass.A' => [
-            'typeOf' => MyClass::class
+            'typeOf' => MyClass::class,
             'preferences' => [
-               FooInterface::class => SpecialFoo::class,,
+               FooInterface::class => SpecialFoo::class,
             ],
         ],
         'MyClass.B' => [
-            'typeOf' => MyClass::class
+            'typeOf' => MyClass::class,
             'preferences' => [
-               FooInterface::class => Bar::class,,
+               FooInterface::class => Bar::class,
             ],
         ],
     ],
-]);
+]));
 
 
 // The results are:
@@ -218,7 +218,7 @@ $injector = new Injector(new Config([
             ],
         ],
     ],
-]);
+]));
 
 // The results are:
 $a = $injector->create(MyClass::class); // Constructed with SpecialFoo
