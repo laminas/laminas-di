@@ -411,25 +411,28 @@ you just need to install laminas-di via composer and you're done.</p>
   <code>Laminas\Di\ConfigInterface</code> service, if available.</p>
 </li>
 </ul>
-<pre class=codehilite><code class=language-php>use Laminas\Di;
+<pre class="highlight"><code class="language-php">use Laminas\Di;
 use Laminas\Di\Container;
 
 $serviceManager-&gt;setFactory(Di\ConfigInterface::class, Container\ConfigFactory::class);
 $serviceManager-&gt;setFactory(Di\InjectorInterface::class, Container\InjectorFactory::class);</code></pre>
+
 <h2 id="abstractgeneric-service-factory">Abstract/Generic Service Factory</h2>
 <p>This component ships with an generic factory
 <code>Laminas\Di\Container\AutowireFactory</code>. This factory is suitable as an abstract
 service factory for use with laminas-servicemanager.</p>
 <p>You can also use it to create instances with laminas-di using an IoC container
 (e.g. inside a service factory):</p>
-<pre class=codehilite><code class=language-php>use Laminas\Di\Container\AutowireFactory;
+<pre class="highlight"><code class="language-php">use Laminas\Di\Container\AutowireFactory;
 (new AutowireFactory())-&gt;__invoke($container, MyClassname::class);</code></pre>
+
 <p>Or you can use it as factory in your service configuration directly:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     'factories' =&gt; [
         SomeClass::class =&gt; \Laminas\Di\Container\AutowireFactory::class,
     ],
 ];</code></pre>
+
 <h2 id="service-factory-for-aot-code-generation">Service Factory For AoT Code Generation</h2>
 <p>laminas-di also provides a factory for <code>Laminas\Di\CodeGenerator\InjectorGenerator</code>.
 This factory (<code>Laminas\Di\Container\GeneratorFactory</code>) is also auto registered by

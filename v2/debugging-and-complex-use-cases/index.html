@@ -407,14 +407,16 @@
 <p>It is possible to dump the information contained within both the <code>Definition</code>
 and <code>InstanceManager</code> for a <code>Laminas\Di\Di</code> instance.</p>
 <p>The easiest way is to do the following:</p>
-<pre class=codehilite><code class=language-php>Laminas\Di\Display\Console::export($di);</code></pre>
+<pre class="highlight"><code class="language-php">Laminas\Di\Display\Console::export($di);</code></pre>
+
 <p>If you are using a <code>RuntimeDefinition</code> where upon you expect a particular
 definition to be resolve at the first-call, you can see that information to the
 console display to force it to read that class:</p>
-<pre class=codehilite><code class=language-php>Laminas\Di\Display\Console::export($di, ['A\ClassIWantTo\GetTheDefinitionFor']);</code></pre>
+<pre class="highlight"><code class="language-php">Laminas\Di\Display\Console::export($di, ['A\ClassIWantTo\GetTheDefinitionFor']);</code></pre>
+
 <h2 id="complex-use-cases">Complex Use Cases</h2>
 <h3>Interface Injection</h3>
-<pre class=codehilite><code class=language-php>namespace Foo\Bar
+<pre class="highlight"><code class="language-php">namespace Foo\Bar
 {
     class Baz implements BamAwareInterface
     {
@@ -441,8 +443,9 @@ namespace {
     $di = new Laminas\Di\Di;
     $baz = $di-&gt;get('Foo\Bar\Baz');
 }</code></pre>
+
 <h3>Setter Injection with Class Definition</h3>
-<pre class=codehilite><code class=language-php>namespace Foo\Bar
+<pre class="highlight"><code class="language-php">namespace Foo\Bar
 {
     class Baz
     {
@@ -471,8 +474,9 @@ namespace {
     ]));
     $baz = $di-&gt;get('Foo\Bar\Baz');
 }</code></pre>
+
 <h3>Multiple Injections To A Single Injection Point</h3>
-<pre class=codehilite><code class=language-php>namespace Application
+<pre class="highlight"><code class="language-php">namespace Application
 {
     class Page
     {

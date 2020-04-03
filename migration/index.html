@@ -447,10 +447,11 @@ where <code>$config</code> is your <code>config</code> service.</p>
 <p>The laminas-di config service factory will automatically attempt to migrate legacy
 configurations at runtime, which gives you some time to migrate your configs.
 You can use <code>Laminas\Di\LegacyConfig</code> to help migrating existing configs:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Di\LegacyConfig;
+<pre class="highlight"><code class="language-php">use Laminas\Di\LegacyConfig;
 
 $migrated = new LegacyConfig($diConfigArray);
 $code = var_export($migrated-&gt;toArray(), true);</code></pre>
+
 <p>When the laminas-di config service factory is used to create configuration for use
 with the <code>AutowireFactory</code> and/or <code>DefaultContainer</code>, if it detects the
 <code>$config['di]</code> key, it will emit an <code>E_USER_DEPRECATED</code> error, pointing to this

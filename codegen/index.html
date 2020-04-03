@@ -404,16 +404,15 @@ based on these results.</p>
 <h3>Removal of laminas-code dependencies</h3>
 <p>Before version 3.1, this feature required <a href="https://docs.laminas.dev/laminas-code/">laminas-code</a>,
 which you can add to your project using Composer:</p>
-<pre class="codehilite"><code class="language-bash">
-$ composer require --dev laminas/laminas-code
-</code></pre>
+<pre class="highlight"><code class="language-bash">$ composer require --dev laminas/laminas-code</code></pre>
+
 <p><strong>Since version 3.1 and up, this is no longer required.</strong></p>
 </blockquote>
 <h2 id="generating-an-optimized-injector">Generating an optimized injector</h2>
 <p>The <code>Laminas\Di\CodeGenerator\InjectorGenerator</code> class offers an implementation to
 generate an optimized injector based on the runtime configuration and a resolver
 instance.</p>
-<pre class=codehilite><code class=language-php>use Laminas\Di\Config;
+<pre class="highlight"><code class="language-php">use Laminas\Di\Config;
 use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Resolver\DependencyResolver;
 use Laminas\Di\CodeGenerator\InjectorGenerator;
@@ -430,14 +429,17 @@ $generator-&gt;generate([
     MyClassB::class,
     // ...
 ]);</code></pre>
+
 <p>You can also utilize <code>Laminas\Code\Scanner</code> to scan your code for classes:</p>
-<pre class=codehilite><code class=language-php>$scanner = new DirectoryScanner(__DIR__);
+<pre class="highlight"><code class="language-php">$scanner = new DirectoryScanner(__DIR__);
 $generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
+
 <h2 id="mvc-and-mezzio-integration">MVC and Mezzio integration</h2>
 <p>When you are using laminas-di's <code>ConfigProvider</code> with Mezzio or consuming the
 <code>Module</code> class via laminas-mvc, you can obtain the generator instance from the
 service manager:</p>
-<pre class=codehilite><code class=language-php>$generator = $serviceManager-&gt;get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);</code></pre>
+<pre class="highlight"><code class="language-php">$generator = $serviceManager-&gt;get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);</code></pre>
+
 <h3>AoT Config Options</h3>
 <p>The service factory uses options in your <code>config</code> service, located under the key
 <code>dependencies.auto.aot</code>. This should be defined as an associative array of
@@ -457,7 +459,7 @@ following keys (unknown keys are ignored):</p>
 </li>
 </ul>
 <p>Below is an example detailing configuration of the generator factory:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     'dependencies' =&gt; [
         'auto' =&gt; [
             'aot' =&gt; [
@@ -467,6 +469,7 @@ following keys (unknown keys are ignored):</p>
         ],
     ],
 ];</code></pre>
+
 <h2 id="logging">Logging</h2>
 <p>The <code>InjectorGenerator</code> allows passing a <a href="http://www.php-fig.org/psr/psr-3/">PSR-3 logger</a> instance
 via an optional fourth constructor parameter.</p>
