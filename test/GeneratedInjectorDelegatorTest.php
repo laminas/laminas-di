@@ -24,7 +24,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
             ->willReturn(true)
             ->shouldBeCalledTimes(1);
         $container->get('config')
-            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => []]]]])
+            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => new \stdClass()]]]])
             ->shouldBeCalledTimes(1);
 
         $delegator = new GeneratedInjectorDelegator();
