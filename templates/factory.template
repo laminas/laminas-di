@@ -5,8 +5,8 @@
  */
 
 %namespace%
-use Psr\Container\ContainerInterface;
 use Laminas\Di\CodeGenerator\FactoryInterface;
+use Psr\Container\ContainerInterface;
 %use_array_key_exists%
 use function is_array;
 
