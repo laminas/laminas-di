@@ -40,8 +40,13 @@ class GeneratorFactory
         $config = $container->has('config') ? $container->get('config') : [];
         $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
         $namespace = $aotConfig['namespace'] ?? null;
+        $logger = null;
 
-        $generator = new InjectorGenerator($diConfig, $resolver, $namespace);
+        if (isset($aotConfig['logger'])) {
+            $logger = $container->get($aotConfig['logger']);
+        }
+
+        $generator = new InjectorGenerator($diConfig, $resolver, $namespace, $logger);
 
         if (isset($aotConfig['directory'])) {
             $generator->setOutputDirectory($aotConfig['directory']);

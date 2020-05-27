@@ -19,6 +19,8 @@ use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * @covers Laminas\Di\Container\GeneratorFactory
@@ -85,6 +87,40 @@ class GeneratorFactoryTest extends TestCase
 
         $generator = (new GeneratorFactory())->create($container);
         $this->assertEquals($expected, $generator->getNamespace());
+    }
+
+    public function testDefaultLogger() : void
+    {
+        $generator = (new GeneratorFactory())->create(new ServiceManager());
+        $reflection = new \ReflectionClass($generator);
+        $property = $reflection->getProperty('logger');
+        $property->setAccessible(true);
+
+        $this->assertInstanceOf(NullLogger::class, $property->getValue($generator));
+    }
+
+    public function testSetsLoggerFromConfig() : void
+    {
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->getMockForAbstractClass();
+        $container = new ServiceManager();
+        $container->setService('MyCustomLogger', $logger);
+        $container->setService('config', [
+            'dependencies' => [
+                'auto' => [
+                    'aot' => [
+                        'logger' => 'MyCustomLogger',
+                    ],
+                ],
+            ],
+        ]);
+
+        $generator = (new GeneratorFactory())->create($container);
+        $reflection = new \ReflectionClass($generator);
+        $property = $reflection->getProperty('logger');
+        $property->setAccessible(true);
+
+        $this->assertNotInstanceOf(NullLogger::class, $property->getValue($generator));
     }
 
     public function testInvokeCallsCreate() : void
