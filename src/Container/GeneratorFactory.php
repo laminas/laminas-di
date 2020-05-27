@@ -33,13 +33,14 @@ class GeneratorFactory
 
     public function create(ContainerInterface $container) : InjectorGenerator
     {
-        $config = $container->has('config') ? $container->get('config') : [];
         $diConfig = $this->getConfig($container);
-        $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
         $resolver = new DependencyResolver(new RuntimeDefinition(), $diConfig);
+        $resolver->setContainer($container);
+
+        $config = $container->has('config') ? $container->get('config') : [];
+        $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
         $namespace = $aotConfig['namespace'] ?? null;
 
-        $resolver->setContainer($container);
         $generator = new InjectorGenerator($diConfig, $resolver, $namespace);
 
         if (isset($aotConfig['directory'])) {
