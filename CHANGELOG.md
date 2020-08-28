@@ -24,7 +24,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#12](https://github.com/laminas/laminas-di/pull/12) fixes incorrect handling of aot namespace config, when it is an 
+  empty array 
 
 ## 3.1.3 - TBD
 
