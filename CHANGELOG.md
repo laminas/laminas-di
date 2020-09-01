@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [zendframework/zend-di#51](https://github.com/zendframework/zend-di/pull/51) adds `Laminas\Di\GeneratedInjectorDelegator` to decorate the
   default injector with an AoT generated one.
+- [#11](https://github.com/laminas/laminas-di/pull/11) adds a config option to configure a logger for the AoT generator.
 
 ### Changed
 
