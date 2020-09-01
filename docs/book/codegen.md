@@ -29,7 +29,7 @@ use Laminas\Di\Resolver\DependencyResolver;
 use Laminas\Di\CodeGenerator\InjectorGenerator;
 
 $config = new Config();
-$resolver = new DependencyResolver(new RuntimeDefinition(), $config)
+$resolver = new DependencyResolver(new RuntimeDefinition(), $config);
 $generator = new InjectorGenerator($config, $resolver);
 
 // It is highly recommended to set the container that is used at runtime:
@@ -75,6 +75,9 @@ following keys (unknown keys are ignored):
   this value is not provided, you will need to set it with the generator's
   `setOutputDirectory()` method before calling `generate()`.
 
+- `logger`: must be resolvable in container and must be an instance of `Psr\Log\LoggerInterface.`
+  By default `Psr\Log\NullLogger` is used. See the [Logging section](#logging) for details.
+
 Below is an example detailing configuration of the generator factory:
 
 ```php
@@ -84,6 +87,7 @@ return [
             'aot' => [
                 'namespace' => 'AppAoT\Generated',
                 'directory' => __DIR__ . '/../gen',
+                'logger' => Psr\Log\LoggerInterface::class,
             ],
         ],
     ],
