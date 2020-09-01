@@ -22,7 +22,9 @@ class GeneratedInjectorDelegator
     {
         $config = $container->has('config') ? $container->get('config') : [];
         $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
-        $namespace = empty($aotConfig['namespace']) ? 'Laminas\Di\Generated' : $aotConfig['namespace'];
+        $namespace = ! isset($aotConfig['namespace']) || $aotConfig['namespace'] === ''
+            ? 'Laminas\Di\Generated'
+            : $aotConfig['namespace'];
 
         if (! is_string($namespace)) {
             throw new InvalidServiceConfigException('Provided namespace is not a string.');
