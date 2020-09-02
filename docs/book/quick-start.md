@@ -9,12 +9,7 @@ can be paired with any IoC container that implements this interface, such as
 
 ## 1. Installation
 
-If you haven't already, [install Composer](https://getcomposer.org/).
-Once you have, you can install laminas-di:
-
-```bash
-$ composer require laminas/laminas-di
-```
+Before starting, make sure laminas-di is [installed and configured](installation.md).
 
 ## 2. Configuring the injector
 
