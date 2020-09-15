@@ -20,10 +20,6 @@
         "sort-packages": true
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "3.1.x-dev",
-            "dev-develop": "3.2.x-dev"
-        },
         "laminas": {
             "component": "Laminas\\Di",
             "config-provider": "Laminas\\Di\\ConfigProvider"
