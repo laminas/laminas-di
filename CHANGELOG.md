@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.2.0 - TBD
+
+### Added
+
+- [zendframework/zend-di#51](https://github.com/zendframework/zend-di/pull/51) adds `Laminas\Di\GeneratedInjectorDelegator` to decorate the
+  default injector with an AoT generated one.
+- [#11](https://github.com/laminas/laminas-di/pull/11) adds a config option to configure a logger for the AoT generator.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [zendframework/zend-di#48](https://github.com/zendframework/zend-di/pull/48) removes support for laminas-stdlib v2 releases.
+
+### Fixed
+
+- Nothing.
+
 ## 3.1.3 - 2020-09-16
 
 
