@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.3 - TBD
+## 3.1.3 - 2020-09-16
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.1.3](https://github.com/laminas/laminas-di/milestone/2)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 3.1.3
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-- Nothing.
+#### Documentation,Enhancement
 
-### Fixed
-
-- Nothing.
+ - [13: Adds new page for installation to documentation](https://github.com/laminas/laminas-di/pull/13) thanks to @froschdesign
 
 ## 3.1.2 - 2019-12-10
 
