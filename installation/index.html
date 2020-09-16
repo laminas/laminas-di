@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/cookbook/use-with-servicemanager/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/installation/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Usage with laminas-servicemanager - laminas-di - Laminas Docs</title>
+    <title>Installation - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-di</a>
+            <a href="..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -130,7 +130,21 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Installation</a>
                             </li>
                         
                     
@@ -144,21 +158,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -177,25 +177,25 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
+        <a href="../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
+        <a href="../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                                     
@@ -206,25 +206,25 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/config/" class="subnavigation__link">Configuration</a>
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
     </li>
 
             
@@ -251,19 +251,19 @@
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
                                     
@@ -281,7 +281,7 @@
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
                             </li>
                         
                     
@@ -348,30 +348,6 @@
                 
                 
                     
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#service-factories-for-di-instances" class="toc__link nav-link">Service Factories For DI instances</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#abstractgeneric-service-factory" class="toc__link nav-link">Abstract/Generic Service Factory</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#service-factory-for-aot-code-generation" class="toc__link nav-link">Service Factory For AoT Code Generation</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
                 
 
                 
@@ -382,18 +358,11 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
+                <li class="breadcrumb-item"><a href="..">laminas-di</a></li>
 
                 
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Cookbook</li>
-                        
-                    
-                
 
-                <li class="breadcrumb-item active" aria-current="page">Usage with laminas-servicemanager</li>
+                <li class="breadcrumb-item active" aria-current="page">Installation</li>
             
         
     </ol>
@@ -403,54 +372,142 @@
 
 
 
+    <h1>Installation</h1>
+<div class="toc">
+    <h6 class="toc__headline">On this page</h6>
+    <ul class="toc__list">
+        <li class="toc__entry">
+            <a href="#standard-installation" class="toc__link nav-link">Standard Installation</a>
+        </li>
 
-    
-    
-        <h2 class="chapter__headline">Cookbook</h2>
-    
+        
+        <li class="toc__entry">
+            <a href="#installation-for-mezzio-and-laminas-mvc-application" class="toc__link nav-link">
+                Installation for a
+                Mezzio
+                or
+                laminas-mvc
+                Application
+            </a>
+        </li>
+        
+    </ul>
+</div>
 
-    <h1 id="usage-with-laminas-servicemanager">Usage With laminas-servicemanager</h1>
-<p>laminas-di is designed to play and integrate well with laminas-servicemanager.  When
-you are using <a href="https://docs.laminas.dev/laminas-component-installer/">laminas-component-installer</a>,
-you just need to install laminas-di via composer and you're done.</p>
-<h2 id="service-factories-for-di-instances">Service Factories For DI instances</h2>
-<p>laminas-di ships with two service factories to provide the
-<code>Laminas\Di\InjectorInterface</code> implementation.</p>
+
+<h2 id="standard-installation">Standard Installation</h2>
+<p>To install the library use <a href="https://getcomposer.org/">Composer</a>:</p>
+<pre><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
+
+
+
+<h2 id="installation-for-mezzio-and-laminas-mvc-application">
+    Installation for a
+    Mezzio
+    or
+    laminas-mvc
+    Application
+</h2>
+
+<h3>Installation and Automated Configuration</h3>
+<p>
+    The <a href="https://docs.laminas.dev/laminas-component-installer/">laminas-component-installer</a>
+    is the recommended installation method when using in
+    a Mezzio-based
+    or
+    a laminas-mvc-based application.
+    It will automatically inject
+    the config-provider
+    or
+    the module
+    in the configuration during the installation process.
+</p>
+
+<blockquote>
+    <h3>Installation Requirements</h3>
+    <p>
+        The following descriptions depends on the laminas-component-installer component,
+         so be sure to have it installed before getting started.
+    </p>
+
+    <h4>Global Installation</h4>
+    <p>
+        With a <a href="https://docs.laminas.dev/laminas-component-installer/#global-installation">global installation</a>
+        of laminas-component-installer it can be used for all projects without a
+        reinstallation.
+    </p>
+    <pre><code class="language-bash">$ composer global require laminas/laminas-component-installer</code></pre>
+    <h4>As Development Dependency</h4>
+    <pre><code class="language-bash">$ composer require --dev laminas/laminas-component-installer</code></pre>
+</blockquote>
+
+<h4>Install laminas-di and Inject Configuration</h4>
+<p>To install the library use Composer:</p>
+<pre><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
+<p>
+    This will install an initial set of dependencies and it will also prompt to
+    inject the component configuration.
+</p>
 <ul>
-<li>
-<p><code>Laminas\Di\Container\ConfigFactory</code>: Creates a config instance by using the <code>"config"</code> service.</p>
-</li>
-<li>
-<p><code>Laminas\Di\Container\InjectorFactory</code>: Creates the injector instance that uses a
-  <code>Laminas\Di\ConfigInterface</code> service, if available.</p>
-</li>
+    
+    <li>For a Mezzio application, choose <code>config/config.php</code>.</li>
+    
+    
+    <li>For a laminas-mvc application, choose either <code>modules.config.php</code> or <code>application.config.php</code>.</li>
+    
 </ul>
-<pre class="highlight"><code class="language-php">use Laminas\Di;
-use Laminas\Di\Container;
+<p>
+    If additional dependencies are to be installed, the option for other packages
+    can be remembered.
+</p>
 
-$serviceManager-&gt;setFactory(Di\ConfigInterface::class, Container\ConfigFactory::class);
-$serviceManager-&gt;setFactory(Di\InjectorInterface::class, Container\InjectorFactory::class);</code></pre>
+<details><summary>Installation and Manual Configuration</summary>
+<p>
+    If the installer is not used, the manual configuration is needed to add the
+    component to the application.
+</p>
 
-<h2 id="abstractgeneric-service-factory">Abstract/Generic Service Factory</h2>
-<p>This component ships with an generic factory
-<code>Laminas\Di\Container\AutowireFactory</code>. This factory is suitable as an abstract
-service factory for use with laminas-servicemanager.</p>
-<p>You can also use it to create instances with laminas-di using an IoC container
-(e.g. inside a service factory):</p>
-<pre class="highlight"><code class="language-php">use Laminas\Di\Container\AutowireFactory;
-(new AutowireFactory())-&gt;__invoke($container, MyClassname::class);</code></pre>
+<h4>Install laminas-di</h4>
+<p>To install the library use Composer:</p>
+<pre><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
 
-<p>Or you can use it as factory in your service configuration directly:</p>
-<pre class="highlight"><code class="language-php">return [
-    'factories' =&gt; [
-        SomeClass::class =&gt; \Laminas\Di\Container\AutowireFactory::class,
-    ],
-];</code></pre>
 
-<h2 id="service-factory-for-aot-code-generation">Service Factory For AoT Code Generation</h2>
-<p>laminas-di also provides a factory for <code>Laminas\Di\CodeGenerator\InjectorGenerator</code>.
-This factory (<code>Laminas\Di\Container\GeneratorFactory</code>) is also auto registered by
-the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc and Mezzio.</p>
+    <h4>Manual Configuration for a Mezzio-based Application</h4>
+    <p>
+        Add the configuration provider of laminas-di to the configuration file,
+        e.g. <code>config/config.php</code>:
+    </p>
+
+<pre data-line="5"><code class="language-php">
+$aggregator = new Laminas\ConfigAggregator\ConfigAggregator([
+    // …
+    Mezzio\ConfigProvider::class,
+    Mezzio\Router\ConfigProvider::class,
+    Laminas\Di\ConfigProvider, // Add this line
+    // …
+]);
+</code></pre>
+
+
+
+    <h4>Manual Configuration for a laminas-mvc-based Application</h4>
+    <p>
+        Add laminas-di as component at the top of the configuration file for
+        modules, e.g. <code>config/modules.config.php</code>:
+    </p>
+
+<pre data-line="2"><code class="language-php">
+return [
+    'Laminas\Di\Module', // Add this line
+    'Laminas\Router',
+    'Laminas\Session',
+    'Laminas\Validator',
+    'Application',
+];
+</code></pre>
+
+</details>
+
 
 
 
@@ -461,7 +518,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../use-with-psr-containers/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -470,7 +527,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../aot-guide/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../quick-start/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -484,7 +541,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/cookbook/use-with-servicemanager.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/installation.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -513,7 +570,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-di</a>
+            <a href="..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -528,7 +585,21 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item subnavigation__list-item--active">
+                                <a href="./" class="subnavigation__link">Installation</a>
                             </li>
                         
                     
@@ -542,21 +613,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
                             </li>
                         
                     
@@ -575,25 +632,25 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
+        <a href="../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
+        <a href="../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                                     
@@ -604,25 +661,25 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
+        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
+        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/config/" class="subnavigation__link">Configuration</a>
+        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
     </li>
 
             
@@ -649,19 +706,19 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
                                     
                                         
     <li class="subnavigation__list-item ">
-        <a href="../aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
                                     
@@ -679,7 +736,7 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
                     
                         
                             <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
+                                <a href="../migration/" class="subnavigation__link">Migration Guide</a>
                             </li>
                         
                     
@@ -770,13 +827,13 @@ the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc 
 </footer>
 
     <script>
-        let base_url = '../..',
+        let base_url = '..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../../search/main.js"></script>
+        <script src="../search/main.js"></script>
     
 
     
