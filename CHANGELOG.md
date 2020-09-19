@@ -26,6 +26,25 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+## 3.1.3 - 2020-09-16
+
+
+-----
+
+### Release Notes for [3.1.3](https://github.com/laminas/laminas-di/milestone/2)
+
+
+
+### 3.1.3
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Documentation,Enhancement
+
+ - [13: Adds new page for installation to documentation](https://github.com/laminas/laminas-di/pull/13) thanks to @froschdesign
+
 ## 3.1.2 - 2019-12-10
 
 ### Added

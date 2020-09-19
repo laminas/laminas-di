@@ -3,6 +3,7 @@ site_dir: docs/html
 nav:
     - Home: index.md
     - Introduction: intro.md
+    - Installation: installation.md
     - "Quick Start": quick-start.md
     - Reference:
         - "PSR-11 Support": psr-11.md
@@ -24,3 +25,6 @@ site_description: "Automated dependency injection for PSR-11 containers"
 repo_url: 'https://github.com/laminas/laminas-di'
 extra:
     project: Components
+    installation:
+        config_provider_class: 'Laminas\Di\ConfigProvider'
+        module_class: 'Laminas\Di\Module'
