@@ -15,6 +15,7 @@ use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -25,6 +26,8 @@ use function uniqid;
  */
 class TypeInjectionTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testImplementsContract()
     {
         $this->assertInstanceOf(InjectionInterface::class, new TypeInjection('typename'));
@@ -55,7 +58,7 @@ class TypeInjectionTest extends TestCase
     public function provideTypeNames(): iterable
     {
         return [
-            'arbitary' => [ 'SomeArbitaryTypeName' ],
+            'arbitary' => ['SomeArbitaryTypeName'],
         ];
     }
 
@@ -70,7 +73,7 @@ class TypeInjectionTest extends TestCase
     public function testGetTypeIsDeprectaed()
     {
         $subject = new TypeInjection('SomeType');
-        $this->expectException(Deprecated::class);
+        $this->expectDeprecation();
         $this->assertSame('SomeType', $subject->getType());
     }
 }

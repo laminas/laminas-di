@@ -137,7 +137,7 @@ class ConfigFactoryTest extends TestCase
             ],
         ]);
 
-        $this->expectException(DeprecatedError::class);
+        $this->expectDeprecation(DeprecatedError::class);
         (new ConfigFactory())->create($container);
     }
 }

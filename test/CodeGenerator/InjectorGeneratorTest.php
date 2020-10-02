@@ -17,6 +17,7 @@ use Laminas\Di\Resolver\DependencyResolver;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -27,6 +28,7 @@ class InjectorGeneratorTest extends TestCase
     const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
     use GeneratorTestTrait;
+    use ProphecyTrait;
 
     public function testGenerateCreatesFiles() : void
     {
