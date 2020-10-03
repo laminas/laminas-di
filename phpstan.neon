@@ -1,6 +1,7 @@
 parameters:
-    level: 7
+    level: 4
     paths:
         - src/
     ignoreErrors:
-        - '#Cannot call method getName\(\) on ReflectionType\|null.#'
+        - '#Call to an undefined method ReflectionType::getName#'
+        - '#Laminas\\Di\\Resolver\\AbstractInjection is deprecated#'
