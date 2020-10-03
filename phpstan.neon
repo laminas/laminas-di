@@ -1,7 +1,6 @@
 parameters:
-    level: 4
+    level: 7
     paths:
         - src/
-    ignoreErrors:
-        - '#Call to an undefined method ReflectionType::getName#'
-        - '#Laminas\\Di\\Resolver\\AbstractInjection is deprecated#'
+includes:
+    - phpstan-baseline.neon
