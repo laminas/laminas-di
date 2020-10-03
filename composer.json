@@ -41,7 +41,7 @@
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-servicemanager": "^3.4",
         "mikey179/vfsstream": "^1.6.7",
-        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-shim": "^0.10.5",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.3"
     },
