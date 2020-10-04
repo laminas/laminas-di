@@ -21,7 +21,7 @@ class ModuleTest extends TestCase
 {
     public function testModuleProvidesServiceConfiguration()
     {
-        $module = new Module();
+        $module         = new Module();
         $configProvider = new ConfigProvider();
 
         $config = $module->getConfig();

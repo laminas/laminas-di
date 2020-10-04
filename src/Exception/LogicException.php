@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Di\Exception;
 
-class LogicException extends \LogicException implements ExceptionInterface
+use LogicException as BaseLogicException;
+
+class LogicException extends BaseLogicException implements ExceptionInterface
 {
 }

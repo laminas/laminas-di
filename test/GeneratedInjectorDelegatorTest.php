@@ -16,6 +16,8 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
+use function get_class;
+
 class GeneratedInjectorDelegatorTest extends TestCase
 {
     use ProphecyTrait;
@@ -50,7 +52,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
         $container->has('config')->willReturn(false)->shouldBeCalledTimes(1);
 
         $delegator = new GeneratedInjectorDelegator();
-        $result = $delegator($container->reveal(), get_class($injector), $callback);
+        $result    = $delegator($container->reveal(), get_class($injector), $callback);
 
         $this->assertSame($result, $injector);
     }
@@ -71,7 +73,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
             ->shouldBeCalledTimes(1);
 
         $delegator = new GeneratedInjectorDelegator();
-        $result = $delegator($container->reveal(), get_class($injector), $callback);
+        $result    = $delegator($container->reveal(), get_class($injector), $callback);
 
         $this->assertInstanceOf(TestAsset\GeneratedInjector::class, $result);
         $this->assertSame($injector, $result->getInjector());

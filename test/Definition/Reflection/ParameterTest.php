@@ -23,7 +23,7 @@ class ParameterTest extends TestCase
 {
     use ParameterTestTrait;
 
-    public function provideGeneralParameters()
+    public function provideGeneralParameters(): array
     {
         $params = (new ReflectionClass(TestAsset\Parameters::class))->getMethod('general')->getParameters();
 
@@ -37,12 +37,13 @@ class ParameterTest extends TestCase
 
     /**
      * @dataProvider provideGeneralParameters
+     * @param mixed $expectedDefault
      */
     public function testParamterReflectedCorrectly(
         ReflectionParameter $reflection,
-        $expectedName,
-        $expectedPosition,
-        $expectRequired,
+        string $expectedName,
+        int $expectedPosition,
+        bool $expectRequired,
         $expectedDefault
     ) {
         $instance = new Parameter($reflection);
@@ -61,7 +62,7 @@ class ParameterTest extends TestCase
     /**
      * @dataProvider provideTypehintedParameterReflections
      */
-    public function testTypehintedParameter(ReflectionParameter $reflection, $expectedType)
+    public function testTypehintedParameter(ReflectionParameter $reflection, ?string $expectedType)
     {
         $required = new Parameter($reflection);
         $this->assertSame($expectedType, $required->getType());
@@ -78,7 +79,7 @@ class ParameterTest extends TestCase
         $this->assertFalse($param->isBuiltin(), 'Parameter must not be exposed builtin');
     }
 
-    public function provideScalarTypehintedReflections()
+    public function provideScalarTypehintedReflections(): array
     {
         return $this->buildReflectionArgsFromClass(TestAsset\ScalarTypehintParameters::class);
     }
@@ -86,7 +87,7 @@ class ParameterTest extends TestCase
     /**
      * @dataProvider provideBuiltinTypehintedReflections
      */
-    public function testBuiltinTypehintedParameters(ReflectionParameter $reflection, $expectedType)
+    public function testBuiltinTypehintedParameters(ReflectionParameter $reflection, string $expectedType)
     {
         $param = new Parameter($reflection);
         $this->assertTrue($param->isBuiltin());
@@ -96,7 +97,7 @@ class ParameterTest extends TestCase
     /**
      * @dataProvider provideScalarTypehintedReflections
      */
-    public function testScalarTypehintedParameters(ReflectionParameter $reflection, $expectedType)
+    public function testScalarTypehintedParameters(ReflectionParameter $reflection, string $expectedType)
     {
         $param = new Parameter($reflection);
         $this->assertTrue($param->isBuiltin());
@@ -106,7 +107,7 @@ class ParameterTest extends TestCase
     public function testIterablePseudoType()
     {
         $reflections = (new ReflectionClass(TestAsset\IterableDependency::class))->getConstructor()->getParameters();
-        $param = new Parameter($reflections[0]);
+        $param       = new Parameter($reflections[0]);
 
         $this->assertTrue($param->isBuiltin());
         $this->assertSame('iterable', $param->getType());

@@ -12,7 +12,7 @@ namespace LaminasTest\Di\TestAsset\Constructor;
 
 class OptionalArguments
 {
-    public function __construct($foo = null, $bar = 'something')
+    public function __construct(?string $foo = null, string $bar = 'something')
     {
     }
 }

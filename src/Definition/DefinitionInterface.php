@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Di\Definition;
 
+use Laminas\Di\Exception\ClassNotFoundException;
+
 /**
  * Interface for class definitions
  */
@@ -20,20 +22,15 @@ interface DefinitionInterface
      *
      * @return string[]
      */
-    public function getClasses() : array;
+    public function getClasses(): array;
 
     /**
      * Whether a class exists in this definition
-     *
-     * @param  string $class
-     * @return bool
      */
-    public function hasClass(string $class) : bool;
+    public function hasClass(string $class): bool;
 
     /**
-     * @param string $class
-     * @throws \Laminas\Di\Exception\ClassNotFoundException
-     * @return ClassDefinitionInterface
+     * @throws ClassNotFoundException
      */
-    public function getClassDefinition(string $class) : ClassDefinitionInterface;
+    public function getClassDefinition(string $class): ClassDefinitionInterface;
 }

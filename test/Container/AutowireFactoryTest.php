@@ -25,9 +25,7 @@ use stdClass;
  */
 class AutowireFactoryTest extends TestCase
 {
-    /**
-     * @var AutowireFactory
-     */
+    /** @var AutowireFactory */
     private $instance;
 
     /**
@@ -48,7 +46,7 @@ class AutowireFactoryTest extends TestCase
         parent::tearDown();
     }
 
-    private function createContainerMock(InjectorInterface $injector)
+    private function createContainerMock(InjectorInterface $injector): ContainerInterface
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
         $container->method('has')->with(InjectorInterface::class)->willReturn(true);
@@ -67,12 +65,12 @@ class AutowireFactoryTest extends TestCase
             ->willReturn(true);
 
         $container = $this->createContainerMock($injector);
-        $result = $this->instance->canCreate($container, 'AnyClass');
+        $result    = $this->instance->canCreate($container, 'AnyClass');
 
         $this->assertTrue($result);
     }
 
-    private function createContainerForCreateTest($className, $expected)
+    private function createContainerForCreateTest(string $className, object $expected): ContainerInterface
     {
         $injector = $this->getMockBuilder(InjectorInterface::class)->getMockForAbstractClass();
         $injector->method('canCreate')
@@ -88,20 +86,20 @@ class AutowireFactoryTest extends TestCase
 
     public function testCreateUsesInjector()
     {
-        $expected = new stdClass();
+        $expected  = new stdClass();
         $className = 'SomeClassName';
         $container = $this->createContainerForCreateTest($className, $expected);
-        $result = $this->instance->create($container, $className);
+        $result    = $this->instance->create($container, $className);
 
         $this->assertSame($expected, $result);
     }
 
     public function testInstanceIsInvokable()
     {
-        $expected = new stdClass();
+        $expected  = new stdClass();
         $className = 'SomeOtherClassName';
         $container = $this->createContainerForCreateTest($className, $expected);
-        $factory = $this->instance;
+        $factory   = $this->instance;
 
         $result = $factory($container, $className);
         $this->assertSame($expected, $result);

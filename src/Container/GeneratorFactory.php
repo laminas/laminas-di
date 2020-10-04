@@ -15,32 +15,33 @@ use Laminas\Di\ConfigInterface;
 use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Resolver\DependencyResolver;
 use Psr\Container\ContainerInterface;
+use Zend\Di\ConfigInterface as LegacyConfigInterace;
 
 class GeneratorFactory
 {
-    private function getConfig(ContainerInterface $container) : ConfigInterface
+    private function getConfig(ContainerInterface $container): ConfigInterface
     {
         if ($container->has(ConfigInterface::class)) {
             return $container->get(ConfigInterface::class);
         }
 
-        if ($container->has(\Zend\Di\ConfigInterface::class)) {
-            return $container->get(\Zend\Di\ConfigInterface::class);
+        if ($container->has(LegacyConfigInterace::class)) {
+            return $container->get(LegacyConfigInterace::class);
         }
 
         return (new ConfigFactory())->create($container);
     }
 
-    public function create(ContainerInterface $container) : InjectorGenerator
+    public function create(ContainerInterface $container): InjectorGenerator
     {
         $diConfig = $this->getConfig($container);
         $resolver = new DependencyResolver(new RuntimeDefinition(), $diConfig);
         $resolver->setContainer($container);
 
-        $config = $container->has('config') ? $container->get('config') : [];
+        $config    = $container->has('config') ? $container->get('config') : [];
         $aotConfig = $config['dependencies']['auto']['aot'] ?? [];
         $namespace = $aotConfig['namespace'] ?? null;
-        $logger = null;
+        $logger    = null;
 
         if (isset($aotConfig['logger'])) {
             $logger = $container->get($aotConfig['logger']);
@@ -55,7 +56,7 @@ class GeneratorFactory
         return $generator;
     }
 
-    public function __invoke(ContainerInterface $container) : InjectorGenerator
+    public function __invoke(ContainerInterface $container): InjectorGenerator
     {
         return $this->create($container);
     }

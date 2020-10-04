@@ -12,6 +12,7 @@ namespace LaminasTest\Di\TestAsset\CircularClasses;
 
 class Y
 {
+    // @codingStandardsIgnoreStart
     public function __construct(Y $y = null)
     {
     }

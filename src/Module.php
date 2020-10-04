@@ -32,7 +32,7 @@ class Module
     /**
      * Returns the configuration for laminas-mvc
      */
-    public function getConfig() : array
+    public function getConfig(): array
     {
         $provider = new ConfigProvider();
         return [

@@ -12,5 +12,4 @@ namespace LaminasTest\Di\TestAsset;
 
 class ExtendedB extends B
 {
-
 }

@@ -17,6 +17,8 @@ use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use function sort;
+
 /**
  * @coversDefaultClass Laminas\Di\Definition\Reflection\ClassDefinition
  */
@@ -33,7 +35,7 @@ class ClassDefinitionTest extends TestCase
     public function testGetSupertypesReturnsAllClasses()
     {
         $supertypes = (new ClassDefinition(HierarchyAsset\C::class))->getSupertypes();
-        $expected = [
+        $expected   = [
             HierarchyAsset\A::class,
             HierarchyAsset\B::class,
         ];
@@ -59,7 +61,7 @@ class ClassDefinitionTest extends TestCase
      */
     public function testGetInterfacesReturnsAllInterfaces()
     {
-        $result = (new ClassDefinition(HierarchyAsset\C::class))->getInterfaces();
+        $result   = (new ClassDefinition(HierarchyAsset\C::class))->getInterfaces();
         $expected = [
             HierarchyAsset\InterfaceA::class,
             HierarchyAsset\InterfaceB::class,
@@ -85,7 +87,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertEmpty($result);
     }
 
-    public function provideClassesWithParameters()
+    public function provideClassesWithParameters(): array
     {
         return [
             'optional' => [ConstructorAsset\OptionalArguments::class, 2],
@@ -96,7 +98,7 @@ class ClassDefinitionTest extends TestCase
     /**
      * @dataProvider provideClassesWithParameters
      */
-    public function testGetParametersReturnsAllParameters($class, $expectedItemCount)
+    public function testGetParametersReturnsAllParameters(string $class, int $expectedItemCount)
     {
         $result = (new ClassDefinition($class))->getParameters();
 
@@ -114,7 +116,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertContainsOnlyInstancesOf(ParameterInterface::class, $result);
     }
 
-    public function provideParameterlessClasses()
+    public function provideParameterlessClasses(): array
     {
         return [
             'noargs'      => [ConstructorAsset\EmptyConstructor::class],
@@ -125,7 +127,7 @@ class ClassDefinitionTest extends TestCase
     /**
      * @dataProvider provideParameterlessClasses
      */
-    public function testGetParametersReturnsAnArray($class)
+    public function testGetParametersReturnsAnArray(string $class)
     {
         $result = (new ClassDefinition($class))->getParameters();
         $this->assertIsArray($result);

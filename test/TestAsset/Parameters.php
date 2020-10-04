@@ -12,6 +12,10 @@ namespace LaminasTest\Di\TestAsset;
 
 class Parameters
 {
+    /**
+     * @param mixed  $a
+     * @param string $c
+     */
     public function general($a, B $b, $c = 'something')
     {
     }
@@ -20,14 +24,16 @@ class Parameters
     {
     }
 
+    /** @param mixed $bar */
     public function typelessRequired($bar)
     {
     }
 
-    public function typehintOptional(A $fooOpt = null)
+    public function typehintOptional(?A $fooOpt = null)
     {
     }
 
+    /** @param bool $flag */
     public function typelessOptional($flag = false)
     {
     }

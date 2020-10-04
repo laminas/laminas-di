@@ -14,6 +14,7 @@ class TypelessDependency
 {
     public $result;
 
+    /** @param mixed $value */
     public function __construct($value)
     {
         $this->result = $value;

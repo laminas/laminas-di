@@ -18,13 +18,13 @@ use PHPUnit\Framework\TestCase;
  */
 class AutoloadGeneratorTest extends TestCase
 {
-    const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
-
     use GeneratorTestTrait;
+    
+    private const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
     public function testGenerateCreatesFiles()
     {
-        $classmap = [];
+        $classmap  = [];
         $generator = new AutoloadGenerator(self::DEFAULT_NAMESPACE);
         $generator->setOutputDirectory($this->dir);
         $generator->generate($classmap);
@@ -38,8 +38,8 @@ class AutoloadGeneratorTest extends TestCase
         $generator = new AutoloadGenerator(self::DEFAULT_NAMESPACE);
         $generator->setOutputDirectory($this->dir);
         $classmap = [
-            'FooClass' => 'FooClass.php',
-            'Bar\\Class' => 'Bar/Class.php'
+            'FooClass'   => 'FooClass.php',
+            'Bar\\Class' => 'Bar/Class.php',
         ];
 
         $generator->generate($classmap);
@@ -55,8 +55,8 @@ class AutoloadGeneratorTest extends TestCase
         $generator = new AutoloadGenerator(self::DEFAULT_NAMESPACE);
         $generator->setOutputDirectory($this->dir);
         $classmap = [
-            'FooClass' => 'FooClass.php',
-            'Bar\\Class' => 'Bar/Class.php'
+            'FooClass'   => 'FooClass.php',
+            'Bar\\Class' => 'Bar/Class.php',
         ];
 
         $generator->generate($classmap);

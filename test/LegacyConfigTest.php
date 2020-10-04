@@ -16,6 +16,7 @@ use Laminas\Di\Exception;
 use Laminas\Di\LegacyConfig;
 use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
 use PHPUnit\Framework\TestCase;
+use SplFileInfo;
 use stdClass;
 
 /**
@@ -23,14 +24,14 @@ use stdClass;
  */
 class LegacyConfigTest extends TestCase
 {
-    public function provideMigrationConfigFixtures()
+    public function provideMigrationConfigFixtures(): array
     {
         $iterator = new GlobIterator(__DIR__ . '/_files/legacy-configs/*.php');
-        $values = [];
+        $values   = [];
 
-        /** @var \SplFileInfo $file */
+        /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            $key = $file->getBasename('.php');
+            $key  = $file->getBasename('.php');
             $data = include $file->getPathname();
 
             $values[$key] = [
@@ -68,8 +69,8 @@ class LegacyConfigTest extends TestCase
 
     public function testConstructWithTraversable()
     {
-        $spec = include __DIR__ . '/_files/legacy-configs/common.php';
-        $config = new ArrayIterator($spec['config']);
+        $spec     = include __DIR__ . '/_files/legacy-configs/common.php';
+        $config   = new ArrayIterator($spec['config']);
         $instance = new LegacyConfig($config);
 
         $this->assertEquals($spec['expected'], $instance->toArray());
