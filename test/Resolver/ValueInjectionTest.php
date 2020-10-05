@@ -36,7 +36,7 @@ class ValueInjectionTest extends TestCase
     {
         parent::setUp();
 
-        if (!$this->streamFixture) {
+        if (! $this->streamFixture) {
             $this->streamFixture = fopen('php://temp', 'w+');
         }
     }
@@ -126,7 +126,7 @@ class ValueInjectionTest extends TestCase
 
     public function provideUnexportableItems()
     {
-        if (!$this->streamFixture) {
+        if (! $this->streamFixture) {
             $this->streamFixture = fopen('php://temp', 'w+');
         }
 
