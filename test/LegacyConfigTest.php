@@ -53,7 +53,7 @@ class LegacyConfigTest extends TestCase
 
     public function testFQParamNamesTriggerDeprecated()
     {
-        $this->expectException(DeprecatedError::class);
+        $this->expectDeprecation(DeprecatedError::class);
 
         new LegacyConfig([
             'instance' => [

@@ -18,6 +18,7 @@ use LaminasTest\Di\TestAsset\CodeGenerator\StdClassFactory;
 use LaminasTest\Di\TestAsset\InvokableInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
@@ -30,6 +31,8 @@ use function uniqid;
  */
 class AbstractInjectorTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var InjectorInterface|ObjectProphecy
      */

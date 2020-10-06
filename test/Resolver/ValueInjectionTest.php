@@ -17,6 +17,7 @@ use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -27,6 +28,8 @@ use function uniqid;
  */
 class ValueInjectionTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $streamFixture = null;
 
     protected function setUp(): void
@@ -130,9 +133,7 @@ class ValueInjectionTest extends TestCase
         return [
             'stream'          => [$this->streamFixture],
             'noSetState'      => [new TestAsset\Resolver\UnexportableValue1()],
-            'privateSetState' => [new TestAsset\Resolver\UnexportableValue2()],
             'arrayNoSetState' => [[new TestAsset\Resolver\UnexportableValue1()]],
-            'arrayPrivateSetState' => [[new TestAsset\Resolver\UnexportableValue2()]],
         ];
     }
 
@@ -182,7 +183,7 @@ class ValueInjectionTest extends TestCase
         $value = uniqid();
         $subject = new ValueInjection($value);
 
-        $this->expectException(Deprecated::class);
+        $this->expectDeprecation(Deprecated::class);
         self::assertSame($value, $subject->getValue());
     }
 }

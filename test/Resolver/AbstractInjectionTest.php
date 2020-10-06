@@ -19,14 +19,14 @@ class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated()
     {
-        $this->expectException(Deprecated::class);
-        $this->expectExceptionMessage(sprintf(
+        $this->expectDeprecation(Deprecated::class);
+        $this->expectDeprecationMessage(sprintf(
             '%s is deprecated, please migrate to %s',
             AbstractInjection::class,
             InjectionInterface::class
         ));
 
-        new class() extends AbstractInjection
+        new class () extends AbstractInjection
         {
             public function export(): string
             {

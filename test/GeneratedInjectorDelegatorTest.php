@@ -12,11 +12,14 @@ use Laminas\Di\Exception\InvalidServiceConfigException;
 use Laminas\Di\GeneratedInjectorDelegator;
 use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
 class GeneratedInjectorDelegatorTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testProvidedNamespaceIsNotAString()
     {
         $container = $this->prophesize(ContainerInterface::class);

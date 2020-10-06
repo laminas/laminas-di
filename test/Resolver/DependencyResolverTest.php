@@ -25,6 +25,7 @@ use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -33,6 +34,8 @@ use stdClass;
  */
 class DependencyResolverTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|ContainerInterface
      */
