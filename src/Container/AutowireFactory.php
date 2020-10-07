@@ -42,9 +42,10 @@ class AutowireFactory
     /**
      * Check creatability of the requested name
      *
+     * @param string $requestedName
      * @return bool
      */
-    public function canCreate(ContainerInterface $container, string $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
         if (! $container->has(InjectorInterface::class)) {
             return false;
@@ -56,9 +57,10 @@ class AutowireFactory
     /**
      * Create an instance
      *
+     * @param string $requestedName
      * @return object
      */
-    public function create(ContainerInterface $container, string $requestedName, ?array $options = null)
+    public function create(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         return $this->getInjector($container)->create($requestedName, $options ?: []);
     }
