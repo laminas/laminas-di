@@ -285,7 +285,7 @@ class DependencyResolver implements DependencyResolverInterface
 
         foreach ($params as $paramInfo) {
             $name = $paramInfo->getName();
-            $type = $paramInfo->getType() === 'self' ? $requestedType : $paramInfo->getType();
+            $type = $paramInfo->getType();
 
             if (isset($callTimeParameters[$name])) {
                 $result[$name] = new ValueInjection($callTimeParameters[$name]);

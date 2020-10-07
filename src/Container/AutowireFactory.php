@@ -56,7 +56,7 @@ class AutowireFactory
     /**
      * Create an instance
      *
-     * @return bool
+     * @return object
      */
     public function create(ContainerInterface $container, string $requestedName, ?array $options = null)
     {
@@ -66,9 +66,9 @@ class AutowireFactory
     /**
      * Make invokable and implement the laminas-service factory pattern
      *
-     * @return bool
+     * @return object
      */
-    public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         return $this->create($container, (string) $requestedName, $options);
     }
