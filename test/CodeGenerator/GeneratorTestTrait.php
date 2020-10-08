@@ -15,14 +15,10 @@ use org\bovigo\vfs\vfsStreamDirectory;
 
 trait GeneratorTestTrait
 {
-    /**
-     * @var vfsStreamDirectory
-     */
+    /** @var vfsStreamDirectory */
     private $root;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $dir;
 
     /**
@@ -33,6 +29,6 @@ trait GeneratorTestTrait
         parent::setUp();
 
         $this->root = vfsStream::setup('laminas-di');
-        $this->dir = $this->root->url();
+        $this->dir  = $this->root->url();
     }
 }

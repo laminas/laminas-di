@@ -12,5 +12,4 @@ namespace LaminasTest\Di\TestAsset;
 
 class Option2ForA extends A
 {
-
 }

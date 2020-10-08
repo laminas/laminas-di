@@ -123,7 +123,7 @@ class ValueInjection implements InjectionInterface
     public function getValue()
     {
         trigger_error(
-            __METHOD__ . ' is deprecated, please migrate to ' . __CLASS__ . '::toValue().',
+            __METHOD__ . ' is deprecated, please migrate to ' . self::class . '::toValue().',
             E_USER_DEPRECATED
         );
 

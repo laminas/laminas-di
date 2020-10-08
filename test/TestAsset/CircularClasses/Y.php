@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable
 
 /**
  * @see       https://github.com/laminas/laminas-di for the canonical source repository

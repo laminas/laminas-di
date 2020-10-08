@@ -13,17 +13,23 @@ namespace LaminasTest\Di\Container;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\ConfigFactory;
 use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+
+use function restore_error_handler;
+use function set_error_handler;
+use function strstr;
+use function uniqid;
+
+use const E_USER_DEPRECATED;
 
 /**
  * @coversDefaultClass Laminas\Di\Container\ConfigFactory
  */
 class ConfigFactoryTest extends TestCase
 {
-    /**
-     * @var \PHPUnit_Framework_MockObject_MockBuilder
-     */
+    /** @var MockBuilder */
     private $containerBuilder;
 
     protected function setUp(): void
@@ -67,7 +73,7 @@ class ConfigFactoryTest extends TestCase
         $this->assertInstanceOf(ConfigInterface::class, $result);
     }
 
-    private function createContainerWithConfig($config)
+    private function createContainerWithConfig(array $config): ContainerInterface
     {
         $container = $this->containerBuilder->getMockForAbstractClass();
         $container->expects($this->atLeastOnce())
@@ -86,7 +92,7 @@ class ConfigFactoryTest extends TestCase
     public function testCreateUsesConfigFromContainer()
     {
         $expectedPreference = uniqid('SomePreference');
-        $container = $this->createContainerWithConfig([
+        $container          = $this->createContainerWithConfig([
             'dependencies' => [
                 'auto' => [
                     'preferences' => [
@@ -103,7 +109,7 @@ class ConfigFactoryTest extends TestCase
     public function testLegacyConfigIsRespected()
     {
         $expectedPreference = uniqid('SomePreference');
-        $container = $this->createContainerWithConfig([
+        $container          = $this->createContainerWithConfig([
             'di' => [
                 'instance' => [
                     'preferences' => [
@@ -114,7 +120,7 @@ class ConfigFactoryTest extends TestCase
         ]);
 
         set_error_handler(function ($errno, $errstr) {
-            if ($errno !== \E_USER_DEPRECATED) {
+            if ($errno !== E_USER_DEPRECATED) {
                 return false;
             }
 
@@ -122,7 +128,7 @@ class ConfigFactoryTest extends TestCase
                 // Not the error we're looking for...
                 return false;
             }
-        }, \E_USER_DEPRECATED);
+        }, E_USER_DEPRECATED);
         $result = (new ConfigFactory())->create($container);
         restore_error_handler();
 

@@ -21,6 +21,10 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use function fclose;
+use function fopen;
+use function microtime;
+use function time;
 use function uniqid;
 
 /**
@@ -30,7 +34,7 @@ class ValueInjectionTest extends TestCase
 {
     use ProphecyTrait;
 
-    private $streamFixture = null;
+    private $streamFixture;
 
     protected function setUp(): void
     {
@@ -56,7 +60,7 @@ class ValueInjectionTest extends TestCase
         $this->assertInstanceOf(InjectionInterface::class, new ValueInjection(null));
     }
 
-    public function provideConstructionValues()
+    public function provideConstructionValues(): array
     {
         return [
             'string' => ['Hello World'],
@@ -69,21 +73,23 @@ class ValueInjectionTest extends TestCase
 
     /**
      * @dataProvider provideConstructionValues
+     * @param mixed $value
      */
     public function testSetStateConstructsInstance($value)
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $result = ValueInjection::__set_state(['value' => $value]);
+        $result    = ValueInjection::__set_state(['value' => $value]);
         $this->assertInstanceOf(ValueInjection::class, $result);
         $this->assertSame($value, $result->toValue($container));
     }
 
     /**
      * @dataProvider provideConstructionValues
+     * @param mixed $value
      */
     public function testToValueBypassesContainer($value)
     {
-        $result = new ValueInjection($value);
+        $result    = new ValueInjection($value);
         $container = $this->prophesize(ContainerInterface::class);
 
         $container->get(Argument::cetera())
@@ -92,7 +98,7 @@ class ValueInjectionTest extends TestCase
         $this->assertSame($value, $result->toValue($container->reveal()));
     }
 
-    public function provideExportableValues()
+    public function provideExportableValues(): array
     {
         return [
             'string'       => ['Testvalue'],
@@ -124,7 +130,7 @@ class ValueInjectionTest extends TestCase
         ];
     }
 
-    public function provideUnexportableItems()
+    public function provideUnexportableItems(): array
     {
         if (! $this->streamFixture) {
             $this->streamFixture = fopen('php://temp', 'w+');
@@ -139,6 +145,7 @@ class ValueInjectionTest extends TestCase
 
     /**
      * @dataProvider provideUnexportableItems
+     * @param mixed $value
      */
     public function testExportThrowsExceptionForUnexportable($value)
     {
@@ -150,6 +157,7 @@ class ValueInjectionTest extends TestCase
 
     /**
      * @dataProvider provideUnexportableItems
+     * @param mixed $value
      */
     public function testIsExportableReturnsFalseForUnexportable($value)
     {
@@ -159,6 +167,7 @@ class ValueInjectionTest extends TestCase
 
     /**
      * @dataProvider provideExportableValues
+     * @param mixed $value
      */
     public function testIsExportableReturnsTrueForExportableValues($value)
     {
@@ -168,11 +177,12 @@ class ValueInjectionTest extends TestCase
 
     /**
      * @dataProvider provideExportableValues
+     * @param mixed $value
      */
     public function testExportWithExportableValues($value)
     {
         $instance = new ValueInjection($value);
-        $result = $instance->export();
+        $result   = $instance->export();
 
         $this->assertIsString($result, 'Export is expected to return a string value');
         $this->assertNotEquals('', $result, 'The exported value must not be empty');
@@ -180,7 +190,7 @@ class ValueInjectionTest extends TestCase
 
     public function testGetValueTriggersDeprecatedNotice()
     {
-        $value = uniqid();
+        $value   = uniqid();
         $subject = new ValueInjection($value);
 
         $this->expectDeprecation(Deprecated::class);

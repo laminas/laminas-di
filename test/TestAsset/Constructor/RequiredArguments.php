@@ -14,6 +14,7 @@ use ArrayAccess;
 
 class RequiredArguments
 {
+    /** @param mixed $anyDep */
     public function __construct(NoConstructor $objectDep, ArrayAccess $internalClassDep, $anyDep)
     {
     }
