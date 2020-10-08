@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Laminas\Di;
 
+use ArrayAccess;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Stdlib\Parameters;
 use Traversable;

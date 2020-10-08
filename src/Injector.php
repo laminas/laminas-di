@@ -51,17 +51,14 @@ class Injector implements InjectorInterface
     /**
      * Constructor
      *
-     * @param ConfigInterface|null             $config A custom configuration to utilize. An empty configuration
-     *                                         is used when null is passed or the parameter is omitted.
+     * @param ConfigInterface|null             $config A custom configuration to utilize. An empty configuration is used
+     *                  when null is passed or the parameter is omitted.
      * @param ContainerInterface|null          $container The IoC container to retrieve dependency instances.
-     *                                         `Laminas\Di\DefaultContainer` is used when null is passed or the
-     *                                         parameter is omitted.
-     * @param DefinitionInterface|null         $definition A custom definition instance for creating
-     *                                         requested instances. The runtime definition is used when null is
-     *                                         passed or the parameter is omitted.
+     *               `Laminas\Di\DefaultContainer` is used when null is passed or the parameter is omitted.
+     * @param null|DefinitionInterface         $definition A custom definition instance for creating requested
+     *               instances. The runtime definition is used when null is passed or the parameter is omitted.
      * @param DependencyResolverInterface|null $resolver A custom resolver instance to resolve dependencies.
-     *                                         The default resolver is used when null is passed
-     *                                         or the parameter is omitted.
+     *      The default resolver is used when null is passed or the parameter is omitted
      */
     public function __construct(
         ?ConfigInterface $config = null,

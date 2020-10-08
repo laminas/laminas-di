@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Laminas\Di;
 
-use Zend\Di\CodeGenerator\InjectorGenerator;
-use Zend\Di\ConfigInterface as ZendDiConfigInterface;
-use Zend\Di\InjectorInterface as ZendDiInjectorInterface;
+use Zend\Di\CodeGenerator\InjectorGenerator as LegacyInjectorGenerator;
+use Zend\Di\ConfigInterface as LegacyConfigInterface;
+use Zend\Di\InjectorInterface as LegacyInjectorInterfae;
 
 /**
  * Implements the config provider for mezzio
@@ -39,9 +39,9 @@ class ConfigProvider
         return [
             // Legacy Zend Framework aliases
             'aliases'            => [
-                ZendDiInjectorInterface::class => InjectorInterface::class,
-                ZendDiConfigInterface::class   => ConfigInterface::class,
-                InjectorGenerator::class       => CodeGenerator\InjectorGenerator::class,
+                LegacyInjectorInterfae::class  => InjectorInterface::class,
+                LegacyConfigInterface::class   => ConfigInterface::class,
+                LegacyInjectorGenerator::class => CodeGenerator\InjectorGenerator::class,
             ],
             'factories'          => [
                 InjectorInterface::class               => Container\InjectorFactory::class,

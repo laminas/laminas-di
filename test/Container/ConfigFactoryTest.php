@@ -13,8 +13,8 @@ namespace LaminasTest\Di\Container;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\ConfigFactory;
 use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockBuilder;
 use Psr\Container\ContainerInterface;
 
 use function restore_error_handler;
@@ -29,7 +29,7 @@ use const E_USER_DEPRECATED;
  */
 class ConfigFactoryTest extends TestCase
 {
-    /** @var PHPUnit_Framework_MockObject_MockBuilder */
+    /** @var MockBuilder */
     private $containerBuilder;
 
     protected function setUp(): void
