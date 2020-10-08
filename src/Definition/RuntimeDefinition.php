@@ -13,25 +13,25 @@ namespace Laminas\Di\Definition;
 use Laminas\Di\Definition\Reflection\ClassDefinition;
 use Laminas\Di\Exception;
 
+use function array_keys;
+use function array_merge;
+use function class_exists;
+
 /**
  * Class definitions based on runtime reflection
  */
 class RuntimeDefinition implements DefinitionInterface
 {
-    /**
-     * @var ClassDefinition[]
-     */
+    /** @var ClassDefinition[] */
     private $definition = [];
 
-    /**
-     * @var bool[]
-     */
-    private $explicitClasses = null;
+    /** @var bool[] */
+    private $explicitClasses;
 
     /**
      * @param null|string[] $explicitClasses
      */
-    public function __construct(array $explicitClasses = null)
+    public function __construct(?array $explicitClasses = null)
     {
         if ($explicitClasses) {
             $this->setExplicitClasses($explicitClasses);
@@ -42,11 +42,11 @@ class RuntimeDefinition implements DefinitionInterface
      * Set explicit class names
      *
      * @see addExplicitClass()
+     *
      * @param string[] $explicitClasses An array of class names
      * @throws Exception\ClassNotFoundException
-     * @return self
      */
-    public function setExplicitClasses(array $explicitClasses) : self
+    public function setExplicitClasses(array $explicitClasses): self
     {
         $this->explicitClasses = [];
 
@@ -63,11 +63,9 @@ class RuntimeDefinition implements DefinitionInterface
      * Adding classes this way will cause the defintion to report them when getClasses()
      * is called, even when they're not yet loaded.
      *
-     * @param string $class
      * @throws Exception\ClassNotFoundException
-     * @return self
      */
-    public function addExplicitClass(string $class) : self
+    public function addExplicitClass(string $class): self
     {
         if (! class_exists($class)) {
             throw new Exception\ClassNotFoundException($class);
@@ -91,13 +89,13 @@ class RuntimeDefinition implements DefinitionInterface
             throw new Exception\ClassNotFoundException($class);
         }
 
-        $this->definition[$class] = new Reflection\ClassDefinition($class);
+        $this->definition[$class] = new ClassDefinition($class);
     }
 
     /**
      * @return string[]
      */
-    public function getClasses() : array
+    public function getClasses(): array
     {
         if (! $this->explicitClasses) {
             return array_keys($this->definition);
@@ -106,20 +104,16 @@ class RuntimeDefinition implements DefinitionInterface
         return array_keys(array_merge($this->definition, $this->explicitClasses));
     }
 
-    /**
-     * @return bool
-     */
-    public function hasClass(string $class) : bool
+    public function hasClass(string $class): bool
     {
         return class_exists($class);
     }
 
     /**
-     * @param string $class
-     * @return Reflection\ClassDefinition
+     * @return ClassDefinition
      * @throws Exception\ClassNotFoundException
      */
-    public function getClassDefinition(string $class) : ClassDefinitionInterface
+    public function getClassDefinition(string $class): ClassDefinitionInterface
     {
         if (! isset($this->definition[$class])) {
             $this->loadClass($class);

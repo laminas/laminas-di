@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Laminas\Di\Resolver;
 
+use function sprintf;
 use function trigger_error;
 
 use const E_USER_DEPRECATED;
@@ -24,42 +25,29 @@ trigger_error(
 );
 
 /**
- * @codeCoverageIgnore Deprecated
  * @deprecated Since 3.1.0
+ *
  * @see InjectionInterface
+ *
+ * @codeCoverageIgnore Deprecated
  */
 abstract class AbstractInjection
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $parameterName;
 
-    /**
-     * @param string $name
-     * @return self
-     */
-    public function setParameterName(string $name) : self
+    public function setParameterName(string $name): self
     {
         $this->parameterName = $name;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getParameterName() : string
+    public function getParameterName(): string
     {
         return $this->parameterName;
     }
 
-    /**
-     * @return string
-     */
-    abstract public function export() : string;
+    abstract public function export(): string;
 
-    /**
-     * @return bool
-     */
-    abstract public function isExportable() : bool;
+    abstract public function isExportable(): bool;
 }

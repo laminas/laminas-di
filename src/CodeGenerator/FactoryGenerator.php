@@ -17,11 +17,19 @@ use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use SplFileObject;
 
+use function assert;
+use function dirname;
 use function file_get_contents;
+use function implode;
 use function is_string;
+use function preg_replace;
+use function sprintf;
+use function str_repeat;
+use function str_replace;
 use function strrpos;
 use function strtr;
 use function substr;
+use function var_export;
 
 /**
  * Generates factory classes
@@ -30,9 +38,9 @@ class FactoryGenerator
 {
     use GeneratorTrait;
 
-    private const INDENTATION_SPACES = 4;
-    private const TEMPLATE_FILE = __DIR__ . '/../../templates/factory.template';
-    private const PARAMETERS_TEMPLATE = <<< '__CODE__'
+    private const INDENTATION_SPACES  = 4;
+    private const TEMPLATE_FILE       = __DIR__ . '/../../templates/factory.template';
+    private const PARAMETERS_TEMPLATE = <<<'__CODE__'
 
         $args = empty($options)
             ? [
@@ -44,45 +52,34 @@ class FactoryGenerator
 
 __CODE__;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $namespace;
 
-    /**
-     * @var DependencyResolverInterface
-     */
+    /** @var DependencyResolverInterface */
     private $resolver;
 
-    /**
-     * @var ConfigInterface
-     */
+    /** @var ConfigInterface */
     private $config;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $classmap = [];
 
-    /**
-     * @param DependencyResolverInterface $resolver
-     */
     public function __construct(
         ConfigInterface $config,
         DependencyResolverInterface $resolver,
         ?string $namespace = null
     ) {
-        $this->resolver = $resolver;
-        $this->config = $config;
+        $this->resolver  = $resolver;
+        $this->config    = $config;
         $this->namespace = $namespace ?: 'LaminasDiGenerated';
     }
 
-    protected function buildClassName(string $name) : string
+    protected function buildClassName(string $name): string
     {
         return preg_replace('~[^a-z0-9\\\\]+~i', '_', $name) . 'Factory';
     }
 
-    protected function buildFileName(string $name) : string
+    protected function buildFileName(string $name): string
     {
         return str_replace('\\', '/', $this->buildClassName($name)) . '.php';
     }
@@ -90,7 +87,7 @@ __CODE__;
     /**
      * @return string[] The resulting parts as [$namspace, $unqualifiedClassName]
      */
-    private function splitFullyQualifiedClassName(string $class) : array
+    private function splitFullyQualifiedClassName(string $class): array
     {
         $pos = strrpos($class, '\\');
 
@@ -98,13 +95,13 @@ __CODE__;
             return ['', $class];
         }
 
-        $namespace = substr($class, 0, $pos);
+        $namespace            = substr($class, 0, $pos);
         $unqualifiedClassName = substr($class, $pos + 1);
 
         return [$namespace, $unqualifiedClassName];
     }
 
-    private function getClassName(string $type) : string
+    private function getClassName(string $type): string
     {
         if ($this->config->isAlias($type)) {
             return $this->config->getClassForAlias($type) ?? $type;
@@ -116,7 +113,7 @@ __CODE__;
     /**
      * @param InjectionInterface[] $injections
      */
-    private function canGenerateForParameters(iterable $injections) : bool
+    private function canGenerateForParameters(iterable $injections): bool
     {
         foreach ($injections as $injection) {
             if (! $injection->isExportable()) {
@@ -132,9 +129,9 @@ __CODE__;
      *
      * @param InjectionInterface[] $injections
      */
-    private function buildParametersCode(iterable $injections) : ?string
+    private function buildParametersCode(iterable $injections): ?string
     {
-        $withOptions = [];
+        $withOptions    = [];
         $withoutOptions = [];
 
         foreach ($injections as $name => $injection) {
@@ -172,11 +169,11 @@ __CODE__;
     }
 
     /**
-     * @throws RuntimeException When generating the factory failed
+     * @throws RuntimeException When generating the factory failed.
      */
     public function generate(string $class): string
     {
-        $className = $this->getClassName($class);
+        $className  = $this->getClassName($class);
         $injections = $this->resolver->resolveParameters($className);
 
         if (! $this->canGenerateForParameters($injections)) {
@@ -187,10 +184,10 @@ __CODE__;
             ));
         }
 
-        $paramsCode = $this->buildParametersCode($injections);
-        $absoluteClassName = '\\' . $className;
-        $factoryClassName = $this->namespace . '\\' . $this->buildClassName($class);
-        list($namespace, $unqualifiedFactoryClassName) = $this->splitFullyQualifiedClassName($factoryClassName);
+        $paramsCode                                = $this->buildParametersCode($injections);
+        $absoluteClassName                         = '\\' . $className;
+        $factoryClassName                          = $this->namespace . '\\' . $this->buildClassName($class);
+        [$namespace, $unqualifiedFactoryClassName] = $this->splitFullyQualifiedClassName($factoryClassName);
 
         $filename = $this->buildFileName($class);
         $filepath = $this->outputDirectory . '/' . $filename;
@@ -201,12 +198,12 @@ __CODE__;
         $code = strtr(
             $template,
             [
-                '%class%' => $absoluteClassName,
-                '%namespace%' => $namespace ? "namespace $namespace;\n" : '',
-                '%factory_class%' => $unqualifiedFactoryClassName,
+                '%class%'                => $absoluteClassName,
+                '%namespace%'            => $namespace ? "namespace $namespace;\n" : '',
+                '%factory_class%'        => $unqualifiedFactoryClassName,
                 '%options_to_args_code%' => $paramsCode,
                 '%use_array_key_exists%' => $paramsCode ? "\nuse function array_key_exists;" : '',
-                '%args%' => $paramsCode ? '...$args' : '',
+                '%args%'                 => $paramsCode ? '...$args' : '',
             ]
         );
 
@@ -219,10 +216,7 @@ __CODE__;
         return $factoryClassName;
     }
 
-    /**
-     * @return array
-     */
-    public function getClassmap() : array
+    public function getClassmap(): array
     {
         return $this->classmap;
     }

@@ -14,24 +14,21 @@ use Laminas\Di\ConfigInterface;
 use Laminas\Di\Injector;
 use Laminas\Di\InjectorInterface;
 use Psr\Container\ContainerInterface;
+use Zend\Di\ConfigInterface as LegacyConfigInterace;
 
 /**
  * Implements the DependencyInjector service factory for laminas-servicemanager
  */
 class InjectorFactory
 {
-    /**
-     * @param ContainerInterface $container
-     * @return ConfigInterface
-     */
-    private function createConfig(ContainerInterface $container) : ConfigInterface
+    private function createConfig(ContainerInterface $container): ConfigInterface
     {
         if ($container->has(ConfigInterface::class)) {
             return $container->get(ConfigInterface::class);
         }
 
-        if ($container->has(\Zend\Di\ConfigInterface::class)) {
-            return $container->get(\Zend\Di\ConfigInterface::class);
+        if ($container->has(LegacyConfigInterace::class)) {
+            return $container->get(LegacyConfigInterace::class);
         }
 
         return (new ConfigFactory())->create($container);
@@ -40,7 +37,7 @@ class InjectorFactory
     /**
      * {@inheritDoc}
      */
-    public function create(ContainerInterface $container) : InjectorInterface
+    public function create(ContainerInterface $container): InjectorInterface
     {
         $config = $this->createConfig($container);
         return new Injector($config, $container);
@@ -49,7 +46,7 @@ class InjectorFactory
     /**
      * Make the instance invokable
      */
-    public function __invoke(ContainerInterface $container) : InjectorInterface
+    public function __invoke(ContainerInterface $container): InjectorInterface
     {
         return $this->create($container);
     }

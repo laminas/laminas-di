@@ -13,7 +13,7 @@ use Throwable;
 
 class ClassNotFoundException extends DomainException implements ExceptionInterface
 {
-    public function __construct(string $classname, int $code = null, Throwable $previous = null)
+    public function __construct(string $classname, ?int $code = null, ?Throwable $previous = null)
     {
         parent::__construct("The class '$classname' does not exist.", $code ?? 0, $previous);
     }

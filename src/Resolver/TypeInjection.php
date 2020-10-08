@@ -13,6 +13,7 @@ namespace Laminas\Di\Resolver;
 use Psr\Container\ContainerInterface;
 
 use function trigger_error;
+use function var_export;
 
 use const E_USER_DEPRECATED;
 
@@ -30,24 +31,23 @@ final class TypeInjection implements InjectionInterface
 
     /**
      * Constructor
-     *
-     * @param string $type
      */
     public function __construct(string $type)
     {
         $this->type = $type;
     }
 
-    public function export() : string
+    public function export(): string
     {
         return var_export($this->type, true);
     }
 
-    public function isExportable() : bool
+    public function isExportable(): bool
     {
         return true;
     }
 
+    /** @return mixed */
     public function toValue(ContainerInterface $container)
     {
         return $container->get($this->type);
@@ -55,10 +55,8 @@ final class TypeInjection implements InjectionInterface
 
     /**
      * Reflects the type name
-     *
-     * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->type;
     }
@@ -66,14 +64,15 @@ final class TypeInjection implements InjectionInterface
     /**
      * Get the type name to look up for injection
      *
-     * @codeCoverageIgnore
      * @deprecated Since 3.1.0
+     *
      * @see toValue()
      * @see export()
      * @see __toString()
-     * @return string
+     *
+     * @codeCoverageIgnore
      */
-    public function getType() : string
+    public function getType(): string
     {
         trigger_error(__METHOD__ . ' is deprecated. Please migrate to __toString()', E_USER_DEPRECATED);
         return $this->type;

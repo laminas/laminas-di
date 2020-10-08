@@ -10,15 +10,28 @@ declare(strict_types=1);
 
 namespace Laminas\Di;
 
+use ArrayAccess;
 use Laminas\Stdlib\ArrayUtils;
 use Laminas\Stdlib\Parameters;
 use Traversable;
+
+use function array_pop;
+use function class_exists;
+use function interface_exists;
+use function is_array;
+use function strpos;
+use function trigger_error;
+
+use const E_USER_DEPRECATED;
 
 /**
  * Provides a migration config from laminas-di 2.x configuration arrays
  */
 class LegacyConfig extends Config
 {
+    /**
+     * @param array|ArrayAccess $config
+     */
     public function __construct($config)
     {
         parent::__construct([]);
@@ -36,6 +49,10 @@ class LegacyConfig extends Config
         }
     }
 
+    /**
+     * @param mixed $parameters
+     * @return mixed
+     */
     private function prepareParametersArray($parameters, string $class)
     {
         $prepared = [];
@@ -51,7 +68,7 @@ class LegacyConfig extends Config
         return $prepared;
     }
 
-    private function configureInstance($config)
+    private function configureInstance(iterable $config)
     {
         foreach ($config as $target => $data) {
             switch ($target) {
@@ -73,10 +90,10 @@ class LegacyConfig extends Config
                     break;
 
                 default:
-                    $config = new Parameters($data);
+                    $config     = new Parameters($data);
                     $parameters = $config->get('parameters', $config->get('parameter'));
 
-                    if (is_array($parameters) || ($parameters instanceof Traversable)) {
+                    if (is_array($parameters) || $parameters instanceof Traversable) {
                         $parameters = $this->prepareParametersArray($parameters, $target);
                         $this->setParameters($target, $parameters);
                     }
@@ -88,11 +105,11 @@ class LegacyConfig extends Config
     /**
      * Export the configuraton to an array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'preferences' => $this->preferences,
-            'types' => $this->types,
+            'types'       => $this->types,
         ];
     }
 }

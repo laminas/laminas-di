@@ -24,7 +24,7 @@ class AutowireFactory
      *
      * @param ContainerInterface $container The container context for this factory
      * @return InjectorInterface The dependency injector
-     * @throws Exception\RuntimeException When no dependency injector is available
+     * @throws Exception\RuntimeException When no dependency injector is available.
      */
     private function getInjector(ContainerInterface $container)
     {
@@ -41,6 +41,9 @@ class AutowireFactory
 
     /**
      * Check creatability of the requested name
+     *
+     * @param string $requestedName
+     * @return bool
      */
     public function canCreate(ContainerInterface $container, $requestedName)
     {
