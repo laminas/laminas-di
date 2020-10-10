@@ -76,6 +76,7 @@ class DependencyResolverTest extends TestCase
     }
 
     private function mockClassDefinition(
+        string $name,
         array $parameters = [],
         array $interfaces = [],
         array $supertypes = []
@@ -135,6 +136,7 @@ class DependencyResolverTest extends TestCase
             $mock->method('getClassDefinition')
                 ->with($class)
                 ->willReturn($this->mockClassDefinition(
+                    $class,
                     $options['parameters'],
                     $options['interfaces'],
                     $options['supertypes']

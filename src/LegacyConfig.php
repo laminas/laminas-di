@@ -51,7 +51,7 @@ class LegacyConfig extends Config
 
     /**
      * @param mixed $parameters
-     * @return mixed
+     * @return mixed[]
      */
     private function prepareParametersArray($parameters, string $class)
     {
@@ -68,7 +68,10 @@ class LegacyConfig extends Config
         return $prepared;
     }
 
-    private function configureInstance(iterable $config)
+    /**
+     * @param iterable $config
+     */
+    private function configureInstance($config)
     {
         foreach ($config as $target => $data) {
             switch ($target) {

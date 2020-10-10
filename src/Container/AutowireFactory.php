@@ -57,10 +57,9 @@ class AutowireFactory
     /**
      * Create an instance
      *
-     * @param string $requestedName
      * @return object
      */
-    public function create(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function create(ContainerInterface $container, string $requestedName, ?array $options = null)
     {
         return $this->getInjector($container)->create($requestedName, $options ?: []);
     }
