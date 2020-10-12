@@ -6,16 +6,16 @@ nav:
         - Introduction: intro.md
         - Installation: installation.md
         - "Quick Start": quick-start.md
-        - Reference:
-            - "PSR-11 Support": psr-11.md
-            - Configuration: config.md
-            - "Injector": injector.md
-            - "Code Generator": codegen.md
+        - "PSR-11 Support": psr-11.md
+        - Configuration: config.md
+        - "Injector": injector.md
+        - "Code Generator": codegen.md
         - Cookbook:
             - "Usage with PSR-11 Containers": cookbook/use-with-psr-containers.md
             - "Usage with laminas-servicemanager": cookbook/use-with-servicemanager.md
             - "Using AoT with Mezzio and laminas-servicemanager": cookbook/aot-guide.md
-        - "Migration Guide": migration.md
+        - Migration:
+            - "Migration from Version 2 to 3": migration.md
     - v2:
         - "Quick Start": v2/quick-start.md
         - Reference:

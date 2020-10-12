@@ -4,6 +4,8 @@ This quick start is intended to get developers familiar with the concepts of the
 laminas-di DiC.  Generally speaking, code is never as simple as it is inside this
 example, so working knowledge of the other sections of the manual is suggested.
 
+## Example Application
+
 Assume, for a moment, the following application code. It already assumes that
 dependencies are injected, and so becomes a good candiate for a DiC.
 
@@ -66,6 +68,8 @@ movies, not only can this become repetitive and boring to write, but also
 unmaintainable if you want to swap out one of these dependencies on a wholesale
 scale.
 
+## Using a laminas-di Container
+
 Since this example of code already practices good dependency injection using
 constructor injection, it is a great candidate for using laminas-di.
 
@@ -114,6 +118,8 @@ dependencies fit together and how to go about wiring your objects for you.
 in the methods as the class parameter names. This is how both the `username` and
 `password` keys are mapped to the first and second parameters, respectively, of
 the constructor consuming these named parameters.
+
+## Passing Parameters on Call Time
 
 If you were to want to pass in the username and password at call time, this is
 achieved by passing them as the second argument to `get()`:
