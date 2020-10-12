@@ -68,10 +68,10 @@ movies, not only can this become repetitive and boring to write, but also
 unmaintainable if you want to swap out one of these dependencies on a wholesale
 scale.
 
-## Using a laminas-di Container
-
 Since this example of code already practices good dependency injection using
 constructor injection, it is a great candidate for using laminas-di.
+
+## Using a laminas-di Container
 
 The following demonstrates how to wire the above into a laminas-di container:
 
