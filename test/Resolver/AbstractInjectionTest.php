@@ -15,6 +15,8 @@ use Laminas\Di\Resolver\InjectionInterface;
 use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 
+use function sprintf;
+
 class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated()
@@ -30,10 +32,12 @@ class AbstractInjectionTest extends TestCase
         {
             public function export(): string
             {
+                return '';
             }
 
             public function isExportable(): bool
             {
+                return true;
             }
         };
     }

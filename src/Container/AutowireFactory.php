@@ -24,7 +24,7 @@ class AutowireFactory
      *
      * @param ContainerInterface $container The container context for this factory
      * @return InjectorInterface The dependency injector
-     * @throws Exception\RuntimeException When no dependency injector is available
+     * @throws Exception\RuntimeException When no dependency injector is available.
      */
     private function getInjector(ContainerInterface $container)
     {
@@ -41,6 +41,9 @@ class AutowireFactory
 
     /**
      * Check creatability of the requested name
+     *
+     * @param string $requestedName
+     * @return bool
      */
     public function canCreate(ContainerInterface $container, $requestedName)
     {
@@ -48,11 +51,13 @@ class AutowireFactory
             return false;
         }
 
-        return $this->getInjector($container)->canCreate((string)$requestedName);
+        return $this->getInjector($container)->canCreate((string) $requestedName);
     }
 
     /**
      * Create an instance
+     *
+     * @return object
      */
     public function create(ContainerInterface $container, string $requestedName, ?array $options = null)
     {
@@ -61,9 +66,12 @@ class AutowireFactory
 
     /**
      * Make invokable and implement the laminas-service factory pattern
+     *
+     * @param string $requestedName
+     * @return object
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        return $this->create($container, (string)$requestedName, $options);
+        return $this->create($container, (string) $requestedName, $options);
     }
 }

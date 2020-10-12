@@ -1,5 +1,7 @@
 <?php
 
+// @phpcs:disable
+
 /**
  * @see       https://github.com/laminas/laminas-di for the canonical source repository
  * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
@@ -9,6 +11,9 @@
 declare(strict_types=1);
 
 namespace LaminasTest\Di\TestAsset\Constructor;
+
+use function array_filter;
+use function compact;
 
 class ManyArguments
 {
@@ -23,7 +28,7 @@ class ManyArguments
         $f = null
     ) {
         $this->result = array_filter(compact('a', 'b', 'c', 'd', 'e', 'f'), function ($value) {
-            return ($value !== null);
+            return $value !== null;
         });
     }
 }

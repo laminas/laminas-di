@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Laminas\\\\Di\\\\CodeGenerator\\\\AbstractInjector\\:\\:getFactory\\(\\) has parameter \\$type with no typehint specified\\.$#"
-			count: 1
-			path: src/CodeGenerator/AbstractInjector.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\CodeGenerator\\\\AbstractInjector\\:\\:create\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/CodeGenerator/AbstractInjector.php
@@ -126,17 +121,22 @@ parameters:
 			path: src/Config.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Config\\:\\:setParameters\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Config.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Config\\:\\:setParameters\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Config.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Config\\:\\:ensureArrayOrArrayAccess\\(\\) has parameter \\$options with no typehint specified\\.$#"
+			message: "#^Method Laminas\\\\Di\\\\Config\\:\\:ensureArrayOrArrayAccess\\(\\) has parameter \\$options with generic interface ArrayAccess but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Config.php
+
+		-
+			message: "#^Method Laminas\\\\Di\\\\Config\\:\\:ensureArrayOrArrayAccess\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Config.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
 			count: 1
 			path: src/Config.php
 
@@ -166,27 +166,7 @@ parameters:
 			path: src/ConfigProvider.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:canCreate\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Container/AutowireFactory.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:canCreate\\(\\) has parameter \\$requestedName with no typehint specified\\.$#"
-			count: 1
-			path: src/Container/AutowireFactory.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:create\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Container/AutowireFactory.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:create\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Container/AutowireFactory.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:__invoke\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Container/AutowireFactory.php
 
@@ -196,12 +176,17 @@ parameters:
 			path: src/Container/AutowireFactory.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\AutowireFactory\\:\\:__invoke\\(\\) has parameter \\$requestedName with no typehint specified\\.$#"
+			message: "#^Method Laminas\\\\Di\\\\Container\\\\ServiceManager\\\\AutowireFactory\\:\\:__invoke\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Container/AutowireFactory.php
+			path: src/Container/ServiceManager/AutowireFactory.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Container\\\\ServiceManager\\\\AutowireFactory\\:\\:__invoke\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: "#^Return type \\(bool\\) of method Laminas\\\\Di\\\\Container\\\\ServiceManager\\\\AutowireFactory\\:\\:__invoke\\(\\) should be compatible with return type \\(object\\) of method Laminas\\\\ServiceManager\\\\Factory\\\\FactoryInterface\\:\\:__invoke\\(\\)$#"
+			count: 2
+			path: src/Container/ServiceManager/AutowireFactory.php
+
+		-
+			message: "#^Method Laminas\\\\Di\\\\Container\\\\ServiceManager\\\\AutowireFactory\\:\\:__invoke\\(\\) should return bool but returns object\\.$#"
 			count: 1
 			path: src/Container/ServiceManager/AutowireFactory.php
 
@@ -231,7 +216,17 @@ parameters:
 			path: src/Definition/Reflection/ClassDefinition.php
 
 		-
+			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:reflectSupertypes\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Definition/Reflection/ClassDefinition.php
+
+		-
 			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
+			count: 1
+			path: src/Definition/Reflection/ClassDefinition.php
+
+		-
+			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:reflectParameters\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Definition/Reflection/ClassDefinition.php
 
@@ -276,17 +271,12 @@ parameters:
 			path: src/InjectorInterface.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:__construct\\(\\) has parameter \\$config with no typehint specified\\.$#"
+			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:__construct\\(\\) has parameter \\$config with generic interface ArrayAccess but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: src/LegacyConfig.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:prepareParametersArray\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/LegacyConfig.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:prepareParametersArray\\(\\) has parameter \\$parameters with no typehint specified\\.$#"
+			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:__construct\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/LegacyConfig.php
 
@@ -296,7 +286,7 @@ parameters:
 			path: src/LegacyConfig.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:configureInstance\\(\\) has parameter \\$config with no typehint specified\\.$#"
+			message: "#^Method Laminas\\\\Di\\\\LegacyConfig\\:\\:configureInstance\\(\\) has parameter \\$config with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/LegacyConfig.php
 
@@ -337,11 +327,6 @@ parameters:
 
 		-
 			message: "#^Method Laminas\\\\Di\\\\Resolver\\\\ValueInjection\\:\\:__set_state\\(\\) has parameter \\$state with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Resolver/ValueInjection.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Resolver\\\\ValueInjection\\:\\:getValue\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Resolver/ValueInjection.php
 

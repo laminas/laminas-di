@@ -20,16 +20,17 @@ class GeneratedInjector implements InjectorInterface
         $this->injector = $injector;
     }
 
-    public function getInjector() : InjectorInterface
+    public function getInjector(): InjectorInterface
     {
         return $this->injector;
     }
 
-    public function canCreate(string $name) : bool
+    public function canCreate(string $name): bool
     {
         return $this->injector->canCreate($name);
     }
 
+    /** @return object */
     public function create(string $name, array $options = [])
     {
         return $this->injector->create($name, $options);

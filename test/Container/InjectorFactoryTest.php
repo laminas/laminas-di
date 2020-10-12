@@ -13,7 +13,6 @@ namespace LaminasTest\Di\Container;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\InjectorFactory;
 use Laminas\Di\InjectorInterface;
-use PHPUnit\Framework\Constraint\IsType;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
@@ -31,7 +30,7 @@ class InjectorFactoryTest extends TestCase
     public function testCreateWillReturnAnInjectorInstance()
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $result = (new InjectorFactory())->create($container);
+        $result    = (new InjectorFactory())->create($container);
 
         $this->assertInstanceOf(InjectorInterface::class, $result);
     }
@@ -39,15 +38,15 @@ class InjectorFactoryTest extends TestCase
     public function testInvokeWillReturnAnInjectorInstance()
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $factory = new InjectorFactory();
-        $result = $factory($container);
+        $factory   = new InjectorFactory();
+        $result    = $factory($container);
 
         $this->assertInstanceOf(InjectorInterface::class, $result);
     }
 
     public function testUsesConfigServiceFromContainer()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container  = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
         $configMock = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
         $container->expects($this->atLeastOnce())
             ->method('has')
@@ -62,7 +61,7 @@ class InjectorFactoryTest extends TestCase
         $injector = (new InjectorFactory())->create($container);
 
         $reflection = new ReflectionObject($injector);
-        $property = $reflection->getProperty('config');
+        $property   = $reflection->getProperty('config');
 
         $property->setAccessible(true);
         $this->assertSame($configMock, $property->getValue($injector));

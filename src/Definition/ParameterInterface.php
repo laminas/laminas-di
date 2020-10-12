@@ -15,33 +15,18 @@ namespace Laminas\Di\Definition;
  */
 interface ParameterInterface
 {
-    /**
-     * @return string
-     */
-    public function getName() : string;
+    public function getName(): string;
 
-    /**
-     * @return int
-     */
-    public function getPosition() : int;
+    public function getPosition(): int;
 
-    /**
-     * @return string|null
-     */
-    public function getType() : ?string;
+    public function getType(): ?string;
 
     /**
      * @return mixed
      */
     public function getDefault();
 
-    /**
-     * @return bool
-     */
-    public function isRequired() : bool;
+    public function isRequired(): bool;
 
-    /**
-     * @return bool
-     */
-    public function isBuiltin() : bool;
+    public function isBuiltin(): bool;
 }

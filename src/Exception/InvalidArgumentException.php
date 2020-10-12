@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Di\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
+use InvalidArgumentException as BaseInvalidArgumentException;
+
+class InvalidArgumentException extends BaseInvalidArgumentException implements ExceptionInterface
 {
 }

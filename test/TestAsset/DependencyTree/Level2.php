@@ -14,6 +14,7 @@ class Level2
 {
     public $optionalResult;
 
+    /** @param null|mixed $opt*/
     public function __construct($opt = null)
     {
         $this->optionalResult = $opt;

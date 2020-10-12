@@ -13,12 +13,12 @@ namespace LaminasTest\Di\Resolver;
 use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
-use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use function sprintf;
 use function uniqid;
 
 /**
@@ -35,10 +35,10 @@ class TypeInjectionTest extends TestCase
 
     public function testToValueUsesContainer()
     {
-        $container = $this->prophesize(ContainerInterface::class);
-        $typename = uniqid('TypeName');
+        $container     = $this->prophesize(ContainerInterface::class);
+        $typename      = uniqid('TypeName');
         $expectedValue = new stdClass();
-        $subject = new TypeInjection($typename);
+        $subject       = new TypeInjection($typename);
 
         $container->get($typename)
             ->shouldBeCalled()
@@ -65,7 +65,7 @@ class TypeInjectionTest extends TestCase
     /**
      * @dataProvider provideTypeNames
      */
-    public function testIsExportableIsAlwaysTrue($typeName)
+    public function testIsExportableIsAlwaysTrue(string $typeName)
     {
         $this->assertTrue((new TypeInjection($typeName))->isExportable());
     }

@@ -15,14 +15,14 @@ use Laminas\Di\Exception;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+use function uniqid;
+
 /**
  * @coversDefaultClass Laminas\Di\Config
  */
 class ConfigTest extends TestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fixture;
 
     protected function setUp(): void
@@ -92,7 +92,7 @@ class ConfigTest extends TestCase
     {
         $instance = new Config();
         $expected = [
-            'bar' => 'Baz'
+            'bar' => 'Baz',
         ];
 
         $this->assertEmpty($instance->getParameters('Foo'));
@@ -116,18 +116,18 @@ class ConfigTest extends TestCase
         $this->assertEquals('Bar', $instance->getTypePreference('Foo', 'Baz'));
     }
 
-    public function provideValidClassNames()
+    public function provideValidClassNames(): array
     {
         return [
-            'class' => [ TestAsset\A::class ],
-            'interface' => [ TestAsset\DummyInterface::class ],
+            'class'     => [TestAsset\A::class],
+            'interface' => [TestAsset\DummyInterface::class],
         ];
     }
 
     /**
      * @dataProvider provideValidClassNames
      */
-    public function testSetAlias($className)
+    public function testSetAlias(string $className)
     {
         $instance = new Config();
 
@@ -139,10 +139,10 @@ class ConfigTest extends TestCase
         $this->assertEquals($className, $instance->getClassForAlias('Foo.Bar'));
     }
 
-    public function provideInvalidClassNames()
+    public function provideInvalidClassNames(): array
     {
         return [
-            'badname' => [ 'Bad.Class.Name.For.PHP' ],
+            'badname' => ['Bad.Class.Name.For.PHP'],
         ];
     }
 

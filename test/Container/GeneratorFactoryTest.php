@@ -21,26 +21,29 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use ReflectionClass;
+
+use function uniqid;
 
 /**
  * @covers Laminas\Di\Container\GeneratorFactory
  */
 class GeneratorFactoryTest extends TestCase
 {
-    public function testInvokeCreatesGenerator() : void
+    public function testInvokeCreatesGenerator(): void
     {
         $injector = new Injector();
-        $factory = new GeneratorFactory();
+        $factory  = new GeneratorFactory();
 
         $result = $factory->create($injector->getContainer());
         $this->assertInstanceOf(InjectorGenerator::class, $result);
     }
 
-    public function testFactoryUsesDiConfigContainer() : void
+    public function testFactoryUsesDiConfigContainer(): void
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
         $container->method('has')->willReturnCallback(function ($type) {
-            return $type == ConfigInterface::class;
+            return $type === ConfigInterface::class;
         });
 
         $container->expects($this->atLeastOnce())
@@ -52,10 +55,10 @@ class GeneratorFactoryTest extends TestCase
         $factory->create($container);
     }
 
-    public function testSetsOutputDirectoryFromConfig() : void
+    public function testSetsOutputDirectoryFromConfig(): void
     {
-        $vfs = vfsStream::setup(uniqid('laminas-di'));
-        $expected = $vfs->url();
+        $vfs       = vfsStream::setup(uniqid('laminas-di'));
+        $expected  = $vfs->url();
         $container = new ServiceManager();
         $container->setService('config', [
             'dependencies' => [
@@ -71,9 +74,9 @@ class GeneratorFactoryTest extends TestCase
         $this->assertEquals($expected, $generator->getOutputDirectory());
     }
 
-    public function testSetsNamespaceFromConfig() : void
+    public function testSetsNamespaceFromConfig(): void
     {
-        $expected = 'LaminasTest\\Di\\' . uniqid('Generated');
+        $expected  = 'LaminasTest\\Di\\' . uniqid('Generated');
         $container = new ServiceManager();
         $container->setService('config', [
             'dependencies' => [
@@ -89,19 +92,19 @@ class GeneratorFactoryTest extends TestCase
         $this->assertEquals($expected, $generator->getNamespace());
     }
 
-    public function testDefaultLogger() : void
+    public function testDefaultLogger(): void
     {
-        $generator = (new GeneratorFactory())->create(new ServiceManager());
-        $reflection = new \ReflectionClass($generator);
-        $property = $reflection->getProperty('logger');
+        $generator  = (new GeneratorFactory())->create(new ServiceManager());
+        $reflection = new ReflectionClass($generator);
+        $property   = $reflection->getProperty('logger');
         $property->setAccessible(true);
 
         $this->assertInstanceOf(NullLogger::class, $property->getValue($generator));
     }
 
-    public function testSetsLoggerFromConfig() : void
+    public function testSetsLoggerFromConfig(): void
     {
-        $logger = $this->getMockBuilder(LoggerInterface::class)
+        $logger    = $this->getMockBuilder(LoggerInterface::class)
             ->getMockForAbstractClass();
         $container = new ServiceManager();
         $container->setService('MyCustomLogger', $logger);
@@ -115,15 +118,15 @@ class GeneratorFactoryTest extends TestCase
             ],
         ]);
 
-        $generator = (new GeneratorFactory())->create($container);
-        $reflection = new \ReflectionClass($generator);
-        $property = $reflection->getProperty('logger');
+        $generator  = (new GeneratorFactory())->create($container);
+        $reflection = new ReflectionClass($generator);
+        $property   = $reflection->getProperty('logger');
         $property->setAccessible(true);
 
         $this->assertNotInstanceOf(NullLogger::class, $property->getValue($generator));
     }
 
-    public function testInvokeCallsCreate() : void
+    public function testInvokeCallsCreate(): void
     {
         $mock = $this->getMockBuilder(GeneratorFactory::class)
             ->setMethods(['create'])

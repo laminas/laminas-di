@@ -60,7 +60,7 @@ class RuntimeDefinitionTest extends TestCase
         $this->assertEquals($expected, $definition->getClasses());
     }
 
-    public function provideExistingClasses()
+    public function provideExistingClasses(): array
     {
         return [
             'A'             => [TestAsset\A::class],
@@ -69,7 +69,7 @@ class RuntimeDefinitionTest extends TestCase
         ];
     }
 
-    public function provideInvalidClasses()
+    public function provideInvalidClasses(): array
     {
         return [
             'interface' => [TestAsset\DummyInterface::class],
@@ -80,12 +80,12 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideInvalidClasses
      */
-    public function testSetInvalidExplicitClassThrowsException($class)
+    public function testSetInvalidExplicitClassThrowsException(string $class)
     {
         $definition = new RuntimeDefinition();
 
         $this->expectException(Exception\ClassNotFoundException::class);
-        $definition->setExplicitClasses([ $class ]);
+        $definition->setExplicitClasses([$class]);
     }
 
     /**
@@ -108,7 +108,7 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideInvalidClasses
      */
-    public function testAddInvalidExplicitClassThrowsException($class)
+    public function testAddInvalidExplicitClassThrowsException(string $class)
     {
         $definition = new RuntimeDefinition();
 
@@ -119,7 +119,7 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideExistingClasses
      */
-    public function testHasClassReturnsTrueDynamically($class)
+    public function testHasClassReturnsTrueDynamically(string $class)
     {
         $this->assertTrue(
             (new RuntimeDefinition())->hasClass($class)
@@ -129,7 +129,7 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideInvalidClasses
      */
-    public function testHasClassReturnsFalseForInvalidClasses($class)
+    public function testHasClassReturnsFalseForInvalidClasses(string $class)
     {
         $this->assertFalse(
             (new RuntimeDefinition())->hasClass($class)
@@ -139,10 +139,10 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideExistingClasses
      */
-    public function testGetClassDefinition($class)
+    public function testGetClassDefinition(string $class)
     {
         $definition = new RuntimeDefinition();
-        $result = $definition->getClassDefinition($class);
+        $result     = $definition->getClassDefinition($class);
 
         $this->assertInstanceOf(ClassDefinitionInterface::class, $result);
         $this->assertInstanceOf(ReflectionClass::class, $result->getReflection());
@@ -152,7 +152,7 @@ class RuntimeDefinitionTest extends TestCase
     /**
      * @dataProvider provideExistingClasses
      */
-    public function testGetClassDefinitionAutoPopulatesClass($class)
+    public function testGetClassDefinitionAutoPopulatesClass(string $class)
     {
         $definition = new RuntimeDefinition();
 

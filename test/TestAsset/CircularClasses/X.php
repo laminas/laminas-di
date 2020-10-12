@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable
+
 /**
  * @see       https://github.com/laminas/laminas-di for the canonical source repository
  * @copyright https://github.com/laminas/laminas-di/blob/master/COPYRIGHT.md
@@ -12,6 +14,7 @@ namespace LaminasTest\Di\TestAsset\CircularClasses;
 
 class X
 {
+    // @codingStandardsIgnoreStart
     public function __construct(X $x)
     {
     }

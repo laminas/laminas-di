@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace Laminas\Di;
 
+use Zend\Di\CodeGenerator\InjectorGenerator as LegacyInjectorGenerator;
+use Zend\Di\ConfigInterface as LegacyConfigInterface;
+use Zend\Di\InjectorInterface as LegacyInjectorInterfae;
+
 /**
  * Implements the config provider for mezzio
  */
@@ -20,35 +24,33 @@ class ConfigProvider
      *
      * @return array The configuration for mezzio
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
-            'dependencies' => $this->getDependencyConfig()
+            'dependencies' => $this->getDependencyConfig(),
         ];
     }
 
     /**
      * Returns the dependency (service manager) configuration
-     *
-     * @return array
      */
-    public function getDependencyConfig() : array
+    public function getDependencyConfig(): array
     {
         return [
             // Legacy Zend Framework aliases
-            'aliases' => [
-                \Zend\Di\InjectorInterface::class => InjectorInterface::class,
-                \Zend\Di\ConfigInterface::class => ConfigInterface::class,
-                \Zend\Di\CodeGenerator\InjectorGenerator::class => CodeGenerator\InjectorGenerator::class,
+            'aliases'            => [
+                LegacyInjectorInterfae::class  => InjectorInterface::class,
+                LegacyConfigInterface::class   => ConfigInterface::class,
+                LegacyInjectorGenerator::class => CodeGenerator\InjectorGenerator::class,
             ],
-            'factories' => [
-                InjectorInterface::class => Container\InjectorFactory::class,
-                ConfigInterface::class => Container\ConfigFactory::class,
+            'factories'          => [
+                InjectorInterface::class               => Container\InjectorFactory::class,
+                ConfigInterface::class                 => Container\ConfigFactory::class,
                 CodeGenerator\InjectorGenerator::class => Container\GeneratorFactory::class,
             ],
             'abstract_factories' => [
-                Container\ServiceManager\AutowireFactory::class
-            ]
+                Container\ServiceManager\AutowireFactory::class,
+            ],
         ];
     }
 }

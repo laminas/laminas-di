@@ -17,7 +17,6 @@ interface FactoryInterface
     /**
      * Create an instance
      *
-     * @param array $options
      * @return object
      */
     public function create(ContainerInterface $container, array $options);

@@ -29,6 +29,13 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use function array_keys;
+use function array_merge;
+use function array_shift;
+use function basename;
+use function glob;
+use function uniqid;
+
 /**
  * @coversDefaultClass Laminas\Di\Resolver\DependencyResolver
  */
@@ -39,7 +46,7 @@ class DependencyResolverTest extends TestCase
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|ContainerInterface
      */
-    private function getEmptyContainerMock()
+    private function getEmptyContainerMock(): ContainerInterface
     {
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
         $container->expects($this->any())->method('has')->withAnyParameters()->willReturn(false);
@@ -48,11 +55,7 @@ class DependencyResolverTest extends TestCase
         return $container;
     }
 
-    /**
-     * @param array $definition
-     * @return ParameterInterface
-     */
-    private function mockParameter($name, $position, array $options)
+    private function mockParameter(string $name, int $position, array $options): ParameterInterface
     {
         $definition = array_merge([
             'default'  => null,
@@ -66,24 +69,25 @@ class DependencyResolverTest extends TestCase
         $mock->method('getPosition')->willReturn($position);
         $mock->method('getDefault')->willReturn($definition['default']);
         $mock->method('getType')->willReturn($definition['type']);
-        $mock->method('isBuiltin')->willReturn((bool)$definition['builtin']);
-        $mock->method('isRequired')->willReturn((bool)$definition['required']);
+        $mock->method('isBuiltin')->willReturn((bool) $definition['builtin']);
+        $mock->method('isRequired')->willReturn((bool) $definition['required']);
 
         return $mock;
     }
 
-    /**
-     * @return ClassDefinitionInterface
-     */
-    private function mockClassDefinition($name, array $parameters = [], array $interfaces = [], array $supertypes = [])
-    {
+    private function mockClassDefinition(
+        string $name,
+        array $parameters = [],
+        array $interfaces = [],
+        array $supertypes = []
+    ): ClassDefinitionInterface {
         $mock = $this->getMockForAbstractClass(ClassDefinitionInterface::class);
 
         $mock->method('getInterfaces')->willReturn($interfaces);
         $mock->method('getSupertypes')->willReturn($supertypes);
         $mock->expects($this->never())->method('getReflection');
 
-        $position = 0;
+        $position   = 0;
         $paramMocks = [];
 
         foreach ($parameters as $name => $options) {
@@ -155,7 +159,7 @@ class DependencyResolverTest extends TestCase
 
         $injection = array_shift($params);
         $this->assertInstanceOf(TypeInjection::class, $injection);
-        $this->assertEquals(TestAsset\A::class, (string)$injection);
+        $this->assertEquals(TestAsset\A::class, (string) $injection);
 
         $params = $resolver->resolveParameters(TestAsset\A::class);
         $this->assertIsArray($params);
@@ -174,14 +178,14 @@ class DependencyResolverTest extends TestCase
     public function testResolveSucceedsWithoutContainer()
     {
         $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
-        $result = $resolver->resolveParameters(TestAsset\RequiresA::class);
+        $result   = $resolver->resolveParameters(TestAsset\RequiresA::class);
 
         $this->assertCount(1, $result);
         $this->assertIsArray($result);
-        $this->assertSame(TestAsset\A::class, (string)$result['p']);
+        $this->assertSame(TestAsset\A::class, (string) $result['p']);
     }
 
-    public function testResolveFailsForDependenciesWithoutType()
+    public function testResolveFailsForDependenciesWithoutType(): void
     {
         $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
 
@@ -189,7 +193,7 @@ class DependencyResolverTest extends TestCase
         $resolver->resolveParameters(TestAsset\Constructor\RequiredArguments::class);
     }
 
-    public function testResolveFailsForInterfaces()
+    public function testResolveFailsForInterfaces(): void
     {
         $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
 
@@ -197,31 +201,31 @@ class DependencyResolverTest extends TestCase
         $resolver->resolveParameters(TestAsset\DummyInterface::class);
     }
 
-    public function provideClassesWithoutConstructionParams()
+    public function provideClassesWithoutConstructionParams(): array
     {
         return [
-            'noargs' => [TestAsset\Constructor\EmptyConstructor::class],
-            'noconstruct' => [TestAsset\Constructor\NoConstructor::class]
+            'noargs'      => [TestAsset\Constructor\EmptyConstructor::class],
+            'noconstruct' => [TestAsset\Constructor\NoConstructor::class],
         ];
     }
 
     /**
      * @dataProvider provideClassesWithoutConstructionParams
      */
-    public function testResolveClassWithoutParameters($class)
+    public function testResolveClassWithoutParameters(string $class): void
     {
         $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
-        $result = $resolver->resolveParameters($class);
+        $result   = $resolver->resolveParameters($class);
 
         $this->assertIsArray($result);
         $this->assertCount(0, $result);
     }
 
-    public function testResolveWithOptionalArgs()
+    public function testResolveWithOptionalArgs(): void
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
-        $result = $resolver->resolveParameters(TestAsset\Constructor\OptionalArguments::class);
+        $resolver  = new DependencyResolver(new RuntimeDefinition(), new Config());
+        $result    = $resolver->resolveParameters(TestAsset\Constructor\OptionalArguments::class);
 
         $this->assertIsArray($result);
         $this->assertCount(2, $result);
@@ -230,14 +234,14 @@ class DependencyResolverTest extends TestCase
         $this->assertSame('something', $result['bar']->toValue($container));
     }
 
-    public function testResolvePassedDependenciesWithoutType()
+    public function testResolvePassedDependenciesWithoutType(): void
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
+        $resolver  = new DependencyResolver(new RuntimeDefinition(), new Config());
 
         $expected = 'Some Value';
-        $result = $resolver->resolveParameters(TestAsset\Constructor\RequiredArguments::class, [
-            'anyDep' => $expected
+        $result   = $resolver->resolveParameters(TestAsset\Constructor\RequiredArguments::class, [
+            'anyDep' => $expected,
         ]);
 
         $this->assertCount(3, $result);
@@ -245,18 +249,18 @@ class DependencyResolverTest extends TestCase
         $this->assertSame($expected, $result['anyDep']->toValue($container));
     }
 
-    public function providePreferenceConfigs()
+    public function providePreferenceConfigs(): array
     {
         $args = [];
 
         foreach (glob(__DIR__ . '/../_files/preferences/*.php') as $configFile) {
-            $config = include $configFile;
+            $config         = include $configFile;
             $configInstance = new Config($config);
-            $name = basename($configFile, 'php');
+            $name           = basename($configFile, 'php');
 
             foreach ($config['expect'] as $key => $expectation) {
-                list($requested, $expectedResult, $context) = $expectation;
-                $args[$name . $key] = [
+                [$requested, $expectedResult, $context] = $expectation;
+                $args[$name . $key]                     = [
                     $configInstance,
                     $requested,
                     $context,
@@ -271,13 +275,17 @@ class DependencyResolverTest extends TestCase
     /**
      * @dataProvider providePreferenceConfigs
      */
-    public function testResolveConfiguredPreference(ConfigInterface $config, $requestClass, $context, $expectedType)
-    {
+    public function testResolveConfiguredPreference(
+        ConfigInterface $config,
+        string $requestClass,
+        ?string $context,
+        ?string $expectedType
+    ): void {
         $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
         $this->assertSame($expectedType, $resolver->resolvePreference($requestClass, $context));
     }
 
-    public function provideExplicitInjections()
+    public function provideExplicitInjections(): array
     {
         return [
             'type'  => [new TypeInjection(TestAsset\B::class)],
@@ -288,7 +296,7 @@ class DependencyResolverTest extends TestCase
     /**
      * @dataProvider provideExplicitInjections
      */
-    public function testExplicitInjectionInConfigIsUsedWithoutAdditionalTypeChecks($expected)
+    public function testExplicitInjectionInConfigIsUsedWithoutAdditionalTypeChecks(object $expected): void
     {
         $config = new Config([
             'types' => [
@@ -301,12 +309,12 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
-        $result = $resolver->resolveParameters(TestAsset\RequiresA::class);
+        $result   = $resolver->resolveParameters(TestAsset\RequiresA::class);
         $this->assertArrayHasKey('p', $result);
         $this->assertSame($expected, $result['p']);
     }
 
-    public function provideUnusableParametersData()
+    public function provideUnusableParametersData(): array
     {
         return [
             //            [type,               value,                builtIn]
@@ -321,17 +329,18 @@ class DependencyResolverTest extends TestCase
 
     /**
      * @dataProvider provideUnusableParametersData
+     * @param mixed $value
      */
-    public function testUnusableConfigParametersThrowsException(string $type, $value, bool $builtin = false)
+    public function testUnusableConfigParametersThrowsException(string $type, $value, bool $builtin = false): void
     {
-        $class = uniqid('MockedTestClass');
-        $paramName = uniqid('param');
-        $config = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
+        $class      = uniqid('MockedTestClass');
+        $paramName  = uniqid('param');
+        $config     = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
                     $paramName => [
-                        'type' => $type,
+                        'type'    => $type,
                         'builtin' => $builtin,
                     ],
                 ],
@@ -371,7 +380,8 @@ class DependencyResolverTest extends TestCase
             'boolFalse'                 => ['bool',             true,                          true],
             'iterableArray'             => ['iterable',         [],                            true],
             'iterableIterator'          => ['iterable',         new ArrayIterator([]),         true],
-            'iterableIteratorAggregate' => ['iterable',         new class implements IteratorAggregate {
+            'iterableIteratorAggregate' => ['iterable',         new class implements IteratorAggregate
+            {
                 public function getIterator()
                 {
                     return new ArrayIterator([]);
@@ -380,29 +390,31 @@ class DependencyResolverTest extends TestCase
             'callableClosure'           => ['callable',         function () {
             }, true],
             'callableString'            => ['callable',         'trim',                        true],
-            'callableObject'            => ['callable',         new class {
+            'callableObject'            => ['callable',         new class
+            {
                 public function __invoke()
                 {
                 }
             }, true],
-            'derivedInstance'           => [TestAsset\B::class, new TestAsset\ExtendedB(new TestAsset\A()), false ],
-            'directInstance'            => [TestAsset\A::class, new TestAsset\A(),             false ],
+            'derivedInstance'           => [TestAsset\B::class, new TestAsset\ExtendedB(new TestAsset\A()), false],
+            'directInstance'            => [TestAsset\A::class, new TestAsset\A(),             false],
         ];
         // @codingStandardsIgnoreEnd
     }
 
     /**
      * @dataProvider provideUsableParametersData
+     * @param mixed $value
      */
     public function testUsableConfigParametersAreAccepted(string $type, $value, bool $builtin = false)
     {
-        $class = uniqid('MockedTestClass');
-        $paramName = uniqid('param');
+        $class      = uniqid('MockedTestClass');
+        $paramName  = uniqid('param');
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
                     $paramName => [
-                        'type' => $type,
+                        'type'    => $type,
                         'builtin' => $builtin,
                     ],
                 ],
@@ -420,8 +432,8 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $resolver = new DependencyResolver($definition, $config);
-        $result = $resolver->resolveParameters($class);
+        $resolver  = new DependencyResolver($definition, $config);
+        $result    = $resolver->resolveParameters($class);
 
         $this->assertArrayHasKey($paramName, $result);
         $this->assertInstanceOf(ValueInjection::class, $result[$paramName]);
@@ -438,8 +450,8 @@ class DependencyResolverTest extends TestCase
      */
     public function testConfiguredExtendedInterfaceParameterSatisfiesRequiredInterfaceType()
     {
-        $class = uniqid('MockedTestClass');
-        $paramName = uniqid('param');
+        $class      = uniqid('MockedTestClass');
+        $paramName  = uniqid('param');
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
@@ -461,14 +473,14 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $resolver = new DependencyResolver($definition, $config);
-        $result = $resolver->resolveParameters($class);
+        $result   = $resolver->resolveParameters($class);
 
         $this->assertArrayHasKey($paramName, $result);
         $this->assertInstanceOf(TypeInjection::class, $result[$paramName]);
-        $this->assertEquals(TestAsset\Hierarchy\InterfaceC::class, (string)$result[$paramName]);
+        $this->assertEquals(TestAsset\Hierarchy\InterfaceC::class, (string) $result[$paramName]);
     }
 
-    public function provideIterableClassNames()
+    public function provideIterableClassNames(): array
     {
         return [
             'iterator'          => [TestAsset\Pseudotypes\IteratorImplementation::class],
@@ -488,12 +500,12 @@ class DependencyResolverTest extends TestCase
      *
      * @dataProvider provideIterableClassNames
      */
-    public function testConfiguredTraversableTypeParameterSatisfiesIterable($iterableClassName)
+    public function testConfiguredTraversableTypeParameterSatisfiesIterable(string $iterableClassName)
     {
-        $class = TestAsset\IterableDependency::class;
-        $paramName = 'iterator';
+        $class      = TestAsset\IterableDependency::class;
+        $paramName  = 'iterator';
         $definition = new RuntimeDefinition();
-        $config = new Config([
+        $config     = new Config([
             'types' => [
                 $class => [
                     'parameters' => [
@@ -504,11 +516,11 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $resolver = new DependencyResolver($definition, $config);
-        $result = $resolver->resolveParameters($class);
+        $result   = $resolver->resolveParameters($class);
 
         $this->assertArrayHasKey($paramName, $result);
         $this->assertInstanceOf(TypeInjection::class, $result[$paramName]);
-        $this->assertEquals($iterableClassName, (string)$result[$paramName]);
+        $this->assertEquals($iterableClassName, (string) $result[$paramName]);
     }
 
     /**
@@ -521,8 +533,8 @@ class DependencyResolverTest extends TestCase
      */
     public function testConfiguredInvokableTypeParameterSatisfiesCallable()
     {
-        $class = uniqid('MockedTestClass');
-        $paramName = uniqid('param');
+        $class      = uniqid('MockedTestClass');
+        $paramName  = uniqid('param');
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
@@ -535,7 +547,7 @@ class DependencyResolverTest extends TestCase
 
         $config = new Config([
             'types' => [
-                $class => [
+                $class           => [
                     'parameters' => [
                         $paramName => TestAsset\Pseudotypes\CallableImplementation::class,
                     ],
@@ -547,11 +559,11 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $resolver = new DependencyResolver($definition, $config);
-        $result = $resolver->resolveParameters($class);
+        $result   = $resolver->resolveParameters($class);
 
         $this->assertArrayHasKey($paramName, $result);
         $this->assertInstanceOf(TypeInjection::class, $result[$paramName]);
-        $this->assertEquals(TestAsset\Pseudotypes\CallableImplementation::class, (string)$result[$paramName]);
+        $this->assertEquals(TestAsset\Pseudotypes\CallableImplementation::class, (string) $result[$paramName]);
     }
 
     /**
@@ -565,8 +577,8 @@ class DependencyResolverTest extends TestCase
      */
     public function testConfiguredInvokableAliasParameterSatisfiesCallable()
     {
-        $class = uniqid('MockedTestClass');
-        $paramName = uniqid('param');
+        $class      = uniqid('MockedTestClass');
+        $paramName  = uniqid('param');
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
@@ -579,7 +591,7 @@ class DependencyResolverTest extends TestCase
 
         $config = new Config([
             'types' => [
-                $class => [
+                $class           => [
                     'parameters' => [
                         $paramName => 'Callable.Alias',
                     ],
@@ -591,17 +603,17 @@ class DependencyResolverTest extends TestCase
         ]);
 
         $resolver = new DependencyResolver($definition, $config);
-        $result = $resolver->resolveParameters($class);
+        $result   = $resolver->resolveParameters($class);
 
         $this->assertArrayHasKey($paramName, $result);
         $this->assertInstanceOf(TypeInjection::class, $result[$paramName]);
-        $this->assertEquals('Callable.Alias', (string)$result[$paramName]);
+        $this->assertEquals('Callable.Alias', (string) $result[$paramName]);
     }
 
     public function testResolvePreferenceUsesSupertypes()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(TestAsset\B::class, TestAsset\ExtendedB::class, TestAsset\Hierarchy\A::class);
         $resolver = new DependencyResolver($definition, $config);
 
@@ -614,7 +626,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceUsesInterfaces()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(
             TestAsset\B::class,
             TestAsset\ExtendedB::class,
@@ -632,7 +644,7 @@ class DependencyResolverTest extends TestCase
     public function testParametresResolverShouldNotCheckTheTypeForString()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setParameters(
             TestAsset\B::class,
             ['a' => 'my-service']
@@ -655,7 +667,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceFallsBackToGlobalPreferenceWhenNotSuitableForClassRequirement()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(TestAsset\A::class, TestAsset\B::class, TestAsset\RequiresA::class);
         $config->setTypePreference(TestAsset\A::class, TestAsset\ExtendedA::class);
         $resolver = new DependencyResolver($definition, $config);
@@ -674,7 +686,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceReturnsNullWhenNothingIsSuitableForClassRequirement()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(TestAsset\A::class, TestAsset\ExtendedB::class, TestAsset\RequiresA::class);
         $config->setTypePreference(TestAsset\A::class, TestAsset\B::class);
         $resolver = new DependencyResolver($definition, $config);
@@ -690,7 +702,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceFallsBackToGlobalPreferenceWhenNotSuitableForInterfaceRequirement()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(
             TestAsset\Hierarchy\InterfaceB::class,
             TestAsset\Hierarchy\InterfaceA::class,
@@ -713,7 +725,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceReturnsNullWhenNothingIsSuitableForInterfaceRequirement()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(
             TestAsset\Hierarchy\InterfaceB::class,
             TestAsset\B::class,
@@ -733,7 +745,7 @@ class DependencyResolverTest extends TestCase
     public function testResolvePreferenceUsesDefinedClassForInterfaceRequirements()
     {
         $definition = new RuntimeDefinition();
-        $config = new Config();
+        $config     = new Config();
         $config->setTypePreference(
             TestAsset\Hierarchy\InterfaceB::class,
             TestAsset\Hierarchy\B::class
