@@ -96,18 +96,12 @@ seeded with a `RuntimeDefinition` (which uses PHP's Reflection API) and an empty
 instance manager and no configuration:
 
 ```php
-public function __construct(
-    DefinitionList $definitions = null,
-    InstanceManager $instanceManager = null,
-    Configuration $config = null
-) {
-    $this->definitions = ($definitions) ?: new DefinitionList(new Definition\RuntimeDefinition());
-    $this->instanceManager = ($instanceManager) ?: new InstanceManager();
-
-    if ($config) {
-        $this->configure($config);
-    }
-}
+$di = new Laminas\Di\Di();
+// is the same as
+$di = new Laminas\Di\Di(
+    new Laminas\Di\DefinitionList(new Laminas\Di\Definition\RuntimeDefinition()),
+    new Laminas\Di\InstanceManager()
+);
 ```
 
 This means that when `$di->get()` is called, it will be consulting the
