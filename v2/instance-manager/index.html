@@ -128,80 +128,21 @@
 
                     
                     
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
-                            </li>
-                        
-                    
                 
             
 
                 
                 
-
-                    
                     
                         
-                            <li class="subnavigation__list-item ">
-                                <a href="../../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
     </li>
 
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
-    </li>
-
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">v2 Documentation</span>
+        <span class="subnavigation__headline">Reference</span>
         <ul class="subnavigation__list">
             
                 
@@ -231,59 +172,6 @@
         </ul>
     </li>
 
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Cookbook</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
-                            </li>
-                        
                     
                 
             
@@ -325,9 +213,38 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
+            
+                v2
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
+            
+                
+                    <a href="../../intro/" class="dropdown-item">
+                        
+                            v3 (latest)
+                        
+                    </a>
+                
+            
+                
+                    <a href="../quick-start/" class="dropdown-item active">
+                        
+                            v2
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
 
                     <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
                         <i class="fa fa-search"></i> Search
@@ -388,14 +305,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Reference</li>
-                        
                     
                 
                     
                         
                         
-                            <li class="breadcrumb-item">v2 Documentation</li>
+                            <li class="breadcrumb-item">Reference</li>
                         
                     
                 
@@ -408,12 +323,20 @@
 
 
 
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="../..">Switch to the latest (v3) version.</a>
+        </p>
+    </div>
+
 
 
 
     
     
-        <h2 class="chapter__headline">v2 Documentation</h2>
+        <h2 class="chapter__headline">Reference</h2>
     
 
     <h1 id="instance-manager">Instance Manager</h1>
@@ -471,7 +394,6 @@ namespace MyMovieApp
         }
     }
 }</code></pre>
-
 <p>In the above example, the class <code>DbAdapter</code> has 2 parameters: <code>username</code> and
 <code>password</code>; <code>MovieFinder</code> has one parameter: <code>dbAdapter</code>; and <code>MovieLister</code> has
 one parameter: <code>movieFinder</code>. Any of these can be utilized for injection of
@@ -506,7 +428,6 @@ $movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
 $movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
     'dbAdapter' =&gt; new MyLibrary\DbAdapter('myusername', 'mypassword'),
 ]);</code></pre>
-
 <h2 id="preferences">Preferences</h2>
 <p>In many cases, you might be using interfaces as type hints as opposed to
 concrete types. Lets assume the movie example was modified in the following way:</p>
@@ -537,7 +458,6 @@ concrete types. Lets assume the movie example was modified in the following way:
         }
     }
 }</code></pre>
-
 <p>What you'll notice above is that the <code>MovieLister</code> type now expects that the
 dependency injected implements the <code>MovieFinderInterface</code>. This allows multiple
 implementations of this base interface to be used as a dependency, if that is
@@ -554,7 +474,6 @@ example:</p>
 
 // Assuming all instance config for username, password is setup:
 $di-&gt;get(\MyMovieApp\MovieLister::class);</code></pre>
-
 <h2 id="aliases">Aliases</h2>
 <p>In some situations, you'll find that you need to alias an instance. There are
 two main reasons to do this. First, it creates a simpler, alternative name to
@@ -669,80 +588,21 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
 
                     
                     
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../intro/" class="subnavigation__link">Introduction</a>
-                            </li>
-                        
-                    
                 
             
 
                 
                 
-
-                    
                     
                         
-                            <li class="subnavigation__list-item ">
-                                <a href="../../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
     <li class="subnavigation__list-item ">
-        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
     </li>
 
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../injector/" class="subnavigation__link">Injector</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
-    </li>
-
-                                    
-                                        
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">v2 Documentation</span>
+        <span class="subnavigation__headline">Reference</span>
         <ul class="subnavigation__list">
             
                 
@@ -772,59 +632,6 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
         </ul>
     </li>
 
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Cookbook</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../../migration/" class="subnavigation__link">Migration Guide</a>
-                            </li>
-                        
                     
                 
             

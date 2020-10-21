@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://docs.laminas.dev/laminas-di/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/intro/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/installation/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/quick-start/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/psr-11/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/config/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/injector/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/codegen/</loc>
-     <lastmod>2020-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.laminas.dev/laminas-di/v2/definitions/</loc>
-     <lastmod>2020-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.laminas.dev/laminas-di/v2/instance-manager/</loc>
-     <lastmod>2020-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.laminas.dev/laminas-di/v2/config/</loc>
-     <lastmod>2020-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://docs.laminas.dev/laminas-di/v2/debugging-and-complex-use-cases/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/cookbook/use-with-psr-containers/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/cookbook/use-with-servicemanager/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/cookbook/aot-guide/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://docs.laminas.dev/laminas-di/migration/</loc>
-     <lastmod>2020-09-16</lastmod>
+     <lastmod>2020-10-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-di/v2/quick-start/</loc>
+     <lastmod>2020-10-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-di/v2/definitions/</loc>
+     <lastmod>2020-10-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-di/v2/instance-manager/</loc>
+     <lastmod>2020-10-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-di/v2/config/</loc>
+     <lastmod>2020-10-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://docs.laminas.dev/laminas-di/v2/debugging-and-complex-use-cases/</loc>
+     <lastmod>2020-10-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

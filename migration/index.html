@@ -9,7 +9,7 @@
     <link rel="canonical" href="https://docs.laminas.dev/laminas-di/migration/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Migration Guide - laminas-di - Laminas Docs</title>
+    <title>Migration from Version 2 to 3 - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -128,12 +128,6 @@
 
                     
                     
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../intro/" class="subnavigation__link">Introduction</a>
-                            </li>
-                        
-                    
                 
             
 
@@ -141,149 +135,6 @@
                 
 
                     
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../injector/" class="subnavigation__link">Injector</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">v2 Documentation</span>
-        <ul class="subnavigation__list">
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
-    </li>
-
-            
-        </ul>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Cookbook</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Migration Guide</a>
-                            </li>
-                        
                     
                 
             
@@ -325,9 +176,38 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
+            
+                v3
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
+            
+                
+                    <a href="../intro/" class="dropdown-item">
+                        
+                            v3 (latest)
+                        
+                    </a>
+                
+            
+                
+                    <a href="../v2/quick-start/" class="dropdown-item">
+                        
+                            v2
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
 
                     <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
                         <i class="fa fa-search"></i> Search
@@ -385,8 +265,20 @@
                 <li class="breadcrumb-item"><a href="..">laminas-di</a></li>
 
                 
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Migration</li>
+                        
+                    
+                
 
-                <li class="breadcrumb-item active" aria-current="page">Migration Guide</li>
+                <li class="breadcrumb-item active" aria-current="page">Migration from Version 2 to 3</li>
             
         
     </ol>
@@ -394,10 +286,20 @@
 
 
 
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="..">Switch to the latest (v3) version.</a>
+        </p>
+    </div>
+
 
 
 
     
+    
+        <h2 class="chapter__headline">Migration</h2>
     
 
     <h1 id="migration-guide">Migration Guide</h1>
@@ -465,7 +367,6 @@ You can use <code>Laminas\Di\LegacyConfig</code> to help migrating existing conf
 
 $migrated = new LegacyConfig($diConfigArray);
 $code = var_export($migrated-&gt;toArray(), true);</code></pre>
-
 <p>When the laminas-di config service factory is used to create configuration for use
 with the <code>AutowireFactory</code> and/or <code>DefaultContainer</code>, if it detects the
 <code>$config['di]</code> key, it will emit an <code>E_USER_DEPRECATED</code> error, pointing to this
@@ -489,6 +390,10 @@ configuration to the format recognized by version 3.</p>
 
         
         <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../v2/quick-start/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
             
         </li>
     </ul>
@@ -542,12 +447,6 @@ configuration to the format recognized by version 3.</p>
 
                     
                     
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../intro/" class="subnavigation__link">Introduction</a>
-                            </li>
-                        
-                    
                 
             
 
@@ -555,149 +454,6 @@ configuration to the format recognized by version 3.</p>
                 
 
                     
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../installation/" class="subnavigation__link">Installation</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item ">
-                                <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Reference</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../injector/" class="subnavigation__link">Injector</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">v2 Documentation</span>
-        <ul class="subnavigation__list">
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/definitions/" class="subnavigation__link">Dependency Definitions</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/instance-manager/" class="subnavigation__link">Instance Manager</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/config/" class="subnavigation__link">Configuration</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item ">
-        <a href="../v2/debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
-    </li>
-
-            
-        </ul>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item">
-                                <span class="subnavigation__headline">Cookbook</span>
-                                <ul class="subnavigation__list">
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
-    </li>
-
-                                    
-                                        
-    <li class="subnavigation__list-item ">
-        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
-    </li>
-
-                                    
-                                </ul>
-                            </li>
-                        
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                        
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Migration Guide</a>
-                            </li>
-                        
                     
                 
             
