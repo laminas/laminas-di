@@ -42,7 +42,6 @@
         "laminas/laminas-servicemanager": "^3.12",
         "mikey179/vfsstream": "^1.6.11@alpha",
         "phpbench/phpbench": "^1.2.7",
-        "phpspec/prophecy-phpunit": "^2.0.1",
         "phpunit/phpunit": "^9.5.26",
         "squizlabs/php_codesniffer": "^3.7.1"
     },
