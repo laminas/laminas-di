@@ -3,19 +3,19 @@ site_dir: docs/html
 nav:
     - Home: index.md
     - v3:
-        - Introduction: intro.md
-        - Installation: installation.md
-        - "Quick Start": quick-start.md
-        - "PSR-11 Support": psr-11.md
-        - Configuration: config.md
-        - "Injector": injector.md
-        - "Code Generator": codegen.md
+        - Introduction: v3/intro.md
+        - Installation: v3/installation.md
+        - "Quick Start": v3/quick-start.md
+        - "PSR-11 Support": v3/psr-11.md
+        - Configuration: v3/config.md
+        - "Injector": v3/injector.md
+        - "Code Generator": v3/codegen.md
         - Cookbook:
-            - "Usage with PSR-11 Containers": cookbook/use-with-psr-containers.md
-            - "Usage with laminas-servicemanager": cookbook/use-with-servicemanager.md
-            - "Using AoT with Mezzio and laminas-servicemanager": cookbook/aot-guide.md
+            - "Usage with PSR-11 Containers": v3/cookbook/use-with-psr-containers.md
+            - "Usage with laminas-servicemanager": v3/cookbook/use-with-servicemanager.md
+            - "Using AoT with Mezzio and laminas-servicemanager": v3/cookbook/aot-guide.md
         - Migration:
-            - "Migration from Version 2 to 3": migration.md
+            - "Migration from Version 2 to 3": v3/migration.md
     - v2:
         - "Quick Start": v2/quick-start.md
         - Reference:
