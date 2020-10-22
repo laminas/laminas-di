@@ -13,11 +13,11 @@ use Psr\Container\ContainerInterface;
  */
 abstract class AbstractInjector implements InjectorInterface
 {
-    /** @var array<string, class-string|FactoryInterface> */
+    /** @var array<string, class-string<FactoryInterface>|FactoryInterface> */
     protected $factories = [];
 
     /** @var array<string, FactoryInterface> */
-    private array $factoryInstances = [];
+    private $factoryInstances = [];
 
     private ContainerInterface $container;
 
@@ -41,6 +41,11 @@ abstract class AbstractInjector implements InjectorInterface
         $this->factoryInstances[$type] = $factory;
     }
 
+    /**
+     * @template T
+     * @param string|class-string<T> $type
+     * @return FactoryInterface<T>
+     */
     private function getFactory(string $type): FactoryInterface
     {
         if (isset($this->factoryInstances[$type])) {
@@ -65,7 +70,12 @@ abstract class AbstractInjector implements InjectorInterface
         return isset($this->factories[$name]);
     }
 
-    /** @return object */
+    /**
+     * @template T of object
+     * @param string|class-string<T> $name
+     * @param array<mixed> $options
+     * @return T
+     */
     public function create(string $name, array $options = [])
     {
         if ($this->hasFactory($name)) {

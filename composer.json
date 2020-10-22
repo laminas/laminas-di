@@ -43,7 +43,9 @@
         "mikey179/vfsstream": "^1.6.11@alpha",
         "phpbench/phpbench": "^1.2.7",
         "phpunit/phpunit": "^9.5.26",
-        "squizlabs/php_codesniffer": "^3.7.1"
+        "psalm/plugin-phpunit": "^0.16.1",
+        "squizlabs/php_codesniffer": "^3.7.1",
+        "vimeo/psalm": "^4.10"
     },
     "conflict": {
         "zendframework/zend-di": "*",
@@ -72,6 +74,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "analyse": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }

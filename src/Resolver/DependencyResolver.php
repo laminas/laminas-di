@@ -13,6 +13,7 @@ use ReflectionClass;
 
 use function array_filter;
 use function array_merge;
+use function assert;
 use function class_exists;
 use function gettype;
 use function in_array;
@@ -34,7 +35,7 @@ class DependencyResolver implements DependencyResolverInterface
     /** @var DefinitionInterface */
     protected $definition;
 
-    /** @var ContainerInterface */
+    /** @var ContainerInterface|null */
     protected $container;
 
     /** @var string[] */
@@ -291,7 +292,7 @@ class DependencyResolver implements DependencyResolverInterface
                     throw new Exception\UnexpectedValueException(sprintf(
                         'Unusable configured injection for parameter "%s" of type "%s"',
                         $name,
-                        $type
+                        $type ?? 'null'
                     ));
                 }
 
@@ -321,6 +322,9 @@ class DependencyResolver implements DependencyResolverInterface
             if ($paramInfo->isRequired()) {
                 $isAlias = $this->config->isAlias($requestedType);
                 $class   = $isAlias ? $this->config->getClassForAlias($requestedType) : $requestedType;
+
+                assert(is_string($class));
+
                 throw new Exception\MissingPropertyException(sprintf(
                     'Could not resolve value for parameter "%s" of type %s in class %s (requested as %s)',
                     $name,

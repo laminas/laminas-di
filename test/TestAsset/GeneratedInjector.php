@@ -25,7 +25,13 @@ class GeneratedInjector implements InjectorInterface
         return $this->injector->canCreate($name);
     }
 
-    /** @return object */
+    /**
+     * @inheritDoc
+     * @template T of object
+     * @param string|class-string<T> $name
+     * @param array<mixed> $options
+     * @return T
+     */
     public function create(string $name, array $options = [])
     {
         return $this->injector->create($name, $options);

@@ -12,7 +12,7 @@ use function sprintf;
 
 class AbstractInjectionTest extends TestCase
 {
-    public function testUsageIsDeprecated()
+    public function testUsageIsDeprecated(): void
     {
         $this->expectDeprecation();
         $this->expectDeprecationMessage(sprintf(

@@ -14,6 +14,8 @@ use Laminas\Di\Resolver\TypeInjection;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+use Throwable;
+
 use function array_pop;
 use function class_exists;
 use function implode;
@@ -110,13 +112,14 @@ class Injector implements InjectorInterface
     /**
      * Create the instance with auto wiring
      *
-     * @param string               $name Class name or service alias
-     * @param array<string, mixed> $parameters Constructor parameters, keyed by the parameter name.
-     * @return object
+     * @template T of object
+     * @param string|class-string<T> $name Class name or service alias
+     * @param array<mixed> $options Constructor parameters, keyed by the parameter name.
+     * @return T
      * @throws ClassNotFoundException
      * @throws RuntimeException
      */
-    public function create(string $name, array $parameters = [])
+    public function create(string $name, array $options = [])
     {
         if (in_array($name, $this->instantiationStack)) {
             throw new Exception\CircularDependencyException(sprintf(
@@ -129,7 +132,7 @@ class Injector implements InjectorInterface
         $this->instantiationStack[] = $name;
 
         try {
-            $instance = $this->createInstance($name, $parameters);
+            $instance = $this->createInstance($name, $options);
         } finally {
             array_pop($this->instantiationStack);
         }
@@ -142,9 +145,10 @@ class Injector implements InjectorInterface
      *
      * Any parameters provided will be used as constructor arguments only.
      *
-     * @param string               $name The type name to instantiate.
-     * @param array<string, mixed> $params Constructor arguments, keyed by the parameter name.
-     * @return object
+     * @template T of object
+     * @param string|class-string<T> $name The type name to instantiate.
+     * @param array<mixed> $params Constructor arguments, keyed by the parameter name.
+     * @return T
      * @throws InvalidCallbackException
      * @throws ClassNotFoundException
      */
@@ -170,6 +174,10 @@ class Injector implements InjectorInterface
 
         $callParameters = $this->resolveParameters($name, $params);
 
+        /**
+         * @psalm-suppress MixedMethodCall
+         * @psalm-var T
+         */
         return new $class(...$callParameters);
     }
 
@@ -218,11 +226,12 @@ class Injector implements InjectorInterface
 
         foreach ($resolved as $injection) {
             try {
+                /** @psalm-var mixed */
                 $params[] = $this->getInjectionValue($injection);
             } catch (NotFoundExceptionInterface $containerException) {
                 throw new Exception\UndefinedReferenceException(
                     $containerException->getMessage(),
-                    $containerException->getCode(),
+                    (int) $containerException->getCode(),
                     $containerException
                 );
             }

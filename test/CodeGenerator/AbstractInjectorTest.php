@@ -36,6 +36,9 @@ class AbstractInjectorTest extends TestCase
         parent::setUp();
     }
 
+    /**
+     * @param callable():array<string, class-string<FactoryInterface>|FactoryInterface> $factoriesProvider
+     */
     public function createTestSubject(callable $factoriesProvider, bool $withContainer = true): AbstractInjector
     {
         $injector  = $this->decoratedInjector;
@@ -43,9 +46,12 @@ class AbstractInjectorTest extends TestCase
 
         return new class ($factoriesProvider, $injector, $container) extends AbstractInjector
         {
-            /** @var callable */
+            /** @var callable():array<string, class-string<FactoryInterface>|FactoryInterface> */
             private $provider;
 
+            /**
+             * @param callable():array<string, class-string<FactoryInterface>|FactoryInterface> $provider
+             */
             public function __construct(
                 callable $provider,
                 InjectorInterface $injector,
@@ -62,7 +68,7 @@ class AbstractInjectorTest extends TestCase
         };
     }
 
-    public function testImplementsContract()
+    public function testImplementsContract(): void
     {
         $invokable = $this->createMock(InvokableInterface::class);
         $invokable
@@ -76,7 +82,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertInstanceOf(InjectorInterface::class, $subject);
     }
 
-    public function testCanCreateReturnsTrueWhenAFactoryIsAvailable()
+    public function testCanCreateReturnsTrueWhenAFactoryIsAvailable(): void
     {
         $className = uniqid('SomeClass');
         $provider  = fn() => [$className => 'SomeClassFactory'];
@@ -90,7 +96,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertTrue($subject->canCreate($className));
     }
 
-    public function testCanCreateUsesDecoratedInjectorWithoutFactory()
+    public function testCanCreateUsesDecoratedInjectorWithoutFactory(): void
     {
         $missingClass  = uniqid('SomeClass');
         $existingClass = 'stdClass';
@@ -111,7 +117,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertFalse($subject->canCreate($missingClass));
     }
 
-    public function testCreateUsesFactory()
+    public function testCreateUsesFactory(): void
     {
         $factory   = $this->createMock(FactoryInterface::class);
         $className = uniqid('SomeClass');
@@ -134,7 +140,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertSame($expected, $subject->create($className, $params));
     }
 
-    public function testCreateUsesDecoratedInjectorIfNoFactoryIsAvailable()
+    public function testCreateUsesDecoratedInjectorIfNoFactoryIsAvailable(): void
     {
         $className = uniqid('SomeClass');
         $expected  = new stdClass();
@@ -151,7 +157,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertSame($expected, $subject->create($className, $params));
     }
 
-    public function testConstructionWithoutContainerUsesDefaultContainer()
+    public function testConstructionWithoutContainerUsesDefaultContainer(): void
     {
         $factory   = $this->createMock(FactoryInterface::class);
         $className = uniqid('SomeClass');
@@ -168,7 +174,7 @@ class AbstractInjectorTest extends TestCase
         $this->assertSame($expected, $subject->create($className));
     }
 
-    public function testFactoryIsCreatedFromClassNameString()
+    public function testFactoryIsCreatedFromClassNameString(): void
     {
         $subject = $this->createTestSubject(fn() => ['SomeClass' => StdClassFactory::class]);
 
