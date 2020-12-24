@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/codegen/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-di - Laminas Docs</title>
+    <title>Code Generator - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -114,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -124,8 +125,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -188,7 +271,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../v3/intro/" class="dropdown-item">
+                    <a href="../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -196,7 +279,7 @@
                 
             
                 
-                    <a href="../v2/quick-start/" class="dropdown-item">
+                    <a href="../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -227,21 +310,186 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
                 
+                    <li class="toc__entry">
+                        <a href="#generating-an-optimized-injector" class="toc__link nav-link">Generating an optimized injector</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#mvc-and-mezzio-integration" class="toc__link nav-link">MVC and Mezzio integration</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#logging" class="toc__link nav-link">Logging</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
-<h1 class="content__title">404</h1>
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Code Generator</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+
+    <h1 id="code-generator">Code Generator</h1>
+<p>laminas-di comes with <a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation">Ahead-of-Time (AoT)</a>
+generators to create optimized code for production. These generators will
+inspect the provided classes, resolve their dependencies, and generate factories
+based on these results.</p>
 <blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
+<h3>Removal of laminas-code dependencies</h3>
+<p>Before version 3.1, this feature required <a href="https://docs.laminas.dev/laminas-code/">laminas-code</a>,
+which you can add to your project using Composer:</p>
+<pre class="highlight"><code class="language-bash">$ composer require --dev laminas/laminas-code</code></pre>
+<p><strong>Since version 3.1 and up, this is no longer required.</strong></p>
 </blockquote>
+<h2 id="generating-an-optimized-injector">Generating an optimized injector</h2>
+<p>The <code>Laminas\Di\CodeGenerator\InjectorGenerator</code> class offers an implementation to
+generate an optimized injector based on the runtime configuration and a resolver
+instance.</p>
+<pre class="highlight"><code class="language-php">use Laminas\Di\Config;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
+$config = new Config();
+$resolver = new DependencyResolver(new RuntimeDefinition(), $config);
+$generator = new InjectorGenerator($config, $resolver);
+
+// It is highly recommended to set the container that is used at runtime:
+$resolver-&gt;setContainer($container);
+$generator-&gt;setOutputDirectory('/path/to/generated/files');
+$generator-&gt;generate([
+    MyClassA::class,
+    MyClassB::class,
+    // ...
+]);</code></pre>
+<p>You can also utilize <code>Laminas\Code\Scanner</code> to scan your code for classes:</p>
+<pre class="highlight"><code class="language-php">$scanner = new DirectoryScanner(__DIR__);
+$generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
+<h2 id="mvc-and-mezzio-integration">MVC and Mezzio integration</h2>
+<p>When you are using laminas-di's <code>ConfigProvider</code> with Mezzio or consuming the
+<code>Module</code> class via laminas-mvc, you can obtain the generator instance from the
+service manager:</p>
+<pre class="highlight"><code class="language-php">$generator = $serviceManager-&gt;get(\Laminas\Di\CodeGenerator\InjectorGenerator::class);</code></pre>
+<h3>AoT Config Options</h3>
+<p>The service factory uses options in your <code>config</code> service, located under the key
+<code>dependencies.auto.aot</code>. This should be defined as an associative array of
+options for creating the code generator instance. This array respects the
+following keys (unknown keys are ignored):</p>
+<ul>
+<li>
+<p><code>namespace</code>: This will be used as base namespace to prefix the namespace of
+  the generated classes.  It will be passed to the constructor of
+  <code>Laminas\Di\CodeGenerator\InjectorGenerator</code>; the default value is
+  <code>Laminas\Di\Generated</code>.</p>
+</li>
+<li>
+<p><code>directory</code>: The directory where the generated PHP files will be stored. If
+  this value is not provided, you will need to set it with the generator's
+  <code>setOutputDirectory()</code> method before calling <code>generate()</code>.</p>
+</li>
+<li>
+<p><code>logger</code>: must be resolvable in container and must be an instance of <code>Psr\Log\LoggerInterface.</code>
+  By default <code>Psr\Log\NullLogger</code> is used. See the <a href="#logging">Logging section</a> for details.</p>
+</li>
+</ul>
+<p>Below is an example detailing configuration of the generator factory:</p>
+<pre class="highlight"><code class="language-php">return [
+    'dependencies' =&gt; [
+        'auto' =&gt; [
+            'aot' =&gt; [
+                'namespace' =&gt; 'AppAoT\Generated',
+                'directory' =&gt; __DIR__ . '/../gen',
+                'logger' =&gt; Psr\Log\LoggerInterface::class,
+            ],
+        ],
+    ],
+];</code></pre>
+<h2 id="logging">Logging</h2>
+<p>The <code>InjectorGenerator</code> allows passing a <a href="http://www.php-fig.org/psr/psr-3/">PSR-3 logger</a> instance
+via an optional fourth constructor parameter.</p>
+<p>The generator will log the following information:</p>
+<ul>
+<li>When a factory is about to be generated for a class or alias (Log level: Debug)</li>
+<li>When the factory generation caused an exception (Log level: Error)</li>
+</ul>
 
 
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../injector/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../cookbook/use-with-psr-containers/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v3/codegen.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -264,7 +512,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -274,8 +522,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -372,13 +702,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     

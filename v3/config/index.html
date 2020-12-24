@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v2/instance-manager/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/config/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Instance Manager - laminas-di - Laminas Docs</title>
+    <title>Configuration - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -125,14 +125,18 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
-                    
-                
-            
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
 
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
@@ -141,37 +145,78 @@
 
                     
                         
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Cookbook</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../definitions/" class="subnavigation__link">Dependency Definitions</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Instance Manager</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../config/" class="subnavigation__link">Configuration</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
             
         </ul>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             
@@ -220,13 +265,13 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
-                v2
+                v3
             
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../../v3/intro/" class="dropdown-item">
+                    <a href="../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -234,7 +279,7 @@
                 
             
                 
-                    <a href="../quick-start/" class="dropdown-item active">
+                    <a href="../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -274,11 +319,11 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#parameters" class="toc__link nav-link">Parameters</a>
+                        <a href="#type-preferences" class="toc__link nav-link">Type Preferences</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#preferences" class="toc__link nav-link">Preferences</a>
+                        <a href="#parameters" class="toc__link nav-link">Parameters</a>
                     </li>
                 
                     <li class="toc__entry">
@@ -307,15 +352,8 @@
                         
                     
                 
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
 
-                <li class="breadcrumb-item active" aria-current="page">Instance Manager</li>
+                <li class="breadcrumb-item active" aria-current="page">Configuration</li>
             
         
     </ol>
@@ -323,192 +361,230 @@
 
 
 
-    <div class="alert alert-danger" role="alert">
-        <h4>Caution</h4>
-        <p>
-            The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v3) version.</a>
-        </p>
-    </div>
-
 
 
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
-    
 
-    <h1 id="instance-manager">Instance Manager</h1>
-<p>The <code>InstanceManager</code> is responsible for any runtime information associated with
-the laminas-di DiC.  This means that the information that goes into the instance
-manager is specific to both how the particular consuming application's needs,
-and even more specifically to the environment in which the application is
-running.</p>
-<h2 id="parameters">Parameters</h2>
-<p>Parameters are simply entry points for either dependencies or instance
-configuration values. A class consists of a set of parameters, each uniquely
-named. When writing your classes, you should attempt to not use the same
-parameter name twice in the same class when you expect that that parameters is
-used for either instance configuration or an object dependency. This leads to an
-ambiguous parameter, and is a situation best avoided.</p>
-<p>Our movie finder example can be further used to explain these concepts:</p>
-<pre class="highlight"><code class="language-php">namespace MyLibrary
+    <h1 id="configuration">Configuration</h1>
+<p>Configuration detailing how types are constructed and dependencies should be
+resolved can be provided as an associative array when instantiating
+<code>Laminas\Di\Config</code>. A type may be an actual class name or an alias to a class
+name.</p>
+<p>The configuration array respects the following keys (unknown keys are ignored):</p>
+<ul>
+<li>
+<p><code>preferences</code>: Associative nested array that maps class or interface names to
+  a service name that should be used to provide a dependency. See the
+  <a href="#type-preferences">Type Preferences</a> section below for details.</p>
+</li>
+<li>
+<p><code>types</code>: Associative array defining how classes or aliases should be
+  constructed. Each key in this array is a class or alias name, and its value is
+  another associative array with the following keys:</p>
+</li>
+<li>
+<p><code>preferences</code>: The same as <code>preferences</code> above, but only for the associated
+    class.</p>
+</li>
+<li>
+<p><code>parameters</code>: Associative array declaring the values to inject for the
+    declared construction parameters.  Each key is the parameter name as
+    declared in the constructor method of the associated class name. See the
+    <a href="#parameters">Parameters</a> section below for details.</p>
+</li>
+<li>
+<p><code>typeOf</code>: String that contains a class name. It declares that the
+    associated key is an alias of the given class name. This class must exist.
+    It cannot not be another alias.</p>
+</li>
+</ul>
+<p>Below is an example of injector configuration.</p>
+<pre class="highlight"><code class="language-php">$config = new \Laminas\Di\Config([
+    // Declares global preferences to use when resolving
+    // dependencies of the specified type
+    'preferences' =&gt; [
+        // A map of classname =&gt; preferred type
+        MyInterface::class =&gt; MyImplementation::class,
+    ],
+
+    // Declares how types should be constructed.
+    // This also allows declaring aliases of a specific class
+    'types' =&gt; [
+        ClassName::class =&gt; [
+            // Declaration in the same way as global preferences
+            // but these will aply when the type of the associated key
+            // should be instanciated
+            'preferences' =&gt; [],
+
+            // Constructor parameters to inject. This option will define
+            // the injections directly by the parameter name of the constructor
+            // used as key.
+            //
+            // If the parameter is type-hinted by a class/interface name, you can
+            // provide the injection by string. The injector will use the IoC
+            // container to obtain it.
+            'parameters' =&gt; [
+                'foo' =&gt; 'bar',
+            ],
+        ],
+
+        // Define an alias
+        'Alias.Name' =&gt; [
+            'typeOf' =&gt; ClassName::class,
+
+            'preferences' =&gt; [],
+            'parameters' =&gt; [],
+        ],
+    ],
+]);</code></pre>
+<h2 id="type-preferences">Type Preferences</h2>
+<p>In many cases, you might be using interfaces as type hints as opposed to
+concrete types. Even though type preferences are not limited to interfaces or
+abstract class names, they provide hints to the injector on how such types
+should be resolved.</p>
+<p>The resolver will look up the name finally passed to the container in the
+following way (the first match will be used):</p>
+<ol>
+<li>The preference defined in the type configuration of  the class if it satifies
+   the typehint (implements, extends, or typeOf).</li>
+<li>If there is a global preference defined and it satisfies the typehint.</li>
+<li>Use the typehinted name directly.</li>
+</ol>
+<pre class="highlight"><code class="language-php">// Assume the following classes are declared:
+
+interface FooInterface
+{}
+
+class Foo implements FooInterface
+{}
+
+class SpecialFoo implements FooInterface
+{}
+
+class Bar
+{}
+
+class MyClass
 {
-    class DbAdapter
+    public function __construct(FooInterface $foo)
     {
-        protected $username = null;
-        protected $password = null;
-
-        public function __construct($username, $password)
-        {
-            $this-&gt;username = $username;
-            $this-&gt;password = $password;
-        }
+        // ...
     }
 }
 
-namespace MyMovieApp
-{
-    class MovieFinder
-    {
-        protected $dbAdapter = null;
+// With the following configuration:
 
-        public function __construct(\MyLibrary\DbAdapter $dbAdapter)
-        {
-            $this-&gt;dbAdapter = $dbAdapter;
-        }
-    }
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
 
-    class MovieLister
-    {
-        protected $movieFinder = null;
+$injector = new Injector(new Config([
+    'preferences' =&gt; [
+        FooInterface::class =&gt; Foo::class,
+    ],
+    'types' =&gt; [
+        'MyClass.A' =&gt; [
+            'typeOf' =&gt; MyClass::class,
+            'preferences' =&gt; [
+               FooInterface::class =&gt; SpecialFoo::class,
+            ],
+        ],
+        'MyClass.B' =&gt; [
+            'typeOf' =&gt; MyClass::class,
+            'preferences' =&gt; [
+               FooInterface::class =&gt; Bar::class,
+            ],
+        ],
+    ],
+]));
 
-        public function __construct(MovieFinder $movieFinder)
-        {
-            $this-&gt;movieFinder = $movieFinder;
-        }
-    }
-}</code></pre>
-<p>In the above example, the class <code>DbAdapter</code> has 2 parameters: <code>username</code> and
-<code>password</code>; <code>MovieFinder</code> has one parameter: <code>dbAdapter</code>; and <code>MovieLister</code> has
-one parameter: <code>movieFinder</code>. Any of these can be utilized for injection of
-either dependencies or scalar values during instance configuration or during
-call time.</p>
-<p>When looking at the above code, since the <code>$dbAdapter</code> parameter and the
-<code>$movieFinder</code> parameter are both type-hinted with concrete types, the DiC can
-assume that it can fulfill these object tendencies by itself. On the other hand,
-<code>$username</code> and <code>$password</code> do not have type-hints and are, more than likely,
-scalar in nature. Since the DiC cannot reasonably know this information, it must
-be provided to the instance manager in the form of parameters. Not doing so will
-force <code>$di-&gt;get('MyMovieApp\\MovieLister')</code> to throw an exception.</p>
-<p>The following ways of using parameters are available:</p>
-<pre class="highlight"><code class="language-php">// Setting instance configuration into the instance manager:
-$di-&gt;instanceManager()-&gt;setParameters('MyLibrary\DbAdapter', [
-    'username' =&gt; 'myusername',
-    'password' =&gt; 'mypassword',
-]);
 
-// Forcing a particular dependency to be used by the instance manager:
-$di-&gt;instanceManager()-&gt;setParameters('MyMovieApp\MovieFinder', [
-    'dbAdapter' =&gt; new MyLibrary\DbAdapter('myusername', 'mypassword'),
-]);
-
-// Passing instance parameters at call time:
-$movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
-    'username' =&gt; $config-&gt;username,
-    'password' =&gt; $config-&gt;password,
-]);
-
-// Passing a specific instance at call time:
-$movieLister = $di-&gt;get('MyMovieApp\MovieLister', [
-    'dbAdapter' =&gt; new MyLibrary\DbAdapter('myusername', 'mypassword'),
-]);</code></pre>
-<h2 id="preferences">Preferences</h2>
-<p>In many cases, you might be using interfaces as type hints as opposed to
-concrete types. Lets assume the movie example was modified in the following way:</p>
-<pre class="highlight"><code class="language-php">namespace MyMovieApp
-{
-    interface MovieFinderInterface
-    {
-        // methods required for this type
-    }
-
-    class GenericMovieFinder implements MovieFinderInterface
-    {
-        protected $dbAdapter = null;
-
-        public function __construct(\MyLibrary\DbAdapter $dbAdapter)
-        {
-            $this-&gt;dbAdapter = $dbAdapter;
-        }
-    }
-
-    class MovieLister
-    {
-        protected $movieFinder = null;
-
-        public function __construct(MovieFinderInterface $movieFinder)
-        {
-            $this-&gt;movieFinder = $movieFinder;
-        }
-    }
-}</code></pre>
-<p>What you'll notice above is that the <code>MovieLister</code> type now expects that the
-dependency injected implements the <code>MovieFinderInterface</code>. This allows multiple
-implementations of this base interface to be used as a dependency, if that is
-what the consumer decides they want to do. As you can imagine, laminas-di, by
-itself would not be able to determine what kind of concrete object to use
-fulfill this dependency, so this type of "preference" needs to be made known to
-the instance manager.</p>
-<p>To give this information to the instance manager, see the following code
-example:</p>
-<pre class="highlight"><code class="language-php">$di-&gt;instanceManager()-&gt;addTypePreference(
-    \MyMovieApp\MovieFinderInterface::class,
-    \MyMovieApp\GenericMovieFinder::class
-);
-
-// Assuming all instance config for username, password is setup:
-$di-&gt;get(\MyMovieApp\MovieLister::class);</code></pre>
+// The results are:
+$a = $injector-&gt;create(MyClass::class); // Constructed with Foo
+$b = $injector-&gt;create('MyClass.A'); // Constructed with SpecialFoo
+$c = $injector-&gt;create('MyClass.B'); // Constructed with Foo (since Bar does not satisfy FooInterface)</code></pre>
+<h2 id="parameters">Parameters</h2>
+<p>In contrast to type preferences, the resolver will not perform checks if the
+provided value satisfies the required type. It will be used directly to inject
+the value.</p>
+<p>There are several ways to define injections.</p>
+<ul>
+<li>
+<p>An IoC container service name as string: This is only possible if the required
+  type is a class or interface. For other types (scalars, <code>iterable</code>,
+  <code>callable</code>, etc) or typeless parameters, the string value is passed <strong>as is</strong>.</p>
+</li>
+<li>
+<p>An instance of <code>Laminas\Di\Resolver\ValueInjection</code>: Injects the value returned
+  by <code>getValue()</code> as is.</p>
+</li>
+<li>
+<p>An instance of <code>Laminas\Di\Resolver\TypeInjection</code>: Obtains the injected value
+  from the IoC container by passing the return value of <code>getType()</code> to the
+  container's <code>get()</code> method.</p>
+</li>
+<li>
+<p>The string literal <code>'*'</code>: This requests the injector to ignore any previously
+  defined parameter and use the type preference resolution as described in
+  <a href="#type-preferences">Type Preferences</a>.</p>
+</li>
+<li>
+<p>Any other value will be used as is and encapsulated in a
+  <code>Laminas\Di\Resolver\ValueInjection</code>. If the provided value's type does not fit
+  the required parameter type, an exception is thrown.</p>
+</li>
+</ul>
 <h2 id="aliases">Aliases</h2>
-<p>In some situations, you'll find that you need to alias an instance. There are
-two main reasons to do this. First, it creates a simpler, alternative name to
-use when using the DiC, as opposed to using the full class name. Second, you
-might find that you need to have the same object type in two separate contexts.
-This means that when you alias a particular class, you can then attach a
-specific instance configuration to that alias, as opposed to attaching that
-configuration to the class name.</p>
-<p>To demonstrate both of these points, we'll look at a use case where we'll have
-two separate database adapters. One will be for read-only operations, the other
-will be for read-write operations.</p>
-<blockquote>
-<h3>Alias parameters</h3>
-<p>Aliases can also have parameters registered at alias time.</p>
-</blockquote>
-<pre class="highlight"><code class="language-php">// Assume the MovieLister example of code from the quick start.
+<p>Aliases allow you to configure the same class with different construction
+options. Aliases can directly be created with the injector or declared as type
+preferences.</p>
+<p>An alias must refer to an actual class or an interface, therefore you cannot
+declare aliases for another alias.</p>
+<p>For example the following the following class should be instantiated in two
+different ways:</p>
+<pre class="highlight"><code class="language-php">// Assume the following classes are declared:
 
-$im = $di-&gt;instanceManager();
+class Foo
+{}
 
-// add alias for short naming
-$im-&gt;addAlias('movielister', 'MyMovieApp\MovieLister');
+class SpecialFoo extends Foo
+{}
 
-// add aliases for specific instances
-$im-&gt;addAlias('dbadapter-readonly', 'MyLibrary\DbAdapter', [
-    'username' =&gt; $config-&gt;db-&gt;readAdapter-&gt;username,
-    'password' =&gt; $config-&gt;db-&gt;readAdapter-&gt;password,
-]);
-$im-&gt;addAlias('dbadapter-readwrite', 'MyLibrary\DbAdapter', [
-    'username' =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;username,
-    'password' =&gt; $config-&gt;db-&gt;readWriteAdapter-&gt;password,
-]);
+class MyClass
+{
+    public function __construct(Foo $foo, string $bar)
+    {
+        // ...
+    }
+}
 
-// set a default type to use, pointing to an alias
-$im-&gt;addTypePreference('MyLibrary\DbAdapter', 'dbadapter-readonly');
+// With the following injection config:
 
-$movieListerRead = $di-&gt;get('MyMovieApp\MovieLister');
-$movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
-    'dbAdapter' =&gt; 'dbadapter-readwrite',
-]);</code></pre>
+use Laminas\Di\Injector;
+use Laminas\Di\Config;
+
+$injector = new Injector(new Config([
+    'types' =&gt; [
+        MyClass::class =&gt; [
+            'parameters' =&gt; [
+               'foo' =&gt; SpecialFoo::class,
+               'bar' =&gt; 'Stringvalue',
+            ],
+        ],
+        'MyClass.Alias' =&gt; [
+            'typeOf' =&gt; MyClass::class,
+            'parameters' =&gt; [
+               'foo' =&gt; '*',
+               'bar' =&gt; 'Stringvalue',
+            ],
+        ],
+    ],
+]));
+
+// The results are:
+$a = $injector-&gt;create(MyClass::class); // Constructed with SpecialFoo
+$b = $injector-&gt;create('MyClass.Alias'); // Constructed with Foo (since there are no type preferences for Foo)</code></pre>
 
 
 
@@ -519,7 +595,7 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../definitions/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../psr-11/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -528,7 +604,7 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../config/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../injector/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -542,7 +618,7 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v2/instance-manager.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v3/config.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -581,14 +657,18 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
-                    
-                
-            
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
 
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
@@ -597,37 +677,78 @@ $movieListerReadWrite = $di-&gt;get('MyMovieApp\MovieLister', [
 
                     
                         
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Cookbook</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../definitions/" class="subnavigation__link">Dependency Definitions</a>
-    </li>
-
-            
-                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Instance Manager</a>
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../config/" class="subnavigation__link">Configuration</a>
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../debugging-and-complex-use-cases/" class="subnavigation__link">Debugging And Complex Use Cases</a>
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
             
         </ul>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             

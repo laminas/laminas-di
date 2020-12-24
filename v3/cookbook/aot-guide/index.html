@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/cookbook/aot-guide/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-di - Laminas Docs</title>
+    <title>Using AoT with Mezzio and laminas-servicemanager - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-di</a>
+            <a href="../../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -128,43 +128,43 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/installation/" class="subnavigation__link">Installation</a>
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/quick-start/" class="subnavigation__link">Quick Start</a>
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/config/" class="subnavigation__link">Configuration</a>
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/injector/" class="subnavigation__link">Injector</a>
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                     
@@ -175,19 +175,19 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
             
@@ -202,7 +202,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+        <a href="../../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
     </li>
 
             
@@ -271,7 +271,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="v3/intro/" class="dropdown-item">
+                    <a href="../../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -279,7 +279,7 @@
                 
             
                 
-                    <a href="v2/quick-start/" class="dropdown-item">
+                    <a href="../../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -309,6 +309,40 @@
             <div class="col-md-9 col-sm-12 content" role="main">
                 
                 
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#1-create-project-and-add-laminas-di" class="toc__link nav-link">1. Create project and add laminas-di</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#2-make-your-project-ready-for-aot" class="toc__link nav-link">2. Make your project ready for AoT</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#3-add-some-auto-wiring" class="toc__link nav-link">3. Add some auto-wiring</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#4-add-a-code-generator-command-script" class="toc__link nav-link">4. Add a code generator command script</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#5-add-aot-to-the-service-manager" class="toc__link nav-link">5. Add AoT to the service manager</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
 
                 
                     <nav aria-label="breadcrumb">
@@ -318,7 +352,23 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item">laminas-di</li>
+                <li class="breadcrumb-item"><a href="../../..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Cookbook</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Using AoT with Mezzio and laminas-servicemanager</li>
             
         
     </ol>
@@ -328,22 +378,309 @@
 
 
 
-    <h1>laminas-di</h1>
-<p>Automated dependency injection for PSR-11 containers</p>
 
+    
+    
+        <h2 class="chapter__headline">Cookbook</h2>
+    
 
-    <h2>Installation</h2>
-    <h3>Using Composer</h3>
-    <pre><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
-
-
-<h2>Support</h2>
+    <h1 id="using-aot-with-mezzio-and-laminas-servicemanager">Using AoT with Mezzio and laminas-servicemanager</h1>
+<p>This guide will show you how you can use laminas-di's Ahead-of-Time (AoT) compiler
+to make your <a href="https://docs.mezzio.dev/mezzio">Mezzio</a>
+application production ready when it uses laminas-di.</p>
+<p>You will learn how to:</p>
 <ul>
-    <li>Issues: <a href="https://github.com/laminas/laminas-di/issues">github.com/laminas/laminas-di/issues</a></li>
-    <li>Source: <a href="https://github.com/laminas/laminas-di/">github.com/laminas/laminas-di/</a></li>
-    <li>Chat: <a href="https://laminas.dev/chat">laminas.dev/chat</a></li>
-    <li>Forum: <a href="https://discourse.laminas.dev/">discourse.laminas.dev</a></li>
+<li>Add a script to run the compilation.</li>
+<li>Use the generated injector with laminas-servicemanager.</li>
+<li>Use the generated factories with laminas-servicemanager.</li>
 </ul>
+<h2 id="1-create-project-and-add-laminas-di">1. Create project and add laminas-di</h2>
+<p>For this guide, we will use an <a href="https://docs.mezzio.dev/mezzio/">mezzio application</a>
+built from the skeleton with laminas-servicemanager as its IoC container.</p>
+<p>If you have already set up a project with laminas-di, you can skip this step.</p>
+<p>First, we'll create a new project:</p>
+<pre class="highlight"><code class="language-bash">$ composer create-project mezzio/mezzio-skeleton laminas-di-aot-example</code></pre>
+<p>Pick the components you want to use. We will be using laminas-servicemanager
+and a "Modular" layout for this example.</p>
+<p>Once you are done, enter the newly created project's working directory:</p>
+<pre class="highlight"><code class="language-bash">$ cd laminas-di-aot-example</code></pre>
+<p>Now add laminas-di with composer:</p>
+<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
+<blockquote>
+<h3>Possible version conflicts</h3>
+<p>Please make sure that laminas-di version 3.x is installed. When you are
+upgrading from laminas-di version 2.x, you may have to remove
+<code>laminas-servicemanager-di</code> because version 3.x makes this package obsolete and
+therefore conflicts with it.</p>
+<p>You can ensure version 3.x is installed by adding a version constraint to
+composer's require command:</p>
+<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-di:^3.0</code></pre>
+<p>This approach will also notify you if there are conflicts with installing v3.</p>
+<h3>Additional requirements for version 3.0.x</h3>
+<p>Before version 3.1, <code>laminas/laminas-code</code> was required to be
+added individually to your project for generating AoT code. Since version
+3.1 this is no longer necessary.</p>
+</blockquote>
+<p>The component installer should ask you where to inject the config provider. Pick
+option 1, which usually is <code>config/config.php</code>. If not, or you cannot use the
+component installer, you will need to add it manually by adding an entry for
+<code>\Laminas\Di\ConfigProvider::class</code> within your application configuration
+example:</p>
+<pre class="highlight"><code class="language-php">// config/config.php:
+
+use Laminas\ConfigAggregator\ArrayProvider;
+use Laminas\ConfigAggregator\ConfigAggregator;
+use Laminas\ConfigAggregator\PhpFileProvider;
+
+// ...
+
+$aggregator = new ConfigAggregator([
+    // Add Laminas\Di
+    \Laminas\Di\ConfigProvider::class,
+
+    // ...
+], $cacheConfig['config_cache_path']);
+
+// ...</code></pre>
+<h2 id="2-make-your-project-ready-for-aot">2. Make your project ready for AoT</h2>
+<p>To follow the modular principle of our mezzio app, we will put the AoT
+related configurations and generated code in a separate module called <code>AppAoT</code>.</p>
+<p>By default, skeleton applications include the mezzio-tooling component,
+which allows you to do this in a single step:</p>
+<pre class="highlight"><code class="language-bash">$ ./vendor/bin/mezzio module:create AppAoT</code></pre>
+<p>If the tooling is present and the above command is successful, you can now skip
+to the next step. Otherwise, continue on to manually create your module.</p>
+<p>First, create the initial directory structure:</p>
+<pre class="highlight"><code class="language-bash">$ mkdir src/AppAoT/src</code></pre>
+<p>Next, create a config provider class in <code>src/AppAoT/src/ConfigProvider.php</code>:</p>
+<pre class="highlight"><code class="language-php">namespace AppAoT;
+
+class ConfigProvider
+{
+    public function __invoke()
+    {
+        return [
+            'dependencies' =&gt; $this-&gt;getDependencies(),
+        ];
+    }
+
+    public function getDependencies()
+    {
+        return [
+            'auto' =&gt; [
+                'aot' =&gt; [
+                    'namespace' =&gt; __NAMESPACE__ . '\\Generated',
+                    'directory' =&gt; __DIR__ . '/../gen',
+                ],
+            ],
+        ];
+    }
+}</code></pre>
+<p>Add this new class to the the beginning of your <code>config/config.php</code> file's
+<code>ConfigAggregator</code> settings:</p>
+<pre class="highlight"><code class="language-php">$aggregator = new ConfigAggregator([
+    \AppAoT\ConfigProvider::class
+    // Add Laminas\Di
+    \Laminas\Di\ConfigProvider::class,
+
+    // ...
+]);</code></pre>
+<p>In order for your application to find this class, we need to add an autoloading
+rule. Find the <code>psr-4</code> autoloader section of your <code>composer.json</code>, and add an
+entry for your new <code>AppAot</code> namespace as follows:</p>
+<pre class="highlight"><code class="language-json">{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/App/src/",
+            "AppAoT\\": "src/AppAoT/src/",
+            "AppAoT\\Generated\\": "src/AppAoT/gen/"
+        }
+    },
+    ...
+}</code></pre>
+<blockquote>
+<p>Note that we defined <code>AppAoT\\Generated\\</code> which will point to the code
+we generate from laminas-di in the next steps.</p>
+</blockquote>
+<p>Finally, update your autoloader:</p>
+<pre class="highlight"><code class="language-bash">$ composer dump-autoload</code></pre>
+<h2 id="3-add-some-auto-wiring">3. Add some auto-wiring</h2>
+<p>Because laminas-di can provide autowiring for us, we can remove configuration that
+already exists within our <code>App</code> module. Edit the file
+<code>src/App/src/ConfigProvider.php</code> and comment out the entries shown below:</p>
+<pre class="highlight"><code class="language-php">    public function getDependencies()
+    {
+        return [
+            'invokables' =&gt; [
+                // Action\PingAction::class =&gt; Action\PingAction::class,
+            ],
+            'factories'  =&gt; [
+                // Action\HomePageAction::class =&gt; Action\HomePageFactory::class,
+            ],
+        ];
+    }</code></pre>
+<p>We can also now remove the <code>HomePageFactory</code> referenced in that method:</p>
+<pre class="highlight"><code class="language-bash">$ rm src/App/src/HomePageFactory.php</code></pre>
+<p>The default actions (<code>HomePageAction</code> and <code>PingAction</code>) now use auto wiring!</p>
+<h2 id="4-add-a-code-generator-command-script">4. Add a code generator command script</h2>
+<p>We will now add a simple script in the <code>bin/</code> directory, which we will also add
+to our <code>composer.json</code>scripts section, to generate factories.</p>
+<p>In the real world, you might use a console implementation such as
+symfony/console for scripts such as these.</p>
+<p>Add the generator script <code>bin/di-generate-aot.php</code>:</p>
+<pre class="highlight"><code class="language-php">namespace AppAoT;
+
+use Psr\Container\ContainerInterface;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// Define the source directories to scan for classes for which
+// to generate AoT factories:
+$directories = [
+    __DIR__ . '/../src/App/src',
+];
+
+/** @var ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
+$scanner = new DirectoryScanner($directories);
+$generator = $container-&gt;get(InjectorGenerator::class);
+
+$generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
+<blockquote>
+<h3>Manually creating a generator instance</h3>
+<p>Before version 3.1, no service factory existed for the generator. Below is an
+example demonstrating manual creation of the generator:</p>
+<pre class="highlight"><code class="language-php">namespace AppAoT;
+
+use Psr\Container\ContainerInterface;
+use Laminas\Code\Scanner\DirectoryScanner;
+use Laminas\Di\CodeGenerator\InjectorGenerator;
+use Laminas\Di\Config;
+use Laminas\Di\ConfigInterface;
+use Laminas\Di\Definition\RuntimeDefinition;
+use Laminas\Di\Resolver\DependencyResolver;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$directories = [
+    __DIR__ . '/../src/App/src',
+];
+
+// Generator dependencies. You might put this in a service factory
+// in a real-life scenario.
+
+/** @var ContainerInterface $container */
+$container = require __DIR__ . '/../config/container.php';
+$config = $container-&gt;get(ConfigInterface::class);
+$resolver = new DependencyResolver(new RuntimeDefinition(), $config);
+
+// This is important; we want to use configured aliases of the service manager.
+$resolver-&gt;setContainer($container);
+
+$scanner = new DirectoryScanner($directories);
+$generator = new InjectorGenerator($config, $resolver, __NAMESPACE__ . '\Generated');
+$generator-&gt;setOutputDirectory(__DIR__ . '/../src/AppAoT/gen');
+$generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
+</blockquote>
+<p>To add the Composer script, edit <code>composer.json</code> and add the following to the
+<code>scripts</code> section:</p>
+<pre class="highlight"><code class="language-json">{
+    "scripts": {
+        "di-generate-aot": [
+            "rm -vfr src/AppAoT/gen",
+            "php bin/di-generate-aot.php"
+        ]
+    }
+}</code></pre>
+<p>When running the compiler with <code>composer di-generate-aot</code>, it will generate
+the following files:</p>
+<p><img alt="screenshot-gen-result" src="../img/aot-gen-result.png" class="img-responsive"/></p>
+<h2 id="5-add-aot-to-the-service-manager">5. Add AoT to the service manager</h2>
+<p>Now we need to make the service manager use the AoT code.</p>
+<p>First, we'll use a delegator <code>Laminas\Di\GeneratedInjectorDelegator</code> to decorate
+the DI injector with the AoT version. Decorating the injector ensures that your
+factories that utilize <code>Laminas\Di\Container\AutowireFactory</code> will benefit from AoT
+as well. We need to add configuration to the <code>ConfigProvider</code> class we created
+in step 2:</p>
+<blockquote>
+<p><strong>Important:</strong> After this step, the application will <strong>always</strong> use the
+generated factories, if present. If you change any dependencies, you will need
+to run <code>composer di-aot-generation</code> again, or remove the generated code in
+<code>src/AppAoT/gen/</code> and use runtime wiring.</p>
+</blockquote>
+<pre class="highlight"><code class="language-php">namespace AppAoT;
+
+use Laminas\Di\GeneratedInjectorDelegator;
+use Laminas\Di\InjectorInterface;
+
+class ConfigProvider
+{
+    public function __invoke()
+    {
+        return [
+            'dependencies' =&gt; $this-&gt;getDependencies(),
+        ];
+    }
+
+    public function getDependencies()
+    {
+        return [
+            'auto' =&gt; [
+                'aot' =&gt; [
+                    'namespace' =&gt; __NAMESPACE__ . '\\Generated',
+                    'directory' =&gt; __DIR__ . '/../gen',
+                ],
+            ],
+            'factories' =&gt; $this-&gt;getGeneratedFactories(),
+            'delegators' =&gt; [
+                InjectorInterface::class =&gt; [
+                    GeneratedInjectorDelegator::class,
+                ],
+            ],
+        ];
+    }
+
+    private function getGeneratedFactories()
+    {
+        // The generated factories.php file is compatible with
+        // laminas-servicemanager's factory configuration.
+        // This avoids using the abstract AutowireFactory, which
+        // improves performance a bit since we spare some lookups.
+
+        if (file_exists(__DIR__ . '/../gen/factories.php')) {
+            return include __DIR__ . '/../gen/factories.php';
+        }
+
+        return [];
+    }
+}</code></pre>
+<blockquote>
+<h3>Custom delegator factory (before version 3.2)</h3>
+<p>The <code>Laminas\Di\GeneratedInjectorDelegator</code> class is available since version 3.2. For
+prior versions of laminas-di, a custom delegator factory must be provided.</p>
+<pre class="highlight"><code class="language-php">namespace AppAoT;
+
+use AppAoT\Generated\GeneratedInjector;
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
+
+class GeneratedInjectorDelegator implements DelegatorFactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null)
+    {
+        $injector = $callback();
+
+        if (class_exists(GeneratedInjector::class)) {
+            return new GeneratedInjector($injector);
+        }
+
+        return $injector;
+    }
+}</code></pre>
+</blockquote>
 
 
 
@@ -354,12 +691,16 @@
         
         <li class="page-nav__item">
             
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../use-with-servicemanager/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
         </li>
 
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="v3/intro/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../migration/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -369,6 +710,15 @@
 
 
 
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v3/cookbook/aot-guide.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
 
                 
             </div>
@@ -393,7 +743,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-di</a>
+            <a href="../../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -406,43 +756,43 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/installation/" class="subnavigation__link">Installation</a>
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/quick-start/" class="subnavigation__link">Quick Start</a>
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/psr-11/" class="subnavigation__link">PSR-11 Support</a>
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/config/" class="subnavigation__link">Configuration</a>
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/injector/" class="subnavigation__link">Injector</a>
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/codegen/" class="subnavigation__link">Code Generator</a>
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
     </li>
 
                     
@@ -453,19 +803,19 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+        <a href="../use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="v3/cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
     </li>
 
             
@@ -480,7 +830,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+        <a href="../../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
     </li>
 
             
@@ -583,13 +933,13 @@
 </footer>
 
     <script>
-        let base_url = '.',
+        let base_url = '../../..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="search/main.js"></script>
+        <script src="../../../search/main.js"></script>
     
 
     
@@ -618,8 +968,3 @@
 
 
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2020-12-24 12:47:11.582665+00:00
--->

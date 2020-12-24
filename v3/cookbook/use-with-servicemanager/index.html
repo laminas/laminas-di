@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/cookbook/use-with-servicemanager/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-di - Laminas Docs</title>
+    <title>Usage with laminas-servicemanager - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -114,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -124,8 +125,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -188,7 +271,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../v3/intro/" class="dropdown-item">
+                    <a href="../../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -196,7 +279,7 @@
                 
             
                 
-                    <a href="../v2/quick-start/" class="dropdown-item">
+                    <a href="../../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -227,21 +310,151 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#service-factories-for-di-instances" class="toc__link nav-link">Service Factories For DI instances</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#abstractgeneric-service-factory" class="toc__link nav-link">Abstract/Generic Service Factory</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#service-factory-for-aot-code-generation" class="toc__link nav-link">Service Factory For AoT Code Generation</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
                 
 
                 
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
-<h1 class="content__title">404</h1>
-<blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
-</blockquote>
+            
+                <li class="breadcrumb-item"><a href="../../..">laminas-di</a></li>
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Cookbook</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Usage with laminas-servicemanager</li>
+            
+        
+    </ol>
+</nav>
 
 
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Cookbook</h2>
+    
+
+    <h1 id="usage-with-laminas-servicemanager">Usage With laminas-servicemanager</h1>
+<p>laminas-di is designed to play and integrate well with laminas-servicemanager.  When
+you are using <a href="https://docs.laminas.dev/laminas-component-installer/">laminas-component-installer</a>,
+you just need to install laminas-di via composer and you're done.</p>
+<h2 id="service-factories-for-di-instances">Service Factories For DI instances</h2>
+<p>laminas-di ships with two service factories to provide the
+<code>Laminas\Di\InjectorInterface</code> implementation.</p>
+<ul>
+<li>
+<p><code>Laminas\Di\Container\ConfigFactory</code>: Creates a config instance by using the <code>"config"</code> service.</p>
+</li>
+<li>
+<p><code>Laminas\Di\Container\InjectorFactory</code>: Creates the injector instance that uses a
+  <code>Laminas\Di\ConfigInterface</code> service, if available.</p>
+</li>
+</ul>
+<pre class="highlight"><code class="language-php">use Laminas\Di;
+use Laminas\Di\Container;
+
+$serviceManager-&gt;setFactory(Di\ConfigInterface::class, Container\ConfigFactory::class);
+$serviceManager-&gt;setFactory(Di\InjectorInterface::class, Container\InjectorFactory::class);</code></pre>
+<h2 id="abstractgeneric-service-factory">Abstract/Generic Service Factory</h2>
+<p>This component ships with an generic factory
+<code>Laminas\Di\Container\AutowireFactory</code>. This factory is suitable as an abstract
+service factory for use with laminas-servicemanager.</p>
+<p>You can also use it to create instances with laminas-di using an IoC container
+(e.g. inside a service factory):</p>
+<pre class="highlight"><code class="language-php">use Laminas\Di\Container\AutowireFactory;
+(new AutowireFactory())-&gt;__invoke($container, MyClassname::class);</code></pre>
+<p>Or you can use it as factory in your service configuration directly:</p>
+<pre class="highlight"><code class="language-php">return [
+    'factories' =&gt; [
+        SomeClass::class =&gt; \Laminas\Di\Container\AutowireFactory::class,
+    ],
+];</code></pre>
+<h2 id="service-factory-for-aot-code-generation">Service Factory For AoT Code Generation</h2>
+<p>laminas-di also provides a factory for <code>Laminas\Di\CodeGenerator\InjectorGenerator</code>.
+This factory (<code>Laminas\Di\Container\GeneratorFactory</code>) is also auto registered by
+the <code>Module</code> and <code>ConfigProvider</code> classes for laminas-mvc and Mezzio.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../use-with-psr-containers/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../aot-guide/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v3/cookbook/use-with-servicemanager.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -264,7 +477,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -274,8 +487,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -372,13 +667,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../../..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../../search/main.js"></script>
     
 
     

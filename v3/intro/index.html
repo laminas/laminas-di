@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/intro/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-di - Laminas Docs</title>
+    <title>Introduction - laminas-di - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -114,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -124,8 +125,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -188,7 +271,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../v3/intro/" class="dropdown-item">
+                    <a href="./" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -196,7 +279,7 @@
                 
             
                 
-                    <a href="../v2/quick-start/" class="dropdown-item">
+                    <a href="../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -227,21 +310,161 @@
                 
                 
                     
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
                 
+                    <li class="toc__entry">
+                        <a href="#dependency-injection" class="toc__link nav-link">Dependency Injection</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#dependency-injection-containers" class="toc__link nav-link">Dependency Injection Containers</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
 
                 
 
-<h1 class="content__title">404</h1>
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-di</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+
+    <h1 id="introduction">Introduction</h1>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<p><em>Dependency Injection</em> (here-in called DI) refers to the act of providing
+dependencies for an object during instantiation or via a method call. A basic
+example looks like this:</p>
+<pre class="highlight"><code class="language-php">$b = new MovieLister(new MovieFinder());</code></pre>
+<p>Above, <code>MovieFinder</code> is a dependency of <code>MovieLister</code>, and <code>MovieFinder</code> was
+injected into <code>MovieLister</code>.</p>
+<p>There are several forms of dependency injection:</p>
+<ul>
+<li>Constructor injection</li>
+<li>Setter injection</li>
+<li>Property (or field) injection</li>
+</ul>
+<p>While previous versions of laminas-di attempted to handle all three types, starting
+in version 3, the component focuses only on the first, constructor injection.
+This decision was made for several reasons:</p>
+<ul>
+<li>It simplified the implementation dramatically.</li>
+<li>The simplified implementation had performance benefits.</li>
+<li>It enforces the order of object initialization, which both helps to prevent
+  circular dependencies, and ensures the completeness of the instantiated object.</li>
+</ul>
 <blockquote>
-    <h3>Something went wrong!</h3>
-    <p>
-        We're sorry, but the page you are looking for does not exist.
-    </p>
+<h3>Further reading</h3>
+<p>If you are not familiar with the concept of DI, here are several great reads:</p>
+<ul>
+<li><a href="https://mwop.net/blog/260-Dependency-Injection-An-analogy.html">Matthew Weier O'Phinney's Analogy</a></li>
+<li><a href="http://fabien.potencier.org/article/11/what-is-dependency-injection">Fabien Potencier's Series</a> on DI</li>
+</ul>
+<h3>laminas-servicemanager</h3>
+<p>Since laminas-di purely provides automatic DI (aka auto wiring), it does not
+provide code-driven <a href="https://en.wikipedia.org/wiki/Inversion_of_control">Inversion of Control</a> (IoC).</p>
+<p>However, Laminas does ship with another IoC component as well: <a href="https://docs.laminas.dev/laminas-servicemanager/">laminas-servicemanager</a>.
+Unlike laminas-di, laminas-servicemanager is code-driven, meaning that you tell it
+what class to instantiate, or provide a factory for the given class. This allows
+you more fine-grained control on how your objects will be instantiated.</p>
+<p>In fact laminas-di is designed to play nicely with other IoC containers that
+implement PSR-11, especially with laminas-servicemanager. You can even use
+factories generated by laminas-di for laminas-servicemanager.</p>
 </blockquote>
+<h2 id="dependency-injection-containers">Dependency Injection Containers</h2>
+<p>When your code is written in such a way that all your dependencies are injected
+into consuming objects, you might find that the simple act of wiring an object
+has gotten more complex. When this becomes the case, and you find that this
+wiring is creating more boilerplate code, this makes for an excellent
+opportunity to utilize a Dependency Injection Container. These containers are also
+often referred to as IoC Containers.</p>
+<p>In its simplest form, a Dependency Injection Container (here-in called a DiC
+for brevity) is an object that is capable of creating objects on request and
+managing the "wiring", or the injection of required dependencies, for those
+requested objects. Since the patterns that developers employ in writing DI
+capable code vary, DiC's are generally either in the form of smallish objects
+that suit a very specific pattern, or larger DiC frameworks.</p>
+<p>The PHP FIG defined a standard interface for such DiCs via <a href="http://www.php-fig.org/psr/psr-11/">PSR-11
+(ContainerInterface)</a>.</p>
+<p>laminas-di is a DiC framework which provides an injector performing the wiring, and
+a simple imlementation of a DiC. The injector is able to consume any PSR-11
+container, such as <a href="https://docs.laminas.dev/laminas-servicemanager/">laminas-servicemanager</a>,
+to obtain the instances of the dependencies.</p>
+<p>While for the simplest use cases no configuration is needed, laminas-di allows
+developers to configure how to resolve dependencies for more complex use cases.</p>
 
-<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../..">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../installation/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-di/edit/master/docs/book/v3/intro.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 <div class="donation-banner">
@@ -264,7 +487,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../.">laminas-di</a>
+            <a href="../..">laminas-di</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -274,8 +497,90 @@
 
                 
                 
+                    
+                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Introduction</a>
+    </li>
 
                     
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr-11/" class="subnavigation__link">PSR-11 Support</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../config/" class="subnavigation__link">Configuration</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../injector/" class="subnavigation__link">Injector</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../codegen/" class="subnavigation__link">Code Generator</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-psr-containers/" class="subnavigation__link">Usage with PSR-11 Containers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/use-with-servicemanager/" class="subnavigation__link">Usage with laminas-servicemanager</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../cookbook/aot-guide/" class="subnavigation__link">Using AoT with Mezzio and laminas-servicemanager</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration from Version 2 to 3</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
                     
                 
             
@@ -372,13 +677,13 @@
 </footer>
 
     <script>
-        let base_url = '..',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-di';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
