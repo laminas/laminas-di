@@ -77,9 +77,3 @@ to obtain the instances of the dependencies.
 
 While for the simplest use cases no configuration is needed, laminas-di allows
 developers to configure how to resolve dependencies for more complex use cases.
-
-## Legacy documentation
-
-The primary documentation covers version 3.0 and above. We also ship
-documentation covering version 2 features, starting with a chapter covering
-[laminas-di Definition classes](v2/definitions.md).

@@ -1,9 +1,5 @@
 # Instance Manager
 
-> ### Version 2
->
-> This is documentation for the legacy version (2.x) of laminas-di.
-
 The `InstanceManager` is responsible for any runtime information associated with
 the laminas-di DiC.  This means that the information that goes into the instance
 manager is specific to both how the particular consuming application's needs,

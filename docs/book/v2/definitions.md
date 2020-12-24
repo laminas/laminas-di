@@ -1,9 +1,5 @@
 # Dependency Definitions
 
-> ### Version 2
->
-> This is documentation for the legacy version (2.x) of laminas-di.
-
 Definitions are what laminas-di uses to understand the structure of the code it is
 attempting to wire. This means that if you've written non-ambiguous, clear, and
 concise code, laminas-di has a very good chance of understanding how to wire things
