@@ -1,9 +1,5 @@
 # Debugging & Complex Use Cases
 
-> ### Version 2
->
-> This is documentation for the legacy version (2.x) of laminas-di.
-
 ## Debugging a DiC
 
 It is possible to dump the information contained within both the `Definition`

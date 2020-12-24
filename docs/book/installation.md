@@ -1,5 +1,6 @@
-**This is only a placeholder.**
-
-The content of this page can be found under:
-
-https://github.com/laminas/documentation-theme/blob/master/theme/pages/installation.html
+<noscript><meta http-equiv="refresh" content="0; url=/laminas-di/v3/installation/"></noscript>
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    window.location.pathname = '/laminas-di/v3/installation/';
+  });
+</script>
