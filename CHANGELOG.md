@@ -24,6 +24,27 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+## 3.2.1 - 2020-12-24
+
+
+-----
+
+### Release Notes for [3.2.1](https://github.com/laminas/laminas-di/milestone/5)
+
+3.2.x bugfix release (patch)
+
+### 3.2.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
+
+ - [23: Fix CI error from fixed false positive in phpstan](https://github.com/laminas/laminas-di/pull/23) thanks to @Xerkus
+
+#### Bug,Documentation
+
+ - [22: Updates documentation files to remove the invalid version note](https://github.com/laminas/laminas-di/pull/22) thanks to @froschdesign
+
 ## 3.2.0 - 2020-10-21
 
 ### Added

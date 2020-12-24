@@ -3,19 +3,19 @@ site_dir: docs/html
 nav:
     - Home: index.md
     - v3:
-        - Introduction: intro.md
-        - Installation: installation.md
-        - "Quick Start": quick-start.md
-        - "PSR-11 Support": psr-11.md
-        - Configuration: config.md
-        - "Injector": injector.md
-        - "Code Generator": codegen.md
+        - Introduction: v3/intro.md
+        - Installation: v3/installation.md
+        - "Quick Start": v3/quick-start.md
+        - "PSR-11 Support": v3/psr-11.md
+        - Configuration: v3/config.md
+        - "Injector": v3/injector.md
+        - "Code Generator": v3/codegen.md
         - Cookbook:
-            - "Usage with PSR-11 Containers": cookbook/use-with-psr-containers.md
-            - "Usage with laminas-servicemanager": cookbook/use-with-servicemanager.md
-            - "Using AoT with Mezzio and laminas-servicemanager": cookbook/aot-guide.md
+            - "Usage with PSR-11 Containers": v3/cookbook/use-with-psr-containers.md
+            - "Usage with laminas-servicemanager": v3/cookbook/use-with-servicemanager.md
+            - "Using AoT with Mezzio and laminas-servicemanager": v3/cookbook/aot-guide.md
         - Migration:
-            - "Migration from Version 2 to 3": migration.md
+            - "Migration from Version 2 to 3": v3/migration.md
     - v2:
         - "Quick Start": v2/quick-start.md
         - Reference:
@@ -23,6 +23,18 @@ nav:
             - "Instance Manager": v2/instance-manager.md
             - Configuration: v2/config.md
             - "Debugging And Complex Use Cases": v2/debugging-and-complex-use-cases.md
+    - "_hidden-legacy-page-links":
+        - '_codegen': codegen.md
+        - '_config': config.md
+        - '_injector': injector.md
+        - '_installation': installation.md
+        - '_intro': intro.md
+        - '_migration': migration.md
+        - '_psr-11': psr-11.md
+        - '_quick-start': quick-start.md
+        - '_cookbook_aot_guide': cookbook/aot-guide.md
+        - '_cookbook_use_with_psr_containers': cookbook/use-with-psr-containers.md
+        - '_cookbook_use_with_servicemanager': cookbook/use-with-servicemanager.md
 
 site_name: laminas-di
 site_description: "Automated dependency injection for PSR-11 containers"
