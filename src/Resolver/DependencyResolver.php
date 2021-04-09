@@ -57,6 +57,7 @@ class DependencyResolver implements DependencyResolverInterface
         'iterable',
     ];
 
+    /** @var array<string, string> */
     private $gettypeMap = [
         'boolean' => 'bool',
         'integer' => 'int',

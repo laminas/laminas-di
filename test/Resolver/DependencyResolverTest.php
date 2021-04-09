@@ -361,6 +361,9 @@ class DependencyResolverTest extends TestCase
         $resolver->resolveParameters($class);
     }
 
+    /**
+     * @return array[]
+     */
     public function provideUsableParametersData()
     {
         // @codingStandardsIgnoreStart
