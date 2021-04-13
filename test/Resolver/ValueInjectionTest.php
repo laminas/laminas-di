@@ -34,6 +34,7 @@ class ValueInjectionTest extends TestCase
 {
     use ProphecyTrait;
 
+    /** @var false|resource */
     private $streamFixture;
 
     protected function setUp(): void

@@ -12,6 +12,7 @@ namespace LaminasTest\Di\TestAsset\DependencyTree;
 
 class Level2
 {
+    /** @var mixed */
     public $optionalResult;
 
     /** @param null|mixed $opt*/
