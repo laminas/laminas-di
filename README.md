@@ -1,6 +1,6 @@
 # laminas-di
 
-[![Build Status](https://github.com/laminas/laminas-di/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-di/actions?query=workflow%3A"Continuous+Integration")
+[![Build Status](https://github.com/laminas/laminas-di/workflows/continuous-integration.yml/badge.svg)](https://github.com/laminas/laminas-di/actions/workflows/continuous-integration.yml)
 
 laminas-di provides autowiring to implement Inversion of Control (IoC) containers.
 IoC containers are widely used to create object instances that have all
