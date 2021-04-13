@@ -407,7 +407,7 @@ and a "Modular" layout for this example.</p>
 <p>Now add laminas-di with composer:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-di</code></pre>
 <blockquote>
-<h3>Possible version conflicts</h3>
+<h3 id="possible-version-conflicts">Possible version conflicts</h3>
 <p>Please make sure that laminas-di version 3.x is installed. When you are
 upgrading from laminas-di version 2.x, you may have to remove
 <code>laminas-servicemanager-di</code> because version 3.x makes this package obsolete and
@@ -416,7 +416,7 @@ therefore conflicts with it.</p>
 composer's require command:</p>
 <pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-di:^3.0</code></pre>
 <p>This approach will also notify you if there are conflicts with installing v3.</p>
-<h3>Additional requirements for version 3.0.x</h3>
+<h3 id="additional-requirements-for-version-30x">Additional requirements for version 3.0.x</h3>
 <p>Before version 3.1, <code>laminas/laminas-code</code> was required to be
 added individually to your project for generating AoT code. Since version
 3.1 this is no longer necessary.</p>
@@ -550,7 +550,7 @@ $generator = $container-&gt;get(InjectorGenerator::class);
 
 $generator-&gt;generate($scanner-&gt;getClassNames());</code></pre>
 <blockquote>
-<h3>Manually creating a generator instance</h3>
+<h3 id="manually-creating-a-generator-instance">Manually creating a generator instance</h3>
 <p>Before version 3.1, no service factory existed for the generator. Below is an
 example demonstrating manual creation of the generator:</p>
 <pre class="highlight"><code class="language-php">namespace AppAoT;
@@ -658,7 +658,7 @@ class ConfigProvider
     }
 }</code></pre>
 <blockquote>
-<h3>Custom delegator factory (before version 3.2)</h3>
+<h3 id="custom-delegator-factory-before-version-32">Custom delegator factory (before version 3.2)</h3>
 <p>The <code>Laminas\Di\GeneratedInjectorDelegator</code> class is available since version 3.2. For
 prior versions of laminas-di, a custom delegator factory must be provided.</p>
 <pre class="highlight"><code class="language-php">namespace AppAoT;
@@ -851,6 +851,7 @@ class GeneratedInjectorDelegator implements DelegatorFactoryInterface
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -923,7 +924,7 @@ class GeneratedInjectorDelegator implements DelegatorFactoryInterface
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
