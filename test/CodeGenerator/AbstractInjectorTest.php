@@ -54,6 +54,7 @@ class AbstractInjectorTest extends TestCase
 
         return new class ($factoriesProvider, $injector, $container) extends AbstractInjector
         {
+            /** @var callable */
             private $provider;
 
             public function __construct(

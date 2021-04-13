@@ -51,7 +51,7 @@ abstract class AbstractInjector implements InjectorInterface
     {
         $this->factoryInstances[$type] = $factory;
     }
-    
+
     private function getFactory(string $type): FactoryInterface
     {
         if (isset($this->factoryInstances[$type])) {

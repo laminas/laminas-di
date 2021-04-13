@@ -12,6 +12,7 @@ namespace LaminasTest\Di\TestAsset;
 
 class TypelessDependency
 {
+    /** @var mixed */
     public $result;
 
     /** @param mixed $value */

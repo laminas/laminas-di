@@ -25,7 +25,7 @@ use function str_replace;
 class FactoryGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
-    
+
     private const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated\Factory';
 
     public function testGenerateCreatesFiles()
