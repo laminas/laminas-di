@@ -159,7 +159,7 @@ class InjectorGenerator
         };
 
         $classmap = array_map($addFactoryPrefix, $this->factoryGenerator->getClassmap());
-        
+
         $classmap[$this->namespace . '\\GeneratedInjector'] = 'GeneratedInjector.php';
 
         $this->autoloadGenerator->generate($classmap);

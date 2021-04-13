@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 class AutoloadGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
-    
+
     private const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
     public function testGenerateCreatesFiles()

@@ -12,6 +12,7 @@ namespace LaminasTest\Di\TestAsset\Constructor;
 
 class ThreeArguments
 {
+    /** @var array<string, mixed> */
     public $result;
 
     /**

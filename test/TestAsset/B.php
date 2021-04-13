@@ -12,6 +12,7 @@ namespace LaminasTest\Di\TestAsset;
 
 class B
 {
+    /** @var A */
     public $injectedA;
 
     public function __construct(A $a)
