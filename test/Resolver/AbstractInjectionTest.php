@@ -13,9 +13,9 @@ use function sprintf;
 
 class AbstractInjectionTest extends TestCase
 {
-    public function testUsageIsDeprecated()
+    public function testUsageIsDeprecated(): void
     {
-        $this->expectDeprecation(Deprecated::class);
+        $this->expectDeprecation();
         $this->expectDeprecationMessage(sprintf(
             '%s is deprecated, please migrate to %s',
             AbstractInjection::class,

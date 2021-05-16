@@ -6,10 +6,14 @@ namespace Laminas\Di;
 
 use ArrayAccess;
 
+use function array_filter;
 use function array_keys;
+use function array_map;
+use function array_values;
 use function class_exists;
 use function interface_exists;
 use function is_array;
+use function is_string;
 
 /**
  * Provides a DI configuration from an array.
@@ -71,15 +75,21 @@ use function is_array;
  * For classes known from the definitions, a type preference might be the
  * better approach
  *
- * @see Laminas\Di\Resolver\ValueInjection A container to force injection of a value
- * @see Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
+ * @see \Laminas\Di\Resolver\ValueInjection A container to force injection of a value
+ * @see \Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
+ *
+ * @psalm-type TypeConfigArray = array{
+ *  typeOf?: class-string,
+ *  preferences?: array<string, string>,
+ *  parameters?: array<string, mixed>
+ * }
  */
 class Config implements ConfigInterface
 {
-    /** @var array */
+    /** @var array<string, string> */
     protected $preferences = [];
 
-    /** @var array */
+    /** @var array<string, TypeConfigArray> */
     protected $types = [];
 
     /**
@@ -110,7 +120,7 @@ class Config implements ConfigInterface
     /**
      * {@inheritDoc}
      *
-     * @see Laminas\Di\ConfigInterface::getClassForAlias()
+     * @see \Laminas\Di\ConfigInterface::getClassForAlias()
      */
     public function getClassForAlias(string $name): ?string
     {
@@ -125,7 +135,7 @@ class Config implements ConfigInterface
      * Returns the instanciation paramters for the given type
      *
      * @param string $type The alias or class name
-     * @return array The configured parameters
+     * @return array<string, mixed> The configured parameters
      */
     public function getParameters(string $type): array
     {
@@ -139,9 +149,10 @@ class Config implements ConfigInterface
     /**
      * {@inheritDoc}
      *
-     * @see Laminas\Di\ConfigInterface::setParameters()
+     * @see \Laminas\Di\ConfigInterface::setParameters()
      *
      * @return $this
+     * @var array<string, mixed> $params
      */
     public function setParameters(string $type, array $params)
     {
@@ -149,10 +160,10 @@ class Config implements ConfigInterface
         return $this;
     }
 
-    public function getTypePreference(string $type, ?string $context = null): ?string
+    public function getTypePreference(string $type, ?string $contextClass = null): ?string
     {
-        if ($context) {
-            return $this->getTypePreferenceForClass($type, $context);
+        if ($contextClass) {
+            return $this->getTypePreferenceForClass($type, $contextClass);
         }
 
         if (! isset($this->preferences[$type])) {
@@ -166,7 +177,7 @@ class Config implements ConfigInterface
     /**
      * {@inheritDoc}
      *
-     * @see Laminas\Di\ConfigInterface::getTypePreferencesForClass()
+     * @see \Laminas\Di\ConfigInterface::getTypePreferencesForClass()
      */
     private function getTypePreferenceForClass(string $type, ?string $context): ?string
     {
@@ -192,6 +203,8 @@ class Config implements ConfigInterface
      * {@inheritDoc}
      *
      * @see ConfigInterface::getConfiguredTypeNames()
+     *
+     * @return list<string>
      */
     public function getConfiguredTypeNames(): array
     {
@@ -224,7 +237,10 @@ class Config implements ConfigInterface
         return $this;
     }
 
-    /** @param array|ArrayAccess $options */
+    /**
+     * @psalm-assert array|ArrayAccess $options
+     * @param mixed $options
+     */
     private function ensureArrayOrArrayAccess($options): void
     {
         if (! is_array($options) && ! $options instanceof ArrayAccess) {

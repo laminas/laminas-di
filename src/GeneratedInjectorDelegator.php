@@ -2,16 +2,21 @@
 
 namespace Laminas\Di;
 
+use ArrayAccess;
 use Laminas\Di\Exception\InvalidServiceConfigException;
 use Psr\Container\ContainerInterface;
 
+use function assert;
 use function class_exists;
+use function class_implements;
+use function in_array;
 use function is_string;
 
 class GeneratedInjectorDelegator
 {
     /**
      * @param string $name
+     * @param callable():InjectorInterface $callback
      */
     public function __invoke(ContainerInterface $container, $name, callable $callback): InjectorInterface
     {
@@ -25,9 +30,9 @@ class GeneratedInjectorDelegator
             throw new InvalidServiceConfigException('Provided namespace is not a string.');
         }
 
-        $injector = $callback();
-
+        $injector          = $callback();
         $generatedInjector = $namespace . '\\GeneratedInjector';
+
         if (class_exists($generatedInjector)) {
             return new $generatedInjector($injector);
         }

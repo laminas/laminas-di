@@ -7,6 +7,8 @@ namespace Laminas\Di\Definition\Reflection;
 use Laminas\Di\Definition\ParameterInterface;
 use ReflectionParameter;
 
+use function assert;
+
 /**
  * This class specifies a method parameter for the di definition
  */
@@ -60,7 +62,9 @@ class Parameter implements ParameterInterface
     public function getType(): ?string
     {
         if ($this->reflection->hasType()) {
-            return $this->reflection->getType()->getName();
+            $reflectionType = $this->reflection->getType();
+            assert($reflectionType !== null);
+            return $reflectionType->getName();
         }
 
         return null;

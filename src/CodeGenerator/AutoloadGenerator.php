@@ -49,6 +49,7 @@ class AutoloadGenerator
         $template = file_get_contents($templateFile);
 
         assert(is_string($template));
+        assert(is_string($this->outputDirectory));
 
         $this->writeFile(
             sprintf('%s/%s', $this->outputDirectory, $outputFile),
@@ -59,6 +60,9 @@ class AutoloadGenerator
         );
     }
 
+    /**
+     * @param array<string, string> $classmap
+     */
     private function generateClassmapCode(array &$classmap): string
     {
         $lines = array_map(
@@ -77,6 +81,9 @@ class AutoloadGenerator
         return implode($indentation, $lines);
     }
 
+    /**
+     * @param array<string, string> $classmap
+     */
     private function generateAutoloaderClass(array &$classmap): void
     {
         $this->buildFromTemplate(self::CLASS_TEMPLATE, 'Autoloader.php', [
@@ -93,7 +100,7 @@ class AutoloadGenerator
     }
 
     /**
-     * @param string[] $classmap
+     * @param array<string, string> $classmap
      */
     public function generate(array &$classmap): void
     {

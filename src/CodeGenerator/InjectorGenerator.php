@@ -44,7 +44,7 @@ class InjectorGenerator
     /**
      * @deprecated
      *
-     * @var DefinitionInterface
+     * @var DefinitionInterface|null
      */
     protected $definition;
 
@@ -98,6 +98,8 @@ class InjectorGenerator
 
     private function generateInjector(): void
     {
+        assert(is_string($this->outputDirectory));
+
         $this->buildFromTemplate(
             self::INJECTOR_TEMPLATE,
             sprintf('%s/GeneratedInjector.php', $this->outputDirectory),
@@ -107,6 +109,9 @@ class InjectorGenerator
         );
     }
 
+    /**
+     * @param array<string, string> $factories
+     */
     private function generateFactoryList(array $factories): void
     {
         $indentation = sprintf("\n%s", str_repeat(' ', self::INDENTATION_SPACES));
@@ -118,11 +123,16 @@ class InjectorGenerator
             $factories
         );
 
+        assert(is_string($this->outputDirectory));
+
         $this->buildFromTemplate(self::FACTORY_LIST_TEMPLATE, sprintf('%s/factories.php', $this->outputDirectory), [
             '%factories%' => implode($indentation, $codeLines),
         ]);
     }
 
+    /**
+     * @param array<string, string> $factories
+     */
     private function generateTypeFactory(string $class, array &$factories): void
     {
         if (isset($factories[$class])) {
@@ -148,7 +158,7 @@ class InjectorGenerator
 
     private function generateAutoload(): void
     {
-        $addFactoryPrefix = function ($value) {
+        $addFactoryPrefix = function (string $value): string {
             return 'Factory/' . $value;
         };
 

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ModuleTest extends TestCase
 {
-    public function testModuleProvidesServiceConfiguration()
+    public function testModuleProvidesServiceConfiguration(): void
     {
         $module         = new Module();
         $configProvider = new ConfigProvider();

@@ -55,7 +55,7 @@ __CODE__;
     /** @var ConfigInterface */
     private $config;
 
-    /** @var array */
+    /** @var array<string, string> */
     private $classmap = [];
 
     public function __construct(
@@ -183,6 +183,8 @@ __CODE__;
         $factoryClassName                          = $this->namespace . '\\' . $this->buildClassName($class);
         [$namespace, $unqualifiedFactoryClassName] = $this->splitFullyQualifiedClassName($factoryClassName);
 
+        assert(is_string($this->outputDirectory));
+
         $filename = $this->buildFileName($class);
         $filepath = $this->outputDirectory . '/' . $filename;
         $template = file_get_contents(self::TEMPLATE_FILE);
@@ -210,6 +212,9 @@ __CODE__;
         return $factoryClassName;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getClassmap(): array
     {
         return $this->classmap;

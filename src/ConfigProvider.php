@@ -10,13 +10,19 @@ use Zend\Di\InjectorInterface as LegacyInjectorInterfae;
 
 /**
  * Implements the config provider for mezzio
+ *
+ * @psalm-type DependencyConfigArray = array{
+ *  aliases: array<string, string>,
+ *  factories: array<string, callable|class-string>,
+ *  abstract_factories: list<callable|class-string>
+ * }
  */
 class ConfigProvider
 {
     /**
      * Implements the config provider
      *
-     * @return array The configuration for mezzio
+     * @return array{dependencies: DependencyConfigArray} The configuration for mezzio
      */
     public function __invoke(): array
     {
@@ -27,6 +33,8 @@ class ConfigProvider
 
     /**
      * Returns the dependency (service manager) configuration
+     *
+     * @return DependencyConfigArray
      */
     public function getDependencyConfig(): array
     {

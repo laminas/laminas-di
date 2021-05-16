@@ -38,7 +38,7 @@ class AutowireFactory implements AbstractFactoryInterface
      * Make invokable and implement the laminas-service factory pattern
      *
      * @param string $requestedName
-     * @return bool
+     * @return object
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {

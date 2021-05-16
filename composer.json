@@ -37,9 +37,10 @@
         "laminas/laminas-coding-standard": "^2",
         "laminas/laminas-servicemanager": "^3.4",
         "mikey179/vfsstream": "^1.6.7",
-        "phpstan/phpstan": "^0.12.64",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "psalm/plugin-phpunit": "^0.13.0",
+        "vimeo/psalm": "^4.0"
     },
     "conflict": {
         "laminas/laminas-servicemanager-di": "*",
@@ -66,7 +67,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "analyse": "phpstan analyse --no-progress -c phpstan.neon",
+        "analyse": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },

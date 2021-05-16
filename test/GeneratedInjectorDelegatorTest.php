@@ -2,6 +2,7 @@
 
 namespace LaminasTest\Di;
 
+use BadFunctionCallException;
 use Laminas\Di\Exception\InvalidServiceConfigException;
 use Laminas\Di\GeneratedInjectorDelegator;
 use Laminas\Di\InjectorInterface;
@@ -16,7 +17,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testProvidedNamespaceIsNotAString()
+    public function testProvidedNamespaceIsNotAString(): void
     {
         $container = $this->prophesize(ContainerInterface::class);
         $container->has('config')
@@ -31,14 +32,16 @@ class GeneratedInjectorDelegatorTest extends TestCase
         self::assertInstanceOf(ContainerExceptionInterface::class, new InvalidServiceConfigException());
         $this->expectException(InvalidServiceConfigException::class);
         $this->expectExceptionMessage('namespace');
-        $delegator($container->reveal(), 'AnyString', function () {
+
+        $delegator($container->reveal(), 'AnyString', function (): InjectorInterface {
+            throw new BadFunctionCallException('Service delegate factory is not expected to be invoked.');
         });
     }
 
-    public function testGeneratedInjectorDoesNotExist()
+    public function testGeneratedInjectorDoesNotExist(): void
     {
         $injector = $this->prophesize(InjectorInterface::class)->reveal();
-        $callback = function () use ($injector) {
+        $callback = function () use ($injector): InjectorInterface {
             return $injector;
         };
 
@@ -51,10 +54,10 @@ class GeneratedInjectorDelegatorTest extends TestCase
         $this->assertSame($result, $injector);
     }
 
-    public function testGeneratedInjectorExists()
+    public function testGeneratedInjectorExists(): void
     {
         $injector = $this->prophesize(InjectorInterface::class)->reveal();
-        $callback = function () use ($injector) {
+        $callback = function () use ($injector): InjectorInterface {
             return $injector;
         };
 

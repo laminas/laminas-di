@@ -10,9 +10,12 @@ use Laminas\Stdlib\Parameters;
 use Traversable;
 
 use function array_pop;
+use function assert;
 use function class_exists;
 use function interface_exists;
 use function is_array;
+use function is_iterable;
+use function is_string;
 use function strpos;
 use function trigger_error;
 
@@ -24,7 +27,7 @@ use const E_USER_DEPRECATED;
 class LegacyConfig extends Config
 {
     /**
-     * @param array|ArrayAccess $config
+     * @param array|ArrayAccess|Traversable $config
      */
     public function __construct($config)
     {
@@ -38,24 +41,26 @@ class LegacyConfig extends Config
             throw new Exception\InvalidArgumentException('Config data must be an array or implement Traversable');
         }
 
-        if (isset($config['instance'])) {
+        if (isset($config['instance']) && is_iterable($config['instance'])) {
             $this->configureInstance($config['instance']);
         }
     }
 
     /**
-     * @param mixed $parameters
-     * @return mixed[]
+     * @param iterable<array-key, mixed> $parameters
+     * @return array<array-key, mixed>
      */
-    private function prepareParametersArray($parameters, string $class)
+    private function prepareParametersArray($parameters): array
     {
         $prepared = [];
 
+        /** @var mixed $value */
         foreach ($parameters as $key => $value) {
-            if (strpos($key, ':') !== false) {
+            if (is_string($key) && strpos($key, ':') !== false) {
                 trigger_error('Full qualified parameter positions are no longer supported', E_USER_DEPRECATED);
             }
 
+            /** @psalm-var mixed */
             $prepared[$key] = $value;
         }
 
@@ -63,9 +68,9 @@ class LegacyConfig extends Config
     }
 
     /**
-     * @param iterable $config
+     * @param iterable<array-key, mixed> $config
      */
-    private function configureInstance($config)
+    private function configureInstance($config): void
     {
         foreach ($config as $target => $data) {
             switch ($target) {
@@ -76,6 +81,7 @@ class LegacyConfig extends Config
                             $this->setAlias($name, $class);
                         }
                     }
+
                     break;
 
                 case 'preferences':
@@ -84,9 +90,12 @@ class LegacyConfig extends Config
                         $preference = is_array($pref) ? array_pop($pref) : $pref;
                         $this->setTypePreference($type, $preference);
                     }
+
                     break;
 
                 default:
+                    assert(is_string($target));
+
                     $config     = new Parameters($data);
                     $parameters = $config->get('parameters', $config->get('parameter'));
 
@@ -94,6 +103,7 @@ class LegacyConfig extends Config
                         $parameters = $this->prepareParametersArray($parameters, $target);
                         $this->setParameters($target, $parameters);
                     }
+
                     break;
             }
         }
