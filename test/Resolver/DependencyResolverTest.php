@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
+use Traversable;
 
 use function array_keys;
 use function array_merge;
@@ -379,7 +380,7 @@ class DependencyResolverTest extends TestCase
             'iterableIterator'          => ['iterable',         new ArrayIterator([]),         true],
             'iterableIteratorAggregate' => ['iterable',         new class implements IteratorAggregate
             {
-                public function getIterator()
+                public function getIterator(): Traversable
                 {
                     return new ArrayIterator([]);
                 }
