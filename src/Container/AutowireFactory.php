@@ -7,7 +7,6 @@ namespace Laminas\Di\Container;
 use Laminas\Di\Exception;
 use Laminas\Di\InjectorInterface;
 use Psr\Container\ContainerInterface;
-use Stringable;
 
 /**
  * Create instances with autowiring
@@ -37,7 +36,7 @@ class AutowireFactory
     /**
      * Check creatability of the requested name
      *
-     * @param string|Stringable $requestedName
+     * @param string $requestedName
      * @return bool
      */
     public function canCreate(ContainerInterface $container, $requestedName)
@@ -46,6 +45,7 @@ class AutowireFactory
             return false;
         }
 
+        /** @psalm-suppress RedundantCastGivenDocblockType Avoid behavior BC break */
         return $this->getInjector($container)->canCreate((string) $requestedName);
     }
 
@@ -66,12 +66,13 @@ class AutowireFactory
      * Make invokable and implement the laminas-service factory pattern
      *
      * @template T of object
-     * @param Stringable|string|class-string<T> $requestedName
+     * @param string|class-string<T> $requestedName
      * @param array<mixed>|null $options
      * @return T
      */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
+        /** @psalm-suppress RedundantCastGivenDocblockType Avoid behavior BC break */
         return $this->create($container, (string) $requestedName, $options);
     }
 }
