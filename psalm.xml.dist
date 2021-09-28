@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <psalm
-        totallyTyped="true"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="https://getpsalm.org/schema/config"
-        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    totallyTyped="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="src"/>
@@ -18,25 +19,10 @@
     <issueHandlers>
         <DeprecatedClass>
             <errorLevel type="suppress">
-                <!-- LaminasTest\Di\Resolver\AbstractInjection is deprecated - psalm should not report its usage there -->
                 <referencedClass name="Laminas\Di\Resolver\AbstractInjection" />
                 <referencedClass name="LaminasTest\Di\Resolver\AbstractInjectionTest" />
             </errorLevel>
         </DeprecatedClass>
-
-        <!--
-        <InternalMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
-            </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-            </errorLevel>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-            </errorLevel>
-        </InternalMethod>
-        -->
     </issueHandlers>
 
     <stubs>
