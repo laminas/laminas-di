@@ -197,6 +197,7 @@ __CODE__;
                 '%options_to_args_code%' => $paramsCode,
                 '%use_array_key_exists%' => $paramsCode ? "\nuse function array_key_exists;" : '',
                 '%args%'                 => $paramsCode ? '...$args' : '',
+                '%psalm_suppress%'       => $paramsCode ? "\n        /** @psalm-suppress MixedArgument */" : '',
             ]
         );
 
