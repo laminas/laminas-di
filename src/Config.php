@@ -128,7 +128,7 @@ class Config implements ConfigInterface
         if (
             isset($this->types[$name]['typeOf'])
             && is_string($this->types[$name]['typeOf'])
-            && class_exists($this->types[$name]['typeOf'])
+            && (class_exists($this->types[$name]['typeOf']) || interface_exists($this->types[$name]['typeOf']))
         ) {
             return $this->types[$name]['typeOf'];
         }

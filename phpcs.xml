@@ -22,6 +22,11 @@
         <exclude-pattern>src/Resolver/AbstractInjection.php</exclude-pattern>
     </rule>
 
+    <!-- This must be excluded since it is not compatible with php < 8 -->
+    <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCal">
+        <exclude-pattern>*</exclude-pattern>
+    </rule>
+
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>

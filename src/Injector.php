@@ -14,8 +14,6 @@ use Laminas\Di\Resolver\TypeInjection;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-use Throwable;
-
 use function array_pop;
 use function class_exists;
 use function implode;

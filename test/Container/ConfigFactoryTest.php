@@ -6,6 +6,7 @@ namespace LaminasTest\Di\Container;
 
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\ConfigFactory;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -16,12 +17,10 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/**
- * @coversDefaultClass Laminas\Di\Container\ConfigFactory
- */
+/** @covers \Laminas\Di\Container\ConfigFactory */
 class ConfigFactoryTest extends TestCase
 {
-    /** @var MockBuilder */
+    /** @var MockBuilder<ContainerInterface> */
     private $containerBuilder;
 
     protected function setUp(): void
@@ -127,7 +126,7 @@ class ConfigFactoryTest extends TestCase
         $this->assertEquals($expectedPreference, $result->getTypePreference('SomeDependency'));
     }
 
-    public function testLegacyConfigTriggersDeprecationNotice()
+    public function testLegacyConfigTriggersDeprecationNotice(): void
     {
         $container = $this->createContainerWithConfig([
             'di' => [

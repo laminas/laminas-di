@@ -6,7 +6,6 @@ namespace Laminas\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ClassDefinitionInterface;
 use ReflectionClass;
-use ReflectionParameter;
 
 class ClassDefinition implements ClassDefinitionInterface
 {

@@ -12,7 +12,7 @@ use stdClass;
 use function uniqid;
 
 /**
- * @coversDefaultClass Laminas\Di\Config
+ * @coversDefaultClass \Laminas\Di\Config
  */
 class ConfigTest extends TestCase
 {
@@ -27,51 +27,55 @@ class ConfigTest extends TestCase
     public function testGetConfiguredTypeName(): void
     {
         $config = new Config($this->fixture);
-        $this->assertEquals(['Foo', 'Bar'], $config->getConfiguredTypeNames());
+        $this->assertEquals([TestAsset\Config\SomeClass::class, 'SomeAlias'], $config->getConfiguredTypeNames());
     }
 
     public function testIsAlias(): void
     {
         $config = new Config($this->fixture);
-        $this->assertTrue($config->isAlias('Bar'));
-        $this->assertFalse($config->isAlias('Foo'));
+        $this->assertTrue($config->isAlias('SomeAlias'));
+        $this->assertFalse($config->isAlias(TestAsset\Config\SomeClass::class));
         $this->assertFalse($config->isAlias('DoesNotExist'));
     }
 
     public function testGetClassForAlias(): void
     {
         $config = new Config($this->fixture);
-        $this->assertEquals('Foo', $config->getClassForAlias('Bar'));
-        $this->assertNull($config->getClassForAlias('Foo'));
+        $this->assertEquals(TestAsset\Config\SomeClass::class, $config->getClassForAlias('SomeAlias'));
+        $this->assertNull($config->getClassForAlias(TestAsset\Config\SomeClass::class));
         $this->assertNull($config->getClassForAlias('DoesNotExist'));
     }
 
     public function testGetParameters(): void
     {
         $config = new Config($this->fixture);
-        $this->assertEquals(['a' => '*'], $config->getParameters('Foo'));
-        $this->assertEquals([], $config->getParameters('Bar'));
-        $this->assertEquals([], $config->getParameters('A'));
-        $this->assertEquals([], $config->getParameters('B'));
+        $this->assertEquals(['a' => '*'], $config->getParameters(TestAsset\Config\SomeClass::class));
+        $this->assertEquals([], $config->getParameters('SomeAlias'));
+        $this->assertEquals([], $config->getParameters(TestAsset\A::class));
+        $this->assertEquals([], $config->getParameters(TestAsset\B::class));
     }
 
     public function testGetTypePreference(): void
     {
         $config = new Config($this->fixture);
-        $this->assertEquals('GlobalA', $config->getTypePreference('A'));
-        $this->assertEquals('GlobalB', $config->getTypePreference('B'));
+        $this->assertEquals('GlobalA', $config->getTypePreference(TestAsset\A::class));
+        $this->assertEquals('GlobalB', $config->getTypePreference(TestAsset\B::class));
         $this->assertNull($config->getTypePreference('NotDefined'));
 
-        $this->assertEquals('LocalA', $config->getTypePreference('A', 'Foo'));
-        $this->assertNull($config->getTypePreference('B', 'Foo'));
-        $this->assertNull($config->getTypePreference('NotDefined', 'Foo'));
+        $this->assertEquals(
+            'LocalA',
+            $config->getTypePreference(TestAsset\A::class, TestAsset\Config\SomeClass::class)
+        );
 
-        $this->assertEquals('LocalB', $config->getTypePreference('B', 'Bar'));
-        $this->assertNull($config->getTypePreference('A', 'Bar'));
-        $this->assertNull($config->getTypePreference('NotDefined', 'Bar'));
+        $this->assertNull($config->getTypePreference(TestAsset\B::class, TestAsset\Config\SomeClass::class));
+        $this->assertNull($config->getTypePreference('NotDefined', TestAsset\Config\SomeClass::class));
 
-        $this->assertNull($config->getTypePreference('A', 'NotDefinedType'));
-        $this->assertNull($config->getTypePreference('B', 'NotDefinedType'));
+        $this->assertEquals('LocalB', $config->getTypePreference(TestAsset\B::class, 'SomeAlias'));
+        $this->assertNull($config->getTypePreference(TestAsset\A::class, 'SomeAlias'));
+        $this->assertNull($config->getTypePreference('NotDefined', 'SomeAlias'));
+
+        $this->assertNull($config->getTypePreference(TestAsset\A::class, 'NotDefinedType'));
+        $this->assertNull($config->getTypePreference(TestAsset\B::class, 'NotDefinedType'));
         $this->assertNull($config->getTypePreference('NotDefined', 'NotDefinedType'));
     }
 
@@ -87,28 +91,31 @@ class ConfigTest extends TestCase
     {
         $instance = new Config();
         $expected = [
-            'bar' => 'Baz',
+            'someParam' => 'SomeOtherType',
         ];
 
-        $this->assertEmpty($instance->getParameters('Foo'));
-        $instance->setParameters('Foo', $expected);
-        $this->assertEquals($expected, $instance->getParameters('Foo'));
+        $this->assertEmpty($instance->getParameters(TestAsset\Config\SomeClass::class));
+        $instance->setParameters(TestAsset\Config\SomeClass::class, $expected);
+        $this->assertEquals($expected, $instance->getParameters(TestAsset\Config\SomeClass::class));
     }
 
     public function testSetGlobalTypePreference(): void
     {
         $instance = new Config();
-        $this->assertNull($instance->getTypePreference('Foo'));
-        $instance->setTypePreference('Foo', 'Bar');
-        $this->assertEquals('Bar', $instance->getTypePreference('Foo'));
+        $this->assertNull($instance->getTypePreference(TestAsset\Config\SomeClass::class));
+        $instance->setTypePreference(TestAsset\Config\SomeClass::class, 'SomeAlias');
+        $this->assertEquals('SomeAlias', $instance->getTypePreference(TestAsset\Config\SomeClass::class));
     }
 
     public function testSetTypePreferenceForTypeContext(): void
     {
         $instance = new Config();
-        $this->assertNull($instance->getTypePreference('Foo', 'Baz'));
-        $instance->setTypePreference('Foo', 'Bar', 'Baz');
-        $this->assertEquals('Bar', $instance->getTypePreference('Foo', 'Baz'));
+        $this->assertNull($instance->getTypePreference(TestAsset\Config\SomeClass::class, 'SomeOtherType'));
+        $instance->setTypePreference(TestAsset\Config\SomeClass::class, 'SomeAlias', 'SomeOtherType');
+        $this->assertEquals(
+            'SomeAlias',
+            $instance->getTypePreference(TestAsset\Config\SomeClass::class, 'SomeOtherType')
+        );
     }
 
     /**

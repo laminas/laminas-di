@@ -12,8 +12,6 @@ use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 use stdClass;
 
-use function is_array;
-
 /**
  * @coversDefaultClass Laminas\Di\LegacyConfig
  */
@@ -29,7 +27,7 @@ class LegacyConfigTest extends TestCase
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            $key  = $file->getBasename('.php');
+            $key = $file->getBasename('.php');
 
             /** @var array{config: array, expected: array} $data */
             $data = include $file->getPathname();
