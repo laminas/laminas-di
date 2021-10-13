@@ -48,7 +48,6 @@ Generally the following behavior applies for parameter values that are not
 - If the parameter has no typehint at all, the value will be wrapped into a
   `ValueInjection`.
 
-
 ### Examples
 
 ```php

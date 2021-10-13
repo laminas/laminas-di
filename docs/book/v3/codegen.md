@@ -5,6 +5,7 @@ generators to create optimized code for production. These generators will
 inspect the provided classes, resolve their dependencies, and generate factories
 based on these results.
 
+<!-- markdownlint-disable-next-line header-increment -->
 > ### Removal of laminas-code dependencies
 >
 > Before version 3.1, this feature required [laminas-code](https://docs.laminas.dev/laminas-code/),
@@ -101,5 +102,5 @@ via an optional fourth constructor parameter.
 
 The generator will log the following information:
 
-* When a factory is about to be generated for a class or alias (Log level: Debug)
-* When the factory generation caused an exception (Log level: Error)
+- When a factory is about to be generated for a class or alias (Log level: Debug)
+- When the factory generation caused an exception (Log level: Error)
