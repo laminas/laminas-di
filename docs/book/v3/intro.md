@@ -35,7 +35,6 @@ This decision was made for several reasons:
 > - [Matthew Weier O'Phinney's Analogy](https://mwop.net/blog/260-Dependency-Injection-An-analogy.html)
 > - [Fabien Potencier's Series](http://fabien.potencier.org/article/11/what-is-dependency-injection) on DI
 
-
 > ### laminas-servicemanager
 >
 > Since laminas-di purely provides automatic DI (aka auto wiring), it does not

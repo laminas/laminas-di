@@ -140,7 +140,6 @@ $b = $injector->create('MyClass.A'); // Constructed with SpecialFoo
 $c = $injector->create('MyClass.B'); // Constructed with Foo (since Bar does not satisfy FooInterface)
 ```
 
-
 ## Parameters
 
 In contrast to type preferences, the resolver will not perform checks if the
