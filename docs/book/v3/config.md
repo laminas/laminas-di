@@ -25,7 +25,7 @@ The configuration array respects the following keys (unknown keys are ignored):
 
   - `typeOf`: String that contains a class name. It declares that the
     associated key is an alias of the given class name. This class must exist.
-    It cannot not be another alias.
+    It cannot be another alias.
 
 Below is an example of injector configuration.
 
@@ -43,8 +43,8 @@ $config = new \Laminas\Di\Config([
     'types' => [
         ClassName::class => [
             // Declaration in the same way as global preferences
-            // but these will aply when the type of the associated key
-            // should be instanciated
+            // but these will apply when the type of the associated key
+            // should be instantiated
             'preferences' => [],
 
             // Constructor parameters to inject. This option will define
@@ -176,8 +176,7 @@ preferences.
 An alias must refer to an actual class or an interface, therefore you cannot
 declare aliases for another alias.
 
-For example the following the following class should be instantiated in two
-different ways:
+For example the following class should be instantiated in two different ways:
 
 ```php
 // Assume the following classes are declared:

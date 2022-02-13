@@ -40,7 +40,7 @@ upgrading to `laminas-di` version 3.
 
 When you are using laminas-mvc, you can follow these steps to upgrade:
 
-1. Remove `laminas/laminas-servicemanager-di`from your `composer.json`, or
+1. Remove `laminas/laminas-servicemanager-di` from your `composer.json`, or
    execute `composer remove laminas/laminas-servicemanager-di`.
 2. Change the version constraint for `laminas/laminas-di` to `^3.0`, or
    execute `composer require "laminas/laminas-di:^3.0"`.
@@ -69,6 +69,6 @@ $code = var_export($migrated->toArray(), true);
 
 When the laminas-di config service factory is used to create configuration for use
 with the `AutowireFactory` and/or `DefaultContainer`, if it detects the
-`$config['di]` key, it will emit an `E_USER_DEPRECATED` error, pointing to this
+`$config['di']` key, it will emit an `E_USER_DEPRECATED` error, pointing to this
 documentation. We recommend using the above approach to convert your
 configuration to the format recognized by version 3.

@@ -17,7 +17,7 @@ Instances can be created by calling `create()`:
 ```php
 use Laminas\Di\Injector;
 
-$injector = new Injector()
+$injector = new Injector();
 $injector->create(MyClass::class);
 ```
 
@@ -76,7 +76,7 @@ $injector->create(Bar::class, [
 // Creates Bar with the given instance of SpecialFoo bypassing the IoC
 // container:
 $injector->create(Bar::class, [
-    'foo' => ValueInjection(new SpecialFoo()),
+    'foo' => new ValueInjection(new SpecialFoo()),
 ]);
 
 // Creates Bar with an instance of Foo and the string literal 'SpecialFoo' for
@@ -97,7 +97,7 @@ for all possibilities of how parameters can be declared.
 
 ## Check if a type is creatable
 
-If you uncertain whether or not the injector can create a specific type, you can
+If you are uncertain whether or not the injector can create a specific type, you can
 test it with the `canCreate()` method.
 
 For example, if you were to consume the class name in a generic service factory

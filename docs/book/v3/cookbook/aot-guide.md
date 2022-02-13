@@ -12,7 +12,7 @@ You will learn how to:
 
 ## 1. Create project and add laminas-di
 
-For this guide, we will use an [mezzio application](https://docs.mezzio.dev/mezzio/)
+For this guide, we will use a [mezzio application](https://docs.mezzio.dev/mezzio/)
 built from the skeleton with laminas-servicemanager as its IoC container.
 
 If you have already set up a project with laminas-di, you can skip this step.
@@ -139,7 +139,7 @@ Add this new class to the the beginning of your `config/config.php` file's
 
 ```php
 $aggregator = new ConfigAggregator([
-    \AppAoT\ConfigProvider::class
+    \AppAoT\ConfigProvider::class,
     // Add Laminas\Di
     \Laminas\Di\ConfigProvider::class,
 
@@ -204,7 +204,7 @@ The default actions (`HomePageAction` and `PingAction`) now use auto wiring!
 ## 4. Add a code generator command script
 
 We will now add a simple script in the `bin/` directory, which we will also add
-to our `composer.json`scripts section, to generate factories.
+to our `composer.json` scripts section, to generate factories.
 
 In the real world, you might use a console implementation such as
 symfony/console for scripts such as these.
