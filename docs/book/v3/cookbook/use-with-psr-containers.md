@@ -1,6 +1,6 @@
 # Usage with PSR-11 containers
 
-laminas-di is designed to utilize and work with any IoC container thet implements
+laminas-di is designed to utilize and work with any IoC container that implements
 the PSR-11 `Psr\Container\ContainerInterface`. To achieve this you can pass any
 container instance as the second parameter to the injector:
 
@@ -20,7 +20,7 @@ create unknown instances, even when the classes are known to laminas-di. It may
 fail with an exception that dependencies could not be resolved.
 
 If you want to pair the container with the injector and use the injector for
-dependencies the container it is not aware of, you may decorate the original
+dependencies the container is not aware of, you may decorate the original
 container into a laminas-di-aware implementation. As an example:
 
 ```php
@@ -35,7 +35,7 @@ class MyContainer implements ContainerInterface
 
     private $injector;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $wrappedContainer)
     {
         $this->container = $wrappedContainer;
         $this->injector = new Injector(null, $this);
@@ -43,7 +43,7 @@ class MyContainer implements ContainerInterface
 
     public function has($name)
     {
-        retrun $this->container->has($name) || $this->injector->canCreate($name);
+        return $this->container->has($name) || $this->injector->canCreate($name);
     }
 
     public function get($name)

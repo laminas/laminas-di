@@ -24,7 +24,7 @@ $serviceManager->setFactory(Di\InjectorInterface::class, Container\InjectorFacto
 
 ## Abstract/Generic Service Factory
 
-This component ships with an generic factory
+This component ships with a generic factory
 `Laminas\Di\Container\AutowireFactory`. This factory is suitable as an abstract
 service factory for use with laminas-servicemanager.
 
