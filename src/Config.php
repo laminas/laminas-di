@@ -37,7 +37,7 @@ use function is_array;
  *                  Some\Interface::class => 'My.SpecificAlias'
  *              ],
  *
- *              // instantiation paramters. These will only be used for
+ *              // instantiation parameters. These will only be used for
  *              // the instantiator (i.e. the constructor)
  *              'parameters' => [
  *                  'foo' => My\FooImpl::class, // Use the given type to provide the injection (depends on definition)
@@ -114,7 +114,7 @@ class Config implements ConfigInterface
      */
     public function getClassForAlias(string $name): ?string
     {
-        if (isset($this->types[$name]['typeOf'])) {
+        if ($this->isAlias($name)) {
             return $this->types[$name]['typeOf'];
         }
 
@@ -122,7 +122,7 @@ class Config implements ConfigInterface
     }
 
     /**
-     * Returns the instantiation paramters for the given type
+     * Returns the instantiation parameters for the given type
      *
      * @param string $type The alias or class name
      * @return array The configured parameters
