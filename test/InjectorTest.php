@@ -9,6 +9,7 @@ use Laminas\Di\Config;
 use Laminas\Di\DefaultContainer;
 use Laminas\Di\Definition\DefinitionInterface;
 use Laminas\Di\Exception;
+use Laminas\Di\Exception\ClassNotFoundException;
 use Laminas\Di\Injector;
 use Laminas\Di\Resolver\DependencyResolverInterface;
 use Laminas\Di\Resolver\TypeInjection;
@@ -478,5 +479,18 @@ class InjectorTest extends TestCase
     {
         $result = (new Injector())->create($class, $parameters);
         $this->assertEquals($parameters, $result->result);
+    }
+
+    public function testCreateGivenExistingInterfaceExpectedClassNotFoundExceptionThrown()
+    {
+        $definition = $this->createMock(DefinitionInterface::class);
+        $definition
+            ->method('hasClass')
+            ->willReturn(true);
+
+        $injector = new Injector(null, null, $definition);
+
+        $this->expectException(ClassNotFoundException::class);
+        $injector->create(DefinitionInterface::class);
     }
 }
