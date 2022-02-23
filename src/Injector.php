@@ -163,9 +163,9 @@ class Injector implements InjectorInterface
             ));
         }
 
-        if (! class_exists($class) || interface_exists($class)) {
+        if (! class_exists($class)) {
             throw new ClassNotFoundException(sprintf(
-                'Class or interface by name %s does not exist',
+                'Class by name %s does not exist',
                 $class
             ));
         }
