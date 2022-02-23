@@ -486,9 +486,8 @@ class InjectorTest extends TestCase
         $definition = $this->createMock(DefinitionInterface::class);
         $definition
             ->method('hasClass')
-            ->willReturn(true)
-        ;
-        
+            ->willReturn(true);
+
         $injector = new Injector(null, null, $definition);
 
         $this->expectException(ClassNotFoundException::class);
