@@ -34,7 +34,7 @@ trait GeneratorTrait
         if (! is_dir($dir) && ! mkdir($dir, $this->mode, true)) {
             throw new GenerateCodeException(sprintf(
                 'Could not create output directory: %s',
-                $this->outputDirectory
+                $dir
             ));
         }
     }
