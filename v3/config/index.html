@@ -5,7 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <meta name="description" content="Automated dependency injection for PSR-11 containers"> 
+
+    
+    
+        
+    
+    <meta name="docsearch:version" content="3.0.0,latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-di">
+
     <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/config/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
@@ -397,7 +406,7 @@ name.</p>
 <li>
 <p><code>typeOf</code>: String that contains a class name. It declares that the
     associated key is an alias of the given class name. This class must exist.
-    It cannot not be another alias.</p>
+    It cannot be another alias.</p>
 </li>
 </ul>
 <p>Below is an example of injector configuration.</p>
@@ -414,8 +423,8 @@ name.</p>
     'types' =&gt; [
         ClassName::class =&gt; [
             // Declaration in the same way as global preferences
-            // but these will aply when the type of the associated key
-            // should be instanciated
+            // but these will apply when the type of the associated key
+            // should be instantiated
             'preferences' =&gt; [],
 
             // Constructor parameters to inject. This option will define
@@ -541,8 +550,7 @@ options. Aliases can directly be created with the injector or declared as type
 preferences.</p>
 <p>An alias must refer to an actual class or an interface, therefore you cannot
 declare aliases for another alias.</p>
-<p>For example the following the following class should be instantiated in two
-different ways:</p>
+<p>For example the following class should be instantiated in two different ways:</p>
 <pre class="highlight"><code class="language-php">// Assume the following classes are declared:
 
 class Foo
@@ -596,7 +604,9 @@ $b = $injector-&gt;create('MyClass.Alias'); // Constructed with Foo (since there
         <li class="page-nav__item">
             
                 <a rel="prev" class="page-nav__link page-nav__link--prev" href="../psr-11/">
-                    <i class="fa fa-chevron-left"></i> Previous
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    PSR-11 Support
                 </a>
             
         </li>
@@ -605,7 +615,9 @@ $b = $injector-&gt;create('MyClass.Alias'); // Constructed with Foo (since there
         <li class="page-nav__item">
             
                 <a rel="next" class="page-nav__link page-nav__link--next" href="../injector/">
-                    Next <i class="fa fa-chevron-right"></i>
+                    <small class="page-nav__label">Next</small>
+                    Injector
+                    <i class="fa fa-chevron-right"></i>
                 </a>
             
         </li>
@@ -818,7 +830,7 @@ $b = $injector-&gt;create('MyClass.Alias'); // Constructed with Foo (since there
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2022 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

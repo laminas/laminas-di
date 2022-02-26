@@ -5,7 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Automated dependency injection for PSR-11 containers">  
+    <meta name="description" content="Automated dependency injection for PSR-11 containers"> 
+
+    
+    
+        
+    
+    <meta name="docsearch:version" content="3.0.0,latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-di">
+
     <link rel="canonical" href="https://docs.laminas.dev/laminas-di/v3/cookbook/use-with-psr-containers/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
@@ -369,7 +378,7 @@
     
 
     <h1 id="usage-with-psr-11-containers">Usage with PSR-11 containers</h1>
-<p>laminas-di is designed to utilize and work with any IoC container thet implements
+<p>laminas-di is designed to utilize and work with any IoC container that implements
 the PSR-11 <code>Psr\Container\ContainerInterface</code>. To achieve this you can pass any
 container instance as the second parameter to the injector:</p>
 <pre class="highlight"><code class="language-php">use Laminas\Di\Injector;
@@ -382,7 +391,7 @@ obtain the dependencies.</p>
 create unknown instances, even when the classes are known to laminas-di. It may
 fail with an exception that dependencies could not be resolved.</p>
 <p>If you want to pair the container with the injector and use the injector for
-dependencies the container it is not aware of, you may decorate the original
+dependencies the container is not aware of, you may decorate the original
 container into a laminas-di-aware implementation. As an example:</p>
 <pre class="highlight"><code class="language-php">namespace MyApp;
 
@@ -395,7 +404,7 @@ class MyContainer implements ContainerInterface
 
     private $injector;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $wrappedContainer)
     {
         $this-&gt;container = $wrappedContainer;
         $this-&gt;injector = new Injector(null, $this);
@@ -403,7 +412,7 @@ class MyContainer implements ContainerInterface
 
     public function has($name)
     {
-        retrun $this-&gt;container-&gt;has($name) || $this-&gt;injector-&gt;canCreate($name);
+        return $this-&gt;container-&gt;has($name) || $this-&gt;injector-&gt;canCreate($name);
     }
 
     public function get($name)
@@ -432,7 +441,9 @@ class MyContainer implements ContainerInterface
         <li class="page-nav__item">
             
                 <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../codegen/">
-                    <i class="fa fa-chevron-left"></i> Previous
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Code Generator
                 </a>
             
         </li>
@@ -441,7 +452,9 @@ class MyContainer implements ContainerInterface
         <li class="page-nav__item">
             
                 <a rel="next" class="page-nav__link page-nav__link--next" href="../use-with-servicemanager/">
-                    Next <i class="fa fa-chevron-right"></i>
+                    <small class="page-nav__label">Next</small>
+                    Usage with laminas-servicemanager
+                    <i class="fa fa-chevron-right"></i>
                 </a>
             
         </li>
@@ -654,7 +667,7 @@ class MyContainer implements ContainerInterface
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-di/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2022 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
