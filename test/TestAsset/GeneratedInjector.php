@@ -8,8 +8,7 @@ use Laminas\Di\InjectorInterface;
 
 class GeneratedInjector implements InjectorInterface
 {
-    /** @var InjectorInterface */
-    private $injector;
+    private InjectorInterface $injector;
 
     public function __construct(InjectorInterface $injector)
     {

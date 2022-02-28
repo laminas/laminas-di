@@ -16,8 +16,7 @@ use function uniqid;
  */
 class ConfigTest extends TestCase
 {
-    /** @var array */
-    private $fixture;
+    private array $fixture;
 
     protected function setUp(): void
     {

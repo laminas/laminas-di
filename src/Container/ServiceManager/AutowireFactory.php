@@ -15,8 +15,7 @@ use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
  */
 class AutowireFactory implements AbstractFactoryInterface
 {
-    /** @var GenericAutowireFactory */
-    private $factory;
+    private GenericAutowireFactory $factory;
 
     public function __construct(?GenericAutowireFactory $factory = null)
     {

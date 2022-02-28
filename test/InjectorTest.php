@@ -191,9 +191,7 @@ class InjectorTest extends TestCase
             'selfOptional' => TestAsset\CircularClasses\Y::class,
         ];
 
-        return array_map(function ($class) {
-            return [$class];
-        }, $classes);
+        return array_map(fn($class) => [$class], $classes);
     }
 
     /**
@@ -232,12 +230,8 @@ class InjectorTest extends TestCase
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
 
         // Mocks a container that always creates new instances
-        $container->method('has')->willReturnCallback(function ($class) use ($injector) {
-            return $injector->canCreate($class);
-        });
-        $container->method('get')->willReturnCallback(function ($class) use ($injector) {
-            return $injector->create($class);
-        });
+        $container->method('has')->willReturnCallback(fn($class) => $injector->canCreate($class));
+        $container->method('get')->willReturnCallback(fn($class) => $injector->create($class));
 
         $injector->setContainer($container);
 

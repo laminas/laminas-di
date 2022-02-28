@@ -17,13 +17,11 @@ abstract class AbstractInjector implements InjectorInterface
     protected $factories = [];
 
     /** @var FactoryInterface[] */
-    private $factoryInstances = [];
+    private array $factoryInstances = [];
 
-    /** @var ContainerInterface */
-    private $container;
+    private ContainerInterface $container;
 
-    /** @var InjectorInterface */
-    private $injector;
+    private InjectorInterface $injector;
 
     /**
      * {@inheritDoc}

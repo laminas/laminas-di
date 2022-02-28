@@ -13,14 +13,13 @@ use function uasort;
 
 class ClassDefinition implements ClassDefinitionInterface
 {
-    /** @var ReflectionClass */
-    private $reflection;
+    private ReflectionClass $reflection;
 
     /** @var Parameter[] */
-    private $parameters;
+    private ?array $parameters = null;
 
     /** @var string[] */
-    private $supertypes;
+    private ?array $supertypes = null;
 
     /**
      * @param string|ReflectionClass $class
@@ -85,9 +84,10 @@ class ClassDefinition implements ClassDefinitionInterface
             $this->parameters[$parameter->getName()] = $parameter;
         }
 
-        uasort($this->parameters, function (ParameterInterface $a, ParameterInterface $b) {
-            return $a->getPosition() - $b->getPosition();
-        });
+        uasort(
+            $this->parameters,
+            fn(ParameterInterface $a, ParameterInterface $b) => $a->getPosition() - $b->getPosition()
+        );
     }
 
     /**

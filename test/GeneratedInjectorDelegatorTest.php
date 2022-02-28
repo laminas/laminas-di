@@ -40,9 +40,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
     public function testGeneratedInjectorDoesNotExist()
     {
         $injector = $this->prophesize(InjectorInterface::class)->reveal();
-        $callback = function () use ($injector) {
-            return $injector;
-        };
+        $callback = fn() => $injector;
 
         $container = $this->prophesize(ContainerInterface::class);
         $container->has('config')->willReturn(false)->shouldBeCalledTimes(1);
@@ -56,9 +54,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
     public function testGeneratedInjectorExists()
     {
         $injector = $this->prophesize(InjectorInterface::class)->reveal();
-        $callback = function () use ($injector) {
-            return $injector;
-        };
+        $callback = fn() => $injector;
 
         $container = $this->prophesize(ContainerInterface::class);
         $container->has('config')

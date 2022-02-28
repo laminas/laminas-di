@@ -17,10 +17,10 @@ use function class_exists;
 class RuntimeDefinition implements DefinitionInterface
 {
     /** @var ClassDefinition[] */
-    private $definition = [];
+    private array $definition = [];
 
     /** @var bool[] */
-    private $explicitClasses;
+    private ?array $explicitClasses = null;
 
     /**
      * @param null|string[] $explicitClasses

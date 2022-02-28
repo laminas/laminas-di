@@ -83,9 +83,7 @@ class AbstractInjectorTest extends TestCase
     public function testCanCreateReturnsTrueWhenAFactoryIsAvailable()
     {
         $className = uniqid('SomeClass');
-        $provider  = function () use ($className) {
-            return [$className => 'SomeClassFactory'];
-        };
+        $provider  = fn() => [$className => 'SomeClassFactory'];
 
         $this->decoratedInjectorProphecy
             ->canCreate($className)
@@ -99,9 +97,7 @@ class AbstractInjectorTest extends TestCase
     {
         $missingClass  = uniqid('SomeClass');
         $existingClass = uniqid('SomeOtherClass');
-        $provider      = function () {
-            return [];
-        };
+        $provider      = fn() => [];
 
         $this->decoratedInjectorProphecy
             ->canCreate($missingClass)
@@ -125,9 +121,7 @@ class AbstractInjectorTest extends TestCase
         $className = uniqid('SomeClass');
         $params    = ['someArg' => uniqid()];
         $expected  = new stdClass();
-        $provider  = function () use ($className, $factory) {
-            return [$className => $factory->reveal()];
-        };
+        $provider  = fn() => [$className => $factory->reveal()];
 
         $factory
             ->create(
@@ -150,9 +144,7 @@ class AbstractInjectorTest extends TestCase
         $className = uniqid('SomeClass');
         $expected  = new stdClass();
         $params    = ['someArg' => uniqid()];
-        $provider  = function () {
-            return [];
-        };
+        $provider  = fn() => [];
 
         $this->decoratedInjectorProphecy
             ->create($className, $params)
@@ -168,9 +160,7 @@ class AbstractInjectorTest extends TestCase
         $factory   = $this->prophesize(FactoryInterface::class);
         $className = uniqid('SomeClass');
         $expected  = new stdClass();
-        $provider  = function () use ($className, $factory) {
-            return [$className => $factory->reveal()];
-        };
+        $provider  = fn() => [$className => $factory->reveal()];
 
         $factory->create(Argument::type(DefaultContainer::class), Argument::cetera())
             ->shouldBeCalled()
@@ -182,9 +172,7 @@ class AbstractInjectorTest extends TestCase
 
     public function testFactoryIsCreatedFromClassNameString()
     {
-        $subject = $this->createTestSubject(function () {
-            return ['SomeClass' => StdClassFactory::class];
-        });
+        $subject = $this->createTestSubject(fn() => ['SomeClass' => StdClassFactory::class]);
 
         $factoryInstancesProperty = new ReflectionProperty(AbstractInjector::class, 'factoryInstances');
         $factoriesProperty        = new ReflectionProperty(AbstractInjector::class, 'factories');

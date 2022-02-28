@@ -19,8 +19,7 @@ use stdClass;
  */
 class AutowireFactoryTest extends TestCase
 {
-    /** @var AutowireFactory */
-    private $instance;
+    private ?AutowireFactory $instance = null;
 
     /**
      * Prepares the environment before running a test.
