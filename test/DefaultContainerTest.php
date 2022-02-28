@@ -94,9 +94,7 @@ class DefaultContainerTest extends TestCase
         $injector->expects($this->once())
             ->method('create')
             ->with($key)
-            ->willReturnCallback(function () {
-                return new stdClass();
-            });
+            ->willReturnCallback(fn() => new stdClass());
 
         $container = new DefaultContainer($injector);
         $expected  = $container->get($key);

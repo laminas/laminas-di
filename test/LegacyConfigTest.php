@@ -8,7 +8,6 @@ use ArrayIterator;
 use GlobIterator;
 use Laminas\Di\Exception;
 use Laminas\Di\LegacyConfig;
-use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 use stdClass;
@@ -48,7 +47,7 @@ class LegacyConfigTest extends TestCase
 
     public function testFQParamNamesTriggerDeprecated()
     {
-        $this->expectDeprecation(DeprecatedError::class);
+        $this->expectDeprecation();
 
         new LegacyConfig([
             'instance' => [

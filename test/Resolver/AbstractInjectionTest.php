@@ -6,7 +6,6 @@ namespace LaminasTest\Di\Resolver;
 
 use Laminas\Di\Resolver\AbstractInjection;
 use Laminas\Di\Resolver\InjectionInterface;
-use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 
 use function sprintf;
@@ -15,7 +14,7 @@ class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated()
     {
-        $this->expectDeprecation(Deprecated::class);
+        $this->expectDeprecation();
         $this->expectDeprecationMessage(sprintf(
             '%s is deprecated, please migrate to %s',
             AbstractInjection::class,

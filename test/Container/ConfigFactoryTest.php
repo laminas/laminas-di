@@ -6,8 +6,6 @@ namespace LaminasTest\Di\Container;
 
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\ConfigFactory;
-use PHPUnit\Framework\Error\Deprecated as DeprecatedError;
-use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -137,7 +135,7 @@ class ConfigFactoryTest extends TestCase
             ],
         ]);
 
-        $this->expectDeprecation(DeprecatedError::class);
+        $this->expectDeprecation();
         (new ConfigFactory())->create($container);
     }
 }

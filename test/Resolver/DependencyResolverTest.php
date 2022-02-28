@@ -138,9 +138,7 @@ class DependencyResolverTest extends TestCase
                 ));
         }
 
-        $mock->method('hasClass')->willReturnCallback(function ($class) use ($definition) {
-            return isset($definition[$class]);
-        });
+        $mock->method('hasClass')->willReturnCallback(fn($class) => isset($definition[$class]));
 
         return $mock;
     }
@@ -365,10 +363,10 @@ class DependencyResolverTest extends TestCase
         return [
             //                             [type,               value,                         builtIn]
             'string'                    => ['string',           '123',                         true],
-            'int'                       => ['int',              rand(0, 72649), true],
-            'floatForInt'               => ['int',              (float) rand(0, 72649) / 10.0, true],
-            'intForFloat'               => ['float',            rand(0, 72649), true],
-            'float'                     => ['float',            (float) rand(0, 72649) / 10.0, true],
+            'int'                       => ['int',              random_int(0, 72649), true],
+            'floatForInt'               => ['int',              (float) random_int(0, 72649) / 10.0, true],
+            'intForFloat'               => ['float',            random_int(0, 72649), true],
+            'float'                     => ['float',            (float) random_int(0, 72649) / 10.0, true],
 
             // Accepted by php as well
             'stringForInt'              => ['int',              '123',                         true],

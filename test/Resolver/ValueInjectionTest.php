@@ -8,7 +8,6 @@ use Laminas\Di\Exception;
 use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
-use PHPUnit\Framework\Error\Deprecated;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -60,7 +59,7 @@ class ValueInjectionTest extends TestCase
         return [
             'string' => ['Hello World'],
             'bool'   => [true],
-            'int'    => [7364234],
+            'int'    => [7_364_234],
             'object' => [new stdClass()],
             'null'   => [null],
         ];
@@ -188,7 +187,7 @@ class ValueInjectionTest extends TestCase
         $value   = uniqid();
         $subject = new ValueInjection($value);
 
-        $this->expectDeprecation(Deprecated::class);
+        $this->expectDeprecation();
         self::assertSame($value, $subject->getValue());
     }
 }
