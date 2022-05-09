@@ -28,18 +28,12 @@ class Injector implements InjectorInterface
 {
     /** @var DefinitionInterface */
     protected $definition;
-
-    /** @var ContainerInterface */
-    protected $container;
-
-    /** @var DependencyResolverInterface */
-    protected $resolver;
-
-    /** @var ConfigInterface */
-    protected $config;
+    protected ContainerInterface $container;
+    protected DependencyResolverInterface $resolver;
+    protected ConfigInterface $config;
 
     /** @var string[] */
-    protected $instantiationStack = [];
+    protected array $instantiationStack = [];
 
     /**
      * Constructor
@@ -113,11 +107,10 @@ class Injector implements InjectorInterface
      *
      * @param string $name Class name or service alias
      * @param array  $parameters Constructor parameters, keyed by the parameter name.
-     * @return object|null
      * @throws ClassNotFoundException
      * @throws RuntimeException
      */
-    public function create(string $name, array $parameters = [])
+    public function create(string $name, array $parameters = []): ?object
     {
         if (in_array($name, $this->instantiationStack)) {
             throw new Exception\CircularDependencyException(sprintf(
@@ -145,11 +138,10 @@ class Injector implements InjectorInterface
      *
      * @param string $name The type name to instantiate.
      * @param array  $params Constructor arguments, keyed by the parameter name.
-     * @return object
      * @throws InvalidCallbackException
      * @throws ClassNotFoundException
      */
-    protected function createInstance(string $name, array $params)
+    protected function createInstance(string $name, array $params): object
     {
         $class = $this->getClassName($name);
 
