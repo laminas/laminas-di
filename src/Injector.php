@@ -19,7 +19,6 @@ use function array_pop;
 use function class_exists;
 use function implode;
 use function in_array;
-use function interface_exists;
 use function sprintf;
 
 /**
@@ -106,7 +105,7 @@ class Injector implements InjectorInterface
     public function canCreate(string $name): bool
     {
         $class = $this->getClassName($name);
-        return class_exists($class) && ! interface_exists($class);
+        return class_exists($class);
     }
 
     /**
