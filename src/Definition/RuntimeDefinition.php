@@ -27,9 +27,7 @@ class RuntimeDefinition implements DefinitionInterface
      */
     public function __construct(?array $explicitClasses = null)
     {
-        if ($explicitClasses) {
-            $this->setExplicitClasses($explicitClasses);
-        }
+        $this->setExplicitClasses($explicitClasses ?? []);
     }
 
     /**
@@ -62,11 +60,6 @@ class RuntimeDefinition implements DefinitionInterface
     public function addExplicitClass(string $class): self
     {
         $this->ensureClassExists($class);
-
-        if (! $this->explicitClasses) {
-            $this->explicitClasses = [];
-        }
-
         $this->explicitClasses[$class] = true;
         return $this;
     }
@@ -94,10 +87,6 @@ class RuntimeDefinition implements DefinitionInterface
      */
     public function getClasses(): array
     {
-        if (! $this->explicitClasses) {
-            return array_keys($this->definition);
-        }
-
         return array_keys(array_merge($this->definition, $this->explicitClasses));
     }
 
