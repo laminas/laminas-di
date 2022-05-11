@@ -236,11 +236,6 @@ parameters:
 			path: src/Definition/Reflection/Parameter.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Definition\\\\RuntimeDefinition\\:\\:loadClass\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Definition/RuntimeDefinition.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Injector\\:\\:create\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Injector.php
