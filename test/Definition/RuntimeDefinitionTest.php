@@ -40,7 +40,7 @@ class RuntimeDefinitionTest extends TestCase
         $this->assertEquals($expected, $definition->getClasses());
     }
 
-    public function testSetExplicitClassesReplacesPrefiousValues()
+    public function testSetExplicitClassesReplacesPreviousValues(): void
     {
         $expected = [
             TestAsset\A::class,
