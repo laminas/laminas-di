@@ -211,22 +211,7 @@ parameters:
 			path: src/Definition/Reflection/ClassDefinition.php
 
 		-
-			message: "#^Parameter \\#1 \\$argument of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
-			count: 1
-			path: src/Definition/Reflection/ClassDefinition.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:reflectSupertypes\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/Definition/Reflection/ClassDefinition.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
-			count: 1
-			path: src/Definition/Reflection/ClassDefinition.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\Definition\\\\Reflection\\\\ClassDefinition\\:\\:reflectParameters\\(\\) has no return typehint specified\\.$#"
 			count: 1
 			path: src/Definition/Reflection/ClassDefinition.php
 
