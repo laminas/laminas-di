@@ -19,17 +19,16 @@ class RuntimeDefinition implements DefinitionInterface
     /** @var ClassDefinition[] */
     private array $definition = [];
 
-    /** @var bool[] */
-    private ?array $explicitClasses = null;
+    /** @var array<class-string, bool> */
+    private array $explicitClasses;
 
     /**
-     * @param null|string[] $explicitClasses
+     * @param null|class-string[] $explicitClasses
      */
     public function __construct(?array $explicitClasses = null)
     {
-        if ($explicitClasses) {
-            $this->setExplicitClasses($explicitClasses);
-        }
+        $this->explicitClasses = [];
+        $this->setExplicitClasses($explicitClasses ?? []);
     }
 
     /**
@@ -37,7 +36,7 @@ class RuntimeDefinition implements DefinitionInterface
      *
      * @see addExplicitClass()
      *
-     * @param string[] $explicitClasses An array of class names
+     * @param class-string[] $explicitClasses An array of class names
      * @throws Exception\ClassNotFoundException
      */
     public function setExplicitClasses(array $explicitClasses): self
@@ -57,16 +56,12 @@ class RuntimeDefinition implements DefinitionInterface
      * Adding classes this way will cause the defintion to report them when getClasses()
      * is called, even when they're not yet loaded.
      *
+     * @param class-string $class
      * @throws Exception\ClassNotFoundException
      */
     public function addExplicitClass(string $class): self
     {
         $this->ensureClassExists($class);
-
-        if (! $this->explicitClasses) {
-            $this->explicitClasses = [];
-        }
-
         $this->explicitClasses[$class] = true;
         return $this;
     }
@@ -94,10 +89,6 @@ class RuntimeDefinition implements DefinitionInterface
      */
     public function getClasses(): array
     {
-        if (! $this->explicitClasses) {
-            return array_keys($this->definition);
-        }
-
         return array_keys(array_merge($this->definition, $this->explicitClasses));
     }
 
