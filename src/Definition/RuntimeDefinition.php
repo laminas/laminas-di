@@ -16,7 +16,7 @@ use function class_exists;
  */
 class RuntimeDefinition implements DefinitionInterface
 {
-    /** @var ClassDefinition[] */
+    /** @var array<class-string, ClassDefinition> */
     private array $definition = [];
 
     /** @var array<class-string, bool> */
@@ -66,6 +66,7 @@ class RuntimeDefinition implements DefinitionInterface
         return $this;
     }
 
+    /** @param class-string $class */
     private function ensureClassExists(string $class): void
     {
         if (! $this->hasClass($class)) {
@@ -74,7 +75,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * @param string $class The class name to load
+     * @param class-string $class The class name to load
      * @throws Exception\ClassNotFoundException
      */
     private function loadClass(string $class): void
@@ -84,9 +85,7 @@ class RuntimeDefinition implements DefinitionInterface
         $this->definition[$class] = new ClassDefinition($class);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return list<class-string> */
     public function getClasses(): array
     {
         return array_keys(array_merge($this->definition, $this->explicitClasses));
@@ -98,6 +97,7 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
+     * @param class-string $class
      * @return ClassDefinition
      * @throws Exception\ClassNotFoundException
      */
