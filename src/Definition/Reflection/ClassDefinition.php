@@ -15,14 +15,14 @@ class ClassDefinition implements ClassDefinitionInterface
 {
     private ReflectionClass $reflection;
 
-    /** @var Parameter[] */
+    /** @var array<string, Parameter> */
     private ?array $parameters = null;
 
-    /** @var string[] */
+    /** @var list<class-string> */
     private ?array $supertypes = null;
 
     /**
-     * @param string|ReflectionClass $class
+     * @param class-string|ReflectionClass $class
      */
     public function __construct($class)
     {
@@ -33,7 +33,7 @@ class ClassDefinition implements ClassDefinitionInterface
         $this->reflection = $class;
     }
 
-    private function reflectSupertypes()
+    private function reflectSupertypes(): void
     {
         $this->supertypes = [];
         $class            = $this->reflection;
@@ -49,7 +49,7 @@ class ClassDefinition implements ClassDefinitionInterface
     }
 
     /**
-     * @return string[]
+     * @return list<class-string>
      */
     public function getSupertypes(): array
     {
@@ -68,7 +68,7 @@ class ClassDefinition implements ClassDefinitionInterface
         return $this->reflection->getInterfaceNames();
     }
 
-    private function reflectParameters()
+    private function reflectParameters(): void
     {
         $this->parameters = [];
 
@@ -91,7 +91,7 @@ class ClassDefinition implements ClassDefinitionInterface
     }
 
     /**
-     * @return Parameter[]
+     * @return array<string, Parameter>
      */
     public function getParameters(): array
     {
