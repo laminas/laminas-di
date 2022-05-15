@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\Reflection\Parameter;
+use LaminasTest\Di\Classes\Bar;
+use LaminasTest\Di\Classes\Foo;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionParameter;
+use UnexpectedValueException;
 
 /**
  * Parameter test case.
@@ -105,5 +108,31 @@ class ParameterTest extends TestCase
 
         $this->assertTrue($param->isBuiltin());
         $this->assertSame('iterable', $param->getType());
+    }
+
+    /**
+     * @requires PHP >= 8.0
+     */
+    public function testGivenUnionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    {
+        $this->expectException(UnexpectedValueException::class);
+
+        $parameters = (new ReflectionClass(Foo::class))->getConstructor()->getParameters();
+        $param  = new Parameter($parameters[0]);
+
+        $param->isBuiltin();
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     */
+    public function testGivenIntersectionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    {
+        $this->expectException(UnexpectedValueException::class);
+
+        $parameters = (new ReflectionClass(Bar::class))->getConstructor()->getParameters();
+        $param  = new Parameter($parameters[0]);
+
+        $param->isBuiltin();
     }
 }
