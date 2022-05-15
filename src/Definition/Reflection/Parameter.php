@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace Laminas\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ParameterInterface;
+use Laminas\Di\Exception\UnexpectedValueException;
+use ReflectionNamedType;
 use ReflectionParameter;
+
+use function get_class;
+use function sprintf;
 
 /**
  * This class specifies a method parameter for the di definition
@@ -80,11 +85,24 @@ class Parameter implements ParameterInterface
      * {@inheritDoc}
      *
      * @see ParameterInterface::isScalar()
+     *
+     * @throws UnexpectedValueException
      */
     public function isBuiltin(): bool
     {
         if ($this->reflection->hasType()) {
             $type = $this->reflection->getType();
+
+            if ($type !== null && ! $type instanceof ReflectionNamedType) {
+                throw new UnexpectedValueException(
+                    sprintf(
+                        "Unusable type '%s', object of type '%s' required",
+                        get_class($type),
+                        ReflectionNamedType::class
+                    )
+                );
+            }
+
             return $type !== null ? $type->isBuiltin() : false;
         }
 
