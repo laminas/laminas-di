@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ParameterInterface;
-use Laminas\Di\Exception\UnexpectedValueException;
 use Laminas\Di\Exception\UnsupportedReflectionTypeException;
 use ReflectionNamedType;
 use ReflectionParameter;
@@ -84,7 +83,7 @@ class Parameter implements ParameterInterface
      *
      * @see ParameterInterface::isScalar()
      *
-     * @throws UnexpectedValueException
+     * @throws UnsupportedReflectionTypeException
      */
     public function isBuiltin(): bool
     {
