@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\Reflection\Parameter;
+use Laminas\Di\Exception\UnsupportedReflectionTypeException;
+use LaminasTest\Di\Classes\IntersectionTypeConstructorDependency;
+use LaminasTest\Di\Classes\UnionTypeConstructorDependency;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -105,5 +108,33 @@ class ParameterTest extends TestCase
 
         $this->assertTrue($param->isBuiltin());
         $this->assertSame('iterable', $param->getType());
+    }
+
+    /**
+     * @requires PHP >= 8.0
+     */
+    public function testGivenUnionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    {
+        $this->expectException(UnsupportedReflectionTypeException::class);
+
+        $class      = UnionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
+
+        $param->isBuiltin();
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     */
+    public function testGivenIntersectionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    {
+        $this->expectException(UnsupportedReflectionTypeException::class);
+
+        $class      = IntersectionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
+
+        $param->isBuiltin();
     }
 }
