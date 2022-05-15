@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\Reflection\Parameter;
-use LaminasTest\Di\Classes\Bar;
-use LaminasTest\Di\Classes\Foo;
+use LaminasTest\Di\Classes\IntersectionTypeConstructorDependency;
+use LaminasTest\Di\Classes\UnionTypeConstructorDependency;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -117,8 +117,9 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnexpectedValueException::class);
 
-        $parameters = (new ReflectionClass(Foo::class))->getConstructor()->getParameters();
-        $param  = new Parameter($parameters[0]);
+        $class      = UnionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
 
         $param->isBuiltin();
     }
@@ -130,8 +131,9 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnexpectedValueException::class);
 
-        $parameters = (new ReflectionClass(Bar::class))->getConstructor()->getParameters();
-        $param  = new Parameter($parameters[0]);
+        $class      = IntersectionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
 
         $param->isBuiltin();
     }
