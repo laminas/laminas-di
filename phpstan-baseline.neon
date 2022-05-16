@@ -281,11 +281,6 @@ parameters:
 			path: src/Resolver/AbstractInjection.php
 
 		-
-			message: "#^Property Laminas\\\\Di\\\\Resolver\\\\DependencyResolver\\:\\:\\$gettypeMap has no typehint specified\\.$#"
-			count: 1
-			path: src/Resolver/DependencyResolver.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Resolver\\\\DependencyResolver\\:\\:getConfiguredParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Resolver/DependencyResolver.php
