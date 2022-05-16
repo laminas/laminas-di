@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\Di\Classes;
+namespace LaminasTest\Di\TestAsset\Constructor;
 
 use Countable;
 use Iterator;

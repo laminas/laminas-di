@@ -28,6 +28,6 @@
 
     <exclude-pattern><![CDATA[*/test/_files/*]]></exclude-pattern>
     <!-- Excluded since phpcs does not yet provide intersection types -->
-    <exclude-pattern>./test/Classes/IntersectionTypeConstructorDependency.php</exclude-pattern>
+    <exclude-pattern>./test/TestAsset/Constructor/IntersectionTypeConstructorDependency.php</exclude-pattern>
     <rule ref="LaminasCodingStandard"/>
 </ruleset>
