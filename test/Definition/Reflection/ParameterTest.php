@@ -135,4 +135,32 @@ class ParameterTest extends TestCase
 
         $param->isBuiltin();
     }
+
+    /**
+     * @requires PHP >= 8.0
+     */
+    public function testGetTypeGivenUnionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
+    {
+        $this->expectException(UnsupportedReflectionTypeException::class);
+
+        $class      = TestAsset\Constructor\UnionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
+
+        $param->getType();
+    }
+
+    /**
+     * @requires PHP >= 8.1
+     */
+    public function testGetTypeGivenIntersectionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
+    {
+        $this->expectException(UnsupportedReflectionTypeException::class);
+
+        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
+        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $param      = new Parameter($parameters[0]);
+
+        $param->getType();
+    }
 }
