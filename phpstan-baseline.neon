@@ -216,11 +216,6 @@ parameters:
 			path: src/Definition/Reflection/ClassDefinition.php
 
 		-
-			message: "#^Call to an undefined method ReflectionType\\:\\:getName\\(\\)\\.$#"
-			count: 1
-			path: src/Definition/Reflection/Parameter.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Injector\\:\\:create\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Injector.php

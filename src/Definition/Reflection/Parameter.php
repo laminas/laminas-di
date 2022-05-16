@@ -58,11 +58,19 @@ class Parameter implements ParameterInterface
      * {@inheritDoc}
      *
      * @see ParameterInterface::getType()
+     *
+     * @throws UnsupportedReflectionTypeException
      */
     public function getType(): ?string
     {
         if ($this->reflection->hasType()) {
-            return $this->reflection->getType()->getName();
+            $type = $this->reflection->getType();
+
+            if ($type !== null && ! $type instanceof ReflectionNamedType) {
+                throw UnsupportedReflectionTypeException::fromUnionOrIntersectionType($type);
+            }
+
+            return $type->getName();
         }
 
         return null;
