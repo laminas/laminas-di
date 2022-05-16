@@ -111,7 +111,7 @@ class ParameterTest extends TestCase
     /**
      * @requires PHP >= 8.0
      */
-    public function testGivenUnionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    public function testIsBuiltinGivenUnionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
@@ -125,7 +125,7 @@ class ParameterTest extends TestCase
     /**
      * @requires PHP >= 8.1
      */
-    public function testGivenIntersectionTypeToParameterExpectedUnexpectedValueExceptionThrown(): void
+    public function testIsBuiltinGivenIntersectionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
