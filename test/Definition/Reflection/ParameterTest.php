@@ -6,8 +6,6 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\Reflection\Parameter;
 use Laminas\Di\Exception\UnsupportedReflectionTypeException;
-use LaminasTest\Di\Classes\IntersectionTypeConstructorDependency;
-use LaminasTest\Di\Classes\UnionTypeConstructorDependency;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -117,7 +115,7 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = UnionTypeConstructorDependency::class;
+        $class      = TestAsset\Constructor\UnionTypeConstructorDependency::class;
         $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
         $param      = new Parameter($parameters[0]);
 
@@ -131,7 +129,7 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = IntersectionTypeConstructorDependency::class;
+        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
         $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
         $param      = new Parameter($parameters[0]);
 
