@@ -191,11 +191,6 @@ parameters:
 			path: src/Container/ServiceManager/AutowireFactory.php
 
 		-
-			message: "#^Property Laminas\\\\Di\\\\DefaultContainer\\:\\:\\$services type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DefaultContainer.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Definition\\\\ClassDefinitionInterface\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
 			count: 1
 			path: src/Definition/ClassDefinitionInterface.php

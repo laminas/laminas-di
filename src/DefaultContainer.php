@@ -25,7 +25,7 @@ class DefaultContainer implements ContainerInterface
     /**
      * Registered services and cached values
      *
-     * @var array
+     * @var array<string, object>
      */
     protected $services = [];
 
