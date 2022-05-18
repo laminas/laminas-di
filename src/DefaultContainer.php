@@ -80,7 +80,7 @@ class DefaultContainer implements ContainerInterface
      * @see ContainerInterface::get()
      *
      * @param string $name
-     * @return mixed
+     * @return object
      */
     public function get($name)
     {
