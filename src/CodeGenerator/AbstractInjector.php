@@ -65,7 +65,7 @@ abstract class AbstractInjector implements InjectorInterface
         return isset($this->factories[$name]);
     }
 
-    /** @return mixed */
+    /** @return object */
     public function create(string $name, array $options = [])
     {
         if ($this->hasFactory($name)) {
