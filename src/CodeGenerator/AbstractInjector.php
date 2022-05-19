@@ -23,9 +23,6 @@ abstract class AbstractInjector implements InjectorInterface
 
     private InjectorInterface $injector;
 
-    /**
-     * {@inheritDoc}
-     */
     public function __construct(InjectorInterface $injector, ?ContainerInterface $container = null)
     {
         $this->injector  = $injector;
