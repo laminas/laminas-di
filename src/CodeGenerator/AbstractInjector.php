@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
  */
 abstract class AbstractInjector implements InjectorInterface
 {
-    /** @var string[]|FactoryInterface[] */
+    /** @var array<string, class-string|FactoryInterface> */
     protected $factories = [];
 
     /** @var array<string, FactoryInterface> */
