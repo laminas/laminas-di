@@ -16,7 +16,7 @@ abstract class AbstractInjector implements InjectorInterface
     /** @var string[]|FactoryInterface[] */
     protected $factories = [];
 
-    /** @var FactoryInterface[] */
+    /** @var array<string, FactoryInterface> */
     private array $factoryInstances = [];
 
     private ContainerInterface $container;
