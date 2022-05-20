@@ -166,7 +166,7 @@ class InjectorGenerator
      *
      * This will generate the injector and its factories into the output directory
      *
-     * @param string[] $classes
+     * @param class-string[] $classes
      */
     public function generate($classes = []): void
     {
