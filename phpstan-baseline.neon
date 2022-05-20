@@ -56,16 +56,6 @@ parameters:
 			path: src/CodeGenerator/FactoryInterface.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\CodeGenerator\\\\InjectorGenerator\\:\\:ensureDirectory\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/CodeGenerator/InjectorGenerator.php
-
-		-
-			message: "#^Method Laminas\\\\Di\\\\CodeGenerator\\\\InjectorGenerator\\:\\:ensureOutputDirectory\\(\\) has no return typehint specified\\.$#"
-			count: 1
-			path: src/CodeGenerator/InjectorGenerator.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\CodeGenerator\\\\InjectorGenerator\\:\\:buildFromTemplate\\(\\) has parameter \\$replacements with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/CodeGenerator/InjectorGenerator.php
