@@ -28,8 +28,8 @@ use function var_export;
 /**
  * Generator for the dependency injector
  *
- * Generates a Injector class that will use a generated factory for a requested
- * type, if available. This factory will contained pre-resolved dependencies
+ * Generates an Injector class that will use a generated factory for a requested
+ * type, if available. This factory will contain pre-resolved dependencies
  * from the provided configuration, definition and resolver instances.
  */
 class InjectorGenerator
