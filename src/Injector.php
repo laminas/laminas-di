@@ -111,9 +111,9 @@ class Injector implements InjectorInterface
     /**
      * Create the instance with auto wiring
      *
-     * @param string $name Class name or service alias
-     * @param array  $parameters Constructor parameters, keyed by the parameter name.
-     * @return object|null
+     * @param string               $name Class name or service alias
+     * @param array<string, mixed> $parameters Constructor parameters, keyed by the parameter name.
+     * @return object
      * @throws ClassNotFoundException
      * @throws RuntimeException
      */
@@ -143,8 +143,8 @@ class Injector implements InjectorInterface
      *
      * Any parameters provided will be used as constructor arguments only.
      *
-     * @param string $name The type name to instantiate.
-     * @param array  $params Constructor arguments, keyed by the parameter name.
+     * @param string               $name The type name to instantiate.
+     * @param array<string, mixed> $params Constructor arguments, keyed by the parameter name.
      * @return object
      * @throws InvalidCallbackException
      * @throws ClassNotFoundException
@@ -203,9 +203,9 @@ class Injector implements InjectorInterface
      * If this was successful (the resolver returned a non-null value), it will use
      * the ioc container to fetch the instances
      *
-     * @param string $type The class or alias name to resolve for
-     * @param array  $params Provided call time parameters
-     * @return array The resulting arguments in call order
+     * @param string                $type The class or alias name to resolve for
+     * @param array<string, mixed>  $params Provided call time parameters
+     * @return list<mixed> The resulting arguments in call order
      * @throws Exception\UndefinedReferenceException When a type cannot be
      *     obtained via the ioc container and the method is required for
      *     injection.
@@ -216,7 +216,7 @@ class Injector implements InjectorInterface
         $resolved = $this->resolver->resolveParameters($type, $params);
         $params   = [];
 
-        foreach ($resolved as $position => $injection) {
+        foreach ($resolved as $injection) {
             try {
                 $params[] = $this->getInjectionValue($injection);
             } catch (NotFoundExceptionInterface $containerException) {
