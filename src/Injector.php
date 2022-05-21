@@ -143,8 +143,8 @@ class Injector implements InjectorInterface
      *
      * Any parameters provided will be used as constructor arguments only.
      *
-     * @param string $name The type name to instantiate.
-     * @param array  $params Constructor arguments, keyed by the parameter name.
+     * @param string               $name The type name to instantiate.
+     * @param array<string, mixed> $params Constructor arguments, keyed by the parameter name.
      * @return object
      * @throws InvalidCallbackException
      * @throws ClassNotFoundException
