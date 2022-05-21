@@ -203,8 +203,8 @@ class Injector implements InjectorInterface
      * If this was successful (the resolver returned a non-null value), it will use
      * the ioc container to fetch the instances
      *
-     * @param string $type The class or alias name to resolve for
-     * @param array  $params Provided call time parameters
+     * @param string                $type The class or alias name to resolve for
+     * @param array<string, mixed>  $params Provided call time parameters
      * @return array The resulting arguments in call order
      * @throws Exception\UndefinedReferenceException When a type cannot be
      *     obtained via the ioc container and the method is required for

@@ -201,11 +201,6 @@ parameters:
 			path: src/Definition/Reflection/ClassDefinition.php
 
 		-
-			message: "#^Method Laminas\\\\Di\\\\Injector\\:\\:resolveParameters\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Injector.php
-
-		-
 			message: "#^Method Laminas\\\\Di\\\\Injector\\:\\:resolveParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Injector.php
