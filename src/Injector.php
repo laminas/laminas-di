@@ -111,9 +111,9 @@ class Injector implements InjectorInterface
     /**
      * Create the instance with auto wiring
      *
-     * @param string $name Class name or service alias
-     * @param array  $parameters Constructor parameters, keyed by the parameter name.
-     * @return object|null
+     * @param string               $name Class name or service alias
+     * @param array<string, mixed> $parameters Constructor parameters, keyed by the parameter name.
+     * @return object
      * @throws ClassNotFoundException
      * @throws RuntimeException
      */
