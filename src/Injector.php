@@ -216,7 +216,7 @@ class Injector implements InjectorInterface
         $resolved = $this->resolver->resolveParameters($type, $params);
         $params   = [];
 
-        foreach ($resolved as $position => $injection) {
+        foreach ($resolved as $injection) {
             try {
                 $params[] = $this->getInjectionValue($injection);
             } catch (NotFoundExceptionInterface $containerException) {
