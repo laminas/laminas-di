@@ -205,7 +205,7 @@ class Injector implements InjectorInterface
      *
      * @param string                $type The class or alias name to resolve for
      * @param array<string, mixed>  $params Provided call time parameters
-     * @return array The resulting arguments in call order
+     * @return list<mixed> The resulting arguments in call order
      * @throws Exception\UndefinedReferenceException When a type cannot be
      *     obtained via the ioc container and the method is required for
      *     injection.
