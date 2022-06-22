@@ -114,7 +114,7 @@ $factory = function($container, $requestedName, array $options = null) {
         throw new \RuntimeException('Bad service name');
     }
 
-    return $injector->create($requestedName, $options? : []);
+    return $injector->create($requestedName, $options ?: []);
 };
 
 $serviceManager->setFactory('Foo', $factory);
