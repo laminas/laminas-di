@@ -63,10 +63,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Di\\": "test/"
+            "LaminasTest\\Di\\": "test/",
+            "LaminasBench\\Di\\": "benchmarks/"
         }
     },
     "scripts": {
+        "benchmark": "phpbench run --revs=2 --iterations=2 --report=aggregate",
         "check": [
             "@cs-check",
             "@analyse",
