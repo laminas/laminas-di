@@ -6,19 +6,22 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ParameterInterface;
 use Laminas\Di\Definition\Reflection\ClassDefinition;
+use LaminasTest\Di\TestAsset\ClassDefinitionRedundantUaSortTestDependency;
 use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use function array_values;
 use function sort;
+use function uasort;
 
 /**
  * @coversDefaultClass Laminas\Di\Definition\Reflection\ClassDefinition
  */
-class ClassDefinitionTest extends TestCase
+final class ClassDefinitionTest extends TestCase
 {
-    public function testGetReflection()
+    public function testGetReflection(): void
     {
         $result = (new ClassDefinition(HierarchyAsset\A::class))->getReflection();
 
@@ -26,7 +29,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertEquals(HierarchyAsset\A::class, $result->getName());
     }
 
-    public function testGetSupertypesReturnsAllClasses()
+    public function testGetSupertypesReturnsAllClasses(): void
     {
         $supertypes = (new ClassDefinition(HierarchyAsset\C::class))->getSupertypes();
         $expected   = [
@@ -42,7 +45,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertEquals($expected, $supertypes);
     }
 
-    public function testGetSupertypesReturnsEmptyArray()
+    public function testGetSupertypesReturnsEmptyArray(): void
     {
         $supertypes = (new ClassDefinition(HierarchyAsset\A::class))->getSupertypes();
 
@@ -53,7 +56,7 @@ class ClassDefinitionTest extends TestCase
     /**
      * Tests ClassDefinition->getInterfaces()
      */
-    public function testGetInterfacesReturnsAllInterfaces()
+    public function testGetInterfacesReturnsAllInterfaces(): void
     {
         $result   = (new ClassDefinition(HierarchyAsset\C::class))->getInterfaces();
         $expected = [
@@ -73,7 +76,7 @@ class ClassDefinitionTest extends TestCase
     /**
      * Tests ClassDefinition->getInterfaces()
      */
-    public function testGetInterfacesReturnsArray()
+    public function testGetInterfacesReturnsArray(): void
     {
         $result = (new ClassDefinition(HierarchyAsset\A::class))->getInterfaces();
 
@@ -81,6 +84,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertEmpty($result);
     }
 
+    /** @return array<string, array{class-string, int}> */
     public function provideClassesWithParameters(): array
     {
         return [
@@ -91,8 +95,9 @@ class ClassDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideClassesWithParameters
+     * @param class-string $class
      */
-    public function testGetParametersReturnsAllParameters(string $class, int $expectedItemCount)
+    public function testGetParametersReturnsAllParameters(string $class, int $expectedItemCount): void
     {
         $result = (new ClassDefinition($class))->getParameters();
 
@@ -101,7 +106,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertContainsOnlyInstancesOf(ParameterInterface::class, $result);
     }
 
-    public function testGetParametersWithScalarTypehints()
+    public function testGetParametersWithScalarTypehints(): void
     {
         $result = (new ClassDefinition(ConstructorAsset\Php7::class))->getParameters();
 
@@ -110,6 +115,7 @@ class ClassDefinitionTest extends TestCase
         $this->assertContainsOnlyInstancesOf(ParameterInterface::class, $result);
     }
 
+    /** @return array<string, array<class-string>> */
     public function provideParameterlessClasses(): array
     {
         return [
@@ -120,11 +126,39 @@ class ClassDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideParameterlessClasses
+     * @param class-string $class
      */
-    public function testGetParametersReturnsAnArray(string $class)
+    public function testGetParametersReturnsAnArray(string $class): void
     {
         $result = (new ClassDefinition($class))->getParameters();
         $this->assertIsArray($result);
         $this->assertEmpty($result);
+    }
+
+    public function testRedundantUaSortInClassDefinition(): void
+    {
+        $reflectionClass       = new ReflectionClass(ClassDefinitionRedundantUaSortTestDependency::class);
+        $constructor           = $reflectionClass->getConstructor();
+        $constructorParameters = $constructor->getParameters();
+
+        $parameters = [];
+        foreach ($constructorParameters as $parameter) {
+            $parameters[$parameter->getName()] = $parameter;
+        }
+
+        static::assertEquals(
+            $constructorParameters,
+            array_values($parameters)
+        );
+
+        uasort(
+            $parameters,
+            fn ($a, $b) => $a->getPosition() - $b->getPosition()
+        );
+
+        static::assertEquals(
+            $constructorParameters,
+            array_values($parameters)
+        );
     }
 }

@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Laminas\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ClassDefinitionInterface;
-use Laminas\Di\Definition\ParameterInterface;
 use ReflectionClass;
 use ReflectionParameter;
-
-use function uasort;
 
 class ClassDefinition implements ClassDefinitionInterface
 {
@@ -83,11 +80,6 @@ class ClassDefinition implements ClassDefinitionInterface
             $parameter                               = new Parameter($parameterReflection);
             $this->parameters[$parameter->getName()] = $parameter;
         }
-
-        uasort(
-            $this->parameters,
-            fn(ParameterInterface $a, ParameterInterface $b) => $a->getPosition() - $b->getPosition()
-        );
     }
 
     /**
