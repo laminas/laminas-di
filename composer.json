@@ -42,6 +42,7 @@
         "laminas/laminas-coding-standard": "~2.3.0",
         "laminas/laminas-servicemanager": "^3.7",
         "mikey179/vfsstream": "^1.6.10@alpha",
+        "phpbench/phpbench": "^1.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12.64",
         "phpunit/phpunit": "^9.5.5",
@@ -62,10 +63,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Di\\": "test/"
+            "LaminasTest\\Di\\": "test/",
+            "LaminasBench\\Di\\": "benchmarks/"
         }
     },
     "scripts": {
+        "benchmark": "phpbench run --revs=2 --iterations=2 --report=aggregate",
         "check": [
             "@cs-check",
             "@analyse",
