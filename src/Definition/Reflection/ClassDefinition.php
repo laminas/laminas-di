@@ -69,14 +69,14 @@ class ClassDefinition implements ClassDefinitionInterface
     {
         $this->parameters = [];
 
-        if (! $this->reflection->hasMethod('__construct')) {
+        $constructor = $this->reflection->getConstructor();
+
+        if ($constructor === null) {
             return;
         }
 
-        $method = $this->reflection->getMethod('__construct');
-
         /** @var ReflectionParameter $parameterReflection */
-        foreach ($method->getParameters() as $parameterReflection) {
+        foreach ($constructor->getParameters() as $parameterReflection) {
             $parameter                               = new Parameter($parameterReflection);
             $this->parameters[$parameter->getName()] = $parameter;
         }
