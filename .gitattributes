@@ -8,3 +8,5 @@
 /phpstan.neon export-ignore
 /phpunit.xml.dist export-ignore
 /test/ export-ignore
+/phpbench.json export-ignore
+/benchmarks/ export-ignore
