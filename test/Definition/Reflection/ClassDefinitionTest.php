@@ -6,7 +6,7 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ParameterInterface;
 use Laminas\Di\Definition\Reflection\ClassDefinition;
-use LaminasTest\Di\TestAsset\ClaimTestClass;
+use LaminasTest\Di\TestAsset\ClassDefinitionRedundantUaSortTestDependency;
 use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
@@ -137,7 +137,7 @@ final class ClassDefinitionTest extends TestCase
 
     public function testRedundantUaSortInClassDefinition(): void
     {
-        $reflectionClass       = new ReflectionClass(ClaimTestClass::class);
+        $reflectionClass       = new ReflectionClass(ClassDefinitionRedundantUaSortTestDependency::class);
         $constructor           = $reflectionClass->getConstructor();
         $constructorParameters = $constructor->getParameters();
 

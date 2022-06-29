@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Di\TestAsset;
 
-class ClaimTestClass
+class ClassDefinitionRedundantUaSortTestDependency
 {
     /** @param mixed $third */
     public function __construct(
