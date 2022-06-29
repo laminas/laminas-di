@@ -6,12 +6,15 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use Laminas\Di\Definition\ParameterInterface;
 use Laminas\Di\Definition\Reflection\ClassDefinition;
+use LaminasTest\Di\TestAsset\ClaimTestClass;
 use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use function array_values;
 use function sort;
+use function uasort;
 
 /**
  * @coversDefaultClass Laminas\Di\Definition\Reflection\ClassDefinition
@@ -126,5 +129,32 @@ class ClassDefinitionTest extends TestCase
         $result = (new ClassDefinition($class))->getParameters();
         $this->assertIsArray($result);
         $this->assertEmpty($result);
+    }
+
+    public function testRedundantUaSortInClassDefinition(): void
+    {
+        $reflectionClass       = new ReflectionClass(ClaimTestClass::class);
+        $constructor           = $reflectionClass->getConstructor();
+        $constructorParameters = $constructor->getParameters();
+
+        $parameters = [];
+        foreach ($constructorParameters as $parameter) {
+            $parameters[$parameter->getName()] = $parameter;
+        }
+
+        static::assertEquals(
+            $constructorParameters,
+            array_values($parameters)
+        );
+
+        uasort(
+            $parameters,
+            fn ($a, $b) => $a->getPosition() - $b->getPosition()
+        );
+
+        static::assertEquals(
+            $constructorParameters,
+            array_values($parameters)
+        );
     }
 }
