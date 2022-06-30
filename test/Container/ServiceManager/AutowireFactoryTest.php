@@ -4,34 +4,23 @@ declare(strict_types=1);
 
 namespace LaminasTest\Di\Container\ServiceManager;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Di\Container\AutowireFactory as GenericAutowireFactory;
 use Laminas\Di\Container\ServiceManager\AutowireFactory;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
+use Psr\Container\ContainerInterface;
 use stdClass;
 
 /**
  * AutowireFactory test case.
  *
- * @coversDefaultClass Laminas\Di\Container\ServiceManager\AutowireFactory
+ * @coversDefaultClass \Laminas\Di\Container\ServiceManager\AutowireFactory
  */
-class AutowireFactoryTest extends TestCase
+final class AutowireFactoryTest extends TestCase
 {
-    /**
-     * @return PHPUnit_Framework_MockObject_MockObject
-     */
-    private function createGenericFactoryMock()
-    {
-        return $this->getMockBuilder(GenericAutowireFactory::class)
-            ->setMethodsExcept()
-            ->getMock();
-    }
-
     public function testInvokeIsPassedToGenericFactory()
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $mock      = $this->createGenericFactoryMock();
+        $mock      = $this->createMock(GenericAutowireFactory::class);
         $expected  = new stdClass();
         $className = 'AnyClassName';
 
@@ -52,7 +41,7 @@ class AutowireFactoryTest extends TestCase
     public function testCanCreateIsPassedToGenericFactory()
     {
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $mock      = $this->createGenericFactoryMock();
+        $mock      = $this->createMock(GenericAutowireFactory::class);
         $className = 'AnyClassName';
 
         // Container must not be called directly

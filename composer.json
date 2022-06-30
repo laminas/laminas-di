@@ -38,9 +38,8 @@
         "psr/log": "^1.1.4"
     },
     "require-dev": {
-        "container-interop/container-interop": "^1.2.0",
         "laminas/laminas-coding-standard": "~2.3.0",
-        "laminas/laminas-servicemanager": "^3.7",
+        "laminas/laminas-servicemanager": "^3.12",
         "mikey179/vfsstream": "^1.6.10@alpha",
         "phpbench/phpbench": "^1.2",
         "phpspec/prophecy-phpunit": "^2.0",
@@ -51,6 +50,7 @@
     "conflict": {
         "zendframework/zend-di": "*",
         "laminas/laminas-servicemanager-di": "*",
+        "laminas/laminas-servicemanager": "<3.13.0",
         "phpspec/prophecy": "<1.9.0"
     },
     "suggest": {

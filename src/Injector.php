@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Laminas\Di;
 
-use Interop\Container\ContainerInterface as LegacyContainerInterface;
 use Laminas\Di\Definition\DefinitionInterface;
 use Laminas\Di\Exception\ClassNotFoundException;
 use Laminas\Di\Exception\InvalidCallbackException;
@@ -182,7 +181,8 @@ class Injector implements InjectorInterface
         $container      = $this->container;
         $containerTypes = [
             ContainerInterface::class,
-            LegacyContainerInterface::class, // Be backwards compatible with interop/container
+            // Be backwards compatible with interop/container:
+            'Interop\Container\ContainerInterface', // phpcs:ignore 
         ];
 
         if (
