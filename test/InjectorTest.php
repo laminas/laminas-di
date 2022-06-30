@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Di;
 
-use Interop\Container\ContainerInterface as LegacyContainerInterface;
 use Laminas\Di\Config;
 use Laminas\Di\DefaultContainer;
 use Laminas\Di\Definition\DefinitionInterface;
@@ -26,9 +25,9 @@ use function array_map;
 use function uniqid;
 
 /**
- * @coversDefaultClass Laminas\Di\Injector
+ * @coversDefaultClass \Laminas\Di\Injector
  */
-class InjectorTest extends TestCase
+final class InjectorTest extends TestCase
 {
     /**
      * @param mixed $value
@@ -392,7 +391,7 @@ class InjectorTest extends TestCase
     {
         return [
             'psr'     => [ContainerInterface::class],
-            'interop' => [LegacyContainerInterface::class],
+            'interop' => ['Interop\Container\ContainerInterface'], // phpcs:ignore
         ];
     }
 

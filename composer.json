@@ -50,6 +50,7 @@
     "conflict": {
         "zendframework/zend-di": "*",
         "laminas/laminas-servicemanager-di": "*",
+        "laminas/laminas-servicemanager": "<3.13.0",
         "phpspec/prophecy": "<1.9.0"
     },
     "suggest": {
