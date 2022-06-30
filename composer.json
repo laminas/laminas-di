@@ -43,7 +43,6 @@
         "mikey179/vfsstream": "^1.6.10@alpha",
         "phpbench/phpbench": "^1.2",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^1.0.0",
         "phpunit/phpunit": "^9.5.5",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -76,7 +75,6 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "analyse": "phpstan analyse --no-progress -c phpstan.neon",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }
