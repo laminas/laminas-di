@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.4.0",
-        "laminas/laminas-servicemanager": "^3.12",
+        "laminas/laminas-servicemanager": "^3.19.0",
         "mikey179/vfsstream": "^1.6.11@alpha",
         "phpbench/phpbench": "^1.2.7",
         "phpspec/prophecy-phpunit": "^2.0.1",
