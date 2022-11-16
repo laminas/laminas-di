@@ -10,3 +10,4 @@
 /test/ export-ignore
 /phpbench.json export-ignore
 /benchmarks/ export-ignore
+/.laminas-ci.json export-ignore
