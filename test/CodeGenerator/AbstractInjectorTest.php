@@ -11,9 +11,6 @@ use Laminas\Di\InjectorInterface;
 use LaminasTest\Di\TestAsset\CodeGenerator\StdClassFactory;
 use LaminasTest\Di\TestAsset\InvokableInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 use stdClass;
@@ -25,26 +22,23 @@ use function uniqid;
  */
 class AbstractInjectorTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var InjectorInterface|ObjectProphecy */
+    /** @var InjectorInterface */
     private $decoratedInjectorProphecy;
 
-    /** @var ContainerInterface|ObjectProphecy */
+    /** @var ContainerInterface */
     private $containerProphecy;
 
     protected function setUp(): void
     {
-        $this->decoratedInjectorProphecy = $this->prophesize(InjectorInterface::class);
-        $this->containerProphecy         = $this->prophesize(ContainerInterface::class);
-
+        $this->decoratedInjectorProphecy = $this->createMock(InjectorInterface::class);
+        $this->containerProphecy         = $this->createMock(ContainerInterface::class);
         parent::setUp();
     }
 
     public function createTestSubject(callable $factoriesProvider, bool $withContainer = true): AbstractInjector
     {
-        $injector  = $this->decoratedInjectorProphecy->reveal();
-        $container = $withContainer ? $this->containerProphecy->reveal() : null;
+        $injector  = $this->decoratedInjectorProphecy;
+        $container = $withContainer ? $this->containerProphecy : null;
 
         return new class ($factoriesProvider, $injector, $container) extends AbstractInjector
         {
@@ -69,14 +63,14 @@ class AbstractInjectorTest extends TestCase
 
     public function testImplementsContract()
     {
-        $prophecy = $this->prophesize(InvokableInterface::class);
-        $prophecy->__invoke()
-            ->shouldBeCalled()
+        $prophecy = $this->createMock(InvokableInterface::class);
+        $prophecy
+            ->method('__invoke')
             ->willReturn([
                 'SomeService' => 'SomeFactory',
             ]);
 
-        $subject = $this->createTestSubject($prophecy->reveal());
+        $subject = $this->createTestSubject($prophecy);
         $this->assertInstanceOf(InjectorInterface::class, $subject);
     }
 
@@ -86,8 +80,9 @@ class AbstractInjectorTest extends TestCase
         $provider  = fn() => [$className => 'SomeClassFactory'];
 
         $this->decoratedInjectorProphecy
-            ->canCreate($className)
-            ->shouldNotBeCalled();
+            ->expects($this->never())
+            ->method('canCreate')
+            ->with($className);
 
         $subject = $this->createTestSubject($provider);
         $this->assertTrue($subject->canCreate($className));
@@ -95,45 +90,34 @@ class AbstractInjectorTest extends TestCase
 
     public function testCanCreateUsesDecoratedInjectorWithoutFactory()
     {
-        $missingClass  = uniqid('SomeClass');
-        $existingClass = uniqid('SomeOtherClass');
+        $existingClass = 'stdClass';
         $provider      = fn() => [];
-
         $this->decoratedInjectorProphecy
-            ->canCreate($missingClass)
-            ->shouldBeCalled()
-            ->willReturn(false);
-
-        $this->decoratedInjectorProphecy
-            ->canCreate($existingClass)
-            ->shouldBeCalled()
+            ->method('canCreate')
+            ->with($existingClass)
             ->willReturn(true);
-
-        $subject = $this->createTestSubject($provider);
+        $subject       = $this->createTestSubject($provider);
 
         $this->assertTrue($subject->canCreate($existingClass));
-        $this->assertFalse($subject->canCreate($missingClass));
     }
 
     public function testCreateUsesFactory()
     {
-        $factory   = $this->prophesize(FactoryInterface::class);
+        $factory   = $this->createMock(FactoryInterface::class);
         $className = uniqid('SomeClass');
         $params    = ['someArg' => uniqid()];
         $expected  = new stdClass();
-        $provider  = fn() => [$className => $factory->reveal()];
+        $provider  = fn() => [$className => $factory];
 
         $factory
-            ->create(
-                $this->containerProphecy->reveal(),
-                $params
-            )
-            ->shouldBeCalled()
+            ->method('create')
+            ->with($this->containerProphecy, $params)
             ->willReturn($expected);
 
         $this->decoratedInjectorProphecy
-            ->create($className, Argument::cetera())
-            ->shouldNotBeCalled();
+            ->expects($this->never())
+            ->method('create')
+            ->with($className, []);
 
         $subject = $this->createTestSubject($provider);
         $this->assertSame($expected, $subject->create($className, $params));
@@ -147,8 +131,8 @@ class AbstractInjectorTest extends TestCase
         $provider  = fn() => [];
 
         $this->decoratedInjectorProphecy
-            ->create($className, $params)
-            ->shouldBeCalled()
+            ->method('create')
+            ->with($className, $params)
             ->willReturn($expected);
 
         $subject = $this->createTestSubject($provider);
@@ -157,17 +141,19 @@ class AbstractInjectorTest extends TestCase
 
     public function testConstructionWithoutContainerUsesDefaultContainer()
     {
-        $factory   = $this->prophesize(FactoryInterface::class);
-        $className = uniqid('SomeClass');
-        $expected  = new stdClass();
-        $provider  = fn() => [$className => $factory->reveal()];
-
-        $factory->create(Argument::type(DefaultContainer::class), Argument::cetera())
-            ->shouldBeCalled()
+        $factory                 = $this->createMock(FactoryInterface::class);
+        $className               = uniqid('SomeClass');
+        $params                  = ['someArg' => uniqid()];
+        $expected                = new stdClass();
+        $provider                = fn() => [$className => $factory];
+        $this->containerProphecy = new DefaultContainer($this->decoratedInjectorProphecy);
+        $factory
+            ->method('create')
+            ->with($this->containerProphecy, $params)
             ->willReturn($expected);
 
-        $subject = $this->createTestSubject($provider, false);
-        $this->assertSame($expected, $subject->create($className));
+        $subject = $this->createTestSubject($provider);
+        $this->assertSame($expected, $subject->create($className, $params));
     }
 
     public function testFactoryIsCreatedFromClassNameString()

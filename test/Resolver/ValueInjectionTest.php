@@ -10,7 +10,6 @@ use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -25,8 +24,6 @@ use function uniqid;
  */
 class ValueInjectionTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var false|resource */
     private $streamFixture;
 
@@ -71,7 +68,7 @@ class ValueInjectionTest extends TestCase
      */
     public function testSetStateConstructsInstance($value)
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $result    = ValueInjection::__set_state(['value' => $value]);
         $this->assertInstanceOf(ValueInjection::class, $result);
         $this->assertSame($value, $result->toValue($container));
@@ -84,12 +81,14 @@ class ValueInjectionTest extends TestCase
     public function testToValueBypassesContainer($value)
     {
         $result    = new ValueInjection($value);
-        $container = $this->prophesize(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
-        $container->get(Argument::cetera())
-            ->shouldNotBeCalled();
+        $container
+            ->expects($this->never())
+            ->method('get')
+            ->with(Argument::cetera());
 
-        $this->assertSame($value, $result->toValue($container->reveal()));
+        $this->assertSame($value, $result->toValue($container));
     }
 
     public function provideExportableValues(): array

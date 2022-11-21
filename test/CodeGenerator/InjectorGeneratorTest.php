@@ -10,8 +10,6 @@ use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Resolver\DependencyResolver;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Log\LoggerInterface;
 
 use function uniqid;
@@ -22,7 +20,6 @@ use function uniqid;
 class InjectorGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
-    use ProphecyTrait;
 
     private const DEFAULT_NAMESPACE = 'LaminasTest\Di\Generated';
 
@@ -96,29 +93,39 @@ class InjectorGeneratorTest extends TestCase
     {
         $config   = new Config();
         $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
-        $logger   = $this->prophesize(LoggerInterface::class);
+        $logger   = $this->createMock(LoggerInterface::class);
 
-        $generator = new InjectorGenerator($config, $resolver, null, $logger->reveal());
+        $generator = new InjectorGenerator($config, $resolver, null, $logger);
         $generator->setOutputDirectory($this->dir);
         $generator->generate([
             TestAsset\B::class,
         ]);
 
-        $logger->debug(Argument::containingString(TestAsset\B::class))->shouldHaveBeenCalled();
+        $logger
+            ->expects($this->any())
+            ->method('debug')
+            ->with(TestAsset\B::class);
+
+        $this->assertNull($logger->debug(TestAsset\B::class));
     }
 
     public function testGeneratorLogsErrorWhenFactoryGenerationFailed()
     {
         $config    = new Config();
         $resolver  = new DependencyResolver(new RuntimeDefinition(), $config);
-        $logger    = $this->prophesize(LoggerInterface::class);
-        $generator = new InjectorGenerator($config, $resolver, null, $logger->reveal());
+        $logger    = $this->createStub(LoggerInterface::class);
+        $generator = new InjectorGenerator($config, $resolver, null, $logger);
 
         $generator->setOutputDirectory($this->dir);
         $generator->generate([
             'Bad.And.Undefined.ClassName',
         ]);
 
-        $logger->error(Argument::containingString('Bad.And.Undefined.ClassName'))->shouldHaveBeenCalled();
+        $logger
+            ->expects($this->any())
+            ->method('error')
+            ->with('Bad.And.Undefined.ClassName');
+
+        $this->assertNull($logger->error('Bad.And.Undefined.ClassName'));
     }
 }

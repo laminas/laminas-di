@@ -8,64 +8,66 @@ use Laminas\Di\Exception\InvalidServiceConfigException;
 use Laminas\Di\GeneratedInjectorDelegator;
 use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
-use function get_class;
-
 class GeneratedInjectorDelegatorTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testProvidedNamespaceIsNotAString()
     {
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has('config')
-            ->willReturn(true)
-            ->shouldBeCalledTimes(1);
-        $container->get('config')
-            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => []]]]])
-            ->shouldBeCalledTimes(1);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->method('has')
+            ->with('config')
+            ->willReturn(true);
+
+        $container
+            ->method('get')
+            ->with('config')
+            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => []]]]]);
 
         $delegator = new GeneratedInjectorDelegator();
 
         self::assertInstanceOf(ContainerExceptionInterface::class, new InvalidServiceConfigException());
         $this->expectException(InvalidServiceConfigException::class);
         $this->expectExceptionMessage('namespace');
-        $delegator($container->reveal(), 'AnyString', function () {
+        $delegator($container, 'AnyString', function () {
         });
     }
 
     public function testGeneratedInjectorDoesNotExist()
     {
-        $injector = $this->prophesize(InjectorInterface::class)->reveal();
+        $injector = $this->createMock(InjectorInterface::class);
         $callback = fn() => $injector;
 
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has('config')->willReturn(false)->shouldBeCalledTimes(1);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->method('has')
+            ->with('config')
+            ->willReturn(false);
 
         $delegator = new GeneratedInjectorDelegator();
-        $result    = $delegator($container->reveal(), get_class($injector), $callback);
-
+        $result    = $delegator($container, $injector::class, $callback);
         $this->assertSame($result, $injector);
     }
 
     public function testGeneratedInjectorExists()
     {
-        $injector = $this->prophesize(InjectorInterface::class)->reveal();
+        $injector = $this->createMock(InjectorInterface::class);
         $callback = fn() => $injector;
 
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has('config')
-            ->willReturn(true)
-            ->shouldBeCalledTimes(1);
-        $container->get('config')
-            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => 'LaminasTest\Di\TestAsset']]]])
-            ->shouldBeCalledTimes(1);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->method('has')
+            ->with('config')
+            ->willReturn(true);
+        $container
+            ->method('get')
+            ->with('config')
+            ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => 'LaminasTest\Di\TestAsset']]]]);
 
         $delegator = new GeneratedInjectorDelegator();
-        $result    = $delegator($container->reveal(), get_class($injector), $callback);
+        $result    = $delegator($container, $injector::class, $callback);
 
         $this->assertInstanceOf(TestAsset\GeneratedInjector::class, $result);
         $this->assertSame($injector, $result->getInjector());
