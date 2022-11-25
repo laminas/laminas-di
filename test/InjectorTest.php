@@ -169,7 +169,6 @@ final class InjectorTest extends TestCase
         $container->setInstance(TestAsset\A::class, $expectedA);
         $injector->setContainer($container);
 
-        /** @var TestAsset\B $result */
         $result = $injector->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
@@ -178,7 +177,6 @@ final class InjectorTest extends TestCase
 
     public function testCreateSimpleDependency(): void
     {
-        /** @var TestAsset\B $result */
         $result = (new Injector())->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
@@ -211,7 +209,6 @@ final class InjectorTest extends TestCase
 
     public function testSimpleTreeResolving(): void
     {
-        /** @var TreeTestAsset\Simple $result */
         $result = (new Injector())->create(TreeTestAsset\Simple::class);
         $this->assertInstanceOf(TreeTestAsset\Simple::class, $result);
         $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
@@ -220,7 +217,6 @@ final class InjectorTest extends TestCase
 
     public function testComplexTreeResolving(): void
     {
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector())->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Complex::class, $result);
         $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
@@ -241,12 +237,9 @@ final class InjectorTest extends TestCase
 
         $injector->setContainer($container);
 
-        /** @var TreeTestAsset\Complex $result1 */
         $result1 = $injector->create(TreeTestAsset\Complex::class);
-        /** @var TreeTestAsset\Complex $result2 */
         $result2 = $injector->create(TreeTestAsset\Complex::class);
 
-        /** @var TreeTestAsset\Complex $result */
         foreach ([$result1, $result2] as $result) {
             $this->assertInstanceOf(TreeTestAsset\Complex::class, $result);
             $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
@@ -273,7 +266,6 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result2->result);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result->result);
@@ -291,7 +283,6 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result2->result);
         $this->assertNotInstanceOf(TreeTestAsset\Level2Preference::class, $result->result->result);
@@ -310,7 +301,6 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertSame($expected, $result->result2->result->optionalResult);
         $this->assertSame($expected, $result->result->result->optionalResult);
@@ -342,7 +332,6 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertSame($expected1, $result->result->result->optionalResult);
         $this->assertSame($expected2, $result->result2->result->optionalResult);

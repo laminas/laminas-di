@@ -23,7 +23,6 @@ trait ParameterTestTrait
         $class          = new ReflectionClass($classname);
         $invocationArgs = [];
 
-        /** @var ReflectionMethod $method */
         foreach ($class->getMethods() as $method) {
             $params                    = $method->getParameters();
             $typename                  = substr($method->name, 0, -4);

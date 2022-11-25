@@ -212,9 +212,6 @@
       <code>array</code>
       <code>array</code>
     </MixedInferredReturnType>
-    <UnnecessaryVarAnnotation occurrences="1">
-      <code>ReflectionMethod</code>
-    </UnnecessaryVarAnnotation>
   </file>
   <file src="test/Definition/RuntimeDefinitionTest.php">
     <ArgumentTypeCoercion occurrences="2">
@@ -232,21 +229,6 @@
     <MixedInferredReturnType occurrences="1">
       <code>array</code>
     </MixedInferredReturnType>
-  </file>
-  <file src="test/InjectorTest.php">
-    <UnnecessaryVarAnnotation occurrences="11">
-      <code>TestAsset\B</code>
-      <code>TestAsset\B</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Complex</code>
-      <code>TreeTestAsset\Simple</code>
-    </UnnecessaryVarAnnotation>
   </file>
   <file src="test/LegacyConfigTest.php">
     <InvalidArgument occurrences="1">
