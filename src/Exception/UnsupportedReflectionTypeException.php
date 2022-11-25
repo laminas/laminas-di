@@ -7,7 +7,6 @@ namespace Laminas\Di\Exception;
 use ReflectionNamedType;
 use ReflectionType;
 
-use function get_class;
 use function sprintf;
 
 /**
@@ -23,7 +22,7 @@ final class UnsupportedReflectionTypeException extends RuntimeException
         parent::__construct(
             sprintf(
                 "Unusable reflection type '%s', object of type '%s' required",
-                get_class($reflectionType),
+                $reflectionType::class,
                 ReflectionNamedType::class
             )
         );

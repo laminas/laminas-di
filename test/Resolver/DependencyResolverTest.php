@@ -19,7 +19,6 @@ use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 use Traversable;
@@ -36,8 +35,6 @@ use function uniqid;
  */
 class DependencyResolverTest extends TestCase
 {
-    use ProphecyTrait;
-
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|ContainerInterface
      */
@@ -216,7 +213,7 @@ class DependencyResolverTest extends TestCase
 
     public function testResolveWithOptionalArgs(): void
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $resolver  = new DependencyResolver(new RuntimeDefinition(), new Config());
         $result    = $resolver->resolveParameters(TestAsset\Constructor\OptionalArguments::class);
 
@@ -229,7 +226,7 @@ class DependencyResolverTest extends TestCase
 
     public function testResolvePassedDependenciesWithoutType(): void
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $resolver  = new DependencyResolver(new RuntimeDefinition(), new Config());
 
         $expected = 'Some Value';
@@ -427,7 +424,7 @@ class DependencyResolverTest extends TestCase
             ],
         ]);
 
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $resolver  = new DependencyResolver($definition, $config);
         $result    = $resolver->resolveParameters($class);
 

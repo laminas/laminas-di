@@ -6,7 +6,7 @@
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>
-    
+
     <!-- Show progress -->
     <arg value="p"/>
 

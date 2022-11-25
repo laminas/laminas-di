@@ -8,7 +8,6 @@ use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -20,8 +19,6 @@ use function uniqid;
  */
 class TypeInjectionTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testImplementsContract()
     {
         $this->assertInstanceOf(InjectionInterface::class, new TypeInjection('typename'));
@@ -29,16 +26,17 @@ class TypeInjectionTest extends TestCase
 
     public function testToValueUsesContainer()
     {
-        $container     = $this->prophesize(ContainerInterface::class);
+        $container     = $this->createMock(ContainerInterface::class);
         $typename      = uniqid('TypeName');
         $expectedValue = new stdClass();
         $subject       = new TypeInjection($typename);
 
-        $container->get($typename)
-            ->shouldBeCalled()
+        $container
+            ->method('get')
+            ->with($typename)
             ->willReturn($expectedValue);
 
-        $this->assertSame($expectedValue, $subject->toValue($container->reveal()));
+        $this->assertSame($expectedValue, $subject->toValue($container));
     }
 
     public function testExport()
