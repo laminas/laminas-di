@@ -220,12 +220,11 @@ class Injector implements InjectorInterface
     private function resolveParameters(string $type, array $params = []): array
     {
         $resolved = $this->resolver->resolveParameters($type, $params);
-        $params   = [];
+        $foundParams   = [];
 
         foreach ($resolved as $injection) {
             try {
-                /** @psalm-var mixed */
-                $params[] = $this->getInjectionValue($injection);
+                $foundParams[] = $this->getInjectionValue($injection);
             } catch (NotFoundExceptionInterface $containerException) {
                 throw new Exception\UndefinedReferenceException(
                     $containerException->getMessage(),
@@ -235,6 +234,6 @@ class Injector implements InjectorInterface
             }
         }
 
-        return $params;
+        return $foundParams;
     }
 }

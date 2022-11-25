@@ -24,6 +24,7 @@ interface DefinitionInterface
     public function hasClass(string $class): bool;
 
     /**
+     * @param class-string $class
      * @throws ClassNotFoundException
      */
     public function getClassDefinition(string $class): ClassDefinitionInterface;

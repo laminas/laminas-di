@@ -67,7 +67,8 @@ class RuntimeDefinition implements DefinitionInterface
     }
 
     /**
-     * @param class-string $class
+     * @psalm-assert class-string $class
+     *
      * @throws Exception\ClassNotFoundException
      */
     private function ensureClassExists(string $class): void
@@ -102,11 +103,7 @@ class RuntimeDefinition implements DefinitionInterface
         return class_exists($class);
     }
 
-    /**
-     * @param class-string $class
-     * @return ClassDefinition
-     * @throws Exception\ClassNotFoundException
-     */
+    /** @throws Exception\ClassNotFoundException */
     public function getClassDefinition(string $class): ClassDefinitionInterface
     {
         if (! isset($this->definition[$class])) {

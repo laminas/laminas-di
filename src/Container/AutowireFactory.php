@@ -23,7 +23,6 @@ class AutowireFactory
     {
         $injector = $container->get(InjectorInterface::class);
 
-        /** @psalm-suppress DocblockTypeContradiction Can we remove all code below and return directly from container get? */
         if (! $injector instanceof InjectorInterface) {
             throw new Exception\RuntimeException(
                 'Could not get a dependency injector form the container implementation'

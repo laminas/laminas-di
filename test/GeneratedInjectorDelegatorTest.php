@@ -42,7 +42,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
     public function testGeneratedInjectorDoesNotExist(): void
     {
         $injector = $this->createMock(InjectorInterface::class);
-        $callback = fn() => $injector;
+        $callback = static fn(): InjectorInterface => $injector;
 
         $container = $this->createMock(ContainerInterface::class);
         $container
@@ -59,7 +59,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
     public function testGeneratedInjectorExists(): void
     {
         $injector = $this->createMock(InjectorInterface::class);
-        $callback = fn() => $injector;
+        $callback = static fn(): InjectorInterface => $injector;
 
         $container = $this->createMock(ContainerInterface::class);
         $container

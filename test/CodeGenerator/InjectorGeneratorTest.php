@@ -112,7 +112,7 @@ class InjectorGeneratorTest extends TestCase
     {
         $config    = new Config();
         $resolver  = new DependencyResolver(new RuntimeDefinition(), $config);
-        $logger    = $this->createStub(LoggerInterface::class);
+        $logger    = $this->createMock(LoggerInterface::class);
         $generator = new InjectorGenerator($config, $resolver, null, $logger);
 
         $generator->setOutputDirectory($this->dir);

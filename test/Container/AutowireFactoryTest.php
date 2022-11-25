@@ -19,7 +19,7 @@ use stdClass;
  */
 class AutowireFactoryTest extends TestCase
 {
-    private ?AutowireFactory $instance = null;
+    private AutowireFactory $instance;
 
     /**
      * Prepares the environment before running a test.
@@ -28,15 +28,6 @@ class AutowireFactoryTest extends TestCase
     {
         parent::setUp();
         $this->instance = new AutowireFactory();
-    }
-
-    /**
-     * Cleans up the environment after running a test.
-     */
-    protected function tearDown(): void
-    {
-        $this->instance = null;
-        parent::tearDown();
     }
 
     private function createContainerMock(InjectorInterface $injector): ContainerInterface

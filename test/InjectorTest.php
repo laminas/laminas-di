@@ -500,7 +500,7 @@ final class InjectorTest extends TestCase
         $this->assertEquals($parameters, $result->result);
     }
 
-    public function testCreateGivenExistingInterfaceExpectedClassNotFoundExceptionThrown()
+    public function testCreateGivenExistingInterfaceExpectedClassNotFoundExceptionThrown(): void
     {
         $definition = $this->createMock(DefinitionInterface::class);
         $definition

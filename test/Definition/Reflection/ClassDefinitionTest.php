@@ -12,12 +12,14 @@ use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use ReflectionParameter;
 use function array_values;
+use function assert;
 use function sort;
 use function uasort;
 
 /**
- * @coversDefaultClass Laminas\Di\Definition\Reflection\ClassDefinition
+ * @covers \Laminas\Di\Definition\Reflection\ClassDefinition
  */
 final class ClassDefinitionTest extends TestCase
 {
@@ -137,8 +139,11 @@ final class ClassDefinitionTest extends TestCase
 
     public function testRedundantUaSortInClassDefinition(): void
     {
-        $reflectionClass       = new ReflectionClass(ClassDefinitionRedundantUaSortTestDependency::class);
-        $constructor           = $reflectionClass->getConstructor();
+        $reflectionClass = new ReflectionClass(ClassDefinitionRedundantUaSortTestDependency::class);
+        $constructor     = $reflectionClass->getConstructor();
+        
+        assert($constructor !== null);
+
         $constructorParameters = $constructor->getParameters();
 
         $parameters = [];
@@ -146,17 +151,17 @@ final class ClassDefinitionTest extends TestCase
             $parameters[$parameter->getName()] = $parameter;
         }
 
-        static::assertEquals(
+        self::assertEquals(
             $constructorParameters,
             array_values($parameters)
         );
 
         uasort(
             $parameters,
-            fn ($a, $b) => $a->getPosition() - $b->getPosition()
+            static fn (ReflectionParameter $a, ReflectionParameter $b) => $a->getPosition() - $b->getPosition()
         );
 
-        static::assertEquals(
+        self::assertEquals(
             $constructorParameters,
             array_values($parameters)
         );
