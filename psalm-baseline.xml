@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.10.0@916b098b008f6de4543892b1e0651c1c3b92cbfa">
+<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
+  <file src="src/CodeGenerator/InjectorGenerator.php">
+    <PossiblyUnusedProperty occurrences="1">
+      <code>$definition</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/ConfigInterface.php">
+    <PossiblyUnusedReturnValue occurrences="1">
+      <code>mixed</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Definition/Reflection/ClassDefinition.php">
+    <PropertyTypeCoercion occurrences="1">
+      <code>$this-&gt;supertypes</code>
+    </PropertyTypeCoercion>
+  </file>
+  <file src="src/Definition/RuntimeDefinition.php">
+    <RedundantConditionGivenDocblockType occurrences="2">
+      <code>ensureClassExists</code>
+      <code>ensureClassExists</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Exception/InvalidParamNameException.php">
+    <UnusedClass occurrences="1">
+      <code>InvalidParamNameException</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Exception/InvalidPositionException.php">
+    <UnusedClass occurrences="1">
+      <code>InvalidPositionException</code>
+    </UnusedClass>
+  </file>
+  <file src="src/GeneratedInjectorDelegator.php">
+    <PossiblyUnusedParam occurrences="1">
+      <code>$name</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="src/Injector.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$params</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="1">
+      <code>$foundParams[]</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Resolver/AbstractInjection.php">
+    <PossiblyUnusedMethod occurrences="4">
+      <code>export</code>
+      <code>getParameterName</code>
+      <code>isExportable</code>
+      <code>setParameterName</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Resolver/DependencyResolver.php">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>$type</code>
+      <code>$type</code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Resolver/DependencyResolverInterface.php">
+    <PossiblyUnusedReturnValue occurrences="1">
+      <code>self</code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="test/CodeGenerator/AbstractInjectorTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$provider</code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument occurrences="1">
+      <code>$invokable</code>
+    </InvalidArgument>
+  </file>
   <file src="test/CodeGenerator/AutoloadGeneratorTest.php">
     <MissingReturnType occurrences="3">
       <code>testGenerateCreatesFiles</code>
@@ -16,6 +87,10 @@
       <code>$root</code>
       <code>$root</code>
     </MissingConstructor>
+  </file>
+  <file src="test/CodeGenerator/InjectorGeneratorTest.php">
+    <ArgumentTypeCoercion occurrences="1"/>
+    <UndefinedClass occurrences="1"/>
   </file>
   <file src="test/ConfigTest.php">
     <MixedAssignment occurrences="1">
@@ -44,9 +119,6 @@
       <code>testCreateWithoutInjectorThrowsException</code>
       <code>testInstanceIsInvokable</code>
     </MissingReturnType>
-    <PossiblyNullPropertyAssignmentValue occurrences="1">
-      <code>null</code>
-    </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="test/Container/ConfigFactoryTest.php">
     <InvalidArgument occurrences="2">
@@ -59,26 +131,15 @@
     <InvalidReturnType occurrences="1">
       <code>ContainerInterface</code>
     </InvalidReturnType>
-    <MissingClosureParamType occurrences="2">
-      <code>$errno</code>
-      <code>$errstr</code>
-    </MissingClosureParamType>
-    <MissingReturnType occurrences="5">
+    <MissingReturnType occurrences="4">
       <code>testCreateRequestsContainerForConfigServiceGracefully</code>
       <code>testCreateUsesConfigFromContainer</code>
       <code>testInvokeCreatesConfigInstance</code>
       <code>testLegacyConfigIsRespected</code>
-      <code>testLegacyConfigTriggersDeprecationNotice</code>
     </MissingReturnType>
-    <MixedArgument occurrences="1">
-      <code>$errstr</code>
-    </MixedArgument>
     <PossiblyNullPropertyAssignmentValue occurrences="1">
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
-    <TooManyArguments occurrences="1">
-      <code>expectDeprecation</code>
-    </TooManyArguments>
   </file>
   <file src="test/Container/GeneratorFactoryTest.php">
     <DeprecatedMethod occurrences="1">
@@ -108,56 +169,16 @@
     </MissingReturnType>
   </file>
   <file src="test/Container/ServiceManager/AutowireFactoryTest.php">
-    <DeprecatedMethod occurrences="1">
-      <code>setMethodsExcept</code>
-    </DeprecatedMethod>
-    <InvalidArgument occurrences="4">
+    <InvalidArgument occurrences="2">
       <code>$container</code>
       <code>$container</code>
-      <code>$mock</code>
-      <code>$mock</code>
     </InvalidArgument>
-    <InvalidReturnStatement occurrences="1"/>
-    <InvalidReturnType occurrences="1">
-      <code>PHPUnit_Framework_MockObject_MockObject</code>
-    </InvalidReturnType>
     <MissingReturnType occurrences="2">
       <code>testCanCreateIsPassedToGenericFactory</code>
       <code>testInvokeIsPassedToGenericFactory</code>
     </MissingReturnType>
-    <MixedMethodCall occurrences="6">
-      <code>method</code>
-      <code>method</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>with</code>
-      <code>with</code>
-    </MixedMethodCall>
-    <UndefinedDocblockClass occurrences="3">
-      <code>$mock</code>
-      <code>$mock</code>
-      <code>PHPUnit_Framework_MockObject_MockObject</code>
-    </UndefinedDocblockClass>
   </file>
   <file src="test/Definition/Reflection/ClassDefinitionTest.php">
-    <ArgumentTypeCoercion occurrences="2">
-      <code>$class</code>
-      <code>$class</code>
-    </ArgumentTypeCoercion>
-    <MissingReturnType occurrences="8">
-      <code>testGetInterfacesReturnsAllInterfaces</code>
-      <code>testGetInterfacesReturnsArray</code>
-      <code>testGetParametersReturnsAllParameters</code>
-      <code>testGetParametersReturnsAnArray</code>
-      <code>testGetParametersWithScalarTypehints</code>
-      <code>testGetReflection</code>
-      <code>testGetSupertypesReturnsAllClasses</code>
-      <code>testGetSupertypesReturnsEmptyArray</code>
-    </MissingReturnType>
-    <MixedInferredReturnType occurrences="2">
-      <code>array</code>
-      <code>array</code>
-    </MixedInferredReturnType>
     <RedundantCondition occurrences="7">
       <code>assertIsArray</code>
       <code>assertIsArray</code>
@@ -181,9 +202,6 @@
       <code>array</code>
       <code>array</code>
     </MixedInferredReturnType>
-    <PossiblyNullReference occurrences="1">
-      <code>getParameters</code>
-    </PossiblyNullReference>
   </file>
   <file src="test/Definition/Reflection/ParameterTestTrait.php">
     <ArgumentTypeCoercion occurrences="1">
@@ -199,20 +217,19 @@
     </UnnecessaryVarAnnotation>
   </file>
   <file src="test/Definition/RuntimeDefinitionTest.php">
-    <MissingReturnType occurrences="10">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>$class</code>
+      <code>[$class]</code>
+    </ArgumentTypeCoercion>
+    <MissingReturnType occurrences="6">
       <code>testAddExplicitClass</code>
       <code>testAddInvalidExplicitClassThrowsException</code>
-      <code>testGetClassDefinition</code>
-      <code>testGetClassDefinitionAutoPopulatesClass</code>
       <code>testHasClassReturnsFalseForInvalidClasses</code>
-      <code>testHasClassReturnsTrueDynamically</code>
       <code>testSetExplicitClasses</code>
-      <code>testSetExplicitClassesReplacesPrefiousValues</code>
       <code>testSetExplicitClassesViaConstructor</code>
       <code>testSetInvalidExplicitClassThrowsException</code>
     </MissingReturnType>
-    <MixedInferredReturnType occurrences="2">
-      <code>array</code>
+    <MixedInferredReturnType occurrences="1">
       <code>array</code>
     </MixedInferredReturnType>
   </file>
@@ -374,9 +391,6 @@
     <RedundantCondition occurrences="1">
       <code>assertIsString</code>
     </RedundantCondition>
-    <TooManyArguments occurrences="1">
-      <code>expectDeprecation</code>
-    </TooManyArguments>
   </file>
   <file src="test/TestAsset/BuiltinTypehintParameters.php">
     <MissingReturnType occurrences="2">
@@ -420,10 +434,6 @@
     <InvalidReturnType occurrences="1">
       <code>bool</code>
     </InvalidReturnType>
-    <UndefinedAttributeClass occurrences="2">
-      <code>ReturnTypeWillChange</code>
-      <code>ReturnTypeWillChange</code>
-    </UndefinedAttributeClass>
   </file>
   <file src="test/TestAsset/ScalarTypehintParameters.php">
     <MissingReturnType occurrences="4">
@@ -432,11 +442,5 @@
       <code>intType</code>
       <code>stringType</code>
     </MissingReturnType>
-  </file>
-  <file src="vendor/laminas/laminas-servicemanager/src/ServiceManager.php">
-    <ParseError occurrences="2">
-      <code>=&gt;</code>
-      <code>fn</code>
-    </ParseError>
   </file>
 </files>
