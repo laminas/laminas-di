@@ -219,8 +219,8 @@ class Injector implements InjectorInterface
      */
     private function resolveParameters(string $type, array $params = []): array
     {
-        $resolved = $this->resolver->resolveParameters($type, $params);
-        $foundParams   = [];
+        $resolved    = $this->resolver->resolveParameters($type, $params);
+        $foundParams = [];
 
         foreach ($resolved as $injection) {
             try {

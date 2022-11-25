@@ -7,10 +7,12 @@ namespace LaminasTest\Di\Definition\Reflection;
 use Laminas\Di\Definition\Reflection\Parameter;
 use Laminas\Di\Exception\UnsupportedReflectionTypeException;
 use LaminasTest\Di\TestAsset;
+use LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionParameter;
+
 use function assert;
 
 /**
@@ -132,7 +134,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         /** @var class-string $class */
-        $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency';
+        $class      = IntersectionTypeConstructorDependency::class;
         $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
@@ -161,7 +163,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         /** @var class-string $class */
-        $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency';
+        $class      = IntersectionTypeConstructorDependency::class;
         $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 

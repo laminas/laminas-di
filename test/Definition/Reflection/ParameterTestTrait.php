@@ -6,7 +6,6 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use LaminasTest\Di\TestAsset;
 use ReflectionClass;
-use ReflectionMethod;
 
 use function substr;
 

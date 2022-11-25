@@ -68,7 +68,6 @@ class RuntimeDefinition implements DefinitionInterface
 
     /**
      * @psalm-assert class-string $class
-     *
      * @throws Exception\ClassNotFoundException
      */
     private function ensureClassExists(string $class): void

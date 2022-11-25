@@ -131,7 +131,6 @@ class RuntimeDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideExistingClasses
-     *
      * @param class-string $class
      */
     public function testGetClassDefinition(string $class): void
@@ -146,7 +145,6 @@ class RuntimeDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideExistingClasses
-     *
      * @param class-string $class
      */
     public function testGetClassDefinitionAutoPopulatesClass(string $class): void

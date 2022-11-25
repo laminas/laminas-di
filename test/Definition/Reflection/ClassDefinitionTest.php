@@ -11,8 +11,8 @@ use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-
 use ReflectionParameter;
+
 use function array_values;
 use function assert;
 use function sort;
@@ -141,7 +141,7 @@ final class ClassDefinitionTest extends TestCase
     {
         $reflectionClass = new ReflectionClass(ClassDefinitionRedundantUaSortTestDependency::class);
         $constructor     = $reflectionClass->getConstructor();
-        
+
         assert($constructor !== null);
 
         $constructorParameters = $constructor->getParameters();
