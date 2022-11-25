@@ -133,7 +133,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         /** @var class-string $class this is written as is due to CS/SA tooling not being PHP-8.1-friendly yet */
-        $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency'; // phpcs:ignore
+        $class      = 'LaminasTest\Di\TestAsset\Constructor\\' . 'IntersectionTypeConstructorDependency'; // phpcs:ignore
         $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
@@ -162,7 +162,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         /** @var class-string $class this is written as is due to CS/SA tooling not being PHP-8.1-friendly yet */
-        $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency'; // phpcs:ignore
+        $class      = 'LaminasTest\Di\TestAsset\Constructor\\' . 'IntersectionTypeConstructorDependency'; // phpcs:ignore
         $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
