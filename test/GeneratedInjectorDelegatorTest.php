@@ -17,6 +17,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
     {
         $container = $this->createMock(ContainerInterface::class);
         $container
+            ->expects(self::once())
             ->method('has')
             ->with('config')
             ->willReturn(true);
@@ -42,6 +43,7 @@ class GeneratedInjectorDelegatorTest extends TestCase
 
         $container = $this->createMock(ContainerInterface::class);
         $container
+            ->expects(self::once())
             ->method('has')
             ->with('config')
             ->willReturn(false);
@@ -58,10 +60,12 @@ class GeneratedInjectorDelegatorTest extends TestCase
 
         $container = $this->createMock(ContainerInterface::class);
         $container
+            ->expects(self::once())
             ->method('has')
             ->with('config')
             ->willReturn(true);
         $container
+            ->expects(self::once())
             ->method('get')
             ->with('config')
             ->willReturn(['dependencies' => ['auto' => ['aot' => ['namespace' => 'LaminasTest\Di\TestAsset']]]]);

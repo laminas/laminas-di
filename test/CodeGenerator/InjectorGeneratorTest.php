@@ -97,16 +97,15 @@ class InjectorGeneratorTest extends TestCase
 
         $generator = new InjectorGenerator($config, $resolver, null, $logger);
         $generator->setOutputDirectory($this->dir);
+
+        $logger
+            ->expects(self::atLeastOnce())
+            ->method('debug')
+            ->with(self::stringContains(TestAsset\B::class));
+
         $generator->generate([
             TestAsset\B::class,
         ]);
-
-        $logger
-            ->expects($this->any())
-            ->method('debug')
-            ->with(TestAsset\B::class);
-
-        $this->assertNull($logger->debug(TestAsset\B::class));
     }
 
     public function testGeneratorLogsErrorWhenFactoryGenerationFailed()
@@ -117,15 +116,14 @@ class InjectorGeneratorTest extends TestCase
         $generator = new InjectorGenerator($config, $resolver, null, $logger);
 
         $generator->setOutputDirectory($this->dir);
+
+        $logger
+            ->expects(self::atLeastOnce())
+            ->method('error')
+            ->with(self::stringContains('Bad.And.Undefined.ClassName'));
+
         $generator->generate([
             'Bad.And.Undefined.ClassName',
         ]);
-
-        $logger
-            ->expects($this->any())
-            ->method('error')
-            ->with('Bad.And.Undefined.ClassName');
-
-        $this->assertNull($logger->error('Bad.And.Undefined.ClassName'));
     }
 }
