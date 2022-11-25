@@ -129,7 +129,7 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
+         $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency';
         $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
         $param      = new Parameter($parameters[0]);
 
@@ -157,7 +157,7 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
+        $class      = 'LaminasTest\Di\TestAsset\Constructor\IntersectionTypeConstructorDependency';
         $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
         $param      = new Parameter($parameters[0]);
 

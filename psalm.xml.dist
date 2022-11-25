@@ -13,6 +13,8 @@
         <ignoreFiles>
             <directory name="test/_files"/>
             <directory name="vendor"/>
+            <!-- psalm cannot scan intersection types yet -->
+            <file name="test/TestAsset/Constructor/IntersectionTypeConstructorDependency.php"/>
         </ignoreFiles>
     </projectFiles>
 
