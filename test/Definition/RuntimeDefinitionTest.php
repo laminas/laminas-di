@@ -54,6 +54,7 @@ class RuntimeDefinitionTest extends TestCase
         $this->assertEquals($expected, $definition->getClasses());
     }
 
+    /** @return non-empty-array<non-empty-string, array{class-string}> */
     public function provideExistingClasses(): array
     {
         return [
@@ -110,10 +111,8 @@ class RuntimeDefinitionTest extends TestCase
         $definition->addExplicitClass($class);
     }
 
-    /**
-     * @dataProvider provideExistingClasses
-     */
-    public function testHasClassReturnsTrueDynamically(string $class)
+    /** @dataProvider provideExistingClasses */
+    public function testHasClassReturnsTrueDynamically(string $class): void
     {
         $this->assertTrue(
             (new RuntimeDefinition())->hasClass($class)
@@ -132,8 +131,9 @@ class RuntimeDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideExistingClasses
+     * @param class-string $class
      */
-    public function testGetClassDefinition(string $class)
+    public function testGetClassDefinition(string $class): void
     {
         $definition = new RuntimeDefinition();
         $result     = $definition->getClassDefinition($class);
@@ -145,8 +145,9 @@ class RuntimeDefinitionTest extends TestCase
 
     /**
      * @dataProvider provideExistingClasses
+     * @param class-string $class
      */
-    public function testGetClassDefinitionAutoPopulatesClass(string $class)
+    public function testGetClassDefinitionAutoPopulatesClass(string $class): void
     {
         $definition = new RuntimeDefinition();
 

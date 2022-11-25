@@ -31,6 +31,8 @@ class ConfigProviderTest extends TestCase
 
     /**
      * Provides service names that should be defined with a factory
+     *
+     * @return iterable<string, array{0: class-string}>
      */
     public function provideExpectedServicesWithFactory(): iterable
     {
@@ -48,6 +50,7 @@ class ConfigProviderTest extends TestCase
     public function testProvidesFactoryDefinition(string $serviceName): void
     {
         $result = (new ConfigProvider())->getDependencyConfig();
+
         $this->assertArrayHasKey($serviceName, $result['factories']);
     }
 }

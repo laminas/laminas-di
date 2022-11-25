@@ -14,9 +14,12 @@ use Psr\Container\ContainerInterface;
 use function array_key_exists;
 use function is_array;
 
+/**
+ * @template-implements FactoryInterface<\LaminasTest\Di\TestAsset\Constructor\MixedArguments>
+ */
 final class MixedArgumentsFactory implements FactoryInterface
 {
-    public function create(ContainerInterface $container, array $options = [])
+    public function create(ContainerInterface $container, array $options = []): \LaminasTest\Di\TestAsset\Constructor\MixedArguments
     {
         $args = empty($options)
             ? [
@@ -28,10 +31,15 @@ final class MixedArgumentsFactory implements FactoryInterface
                 array_key_exists('anyDep', $options) ? $options['anyDep'] : null,
             ];
 
+        /** @psalm-suppress MixedArgument */
         return new \LaminasTest\Di\TestAsset\Constructor\MixedArguments(...$args);
     }
 
-    public function __invoke(ContainerInterface $container, $name = null, array $options = null)
+    /**
+     * @param array<mixed>|string|null $name
+     * @param array<mixed>|null $options
+     */
+    public function __invoke(ContainerInterface $container, $name = null, array $options = null): \LaminasTest\Di\TestAsset\Constructor\MixedArguments
     {
         if (is_array($name) && $options === null) {
             $options = $name;

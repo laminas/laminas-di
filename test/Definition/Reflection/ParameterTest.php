@@ -9,7 +9,10 @@ use Laminas\Di\Exception\UnsupportedReflectionTypeException;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionMethod;
 use ReflectionParameter;
+
+use function assert;
 
 /**
  * Parameter test case.
@@ -101,7 +104,7 @@ class ParameterTest extends TestCase
 
     public function testIterablePseudoType()
     {
-        $reflections = (new ReflectionClass(TestAsset\IterableDependency::class))->getConstructor()->getParameters();
+        $reflections = $this->getConstructor(TestAsset\IterableDependency::class)->getParameters();
         $param       = new Parameter($reflections[0]);
 
         $this->assertTrue($param->isBuiltin());
@@ -116,7 +119,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         $class      = TestAsset\Constructor\UnionTypeConstructorDependency::class;
-        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
         $param->isBuiltin();
@@ -129,8 +132,9 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
-        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        /** @var class-string $class this is written as is due to CS/SA tooling not being PHP-8.1-friendly yet */
+        $class      = 'LaminasTest\Di\TestAsset\Constructor\\' . 'IntersectionTypeConstructorDependency'; // phpcs:ignore
+        $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
         $param->isBuiltin();
@@ -144,7 +148,7 @@ class ParameterTest extends TestCase
         $this->expectException(UnsupportedReflectionTypeException::class);
 
         $class      = TestAsset\Constructor\UnionTypeConstructorDependency::class;
-        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
         $param->getType();
@@ -157,10 +161,21 @@ class ParameterTest extends TestCase
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
 
-        $class      = TestAsset\Constructor\IntersectionTypeConstructorDependency::class;
-        $parameters = (new ReflectionClass($class))->getConstructor()->getParameters();
+        /** @var class-string $class this is written as is due to CS/SA tooling not being PHP-8.1-friendly yet */
+        $class      = 'LaminasTest\Di\TestAsset\Constructor\\' . 'IntersectionTypeConstructorDependency'; // phpcs:ignore
+        $parameters = $this->getConstructor($class)->getParameters();
         $param      = new Parameter($parameters[0]);
 
         $param->getType();
+    }
+
+    /** @param class-string $class */
+    private function getConstructor(string $class): ReflectionMethod
+    {
+        $constructor = (new ReflectionClass($class))->getConstructor();
+
+        assert($constructor !== null);
+
+        return $constructor;
     }
 }

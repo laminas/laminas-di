@@ -13,14 +13,21 @@ use Psr\Container\ContainerInterface;
 
 use function is_array;
 
+/**
+ * @template-implements FactoryInterface<\LaminasTest\Di\TestAsset\A>
+ */
 final class AFactory implements FactoryInterface
 {
-    public function create(ContainerInterface $container, array $options = [])
+    public function create(ContainerInterface $container, array $options = []): \LaminasTest\Di\TestAsset\A
     {
         return new \LaminasTest\Di\TestAsset\A();
     }
 
-    public function __invoke(ContainerInterface $container, $name = null, array $options = null)
+    /**
+     * @param array<mixed>|string|null $name
+     * @param array<mixed>|null $options
+     */
+    public function __invoke(ContainerInterface $container, $name = null, array $options = null): \LaminasTest\Di\TestAsset\A
     {
         if (is_array($name) && $options === null) {
             $options = $name;

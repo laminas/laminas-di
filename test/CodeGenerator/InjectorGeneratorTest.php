@@ -89,7 +89,7 @@ class InjectorGeneratorTest extends TestCase
         $this->assertEquals($expected, $generator->getNamespace());
     }
 
-    public function testGeneratorLogsDebugForEachClass()
+    public function testGeneratorLogsDebugForEachClass(): void
     {
         $config   = new Config();
         $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
@@ -108,11 +108,11 @@ class InjectorGeneratorTest extends TestCase
         ]);
     }
 
-    public function testGeneratorLogsErrorWhenFactoryGenerationFailed()
+    public function testGeneratorLogsErrorWhenFactoryGenerationFailed(): void
     {
         $config    = new Config();
         $resolver  = new DependencyResolver(new RuntimeDefinition(), $config);
-        $logger    = $this->createStub(LoggerInterface::class);
+        $logger    = $this->createMock(LoggerInterface::class);
         $generator = new InjectorGenerator($config, $resolver, null, $logger);
 
         $generator->setOutputDirectory($this->dir);

@@ -81,6 +81,7 @@ class ValueInjection implements InjectionInterface
         }
 
         if (is_array($value)) {
+            /** @var mixed $item */
             foreach ($value as $item) {
                 if (! $this->isExportableRecursive($item)) {
                     return false;

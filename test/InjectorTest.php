@@ -14,6 +14,7 @@ use Laminas\Di\Resolver\DependencyResolverInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use LaminasTest\Di\TestAsset\DependencyTree as TreeTestAsset;
 use PHPUnit\Framework\Constraint;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -38,7 +39,7 @@ final class InjectorTest extends TestCase
         return new Constraint\IsIdentical($value);
     }
 
-    public function testSetContainerReplacesConstructed()
+    public function testSetContainerReplacesConstructed(): void
     {
         $mock1 = $this->getMockForAbstractClass(ContainerInterface::class);
         $mock2 = $this->getMockForAbstractClass(ContainerInterface::class);
@@ -50,7 +51,7 @@ final class InjectorTest extends TestCase
         $this->assertNotSame($mock1, $injector->getContainer());
     }
 
-    public function testConstructWithContainerPassesItToResolver()
+    public function testConstructWithContainerPassesItToResolver(): void
     {
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
         $resolver  = $this->getMockForAbstractClass(DependencyResolverInterface::class);
@@ -63,7 +64,7 @@ final class InjectorTest extends TestCase
         $this->assertSame($container, $injector->getContainer());
     }
 
-    public function testSetContainerPassesItToResolver()
+    public function testSetContainerPassesItToResolver(): void
     {
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
         $resolver  = $this->getMockForAbstractClass(DependencyResolverInterface::class);
@@ -79,7 +80,7 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<string, array{0: class-string}>
      */
     public function provideClassNames()
     {
@@ -93,23 +94,26 @@ final class InjectorTest extends TestCase
     /**
      * @dataProvider provideClassNames
      */
-    public function testCanCreateReturnsTrueForClasses(string $className)
+    public function testCanCreateReturnsTrueForClasses(string $className): void
     {
         $this->assertTrue((new Injector())->canCreate($className));
     }
 
-    public function testCanCreateReturnsFalseForInterfaces()
+    public function testCanCreateReturnsFalseForInterfaces(): void
     {
         $this->assertFalse((new Injector())->canCreate(TestAsset\DummyInterface::class));
     }
 
-    public function testCanCreateReturnsFalseForNonExistingClassOrAlias()
+    public function testCanCreateReturnsFalseForNonExistingClassOrAlias(): void
     {
         $injector = new Injector();
         $this->assertFalse($injector->canCreate('Laminas\Di\TestAsset\NoSuchClass'));
         $this->assertFalse($injector->canCreate('Some.Alias.Name'));
     }
 
+    /**
+     * @return array<string, array{0: string, 1: string}>
+     */
     public function provideValidAliases(): array
     {
         return [
@@ -124,7 +128,7 @@ final class InjectorTest extends TestCase
     /**
      * @dataProvider provideValidAliases
      */
-    public function testCanCreateReturnsTrueWithDefinedAndValidAliases(string $aliasName, string $className)
+    public function testCanCreateReturnsTrueWithDefinedAndValidAliases(string $aliasName, string $className): void
     {
         $config = new Config([
             'types' => [
@@ -137,7 +141,7 @@ final class InjectorTest extends TestCase
         $this->assertTrue((new Injector($config))->canCreate($aliasName));
     }
 
-    public function testCanCreateReturnsFalseWithDefinedInvalidAliases()
+    public function testCanCreateReturnsFalseWithDefinedInvalidAliases(): void
     {
         $config = new Config([
             'types' => [
@@ -150,13 +154,13 @@ final class InjectorTest extends TestCase
         $this->assertFalse((new Injector($config))->canCreate('Some.Custom.Name'));
     }
 
-    public function testCreateWithoutDependencies()
+    public function testCreateWithoutDependencies(): void
     {
         $result = (new Injector())->create(TestAsset\Constructor\EmptyConstructor::class);
         $this->assertInstanceOf(TestAsset\Constructor\EmptyConstructor::class, $result);
     }
 
-    public function testCreateUsesContainerDependency()
+    public function testCreateUsesContainerDependency(): void
     {
         $injector  = new Injector();
         $expectedA = new TestAsset\A();
@@ -165,22 +169,23 @@ final class InjectorTest extends TestCase
         $container->setInstance(TestAsset\A::class, $expectedA);
         $injector->setContainer($container);
 
-        /** @var TestAsset\B $result */
         $result = $injector->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
         $this->assertSame($expectedA, $result->injectedA);
     }
 
-    public function testCreateSimpleDependency()
+    public function testCreateSimpleDependency(): void
     {
-        /** @var TestAsset\B $result */
         $result = (new Injector())->create(TestAsset\B::class);
 
         $this->assertInstanceOf(TestAsset\B::class, $result);
         $this->assertInstanceOf(TestAsset\A::class, $result->injectedA);
     }
 
+    /**
+     * @return array<string, array{0: class-string}>
+     */
     public function provideCircularClasses(): array
     {
         $classes = [
@@ -196,24 +201,22 @@ final class InjectorTest extends TestCase
     /**
      * @dataProvider provideCircularClasses
      */
-    public function testCircularDependencyThrowsException(string $class)
+    public function testCircularDependencyThrowsException(string $class): void
     {
         $this->expectException(Exception\CircularDependencyException::class);
         (new Injector())->create($class);
     }
 
-    public function testSimpleTreeResolving()
+    public function testSimpleTreeResolving(): void
     {
-        /** @var TreeTestAsset\Simple $result */
         $result = (new Injector())->create(TreeTestAsset\Simple::class);
         $this->assertInstanceOf(TreeTestAsset\Simple::class, $result);
         $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
         $this->assertInstanceOf(TreeTestAsset\Level2::class, $result->result->result);
     }
 
-    public function testComplexTreeResolving()
+    public function testComplexTreeResolving(): void
     {
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector())->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Complex::class, $result);
         $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
@@ -223,23 +226,20 @@ final class InjectorTest extends TestCase
         $this->assertSame($result->result->result, $result->result2->result);
     }
 
-    public function testDeepDependencyUsesContainer()
+    public function testDeepDependencyUsesContainer(): void
     {
         $injector  = new Injector();
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
 
         // Mocks a container that always creates new instances
-        $container->method('has')->willReturnCallback(fn($class) => $injector->canCreate($class));
-        $container->method('get')->willReturnCallback(fn($class) => $injector->create($class));
+        $container->method('has')->willReturnCallback(fn(string $class) => $injector->canCreate($class));
+        $container->method('get')->willReturnCallback(fn(string $class) => $injector->create($class));
 
         $injector->setContainer($container);
 
-        /** @var TreeTestAsset\Complex $result1 */
         $result1 = $injector->create(TreeTestAsset\Complex::class);
-        /** @var TreeTestAsset\Complex $result2 */
         $result2 = $injector->create(TreeTestAsset\Complex::class);
 
-        /** @var TreeTestAsset\Complex $result */
         foreach ([$result1, $result2] as $result) {
             $this->assertInstanceOf(TreeTestAsset\Complex::class, $result);
             $this->assertInstanceOf(TreeTestAsset\Level1::class, $result->result);
@@ -258,7 +258,7 @@ final class InjectorTest extends TestCase
         $this->assertNotSame($result2->result->result, $result2->result2->result);
     }
 
-    public function testDeepDependencyRespectsGlobalTypePreference()
+    public function testDeepDependencyRespectsGlobalTypePreference(): void
     {
         $config = new Config([
             'preferences' => [
@@ -266,13 +266,12 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result2->result);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result->result);
     }
 
-    public function testDeepDependencyRespectsSpecificTypePreference()
+    public function testDeepDependencyRespectsSpecificTypePreference(): void
     {
         $config = new Config([
             'types' => [
@@ -284,13 +283,12 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertInstanceOf(TreeTestAsset\Level2Preference::class, $result->result2->result);
         $this->assertNotInstanceOf(TreeTestAsset\Level2Preference::class, $result->result->result);
     }
 
-    public function testDeepDependencyUsesConfiguredParameters()
+    public function testDeepDependencyUsesConfiguredParameters(): void
     {
         $expected = uniqid('InjectValue');
         $config   = new Config([
@@ -303,13 +301,12 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertSame($expected, $result->result2->result->optionalResult);
         $this->assertSame($expected, $result->result->result->optionalResult);
     }
 
-    public function testComplexDeepDependencyConfiguration()
+    public function testComplexDeepDependencyConfiguration(): void
     {
         $expected1 = uniqid('InjectValueA');
         $expected2 = uniqid('InjectValueB');
@@ -335,20 +332,20 @@ final class InjectorTest extends TestCase
             ],
         ]);
 
-        /** @var TreeTestAsset\Complex $result */
         $result = (new Injector($config))->create(TreeTestAsset\Complex::class);
         $this->assertSame($expected1, $result->result->result->optionalResult);
         $this->assertSame($expected2, $result->result2->result->optionalResult);
     }
 
-    public function testCreateInstanceWithoutUnknownClassThrowsException()
+    public function testCreateInstanceWithoutUnknownClassThrowsException(): void
     {
         $this->expectException(Exception\ClassNotFoundException::class);
         (new Injector())->create('Unknown.Alias.Should.Fail');
     }
 
-    public function testKnownButInexistentClassThrowsException()
+    public function testKnownButInexistentClassThrowsException(): void
     {
+        /** @var MockObject&DefinitionInterface $definition */
         $definition = $this->getMockBuilder(DefinitionInterface::class)
             ->getMockForAbstractClass();
 
@@ -360,6 +357,9 @@ final class InjectorTest extends TestCase
         (new Injector(null, null, $definition))->create('LaminasTest\Di\TestAsset\No\Such\Class');
     }
 
+    /**
+     * @return array<string, array{0: mixed}>
+     */
     public function provideUnexpectedResolverValues(): array
     {
         return [
@@ -374,8 +374,9 @@ final class InjectorTest extends TestCase
      * @dataProvider provideUnexpectedResolverValues
      * @param mixed $unexpectedValue
      */
-    public function testUnexpectedResolverResultThrowsTypeError($unexpectedValue)
+    public function testUnexpectedResolverResultThrowsTypeError($unexpectedValue): void
     {
+        /** @var MockObject&DependencyResolverInterface $resolver */
         $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
@@ -387,6 +388,9 @@ final class InjectorTest extends TestCase
         $injector->create(TestAsset\TypelessDependency::class);
     }
 
+    /**
+     * @return array<string, array{0: string}>
+     */
     public function provideContainerTypeNames(): array
     {
         return [
@@ -398,9 +402,11 @@ final class InjectorTest extends TestCase
     /**
      * @dataProvider provideContainerTypeNames
      */
-    public function testContainerItselfIsInjectedIfHasReturnsFalse(string $typeName)
+    public function testContainerItselfIsInjectedIfHasReturnsFalse(string $typeName): void
     {
-        $resolver  = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
+        /** @var MockObject&DependencyResolverInterface $resolver */
+        $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
+        /** @var MockObject&ContainerInterface $container */
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
@@ -415,11 +421,16 @@ final class InjectorTest extends TestCase
         $this->assertSame($container, $result->result);
     }
 
-    public function testTypeUnavailableInContainerThrowsException()
+    public function testTypeUnavailableInContainerThrowsException(): void
     {
         $expectedMessage = 'Exception from container';
-        $resolver        = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
-        $container       = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+
+        /** @var MockObject&DependencyResolverInterface $resolver */
+        $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
+
+        /** @var MockObject&ContainerInterface $container */
+        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
             ->willReturn([new TypeInjection(TestAsset\A::class)]);
@@ -440,6 +451,9 @@ final class InjectorTest extends TestCase
         $injector->create(TestAsset\TypelessDependency::class);
     }
 
+    /**
+     * @return array<string, array{0: class-string, 1: array<string, mixed>}>
+     */
     public function provideManyArguments(): array
     {
         return [
@@ -467,14 +481,15 @@ final class InjectorTest extends TestCase
 
     /**
      * @dataProvider provideManyArguments
+     * @param array<string, mixed> $parameters
      */
-    public function testConstructionWithManyParameters(string $class, array $parameters)
+    public function testConstructionWithManyParameters(string $class, array $parameters): void
     {
         $result = (new Injector())->create($class, $parameters);
         $this->assertEquals($parameters, $result->result);
     }
 
-    public function testCreateGivenExistingInterfaceExpectedClassNotFoundExceptionThrown()
+    public function testCreateGivenExistingInterfaceExpectedClassNotFoundExceptionThrown(): void
     {
         $definition = $this->createMock(DefinitionInterface::class);
         $definition

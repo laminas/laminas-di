@@ -1,23 +1,25 @@
 <?php
 
+use LaminasTest\Di\TestAsset;
+
 return [
     'preferences' => [
-        'A' => 'GlobalA',
-        'B' => 'GlobalB'
+        TestAsset\A::class => 'GlobalA',
+        TestAsset\B::class => 'GlobalB',
     ],
     'types' => [
-        'Foo' => [
+        TestAsset\Config\SomeClass::class => [
             'preferences' => [
-                'A' => 'LocalA',
+                TestAsset\A::class => 'LocalA',
              ],
             'parameters' => [
                 'a' => '*'
             ]
         ],
-        'Bar' => [
-            'typeOf' => 'Foo',
+        'SomeAlias' => [
+            'typeOf' => TestAsset\Config\SomeClass::class,
             'preferences' => [
-                'B' => 'LocalB'
+                TestAsset\B::class => 'LocalB'
             ]
         ]
     ],

@@ -9,7 +9,6 @@ use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -19,9 +18,7 @@ use function microtime;
 use function time;
 use function uniqid;
 
-/**
- * @coversDefaultClass Laminas\Di\Resolver\ValueInjection
- */
+/** @covers \Laminas\Di\Resolver\ValueInjection */
 class ValueInjectionTest extends TestCase
 {
     /** @var false|resource */
@@ -84,9 +81,8 @@ class ValueInjectionTest extends TestCase
         $container = $this->createMock(ContainerInterface::class);
 
         $container
-            ->expects($this->never())
-            ->method('get')
-            ->with(Argument::cetera());
+            ->expects(self::never())
+            ->method('get');
 
         $this->assertSame($value, $result->toValue($container));
     }

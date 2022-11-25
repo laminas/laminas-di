@@ -6,7 +6,6 @@ namespace LaminasTest\Di\Definition\Reflection;
 
 use LaminasTest\Di\TestAsset;
 use ReflectionClass;
-use ReflectionMethod;
 
 use function substr;
 
@@ -23,7 +22,6 @@ trait ParameterTestTrait
         $class          = new ReflectionClass($classname);
         $invocationArgs = [];
 
-        /** @var ReflectionMethod $method */
         foreach ($class->getMethods() as $method) {
             $params                    = $method->getParameters();
             $typename                  = substr($method->name, 0, -4);
