@@ -28,7 +28,7 @@ $injector = new Injector(new Config([
 ]));
 ```
 
-This config implementation accepts a veriety of options. Refer to the
+This config implementation accepts a variety of options. Refer to the
 [Configuration](config.md) chapter for full details.
 
 ## 3. Creating instances
