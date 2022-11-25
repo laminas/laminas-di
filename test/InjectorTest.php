@@ -14,7 +14,6 @@ use Laminas\Di\Resolver\DependencyResolverInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use LaminasTest\Di\TestAsset\DependencyTree as TreeTestAsset;
 use PHPUnit\Framework\Constraint;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -345,7 +344,6 @@ final class InjectorTest extends TestCase
 
     public function testKnownButInexistentClassThrowsException(): void
     {
-        /** @var MockObject&DefinitionInterface $definition */
         $definition = $this->getMockBuilder(DefinitionInterface::class)
             ->getMockForAbstractClass();
 
@@ -376,7 +374,6 @@ final class InjectorTest extends TestCase
      */
     public function testUnexpectedResolverResultThrowsTypeError($unexpectedValue): void
     {
-        /** @var MockObject&DependencyResolverInterface $resolver */
         $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
@@ -404,9 +401,7 @@ final class InjectorTest extends TestCase
      */
     public function testContainerItselfIsInjectedIfHasReturnsFalse(string $typeName): void
     {
-        /** @var MockObject&DependencyResolverInterface $resolver */
-        $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
-        /** @var MockObject&ContainerInterface $container */
+        $resolver  = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
@@ -425,10 +420,7 @@ final class InjectorTest extends TestCase
     {
         $expectedMessage = 'Exception from container';
 
-        /** @var MockObject&DependencyResolverInterface $resolver */
-        $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
-
-        /** @var MockObject&ContainerInterface $container */
+        $resolver  = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
         $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
 
         $resolver->expects($this->atLeastOnce())
