@@ -11,6 +11,7 @@ use stdClass;
 /** @template-implements FactoryInterface<stdClass> */
 class StdClassFactory implements FactoryInterface
 {
+    /** @inheritDoc */
     public function create(ContainerInterface $container, array $options)
     {
         return new stdClass();
