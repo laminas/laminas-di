@@ -7,6 +7,7 @@ namespace LaminasTest\Di\TestAsset\Pseudotypes;
 use Iterator;
 use ReturnTypeWillChange;
 
+/** @template-implements Iterator<array-key, mixed> */
 class IteratorImplementation implements Iterator
 {
     #[ReturnTypeWillChange]

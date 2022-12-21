@@ -8,9 +8,9 @@ use Laminas\Di\CodeGenerator\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+/** @template-implements FactoryInterface<stdClass> */
 class StdClassFactory implements FactoryInterface
 {
-    /** @return stdClass */
     public function create(ContainerInterface $container, array $options)
     {
         return new stdClass();

@@ -351,9 +351,7 @@ class DependencyResolverTest extends TestCase
         $resolver->resolveParameters($class);
     }
 
-    /**
-     * @return array[]
-     */
+    /** @return non-empty-array<non-empty-string, array{string, mixed, bool}> */
     public function provideUsableParametersData()
     {
         // @codingStandardsIgnoreStart
