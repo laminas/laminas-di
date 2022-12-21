@@ -11,6 +11,7 @@ use function substr;
 
 trait ParameterTestTrait
 {
+    /** @param non-empty-string $methodName */
     private function reflectAsset(string $methodName, int $parameterIndex = 0): object
     {
         $all = (new ReflectionClass(TestAsset\Parameters::class))->getMethod($methodName)->getParameters();

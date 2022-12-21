@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+  <file src="src/CodeGenerator/AbstractInjector.php">
+    <InvalidReturnStatement occurrences="1">
+      <code>$this-&gt;injector-&gt;create($name, $options)</code>
+    </InvalidReturnStatement>
+    <MixedInferredReturnType occurrences="1">
+      <code>T</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;getFactory($name)-&gt;create($this-&gt;container, $options)</code>
+    </MixedReturnStatement>
+  </file>
   <file src="src/CodeGenerator/InjectorGenerator.php">
     <PossiblyUnusedProperty occurrences="1">
       <code>$definition</code>
     </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Config.php">
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;types[$context]['preferences'][$type]</code>
+    </MixedArrayAccess>
   </file>
   <file src="src/ConfigInterface.php">
     <PossiblyUnusedReturnValue occurrences="1">
       <code>mixed</code>
     </PossiblyUnusedReturnValue>
   </file>
-  <file src="src/Definition/Reflection/ClassDefinition.php">
-    <PropertyTypeCoercion occurrences="1">
-      <code>$this-&gt;supertypes</code>
-    </PropertyTypeCoercion>
-  </file>
-  <file src="src/Definition/RuntimeDefinition.php">
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>ensureClassExists</code>
-      <code>ensureClassExists</code>
-    </RedundantConditionGivenDocblockType>
+  <file src="src/Container/AutowireFactory.php">
+    <InvalidReturnStatement occurrences="2">
+      <code>$this-&gt;create($container, (string) $requestedName, $options)</code>
+      <code>$this-&gt;getInjector($container)-&gt;create($requestedName, $options ?: [])</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="2">
+      <code>T</code>
+      <code>T</code>
+    </InvalidReturnType>
   </file>
   <file src="src/Exception/InvalidParamNameException.php">
     <UnusedClass occurrences="1">
@@ -37,12 +52,21 @@
     </PossiblyUnusedParam>
   </file>
   <file src="src/Injector.php">
+    <InvalidReturnStatement occurrences="1">
+      <code>$instance</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>T</code>
+    </InvalidReturnType>
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$params</code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="1">
       <code>$foundParams[]</code>
     </MixedAssignment>
+    <RedundantCast occurrences="1">
+      <code>(int) $containerException-&gt;getCode()</code>
+    </RedundantCast>
   </file>
   <file src="src/Resolver/AbstractInjection.php">
     <PossiblyUnusedMethod occurrences="4">
@@ -98,19 +122,6 @@
     </MixedAssignment>
   </file>
   <file src="test/Container/AutowireFactoryTest.php">
-    <InvalidArgument occurrences="5">
-      <code>$container</code>
-      <code>$container</code>
-      <code>$container</code>
-      <code>$injector</code>
-      <code>$injector</code>
-    </InvalidArgument>
-    <InvalidReturnStatement occurrences="1">
-      <code>$container</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>ContainerInterface</code>
-    </InvalidReturnType>
     <MissingReturnType occurrences="6">
       <code>testCanCreateReturnsFalseWithoutInjector</code>
       <code>testCanCreateUsesInjector</code>
@@ -121,16 +132,6 @@
     </MissingReturnType>
   </file>
   <file src="test/Container/ConfigFactoryTest.php">
-    <InvalidArgument occurrences="2">
-      <code>$container</code>
-      <code>$container</code>
-    </InvalidArgument>
-    <InvalidReturnStatement occurrences="1">
-      <code>$container</code>
-    </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
-      <code>ContainerInterface</code>
-    </InvalidReturnType>
     <MissingReturnType occurrences="4">
       <code>testCreateRequestsContainerForConfigServiceGracefully</code>
       <code>testCreateUsesConfigFromContainer</code>
@@ -145,9 +146,6 @@
     <DeprecatedMethod occurrences="1">
       <code>setMethods</code>
     </DeprecatedMethod>
-    <InvalidArgument occurrences="1">
-      <code>$container</code>
-    </InvalidArgument>
     <InvalidFunctionCall occurrences="1">
       <code>$mock($container)</code>
     </InvalidFunctionCall>
@@ -156,11 +154,6 @@
     </MissingClosureParamType>
   </file>
   <file src="test/Container/InjectorFactoryTest.php">
-    <InvalidArgument occurrences="3">
-      <code>$container</code>
-      <code>$container</code>
-      <code>$container</code>
-    </InvalidArgument>
     <MissingReturnType occurrences="4">
       <code>testCreateWillReturnAnInjectorInstance</code>
       <code>testFactoryIsInvokable</code>
@@ -169,10 +162,6 @@
     </MissingReturnType>
   </file>
   <file src="test/Container/ServiceManager/AutowireFactoryTest.php">
-    <InvalidArgument occurrences="2">
-      <code>$container</code>
-      <code>$container</code>
-    </InvalidArgument>
     <MissingReturnType occurrences="2">
       <code>testCanCreateIsPassedToGenericFactory</code>
       <code>testInvokeIsPassedToGenericFactory</code>
@@ -243,9 +232,6 @@
       <code>toValue</code>
       <code>toValue</code>
     </InternalMethod>
-    <InvalidArgument occurrences="1">
-      <code>$config</code>
-    </InvalidArgument>
     <InvalidCast occurrences="1">
       <code>$result['p']</code>
     </InvalidCast>
@@ -270,6 +256,9 @@
       <code>testResolveWithoutConfig</code>
       <code>testUsableConfigParametersAreAccepted</code>
     </MissingReturnType>
+    <MissingTemplateParam occurrences="1">
+      <code>IteratorAggregate</code>
+    </MissingTemplateParam>
     <MixedArgument occurrences="6">
       <code>$config</code>
       <code>$options</code>
@@ -310,9 +299,8 @@
     <MixedOperand occurrences="1">
       <code>$key</code>
     </MixedOperand>
-    <PossiblyInvalidArgument occurrences="2">
+    <PossiblyInvalidArgument occurrences="1">
       <code>$this-&gt;getEmptyContainerMock()</code>
-      <code>testUsableConfigParametersAreAccepted</code>
     </PossiblyInvalidArgument>
     <RedundantCondition occurrences="4">
       <code>assertIsArray</code>
@@ -392,6 +380,14 @@
     <MissingPropertyType occurrences="1">
       <code>$result</code>
     </MissingPropertyType>
+  </file>
+  <file src="test/TestAsset/GeneratedInjector.php">
+    <InvalidReturnStatement occurrences="1">
+      <code>$this-&gt;injector-&gt;create($name, $options)</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>T</code>
+    </InvalidReturnType>
   </file>
   <file src="test/TestAsset/InvokableInterface.php">
     <MissingReturnType occurrences="1">
