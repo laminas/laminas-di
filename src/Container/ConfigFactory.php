@@ -9,11 +9,11 @@ use Laminas\Di\Config;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\LegacyConfig;
 use Psr\Container\ContainerInterface;
-use Traversable;
 
 use function array_merge_recursive;
 use function assert;
 use function is_array;
+use function is_iterable;
 use function trigger_error;
 
 use const E_USER_DEPRECATED;
@@ -47,7 +47,7 @@ class ConfigFactory
                 E_USER_DEPRECATED
             );
 
-            assert(is_array($legacyData) || $legacyData instanceof Traversable || $legacyData instanceof ArrayAccess);
+            assert(is_iterable($legacyData) || $legacyData instanceof ArrayAccess);
 
             $legacyConfig = new LegacyConfig($legacyData);
             $data         = array_merge_recursive($legacyConfig->toArray(), $data);

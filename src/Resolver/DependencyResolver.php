@@ -107,7 +107,7 @@ class DependencyResolver implements DependencyResolverInterface
 
         // A type configuration may define a parameter should be auto resolved
         // even it was defined earlier
-        $params = array_filter($params, fn($value) => $value !== '*');
+        $params = array_filter($params, static fn($value): bool => $value !== '*');
 
         return $params;
     }
@@ -148,10 +148,7 @@ class DependencyResolver implements DependencyResolverInterface
             && ($this->container === null || $this->container->has($type));
     }
 
-    /**
-     * @param mixed $value
-     */
-    private function getTypeNameFromValue($value): string
+    private function getTypeNameFromValue(mixed $value): string
     {
         $type = gettype($value);
         return $this->gettypeMap[$type] ?? $type;
@@ -163,7 +160,7 @@ class DependencyResolver implements DependencyResolverInterface
      * @param mixed  $value The value to check
      * @param string $type The typename to check against
      */
-    private function isValueOf($value, string $type): bool
+    private function isValueOf(mixed $value, string $type): bool
     {
         if (! $this->isBuiltinType($type)) {
             return $value instanceof $type;
@@ -224,10 +221,8 @@ class DependencyResolver implements DependencyResolverInterface
      * Prepare a candidate for injection
      *
      * If the candidate is usable, its injection representation is returned
-     *
-     * @param mixed $value
      */
-    private function prepareInjection($value, ?string $requiredType): ?InjectionInterface
+    private function prepareInjection(mixed $value, ?string $requiredType): ?InjectionInterface
     {
         if ($value instanceof ValueInjection || $value instanceof TypeInjection) {
             return $value;

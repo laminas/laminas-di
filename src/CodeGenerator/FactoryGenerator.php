@@ -48,20 +48,14 @@ __CODE__;
 
     private string $namespace;
 
-    private DependencyResolverInterface $resolver;
-
-    private ConfigInterface $config;
-
     /** @var array<string, string> */
     private array $classmap = [];
 
     public function __construct(
-        ConfigInterface $config,
-        DependencyResolverInterface $resolver,
+        private ConfigInterface $config,
+        private DependencyResolverInterface $resolver,
         ?string $namespace = null
     ) {
-        $this->resolver  = $resolver;
-        $this->config    = $config;
         $this->namespace = $namespace ?: 'LaminasDiGenerated';
     }
 

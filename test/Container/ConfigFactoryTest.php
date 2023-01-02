@@ -110,7 +110,7 @@ class ConfigFactoryTest extends TestCase
             ],
         ]);
 
-        set_error_handler(function ($errno, $errstr) {
+        set_error_handler(static function ($errno, $errstr) {
             if ($errno !== E_USER_DEPRECATED) {
                 return false;
             }

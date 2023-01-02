@@ -35,14 +35,13 @@ class ParameterTest extends TestCase
 
     /**
      * @dataProvider provideGeneralParameters
-     * @param mixed $expectedDefault
      */
     public function testParamterReflectedCorrectly(
         ReflectionParameter $reflection,
         string $expectedName,
         int $expectedPosition,
         bool $expectRequired,
-        $expectedDefault
+        mixed $expectedDefault
     ) {
         $instance = new Parameter($reflection);
 
