@@ -176,7 +176,7 @@ class AbstractInjectorTest extends TestCase
 
     public function testFactoryIsCreatedFromClassNameString(): void
     {
-        $subject = $this->createTestSubject(fn() => ['SomeClass' => StdClassFactory::class]);
+        $subject = $this->createTestSubject(static fn(): array => ['SomeClass' => StdClassFactory::class]);
 
         $factoryInstancesProperty = new ReflectionProperty(AbstractInjector::class, 'factoryInstances');
         $factoriesProperty        = new ReflectionProperty(AbstractInjector::class, 'factories');

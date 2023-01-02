@@ -249,9 +249,8 @@ class Config implements ConfigInterface
 
     /**
      * @psalm-assert array|ArrayAccess $options
-     * @param mixed $options
      */
-    private function ensureArrayOrArrayAccess($options): void
+    private function ensureArrayOrArrayAccess(mixed $options): void
     {
         if (! is_array($options) && ! $options instanceof ArrayAccess) {
             throw new Exception\InvalidArgumentException(

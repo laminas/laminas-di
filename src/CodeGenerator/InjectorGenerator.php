@@ -40,8 +40,6 @@ class InjectorGenerator
     private const INJECTOR_TEMPLATE     = __DIR__ . '/../../templates/injector.template';
     private const INDENTATION_SPACES    = 4;
 
-    private ConfigInterface $config;
-
     /**
      * @deprecated
      *
@@ -68,12 +66,11 @@ class InjectorGenerator
      *            and processed classes.
      */
     public function __construct(
-        ConfigInterface $config,
+        private ConfigInterface $config,
         DependencyResolverInterface $resolver,
         ?string $namespace = null,
         ?LoggerInterface $logger = null
     ) {
-        $this->config            = $config;
         $this->namespace         = $namespace ? : 'Laminas\Di\Generated';
         $this->factoryGenerator  = new FactoryGenerator($config, $resolver, $this->namespace . '\Factory');
         $this->autoloadGenerator = new AutoloadGenerator($this->namespace);
@@ -113,7 +110,7 @@ class InjectorGenerator
     {
         $indentation = sprintf("\n%s", str_repeat(' ', self::INDENTATION_SPACES));
         $codeLines   = array_map(
-            fn(string $key, string $value): string =>
+            static fn(string $key, string $value): string =>
                 sprintf('%s => %s,', var_export($key, true), var_export($value, true)),
             array_keys($factories),
             $factories
@@ -154,7 +151,7 @@ class InjectorGenerator
 
     private function generateAutoload(): void
     {
-        $addFactoryPrefix = fn(string $value): string => 'Factory/' . $value;
+        $addFactoryPrefix = static fn(string $value): string => 'Factory/' . $value;
 
         $classmap = array_map($addFactoryPrefix, $this->factoryGenerator->getClassmap());
 

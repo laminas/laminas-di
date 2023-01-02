@@ -15,7 +15,7 @@ use function class_exists;
 use function is_array;
 use function is_iterable;
 use function is_string;
-use function strpos;
+use function str_contains;
 use function trigger_error;
 
 use const E_USER_DEPRECATED;
@@ -58,7 +58,7 @@ class LegacyConfig extends Config
         foreach ($parameters as $key => $value) {
             $key = (string) $key;
 
-            if (strpos($key, ':') !== false) {
+            if (str_contains($key, ':')) {
                 trigger_error('Full qualified parameter positions are no longer supported', E_USER_DEPRECATED);
             }
 

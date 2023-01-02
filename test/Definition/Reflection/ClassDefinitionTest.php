@@ -158,7 +158,7 @@ final class ClassDefinitionTest extends TestCase
 
         uasort(
             $parameters,
-            static fn (ReflectionParameter $a, ReflectionParameter $b) => $a->getPosition() - $b->getPosition()
+            static fn (ReflectionParameter $a, ReflectionParameter $b): int => $a->getPosition() - $b->getPosition()
         );
 
         self::assertEquals(

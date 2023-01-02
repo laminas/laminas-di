@@ -17,15 +17,12 @@ abstract class AbstractInjector implements InjectorInterface
     protected $factories = [];
 
     /** @var array<string, FactoryInterface> */
-    private $factoryInstances = [];
+    private array $factoryInstances = [];
 
     private ContainerInterface $container;
 
-    private InjectorInterface $injector;
-
-    public function __construct(InjectorInterface $injector, ?ContainerInterface $container = null)
+    public function __construct(private InjectorInterface $injector, ?ContainerInterface $container = null)
     {
-        $this->injector  = $injector;
         $this->container = $container ?: new DefaultContainer($this);
 
         $this->loadFactoryList();

@@ -135,7 +135,7 @@ class DependencyResolverTest extends TestCase
                 ));
         }
 
-        $mock->method('hasClass')->willReturnCallback(fn($class) => isset($definition[$class]));
+        $mock->method('hasClass')->willReturnCallback(static fn($class): bool => isset($definition[$class]));
 
         return $mock;
     }
@@ -319,9 +319,8 @@ class DependencyResolverTest extends TestCase
 
     /**
      * @dataProvider provideUnusableParametersData
-     * @param mixed $value
      */
-    public function testUnusableConfigParametersThrowsException(string $type, $value, bool $builtin = false): void
+    public function testUnusableConfigParametersThrowsException(string $type, mixed $value, bool $builtin = false): void
     {
         $class      = uniqid('MockedTestClass');
         $paramName  = uniqid('param');
@@ -378,7 +377,7 @@ class DependencyResolverTest extends TestCase
                     return new ArrayIterator([]);
                 }
             }, true],
-            'callableClosure'           => ['callable',         function () {
+            'callableClosure'           => ['callable',         static function () : void {
             }, true],
             'callableString'            => ['callable',         'trim',                        true],
             'callableObject'            => ['callable',         new class
@@ -395,9 +394,8 @@ class DependencyResolverTest extends TestCase
 
     /**
      * @dataProvider provideUsableParametersData
-     * @param mixed $value
      */
-    public function testUsableConfigParametersAreAccepted(string $type, $value, bool $builtin = false)
+    public function testUsableConfigParametersAreAccepted(string $type, mixed $value, bool $builtin = false)
     {
         $class      = uniqid('MockedTestClass');
         $paramName  = uniqid('param');

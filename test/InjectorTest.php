@@ -30,10 +30,9 @@ use function uniqid;
 final class InjectorTest extends TestCase
 {
     /**
-     * @param mixed $value
      * @return Constraint\IsIdentical
      */
-    private function isIdentical($value)
+    private function isIdentical(mixed $value)
     {
         return new Constraint\IsIdentical($value);
     }
@@ -194,7 +193,7 @@ final class InjectorTest extends TestCase
             'selfOptional' => TestAsset\CircularClasses\Y::class,
         ];
 
-        return array_map(fn($class) => [$class], $classes);
+        return array_map(static fn($class): array => [$class], $classes);
     }
 
     /**
@@ -231,8 +230,8 @@ final class InjectorTest extends TestCase
         $container = $this->getMockForAbstractClass(ContainerInterface::class);
 
         // Mocks a container that always creates new instances
-        $container->method('has')->willReturnCallback(fn(string $class) => $injector->canCreate($class));
-        $container->method('get')->willReturnCallback(fn(string $class) => $injector->create($class));
+        $container->method('has')->willReturnCallback(static fn(string $class): bool => $injector->canCreate($class));
+        $container->method('get')->willReturnCallback(static fn(string $class): object => $injector->create($class));
 
         $injector->setContainer($container);
 
@@ -370,9 +369,8 @@ final class InjectorTest extends TestCase
 
     /**
      * @dataProvider provideUnexpectedResolverValues
-     * @param mixed $unexpectedValue
      */
-    public function testUnexpectedResolverResultThrowsTypeError($unexpectedValue): void
+    public function testUnexpectedResolverResultThrowsTypeError(mixed $unexpectedValue): void
     {
         $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
         $resolver->expects($this->atLeastOnce())
