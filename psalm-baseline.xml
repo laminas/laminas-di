@@ -94,6 +94,9 @@
     <InvalidArgument occurrences="1">
       <code>$invokable</code>
     </InvalidArgument>
+    <UnusedMethodCall occurrences="2">
+        <code>testFactoryIsCreatedFromClassNameString</code>
+    </UnusedMethodCall>
   </file>
   <file src="test/CodeGenerator/AutoloadGeneratorTest.php">
     <MissingReturnType occurrences="3">
@@ -141,6 +144,9 @@
     <PossiblyNullPropertyAssignmentValue occurrences="1">
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
+    <DeprecatedMethod occurrences="1">
+        <code>expectDeprecation</code>
+    </DeprecatedMethod>
   </file>
   <file src="test/Container/GeneratorFactoryTest.php">
     <DeprecatedMethod occurrences="1">
@@ -152,6 +158,9 @@
     <MissingClosureParamType occurrences="1">
       <code>$type</code>
     </MissingClosureParamType>
+    <UnusedMethodCall occurrences="2">
+        <code>setAccessible</code>
+    </UnusedMethodCall>
   </file>
   <file src="test/Container/InjectorFactoryTest.php">
     <MissingReturnType occurrences="4">
@@ -160,6 +169,9 @@
       <code>testInvokeWillReturnAnInjectorInstance</code>
       <code>testUsesConfigServiceFromContainer</code>
     </MissingReturnType>
+    <UnusedMethodCall occurrences="1">
+        <code>setAccessible</code>
+    </UnusedMethodCall>
   </file>
   <file src="test/Container/ServiceManager/AutowireFactoryTest.php">
     <MissingReturnType occurrences="2">
@@ -226,6 +238,9 @@
     <UnresolvableInclude occurrences="1">
       <code>include $file-&gt;getPathname()</code>
     </UnresolvableInclude>
+    <DeprecatedMethod occurrences="1">
+        <code>expectDeprecation</code>
+    </DeprecatedMethod>
   </file>
   <file src="test/Resolver/DependencyResolverTest.php">
     <InternalMethod occurrences="2">
@@ -319,8 +334,9 @@
     </UnusedParam>
   </file>
   <file src="test/Resolver/TypeInjectionTest.php">
-    <DeprecatedMethod occurrences="1">
+    <DeprecatedMethod occurrences="2">
       <code>getType</code>
+      <code>expectDeprecation</code>
     </DeprecatedMethod>
     <MissingReturnType occurrences="5">
       <code>testExport</code>
@@ -334,8 +350,9 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/Resolver/ValueInjectionTest.php">
-    <DeprecatedMethod occurrences="1">
+    <DeprecatedMethod occurrences="2">
       <code>getValue</code>
+      <code>expectDeprecation</code>
     </DeprecatedMethod>
     <InvalidPropertyAssignmentValue occurrences="1">
       <code>$this-&gt;streamFixture</code>
@@ -367,6 +384,10 @@
       <code>arrayType</code>
       <code>callableType</code>
     </MissingReturnType>
+    <PossiblyUnusedParam occurrences="2">
+        <code>$p</code>
+        <code>$r</code>
+    </PossiblyUnusedParam>
   </file>
   <file src="test/TestAsset/Constructor/ManyArguments.php">
     <MissingParamType occurrences="6">
@@ -402,6 +423,13 @@
       <code>typelessOptional</code>
       <code>typelessRequired</code>
     </MissingReturnType>
+    <PossiblyUnusedParam occurrences="7">
+        <code>general</code>
+        <code>typehintRequired</code>
+        <code>typelessRequired</code>
+        <code>typehintOptional</code>
+        <code>typelessOptional</code>
+    </PossiblyUnusedParam>
   </file>
   <file src="test/TestAsset/Pseudotypes/IteratorAggregateImplementation.php">
     <InvalidReturnType occurrences="1">
@@ -420,5 +448,114 @@
       <code>intType</code>
       <code>stringType</code>
     </MissingReturnType>
+    <PossiblyUnusedParam occurrences="4">
+        <code>$p</code>
+    </PossiblyUnusedParam>
   </file>
+    <file src="src/DefaultContainer.php">
+        <MethodSignatureMustProvideReturnType occurences="1">
+            <code>has</code>
+            <code>get</code>
+        </MethodSignatureMustProvideReturnType>
+    </file>
+    <file src="test/CodeGenerator/GeneratorTraitTest.php">
+        <DeprecatedMethod occurrences="1">
+            <code>expectErrorMessage</code>
+        </DeprecatedMethod>
+    </file>
+    <file src="test/Resolver/AbstractInjectionTest.php">
+        <DeprecatedMethod occurrences="2">
+            <code>expectDeprecation</code>
+            <code>expectDeprecationMessage</code>
+        </DeprecatedMethod>
+    </file>
+    <file src="test/TestAsset/CircularClasses/A.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$b</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/B.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$a</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/C.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$d</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/D.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$e</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/E.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$c</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/X.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$x</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/CircularClasses/Y.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$y</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/ClassDefinitionRedundantUaSortTestDependency.php">
+        <PossiblyUnusedParam occurrences="3">
+            <code>$first</code>
+            <code>$second</code>
+            <code>$third</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Config/SomeClass.php">
+        <PossiblyUnusedParam occurrences="2">
+            <code>$a</code>
+            <code>$b</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Constructor/MixedArguments.php">
+        <PossiblyUnusedParam occurrences="2">
+            <code>$objectDep</code>
+            <code>$anyDep</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Constructor/OptionalArguments.php">
+        <PossiblyUnusedParam occurrences="2">
+            <code>$foo</code>
+            <code>$bar</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Constructor/Php7.php">
+        <PossiblyUnusedParam occurrences="3">
+            <code>$stringDep</code>
+            <code>$numDep</code>
+            <code>$callbacDep</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Constructor/RequiredArguments.php">
+        <PossiblyUnusedParam occurrences="3">
+            <code>$objectDep</code>
+            <code>$internalClassDep</code>
+            <code>$anyDep</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/IterableDependency.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$iterator</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/RequiresA.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$p</code>
+        </PossiblyUnusedParam>
+    </file>
+    <file src="test/TestAsset/Resolver/ExportableValue.php">
+        <PossiblyUnusedParam occurrences="1">
+            <code>$data</code>
+        </PossiblyUnusedParam>
+    </file>
 </files>
