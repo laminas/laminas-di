@@ -26,9 +26,8 @@ class AutowireFactory implements AbstractFactoryInterface
      * Check creatability of the requested name
      *
      * @param string $requestedName
-     * @return bool
      */
-    public function canCreate(ContainerInterface $container, $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName): bool
     {
         return $this->factory->canCreate($container, $requestedName);
     }
@@ -38,9 +37,8 @@ class AutowireFactory implements AbstractFactoryInterface
      *
      * @psalm-suppress RedundantCastGivenDocblockType
      * @param string $requestedName
-     * @return object
      */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): object
     {
         return $this->factory->create($container, (string) $requestedName, $options);
     }
