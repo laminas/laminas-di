@@ -38,9 +38,9 @@ Generally the following behavior applies for parameter values that are not
 `ValueInjection` or `TypeInjection` instances:
 
 - If the parameter has a class/interface typehint:
-  - string values will be wrapped into a `TypeInjection` instance
-  - objects are wrapped into a `ValueInjection` instance
-  - everything else will fail with an exception.
+    - string values will be wrapped into a `TypeInjection` instance
+    - objects are wrapped into a `ValueInjection` instance
+    - everything else will fail with an exception.
 
 - If the parameter has a scalar or pseudo-type typehint (e.g. string, int,
   iterable, callable, etc ...), the value will be wrapped in a `ValueInjection`.
