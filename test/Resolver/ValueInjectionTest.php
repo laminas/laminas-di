@@ -176,7 +176,20 @@ class ValueInjectionTest extends TestCase
         $value   = uniqid();
         $subject = new ValueInjection($value);
 
-        $this->expectDeprecation();
-        self::assertSame($value, $subject->getValue());
+        $expectedMessage = 'ValueInjection::getValue is deprecated';
+
+        set_error_handler(function ($errno, $errstr) use ($expectedMessage) {
+            if ($errno === E_USER_DEPRECATED) {
+                $this->assertStringContainsString($expectedMessage, $errstr);
+                return true;
+            }
+            return false;
+        }, E_USER_DEPRECATED);
+
+        try {
+            self::assertSame($value, $subject->getValue());
+        } finally {
+            restore_error_handler();
+        }
     }
 }

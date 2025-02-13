@@ -134,7 +134,20 @@ class ConfigFactoryTest extends TestCase
             ],
         ]);
 
-        $this->expectDeprecation();
+        $deprecationTriggered = false;
+
+        set_error_handler(static function ($errno, $errstr) use (&$deprecationTriggered) {
+            if ($errno === E_USER_DEPRECATED && strstr($errstr, 'legacy DI config')) {
+                $deprecationTriggered = true;
+                return true;
+            }
+            return false;
+        }, E_USER_DEPRECATED);
+
         (new ConfigFactory())->create($container);
+
+        restore_error_handler();
+
+        $this->assertTrue($deprecationTriggered, 'Expected deprecation notice was not triggered.');
     }
 }

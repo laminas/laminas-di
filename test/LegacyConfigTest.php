@@ -52,17 +52,29 @@ class LegacyConfigTest extends TestCase
 
     public function testFQParamNamesTriggerDeprecated(): void
     {
-        $this->expectDeprecation();
+        $expectedMessage = 'Full qualified parameter positions are no longer supported';
 
-        new LegacyConfig([
-            'instance' => [
-                'FooClass' => [
-                    'parameters' => [
-                        'BarClass:__construct:0' => 'Value for fq param name',
+        set_error_handler(function ($errno, $errstr) use ($expectedMessage) {
+            if ($errno === E_USER_DEPRECATED) {
+                $this->assertStringContainsString($expectedMessage, $errstr);
+                return true;
+            }
+            return false;
+        }, E_USER_DEPRECATED);
+
+        try {
+            new LegacyConfig([
+                'instance' => [
+                    'FooClass' => [
+                        'parameters' => [
+                            'BarClass:__construct:0' => 'Value for fq param name',
+                        ],
                     ],
                 ],
-            ],
-        ]);
+            ]);
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testConstructWithTraversable(): void
