@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23ebecf3f8c91c1ef5a5cef9860db2a2",
+    "content-hash": "857da1aedfcf6d5ea8a9423bc82e714c",
     "packages": [
         {
             "name": "laminas/laminas-stdlib",
@@ -4964,9 +4964,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mikey179/vfsstream": 15
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
