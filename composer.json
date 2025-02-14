@@ -50,7 +50,8 @@
     "conflict": {
         "zendframework/zend-di": "*",
         "laminas/laminas-servicemanager-di": "*",
-        "laminas/laminas-servicemanager": "<3.13.0 || >=4.0.0"
+        "laminas/laminas-servicemanager": "<3.13.0 || >=4.0.0",
+        "amphp/amp": "<2.6.4"
     },
     "suggest": {
         "laminas/laminas-servicemanager": "An IoC container without auto wiring capabilities"
