@@ -12,6 +12,11 @@ use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 use stdClass;
 
+use function restore_error_handler;
+use function set_error_handler;
+
+use const E_USER_DEPRECATED;
+
 /**
  * @coversDefaultClass Laminas\Di\LegacyConfig
  */

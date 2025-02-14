@@ -11,8 +11,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
 use function uniqid;
+
+use const E_USER_DEPRECATED;
 
 /**
  * @covers \Laminas\Di\Resolver\TypeInjection

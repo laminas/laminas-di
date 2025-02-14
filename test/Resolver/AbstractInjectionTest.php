@@ -8,7 +8,11 @@ use Laminas\Di\Resolver\AbstractInjection;
 use Laminas\Di\Resolver\InjectionInterface;
 use PHPUnit\Framework\TestCase;
 
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
+
+use const E_USER_DEPRECATED;
 
 class AbstractInjectionTest extends TestCase
 {

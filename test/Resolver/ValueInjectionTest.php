@@ -15,8 +15,12 @@ use stdClass;
 use function fclose;
 use function fopen;
 use function microtime;
+use function restore_error_handler;
+use function set_error_handler;
 use function time;
 use function uniqid;
+
+use const E_USER_DEPRECATED;
 
 /** @covers \Laminas\Di\Resolver\ValueInjection */
 class ValueInjectionTest extends TestCase
