@@ -148,6 +148,6 @@ class ConfigFactoryTest extends TestCase
 
         restore_error_handler();
 
-        $this->assertTrue($deprecationTriggered, 'Expected deprecation notice was not triggered.');
+        $this->assertTrue($deprecationTriggered, 'Expected deprecation notice was triggered.');
     }
 }
