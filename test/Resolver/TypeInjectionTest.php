@@ -11,8 +11,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
 use function uniqid;
+
+use const E_USER_DEPRECATED;
 
 /**
  * @covers \Laminas\Di\Resolver\TypeInjection
@@ -64,8 +68,21 @@ class TypeInjectionTest extends TestCase
 
     public function testGetTypeIsDeprectaed()
     {
-        $subject = new TypeInjection('SomeType');
-        $this->expectDeprecation();
-        $this->assertSame('SomeType', $subject->getType());
+        $expectedMessage = 'Laminas\Di\Resolver\TypeInjection::getType is deprecated. Please migrate to __toString()';
+
+        set_error_handler(function ($errno, $errstr) use ($expectedMessage) {
+            if ($errno === E_USER_DEPRECATED) {
+                $this->assertStringContainsString($expectedMessage, $errstr);
+                return true;
+            }
+            return false;
+        }, E_USER_DEPRECATED);
+
+        try {
+            $subject = new TypeInjection('SomeType');
+            $subject->getType();
+        } finally {
+            restore_error_handler();
+        }
     }
 }

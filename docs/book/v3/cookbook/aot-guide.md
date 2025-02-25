@@ -358,7 +358,7 @@ class ConfigProvider
 ```
 
 > ### Custom delegator factory (before version 3.2)
-> 
+>
 > The `Laminas\Di\GeneratedInjectorDelegator` class is available since version 3.2. For
 > prior versions of laminas-di, a custom delegator factory must be provided.
 >

@@ -15,7 +15,7 @@ final class GeneratorTraitTest extends TestCase
         $invalidDir = 'http://www.invalid-directory';
 
         $this->expectException(GenerateCodeException::class);
-        $this->expectErrorMessage('Could not create output directory: ' . $invalidDir);
+        $this->expectExceptionMessage('Could not create output directory: ' . $invalidDir);
 
         new class (__DIR__, $invalidDir)
         {

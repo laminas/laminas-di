@@ -15,15 +15,15 @@ The configuration array respects the following keys (unknown keys are ignored):
   constructed. Each key in this array is a class or alias name, and its value is
   another associative array with the following keys:
 
-  - `preferences`: The same as `preferences` above, but only for the associated
+    - `preferences`: The same as `preferences` above, but only for the associated
     class.
 
-  - `parameters`: Associative array declaring the values to inject for the
+    - `parameters`: Associative array declaring the values to inject for the
     declared construction parameters.  Each key is the parameter name as
     declared in the constructor method of the associated class name. See the
     [Parameters](#parameters) section below for details.
 
-  - `typeOf`: String that contains a class name. It declares that the
+    - `typeOf`: String that contains a class name. It declares that the
     associated key is an alias of the given class name. This class must exist.
     It cannot be another alias.
 

@@ -46,7 +46,6 @@ return [
 ];
 ```
 
-
 ## Service Factory For AoT Code Generation
 
 laminas-di also provides a factory for `Laminas\Di\CodeGenerator\InjectorGenerator`.

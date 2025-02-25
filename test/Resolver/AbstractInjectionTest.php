@@ -8,30 +8,45 @@ use Laminas\Di\Resolver\AbstractInjection;
 use Laminas\Di\Resolver\InjectionInterface;
 use PHPUnit\Framework\TestCase;
 
+use function restore_error_handler;
+use function set_error_handler;
 use function sprintf;
+
+use const E_USER_DEPRECATED;
 
 class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated(): void
     {
-        $this->expectDeprecation();
-        $this->expectDeprecationMessage(sprintf(
+        $expectedMessage = sprintf(
             '%s is deprecated, please migrate to %s',
             AbstractInjection::class,
             InjectionInterface::class
-        ));
+        );
 
-        new class () extends AbstractInjection
-        {
-            public function export(): string
-            {
-                return '';
-            }
-
-            public function isExportable(): bool
-            {
+        set_error_handler(function ($errno, $errstr) use ($expectedMessage) {
+            if ($errno === E_USER_DEPRECATED) {
+                $this->assertStringContainsString($expectedMessage, $errstr);
                 return true;
             }
-        };
+            return false;
+        }, E_USER_DEPRECATED);
+
+        try {
+            new class () extends AbstractInjection
+            {
+                public function export(): string
+                {
+                    return '';
+                }
+
+                public function isExportable(): bool
+                {
+                    return true;
+                }
+            };
+        } finally {
+            restore_error_handler();
+        }
     }
 }

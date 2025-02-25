@@ -5,7 +5,7 @@ generators to create optimized code for production. These generators will
 inspect the provided classes, resolve their dependencies, and generate factories
 based on these results.
 
-<!-- markdownlint-disable-next-line header-increment -->
+<!-- markdownlint-disable-next-line MD001 MD003 -->
 > ### Removal of laminas-code dependencies
 >
 > Before version 3.1, this feature required [laminas-code](https://docs.laminas.dev/laminas-code/),
