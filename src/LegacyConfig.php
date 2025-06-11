@@ -24,6 +24,7 @@ use const E_USER_DEPRECATED;
  * Provides a migration config from laminas-di 2.x configuration arrays
  *
  * @deprecated
+ *
  * @psalm-suppress InvalidExtendClass Class will be removed in 4.0 when the parent becomes actually final
  * @final
  */
@@ -31,7 +32,6 @@ class LegacyConfig extends Config
 {
     /**
      * @param iterable<mixed>|ArrayAccess<mixed, mixed> $config
-     *
      * @psalm-suppress ConstructorSignatureMismatch Class will be removed in 4.0 when the parent becomes actually final
      * @psalm-suppress MethodSignatureMismatch Class will be removed in 4.0 when the parent becomes actually final
      * @psalm-suppress ParamNameMismatch Class will be removed in 4.0 when the parent becomes actually final

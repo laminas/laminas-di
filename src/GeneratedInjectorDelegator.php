@@ -19,7 +19,6 @@ class GeneratedInjectorDelegator
      * @psalm-suppress MixedAssignment Laminas config is an untyped array - types should be ensured internally
      * @psalm-suppress MixedArrayAccess Laminas config is an untyped array - types should be ensured internally
      * @psalm-suppress UnusedParam $name is required to satisfy the service manager callable signature
-     *
      * @param string $name
      * @param callable():InjectorInterface $callback
      */
