@@ -7,7 +7,7 @@ namespace Laminas\Di\CodeGenerator;
 use Psr\Container\ContainerInterface;
 
 /**
- * @deprecated
+ * @deprecated Since 3.16.0, the code generator will be replaced by a separate package in version 4.0
  *
  * @template T extends object
  */

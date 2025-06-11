@@ -23,7 +23,8 @@ use const E_USER_DEPRECATED;
 /**
  * Provides a migration config from laminas-di 2.x configuration arrays
  *
- * @deprecated
+ * @deprecated Since 3.16.0. This class will be removed in version 4.0. Use {@link Config}
+ *             or {@link ConfigInterface} instead.
  *
  * @psalm-suppress InvalidExtendClass Class will be removed in 4.0 when the parent becomes actually final
  * @final

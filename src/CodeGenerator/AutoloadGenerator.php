@@ -20,7 +20,7 @@ use function strtr;
 use function var_export;
 
 /**
- * @deprecated
+ * @deprecated Since 3.16.0, the code generator will be replaced by a separate package in version 4.0
  */
 class AutoloadGenerator
 {
