@@ -26,16 +26,12 @@ use const E_USER_DEPRECATED;
  * @deprecated Since 3.16.0. This class will be removed in version 4.0. Use {@link Config}
  *             or {@link ConfigInterface} instead.
  *
- * @psalm-suppress InvalidExtendClass Class will be removed in 4.0 when the parent becomes actually final
  * @final
  */
 class LegacyConfig extends Config
 {
     /**
      * @param iterable<mixed>|ArrayAccess<mixed, mixed> $config
-     * @psalm-suppress ConstructorSignatureMismatch Class will be removed in 4.0 when the parent becomes actually final
-     * @psalm-suppress MethodSignatureMismatch Class will be removed in 4.0 when the parent becomes actually final
-     * @psalm-suppress ParamNameMismatch Class will be removed in 4.0 when the parent becomes actually final
      */
     public function __construct($config)
     {

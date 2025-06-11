@@ -23,31 +23,10 @@
     <issueHandlers>
         <DeprecatedClass>
             <errorLevel type="suppress">
-                <referencedClass name="Laminas\Di\LegacyConfig"/>
-                <referencedClass name="Laminas\Di\CodeGenerator\AbstractInjector"/>
-                <referencedClass name="Laminas\Di\CodeGenerator\AutoloadGenerator"/>
-                <referencedClass name="Laminas\Di\CodeGenerator\FactoryGenerator"/>
-                <referencedClass name="Laminas\Di\CodeGenerator\InjectorGenerator"/>
-                <referencedClass name="Laminas\Di\Container\GeneratorFactory"/>
                 <referencedClass name="Laminas\Di\Resolver\AbstractInjection"/>
                 <referencedClass name="LaminasTest\Di\Resolver\AbstractInjectionTest"/>
             </errorLevel>
         </DeprecatedClass>
-
-        <DeprecatedInterface>
-            <errorLevel type="suppress">
-                <referencedClass name="Laminas\Di\CodeGenerator\FactoryInterface" />
-            </errorLevel>
-        </DeprecatedInterface>
-
-        <DeprecatedTrait>
-            <errorLevel type="suppress">
-                <!-- Cannot name referenced items as in classes/interfaces, so individual items need to be excluded -->
-                <directory name="src/CodeGenerator" />
-                <directory name="test/CodeGenerator" />
-                <file name="src/GeneratedInjectorDelegator.php" />
-            </errorLevel>
-        </DeprecatedTrait>
 
         <PossiblyUnusedMethod>
             <errorLevel type="suppress">
