@@ -19,6 +19,8 @@ use const E_USER_DEPRECATED;
 
 /**
  * Wrapper for values that should be directly injected
+ *
+ * @final
  */
 class ValueInjection implements InjectionInterface
 {

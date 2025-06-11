@@ -22,6 +22,8 @@ use const E_USER_DEPRECATED;
 
 /**
  * Provides a migration config from laminas-di 2.x configuration arrays
+ *
+ * @deprecated
  */
 class LegacyConfig extends Config
 {

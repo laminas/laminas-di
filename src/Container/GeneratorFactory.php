@@ -14,6 +14,11 @@ use Psr\Log\LoggerInterface;
 use function assert;
 use function is_string;
 
+/**
+ * @deprecated
+ *
+ * @final
+ */
 class GeneratorFactory
 {
     private function getConfig(ContainerInterface $container): ConfigInterface

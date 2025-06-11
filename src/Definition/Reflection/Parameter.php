@@ -11,6 +11,8 @@ use ReflectionParameter;
 
 /**
  * This class specifies a method parameter for the di definition
+ *
+ * @final
  */
 class Parameter implements ParameterInterface
 {

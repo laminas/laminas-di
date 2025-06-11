@@ -19,6 +19,9 @@ use function str_repeat;
 use function strtr;
 use function var_export;
 
+/**
+ * @deprecated
+ */
 class AutoloadGenerator
 {
     use GeneratorTrait;

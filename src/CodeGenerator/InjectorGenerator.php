@@ -31,6 +31,8 @@ use function var_export;
  * Generates an Injector class that will use a generated factory for a requested
  * type, if available. This factory will contain pre-resolved dependencies
  * from the provided configuration, definition and resolver instances.
+ *
+ * @deprecated
  */
 class InjectorGenerator
 {

@@ -15,6 +15,8 @@ use function sprintf;
 
 /**
  * Trait with generic generator utility methods
+ *
+ * @deprecated
  */
 trait GeneratorTrait
 {

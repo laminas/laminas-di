@@ -7,6 +7,8 @@ namespace Laminas\Di\CodeGenerator;
 use Psr\Container\ContainerInterface;
 
 /**
+ * @deprecated
+ *
  * @template T extends object
  */
 interface FactoryInterface

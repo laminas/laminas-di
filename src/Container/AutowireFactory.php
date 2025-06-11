@@ -10,6 +10,8 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Create instances with autowiring
+ *
+ * @final
  */
 class AutowireFactory
 {

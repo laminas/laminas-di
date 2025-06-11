@@ -7,6 +7,7 @@ namespace Laminas\Di;
 /**
  * Implements the config provider for mezzio
  *
+ * @final
  * @psalm-type DependencyConfigArray = array{
  *  aliases: array<string, string>,
  *  factories: array<string, callable|class-string>,

@@ -26,6 +26,8 @@ use function sprintf;
 
 /**
  * The default resolver implementation
+ *
+ * @final
  */
 class DependencyResolver implements DependencyResolverInterface
 {

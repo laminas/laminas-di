@@ -27,6 +27,8 @@ use function var_export;
 
 /**
  * Generates factory classes
+ *
+ * @deprecated
  */
 class FactoryGenerator
 {

@@ -12,6 +12,8 @@ use Psr\Container\ContainerInterface;
  * Create instances with autowiring
  *
  * This class is purely for compatibility with Laminas\ServiceManager interface which requires container-interop
+ *
+ * @final
  */
 class AutowireFactory implements AbstractFactoryInterface
 {
