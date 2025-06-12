@@ -14,6 +14,11 @@ use Psr\Log\LoggerInterface;
 use function assert;
 use function is_string;
 
+/**
+ * @deprecated Since 3.16.0, the code generator will be replaced by a separate package in version 4.0
+ *
+ * @final
+ */
 class GeneratorFactory
 {
     private function getConfig(ContainerInterface $container): ConfigInterface

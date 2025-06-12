@@ -10,6 +10,8 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Abstract class for code generated dependency injectors
+ *
+ * @deprecated Since 3.16.0, the code generator will be replaced by a separate package in version 4.0
  */
 abstract class AbstractInjector implements InjectorInterface
 {

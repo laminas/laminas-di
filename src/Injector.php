@@ -22,6 +22,8 @@ use function sprintf;
 
 /**
  * Dependency injector that can generate instances using class definitions and configured instance parameters
+ *
+ * @final
  */
 class Injector implements InjectorInterface
 {

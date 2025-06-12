@@ -20,6 +20,8 @@ use const E_USER_DEPRECATED;
 
 /**
  * Factory implementation for creating the definition list
+ *
+ * @final
  */
 class ConfigFactory
 {

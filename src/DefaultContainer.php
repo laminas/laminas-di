@@ -10,6 +10,8 @@ use Psr\Container\ContainerInterface;
  * Default IoC container implementation.
  *
  * This is using the dependency injector to create instances.
+ *
+ * @final
  */
 class DefaultContainer implements ContainerInterface
 {

@@ -11,6 +11,8 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Implements the DependencyInjector service factory for laminas-servicemanager
+ *
+ * @final
  */
 class InjectorFactory
 {

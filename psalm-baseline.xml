@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/CodeGenerator/AbstractInjector.php">
+    <DeprecatedInterface>
+      <code><![CDATA[FactoryInterface]]></code>
+      <code><![CDATA[FactoryInterface]]></code>
+      <code><![CDATA[FactoryInterface<T>]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
+      <code><![CDATA[private array $factoryInstances = [];]]></code>
+      <code><![CDATA[protected $factories = [];]]></code>
+    </DeprecatedInterface>
     <InvalidReturnStatement>
       <code><![CDATA[$this->injector->create($name, $options)]]></code>
     </InvalidReturnStatement>
@@ -11,7 +20,15 @@
       <code><![CDATA[$this->getFactory($name)->create($this->container, $options)]]></code>
     </MixedReturnStatement>
   </file>
+  <file src="src/CodeGenerator/AutoloadGenerator.php">
+    <DeprecatedTrait>
+      <code><![CDATA[GeneratorTrait]]></code>
+    </DeprecatedTrait>
+  </file>
   <file src="src/CodeGenerator/FactoryGenerator.php">
+    <DeprecatedTrait>
+      <code><![CDATA[GeneratorTrait]]></code>
+    </DeprecatedTrait>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$namespace]]></code>
       <code><![CDATA[$paramsCode]]></code>
@@ -20,11 +37,28 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/CodeGenerator/GeneratorTrait.php">
+    <DeprecatedClass>
+      <code><![CDATA[$this]]></code>
+      <code><![CDATA[$this]]></code>
+      <code><![CDATA[$this]]></code>
+      <code><![CDATA[self]]></code>
+      <code><![CDATA[self]]></code>
+      <code><![CDATA[self]]></code>
+    </DeprecatedClass>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! $this->outputDirectory]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/CodeGenerator/InjectorGenerator.php">
+    <DeprecatedClass>
+      <code><![CDATA[AutoloadGenerator]]></code>
+      <code><![CDATA[FactoryGenerator]]></code>
+      <code><![CDATA[new AutoloadGenerator($this->namespace)]]></code>
+      <code><![CDATA[new FactoryGenerator($config, $resolver, $this->namespace . '\Factory')]]></code>
+    </DeprecatedClass>
+    <DeprecatedTrait>
+      <code><![CDATA[GeneratorTrait]]></code>
+    </DeprecatedTrait>
     <PossiblyUnusedProperty>
       <code><![CDATA[$definition]]></code>
     </PossiblyUnusedProperty>
@@ -46,6 +80,13 @@
       <code><![CDATA[mixed]]></code>
     </PossiblyUnusedReturnValue>
   </file>
+  <file src="src/ConfigProvider.php">
+    <DeprecatedClass>
+      <code><![CDATA[CodeGenerator\InjectorGenerator::class]]></code>
+      <code><![CDATA[CodeGenerator\InjectorGenerator::class]]></code>
+      <code><![CDATA[Container\GeneratorFactory::class]]></code>
+    </DeprecatedClass>
+  </file>
   <file src="src/Container/AutowireFactory.php">
     <InvalidReturnStatement>
       <code><![CDATA[$this->create($container, (string) $requestedName, $options)]]></code>
@@ -58,6 +99,18 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$options]]></code>
     </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/Container/ConfigFactory.php">
+    <DeprecatedClass>
+      <code><![CDATA[new LegacyConfig($legacyData)]]></code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/Container/GeneratorFactory.php">
+    <DeprecatedClass>
+      <code><![CDATA[InjectorGenerator]]></code>
+      <code><![CDATA[InjectorGenerator]]></code>
+      <code><![CDATA[new InjectorGenerator($diConfig, $resolver, $namespace, $logger)]]></code>
+    </DeprecatedClass>
   </file>
   <file src="src/DefaultContainer.php">
     <ParamNameMismatch>
@@ -76,9 +129,9 @@
     </UnusedClass>
   </file>
   <file src="src/GeneratedInjectorDelegator.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$name]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="src/Injector.php">
     <InvalidReturnStatement>
@@ -96,6 +149,20 @@
     <RedundantCast>
       <code><![CDATA[(int) $containerException->getCode()]]></code>
     </RedundantCast>
+  </file>
+  <file src="src/LegacyConfig.php">
+    <ConstructorSignatureMismatch>
+      <code><![CDATA[public function __construct($config)]]></code>
+    </ConstructorSignatureMismatch>
+    <InvalidExtendClass>
+      <code><![CDATA[Config]]></code>
+    </InvalidExtendClass>
+    <MethodSignatureMismatch>
+      <code><![CDATA[public function __construct($config)]]></code>
+    </MethodSignatureMismatch>
+    <ParamNameMismatch>
+      <code><![CDATA[$config]]></code>
+    </ParamNameMismatch>
   </file>
   <file src="src/Resolver/AbstractInjection.php">
     <PossiblyUnusedMethod>
@@ -136,6 +203,18 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$provider]]></code>
     </ArgumentTypeCoercion>
+    <DeprecatedClass>
+      <code><![CDATA[AbstractInjector]]></code>
+      <code><![CDATA[AbstractInjector]]></code>
+      <code><![CDATA[AbstractInjector::class]]></code>
+      <code><![CDATA[AbstractInjector::class]]></code>
+      <code><![CDATA[parent::__construct($injector, $container)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
+      <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
+      <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
+    </DeprecatedInterface>
     <InvalidArgument>
       <code><![CDATA[$invokable]]></code>
     </InvalidArgument>
@@ -145,11 +224,24 @@
     </UnusedMethodCall>
   </file>
   <file src="test/CodeGenerator/AutoloadGeneratorTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[new AutoloadGenerator(self::DEFAULT_NAMESPACE)]]></code>
+      <code><![CDATA[new AutoloadGenerator(self::DEFAULT_NAMESPACE)]]></code>
+      <code><![CDATA[new AutoloadGenerator(self::DEFAULT_NAMESPACE)]]></code>
+    </DeprecatedClass>
     <MissingReturnType>
       <code><![CDATA[testGenerateCreatesFiles]]></code>
       <code><![CDATA[testGeneratedAutoloadFile]]></code>
       <code><![CDATA[testGeneratedAutoloaderClass]]></code>
     </MissingReturnType>
+  </file>
+  <file src="test/CodeGenerator/FactoryGeneratorTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[new FactoryGenerator($config, $resolver, self::DEFAULT_NAMESPACE)]]></code>
+      <code><![CDATA[new FactoryGenerator($config, $resolver, self::DEFAULT_NAMESPACE)]]></code>
+      <code><![CDATA[new FactoryGenerator($config, $resolver, self::DEFAULT_NAMESPACE)]]></code>
+      <code><![CDATA[new FactoryGenerator($config, $resolver, self::DEFAULT_NAMESPACE)]]></code>
+    </DeprecatedClass>
   </file>
   <file src="test/CodeGenerator/GeneratorTestTrait.php">
     <MissingConstructor>
@@ -161,17 +253,35 @@
       <code><![CDATA[$root]]></code>
     </MissingConstructor>
   </file>
+  <file src="test/CodeGenerator/GeneratorTraitTest.php">
+    <DeprecatedTrait>
+      <code><![CDATA[GeneratorTrait]]></code>
+    </DeprecatedTrait>
+  </file>
   <file src="test/CodeGenerator/InjectorGeneratorTest.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[[
             'Bad.And.Undefined.ClassName',
         ]]]></code>
     </ArgumentTypeCoercion>
+    <DeprecatedClass>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, $expected)]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, $namespace)]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, $namespace)]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, null, $logger)]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, null, $logger)]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, self::DEFAULT_NAMESPACE)]]></code>
+    </DeprecatedClass>
     <UndefinedClass>
       <code><![CDATA[[
             'Bad.And.Undefined.ClassName',
         ]]]></code>
     </UndefinedClass>
+  </file>
+  <file src="test/ConfigProviderTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[InjectorGenerator::class]]></code>
+    </DeprecatedClass>
   </file>
   <file src="test/ConfigTest.php">
     <MixedAssignment>
@@ -204,6 +314,20 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/Container/GeneratorFactoryTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[$this->getMockBuilder(GeneratorFactory::class)
+            ->setMethods(['create'])
+            ->enableProxyingToOriginalMethods()]]></code>
+      <code><![CDATA[GeneratorFactory::class]]></code>
+      <code><![CDATA[InjectorGenerator::class]]></code>
+      <code><![CDATA[InjectorGenerator::class]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new GeneratorFactory()]]></code>
+    </DeprecatedClass>
     <DeprecatedMethod>
       <code><![CDATA[setMethods]]></code>
     </DeprecatedMethod>
@@ -288,6 +412,20 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/LegacyConfigTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[new LegacyConfig($config)]]></code>
+      <code><![CDATA[new LegacyConfig($config)]]></code>
+      <code><![CDATA[new LegacyConfig([
+                'instance' => [
+                    'FooClass' => [
+                        'parameters' => [
+                            'BarClass:__construct:0' => 'Value for fq param name',
+                        ],
+                    ],
+                ],
+            ])]]></code>
+      <code><![CDATA[new LegacyConfig(new stdClass())]]></code>
+    </DeprecatedClass>
     <InvalidArgument>
       <code><![CDATA[new stdClass()]]></code>
     </InvalidArgument>
@@ -478,6 +616,11 @@
       <code><![CDATA[$second]]></code>
       <code><![CDATA[$third]]></code>
     </PossiblyUnusedParam>
+  </file>
+  <file src="test/TestAsset/CodeGenerator/StdClassFactory.php">
+    <DeprecatedInterface>
+      <code><![CDATA[StdClassFactory]]></code>
+    </DeprecatedInterface>
   </file>
   <file src="test/TestAsset/Config/SomeClass.php">
     <PossiblyUnusedParam>

@@ -22,6 +22,11 @@ use const E_USER_DEPRECATED;
 
 /**
  * Provides a migration config from laminas-di 2.x configuration arrays
+ *
+ * @deprecated Since 3.16.0. This class will be removed in version 4.0. Use {@link Config}
+ *             or {@link ConfigInterface} instead.
+ *
+ * @final
  */
 class LegacyConfig extends Config
 {
@@ -117,7 +122,7 @@ class LegacyConfig extends Config
     }
 
     /**
-     * Export the configuraton to an array
+     * Export the configuration to an array
      */
     public function toArray(): array
     {

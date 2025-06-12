@@ -7,6 +7,9 @@ namespace Laminas\Di\Definition\Reflection;
 use Laminas\Di\Definition\ClassDefinitionInterface;
 use ReflectionClass;
 
+/**
+ * @final
+ */
 class ClassDefinition implements ClassDefinitionInterface
 {
     private ReflectionClass $reflection;

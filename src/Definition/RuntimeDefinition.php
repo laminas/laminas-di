@@ -13,6 +13,8 @@ use function class_exists;
 
 /**
  * Class definitions based on runtime reflection
+ *
+ * @final
  */
 class RuntimeDefinition implements DefinitionInterface
 {

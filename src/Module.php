@@ -21,6 +21,7 @@ namespace Laminas\Di;
  *  ];
  * </code>
  *
+ * @final
  * @psalm-import-type DependencyConfigArray from ConfigProvider
  */
 class Module

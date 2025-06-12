@@ -77,6 +77,8 @@ use function is_string;
  * @see \Laminas\Di\Resolver\ValueInjection A container to force injection of a value
  * @see \Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
  *
+ * @final
+ *
  * @psalm-type TypeConfigArray = array{
  *  typeOf?: class-string|null,
  *  preferences?: array<string, string>|null,
