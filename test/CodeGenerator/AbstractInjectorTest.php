@@ -20,9 +20,8 @@ use function uniqid;
 
 /**
  * @covers \Laminas\Di\CodeGenerator\AbstractInjector
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class AbstractInjectorTest extends TestCase
+final class AbstractInjectorTest extends TestCase
 {
     /** @var InjectorInterface&MockObject */
     private InjectorInterface $decoratedInjector;

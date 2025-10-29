@@ -15,10 +15,8 @@ use function str_replace;
 
 /**
  * FactoryGenerator test case.
- *
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class FactoryGeneratorTest extends TestCase
+final class FactoryGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
 

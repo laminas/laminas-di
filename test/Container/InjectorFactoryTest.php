@@ -13,9 +13,8 @@ use ReflectionObject;
 
 /**
  * @coversDefaultClass Laminas\Di\Container\InjectorFactory
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class InjectorFactoryTest extends TestCase
+final class InjectorFactoryTest extends TestCase
 {
     public function testFactoryIsInvokable()
     {

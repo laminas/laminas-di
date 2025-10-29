@@ -16,9 +16,8 @@ use stdClass;
  * AutowireFactory test case.
  *
  * @coversDefaultClass Laminas\Di\Container\AutowireFactory
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class AutowireFactoryTest extends TestCase
+final class AutowireFactoryTest extends TestCase
 {
     private AutowireFactory $instance;
 

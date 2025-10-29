@@ -9,10 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * AutoloadGenerator test case.
- *
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class AutoloadGeneratorTest extends TestCase
+final class AutoloadGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
 

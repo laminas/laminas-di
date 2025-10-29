@@ -16,10 +16,8 @@ use function uniqid;
 
 /**
  * FactoryGenerator test case.
- *
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class InjectorGeneratorTest extends TestCase
+final class InjectorGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
 

@@ -14,9 +14,8 @@ use function uniqid;
 
 /**
  * @coversDefaultClass Laminas\Di\DefaultContainer
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class DefaultContainerTest extends TestCase
+final class DefaultContainerTest extends TestCase
 {
     /**
      * @return MockObject&InjectorInterface

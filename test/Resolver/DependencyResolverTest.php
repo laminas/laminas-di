@@ -32,9 +32,8 @@ use function uniqid;
 
 /**
  * @coversDefaultClass Laminas\Di\Resolver\DependencyResolver
- * @final This class should not be extended and will be marked final in version 4.0
  */
-class DependencyResolverTest extends TestCase
+final class DependencyResolverTest extends TestCase
 {
     /**
      * @return PHPUnit_Framework_MockObject_MockObject|ContainerInterface
