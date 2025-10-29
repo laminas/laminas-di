@@ -180,8 +180,6 @@ class AbstractInjectorTest extends TestCase
 
         $factoryInstancesProperty = new ReflectionProperty(AbstractInjector::class, 'factoryInstances');
         $factoriesProperty        = new ReflectionProperty(AbstractInjector::class, 'factories');
-        $factoryInstancesProperty->setAccessible(true);
-        $factoriesProperty->setAccessible(true);
 
         $this->assertSame(
             StdClassFactory::class,

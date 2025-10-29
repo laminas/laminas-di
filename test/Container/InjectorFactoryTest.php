@@ -56,8 +56,6 @@ class InjectorFactoryTest extends TestCase
 
         $reflection = new ReflectionObject($injector);
         $property   = $reflection->getProperty('config');
-
-        $property->setAccessible(true);
         $this->assertSame($configMock, $property->getValue($injector));
     }
 }

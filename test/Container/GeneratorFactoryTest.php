@@ -89,7 +89,6 @@ class GeneratorFactoryTest extends TestCase
         $generator  = (new GeneratorFactory())->create(new ServiceManager());
         $reflection = new ReflectionClass($generator);
         $property   = $reflection->getProperty('logger');
-        $property->setAccessible(true);
 
         $this->assertInstanceOf(NullLogger::class, $property->getValue($generator));
     }
@@ -113,7 +112,6 @@ class GeneratorFactoryTest extends TestCase
         $generator  = (new GeneratorFactory())->create($container);
         $reflection = new ReflectionClass($generator);
         $property   = $reflection->getProperty('logger');
-        $property->setAccessible(true);
 
         $this->assertNotInstanceOf(NullLogger::class, $property->getValue($generator));
     }
