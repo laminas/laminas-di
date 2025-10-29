@@ -21,6 +21,7 @@ use function uniqid;
 
 /**
  * @covers Laminas\Di\Container\GeneratorFactory
+ * @final This class should not be extended and will be marked final in version 4.0
  */
 class GeneratorFactoryTest extends TestCase
 {

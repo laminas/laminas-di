@@ -13,6 +13,7 @@ use function uniqid;
 
 /**
  * @coversDefaultClass \Laminas\Di\Config
+ * @final This class should not be extended and will be marked final in version 4.0
  */
 class ConfigTest extends TestCase
 {

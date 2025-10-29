@@ -22,7 +22,10 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/** @covers \Laminas\Di\Resolver\ValueInjection */
+/**
+ * @covers \Laminas\Di\Resolver\ValueInjection
+ * @final This class should not be extended and will be marked final in version 4.0
+ */
 class ValueInjectionTest extends TestCase
 {
     /** @var false|resource */

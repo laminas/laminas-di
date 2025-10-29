@@ -17,7 +17,10 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/** @covers \Laminas\Di\Container\ConfigFactory */
+/**
+ * @covers \Laminas\Di\Container\ConfigFactory
+ * @final This class should not be extended and will be marked final in version 4.0
+ */
 class ConfigFactoryTest extends TestCase
 {
     /** @var MockBuilder<ContainerInterface> */

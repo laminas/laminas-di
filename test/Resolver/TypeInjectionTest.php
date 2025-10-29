@@ -20,6 +20,7 @@ use const E_USER_DEPRECATED;
 
 /**
  * @covers \Laminas\Di\Resolver\TypeInjection
+ * @final This class should not be extended and will be marked final in version 4.0
  */
 class TypeInjectionTest extends TestCase
 {

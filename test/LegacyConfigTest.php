@@ -19,6 +19,7 @@ use const E_USER_DEPRECATED;
 
 /**
  * @coversDefaultClass Laminas\Di\LegacyConfig
+ * @final This class should not be extended and will be marked final in version 4.0
  */
 class LegacyConfigTest extends TestCase
 {

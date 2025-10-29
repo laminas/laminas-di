@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Laminas\Di\Module
+ * @final This class should not be extended and will be marked final in version 4.0
  */
 class ConfigProviderTest extends TestCase
 {

@@ -14,6 +14,9 @@ use function sprintf;
 
 use const E_USER_DEPRECATED;
 
+/**
+ * @final This class should not be extended and will be marked final in version 4.0
+ */
 class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated(): void
