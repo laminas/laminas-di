@@ -51,7 +51,7 @@ final class TypeInjectionTest extends TestCase
         $this->assertSame($expected, (new ValueInjection($typename))->export());
     }
 
-    public function provideTypeNames(): iterable
+    public static function provideTypeNames(): iterable
     {
         return [
             'arbitary' => ['SomeArbitaryTypeName'],

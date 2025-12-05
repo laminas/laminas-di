@@ -12,13 +12,13 @@ use function substr;
 trait ParameterTestTrait
 {
     /** @param non-empty-string $methodName */
-    private function reflectAsset(string $methodName, int $parameterIndex = 0): object
+    private static function reflectAsset(string $methodName, int $parameterIndex = 0): object
     {
         $all = (new ReflectionClass(TestAsset\Parameters::class))->getMethod($methodName)->getParameters();
         return $all[$parameterIndex];
     }
 
-    private function buildReflectionArgsFromClass(string $classname): array
+    private static function buildReflectionArgsFromClass(string $classname): array
     {
         $class          = new ReflectionClass($classname);
         $invocationArgs = [];
@@ -32,24 +32,24 @@ trait ParameterTestTrait
         return $invocationArgs;
     }
 
-    public function provideBuiltinTypehintedReflections(): array
+    public static function provideBuiltinTypehintedReflections(): array
     {
-        return $this->buildReflectionArgsFromClass(TestAsset\BuiltinTypehintParameters::class);
+        return self::buildReflectionArgsFromClass(TestAsset\BuiltinTypehintParameters::class);
     }
 
-    public function provideTypehintedParameterReflections(): array
+    public static function provideTypehintedParameterReflections(): array
     {
         return [
-            'required' => [$this->reflectAsset('typehintRequired'), TestAsset\A::class],
-            'optional' => [$this->reflectAsset('typehintOptional'), TestAsset\A::class],
+            'required' => [self::reflectAsset('typehintRequired'), TestAsset\A::class],
+            'optional' => [self::reflectAsset('typehintOptional'), TestAsset\A::class],
         ];
     }
 
-    public function provideTypelessParameterReflections(): array
+    public static function provideTypelessParameterReflections(): array
     {
         return [
-            'required' => [$this->reflectAsset('typelessRequired')],
-            'optional' => [$this->reflectAsset('typelessOptional')],
+            'required' => [self::reflectAsset('typelessRequired')],
+            'optional' => [self::reflectAsset('typelessOptional')],
         ];
     }
 }

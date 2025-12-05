@@ -34,7 +34,7 @@ final class ConfigProviderTest extends TestCase
      *
      * @return iterable<string, array{0: class-string}>
      */
-    public function provideExpectedServicesWithFactory(): iterable
+    public static function provideExpectedServicesWithFactory(): iterable
     {
         return [
             //               service name

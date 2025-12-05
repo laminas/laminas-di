@@ -54,7 +54,7 @@ final class ValueInjectionTest extends TestCase
         $this->assertInstanceOf(InjectionInterface::class, new ValueInjection(null));
     }
 
-    public function provideConstructionValues(): array
+    public static function provideConstructionValues(): array
     {
         return [
             'string' => ['Hello World'],
@@ -91,7 +91,7 @@ final class ValueInjectionTest extends TestCase
         $this->assertSame($value, $result->toValue($container));
     }
 
-    public function provideExportableValues(): array
+    public static function provideExportableValues(): array
     {
         return [
             'string'       => ['Testvalue'],
@@ -123,14 +123,12 @@ final class ValueInjectionTest extends TestCase
         ];
     }
 
-    public function provideUnexportableItems(): array
+    public static function provideUnexportableItems(): array
     {
-        if (! $this->streamFixture) {
-            $this->streamFixture = fopen('php://temp', 'w+');
-        }
+        $streamFixture = fopen('php://temp', 'w+');
 
         return [
-            'stream'          => [$this->streamFixture],
+            'stream'          => [$streamFixture],
             'noSetState'      => [new TestAsset\Resolver\UnexportableValue1()],
             'arrayNoSetState' => [[new TestAsset\Resolver\UnexportableValue1()]],
         ];

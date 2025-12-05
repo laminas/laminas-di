@@ -21,7 +21,7 @@ final class ParameterTest extends TestCase
 {
     use ParameterTestTrait;
 
-    public function provideGeneralParameters(): array
+    public static function provideGeneralParameters(): array
     {
         $params = (new ReflectionClass(TestAsset\Parameters::class))->getMethod('general')->getParameters();
 
@@ -76,9 +76,9 @@ final class ParameterTest extends TestCase
         $this->assertFalse($param->isBuiltin(), 'Parameter must not be exposed builtin');
     }
 
-    public function provideScalarTypehintedReflections(): array
+    public static function provideScalarTypehintedReflections(): array
     {
-        return $this->buildReflectionArgsFromClass(TestAsset\ScalarTypehintParameters::class);
+        return self::buildReflectionArgsFromClass(TestAsset\ScalarTypehintParameters::class);
     }
 
     /**

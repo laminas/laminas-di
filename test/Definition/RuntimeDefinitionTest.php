@@ -55,7 +55,7 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /** @return non-empty-array<non-empty-string, array{class-string}> */
-    public function provideExistingClasses(): array
+    public static function provideExistingClasses(): array
     {
         return [
             'A'             => [TestAsset\A::class],
@@ -64,7 +64,7 @@ final class RuntimeDefinitionTest extends TestCase
         ];
     }
 
-    public function provideInvalidClasses(): array
+    public static function provideInvalidClasses(): array
     {
         return [
             'interface' => [TestAsset\DummyInterface::class],

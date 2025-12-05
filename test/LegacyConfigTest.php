@@ -25,7 +25,7 @@ final class LegacyConfigTest extends TestCase
     /**
      * @return array<string, array{0: array, 1: array}>
      */
-    public function provideMigrationConfigFixtures(): array
+    public static function provideMigrationConfigFixtures(): array
     {
         $iterator = new GlobIterator(__DIR__ . '/_files/legacy-configs/*.php');
         $values   = [];

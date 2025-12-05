@@ -191,7 +191,7 @@ final class DependencyResolverTest extends TestCase
         $resolver->resolveParameters(TestAsset\DummyInterface::class);
     }
 
-    public function provideClassesWithoutConstructionParams(): array
+    public static function provideClassesWithoutConstructionParams(): array
     {
         return [
             'noargs'      => [TestAsset\Constructor\EmptyConstructor::class],
@@ -239,7 +239,7 @@ final class DependencyResolverTest extends TestCase
         $this->assertSame($expected, $result['anyDep']->toValue($container));
     }
 
-    public function providePreferenceConfigs(): array
+    public static function providePreferenceConfigs(): array
     {
         $args = [];
 
@@ -275,7 +275,7 @@ final class DependencyResolverTest extends TestCase
         $this->assertSame($expectedType, $resolver->resolvePreference($requestClass, $context));
     }
 
-    public function provideExplicitInjections(): array
+    public static function provideExplicitInjections(): array
     {
         return [
             'type'  => [new TypeInjection(TestAsset\B::class)],
@@ -304,7 +304,7 @@ final class DependencyResolverTest extends TestCase
         $this->assertSame($expected, $result['p']);
     }
 
-    public function provideUnusableParametersData(): array
+    public static function provideUnusableParametersData(): array
     {
         return [
             //            [type,               value,                builtIn]
@@ -351,7 +351,7 @@ final class DependencyResolverTest extends TestCase
     }
 
     /** @return non-empty-array<non-empty-string, array{string, mixed, bool}> */
-    public function provideUsableParametersData()
+    public static function provideUsableParametersData()
     {
         // @codingStandardsIgnoreStart
         return [
@@ -469,7 +469,7 @@ final class DependencyResolverTest extends TestCase
         $this->assertEquals(TestAsset\Hierarchy\InterfaceC::class, (string) $result[$paramName]);
     }
 
-    public function provideIterableClassNames(): array
+    public static function provideIterableClassNames(): array
     {
         return [
             'iterator'          => [TestAsset\Pseudotypes\IteratorImplementation::class],

@@ -119,7 +119,7 @@ final class GeneratorFactoryTest extends TestCase
     public function testInvokeCallsCreate(): void
     {
         $mock = $this->getMockBuilder(GeneratorFactory::class)
-            ->setMethods(['create'])
+            ->onlyMethods(['create'])
             ->enableProxyingToOriginalMethods()
             ->getMock();
 

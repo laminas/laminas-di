@@ -80,7 +80,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: class-string}>
      */
-    public function provideClassNames()
+    public static function provideClassNames()
     {
         return [
             'simple'   => [TestAsset\A::class],
@@ -112,7 +112,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: string, 1: string}>
      */
-    public function provideValidAliases(): array
+    public static function provideValidAliases(): array
     {
         return [
             //               [ alias,               target]
@@ -184,7 +184,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: class-string}>
      */
-    public function provideCircularClasses(): array
+    public static function provideCircularClasses(): array
     {
         $classes = [
             'flat'         => TestAsset\CircularClasses\A::class,
@@ -357,7 +357,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: mixed}>
      */
-    public function provideUnexpectedResolverValues(): array
+    public static function provideUnexpectedResolverValues(): array
     {
         return [
             'string' => ['string value'],
@@ -386,7 +386,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: string}>
      */
-    public function provideContainerTypeNames(): array
+    public static function provideContainerTypeNames(): array
     {
         return [
             'psr'     => [ContainerInterface::class],
@@ -444,7 +444,7 @@ final class InjectorTest extends TestCase
     /**
      * @return array<string, array{0: class-string, 1: array<string, mixed>}>
      */
-    public function provideManyArguments(): array
+    public static function provideManyArguments(): array
     {
         return [
             'three' => [

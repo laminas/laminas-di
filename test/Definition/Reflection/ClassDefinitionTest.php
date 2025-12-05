@@ -87,7 +87,7 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /** @return array<string, array{class-string, int}> */
-    public function provideClassesWithParameters(): array
+    public static function provideClassesWithParameters(): array
     {
         return [
             'optional' => [ConstructorAsset\OptionalArguments::class, 2],
@@ -118,7 +118,7 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /** @return array<string, array<class-string>> */
-    public function provideParameterlessClasses(): array
+    public static function provideParameterlessClasses(): array
     {
         return [
             'noargs'      => [ConstructorAsset\EmptyConstructor::class],
