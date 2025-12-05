@@ -10,6 +10,7 @@ use Laminas\Di\DefaultContainer;
 use Laminas\Di\InjectorInterface;
 use LaminasTest\Di\TestAsset\CodeGenerator\StdClassFactory;
 use LaminasTest\Di\TestAsset\InvokableInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -17,8 +18,6 @@ use ReflectionProperty;
 use stdClass;
 
 use function uniqid;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(AbstractInjector::class)]
 final class AbstractInjectorTest extends TestCase

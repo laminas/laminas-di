@@ -8,11 +8,10 @@ use Laminas\Di\Definition\ClassDefinitionInterface;
 use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Exception;
 use LaminasTest\Di\TestAsset;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
-use ReflectionClass;
-
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 #[CoversClass(RuntimeDefinition::class)]
 final class RuntimeDefinitionTest extends TestCase
@@ -73,8 +72,6 @@ final class RuntimeDefinitionTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideInvalidClasses')]
     public function testSetInvalidExplicitClassThrowsException(string $class)
     {
@@ -101,8 +98,6 @@ final class RuntimeDefinitionTest extends TestCase
         $this->assertEquals($expected, $definition->getClasses());
     }
 
-    /**
-     */
     #[DataProvider('provideInvalidClasses')]
     public function testAddInvalidExplicitClassThrowsException(string $class)
     {
@@ -120,8 +115,6 @@ final class RuntimeDefinitionTest extends TestCase
         );
     }
 
-    /**
-     */
     #[DataProvider('provideInvalidClasses')]
     public function testHasClassReturnsFalseForInvalidClasses(string $class)
     {

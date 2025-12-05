@@ -13,9 +13,10 @@ use Laminas\Di\Injector;
 use Laminas\Di\Resolver\DependencyResolverInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use LaminasTest\Di\TestAsset\DependencyTree as TreeTestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Constraint;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
@@ -24,8 +25,6 @@ use TypeError;
 
 use function array_map;
 use function uniqid;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Injector::class)]
 final class InjectorTest extends TestCase
@@ -90,8 +89,6 @@ final class InjectorTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideClassNames')]
     public function testCanCreateReturnsTrueForClasses(string $className): void
     {
@@ -124,8 +121,6 @@ final class InjectorTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideValidAliases')]
     public function testCanCreateReturnsTrueWithDefinedAndValidAliases(string $aliasName, string $className): void
     {
@@ -197,8 +192,6 @@ final class InjectorTest extends TestCase
         return array_map(static fn($class): array => [$class], $classes);
     }
 
-    /**
-     */
     #[DataProvider('provideCircularClasses')]
     public function testCircularDependencyThrowsException(string $class): void
     {
@@ -365,8 +358,6 @@ final class InjectorTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideUnexpectedResolverValues')]
     public function testUnexpectedResolverResultThrowsTypeError(mixed $unexpectedValue): void
     {
@@ -392,8 +383,6 @@ final class InjectorTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideContainerTypeNames')]
     public function testContainerItselfIsInjectedIfHasReturnsFalse(string $typeName): void
     {

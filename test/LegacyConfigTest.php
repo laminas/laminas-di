@@ -8,8 +8,9 @@ use ArrayIterator;
 use GlobIterator;
 use Laminas\Di\Exception;
 use Laminas\Di\LegacyConfig;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 use stdClass;
 
@@ -17,8 +18,6 @@ use function restore_error_handler;
 use function set_error_handler;
 
 use const E_USER_DEPRECATED;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LegacyConfig::class)]
 final class LegacyConfigTest extends TestCase
@@ -47,8 +46,6 @@ final class LegacyConfigTest extends TestCase
         return $values;
     }
 
-    /**
-     */
     #[DataProvider('provideMigrationConfigFixtures')]
     public function testLegacyConfigMigration(array $config, array $expected): void
     {

@@ -8,11 +8,10 @@ use Laminas\Di\Container\AutowireFactory;
 use Laminas\Di\Exception;
 use Laminas\Di\InjectorInterface;
 use LaminasTest\Di\TestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * AutowireFactory test case.

@@ -8,8 +8,9 @@ use Laminas\Di\Exception;
 use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -22,8 +23,6 @@ use function time;
 use function uniqid;
 
 use const E_USER_DEPRECATED;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(ValueInjection::class)]
 final class ValueInjectionTest extends TestCase
@@ -66,8 +65,6 @@ final class ValueInjectionTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideConstructionValues')]
     public function testSetStateConstructsInstance(mixed $value)
     {
@@ -77,8 +74,6 @@ final class ValueInjectionTest extends TestCase
         $this->assertSame($value, $result->toValue($container));
     }
 
-    /**
-     */
     #[DataProvider('provideConstructionValues')]
     public function testToValueBypassesContainer(mixed $value)
     {
@@ -135,8 +130,6 @@ final class ValueInjectionTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideUnexportableItems')]
     public function testExportThrowsExceptionForUnexportable(mixed $value)
     {
@@ -146,8 +139,6 @@ final class ValueInjectionTest extends TestCase
         $instance->export();
     }
 
-    /**
-     */
     #[DataProvider('provideUnexportableItems')]
     public function testIsExportableReturnsFalseForUnexportable(mixed $value)
     {
@@ -155,8 +146,6 @@ final class ValueInjectionTest extends TestCase
         $this->assertFalse($instance->isExportable());
     }
 
-    /**
-     */
     #[DataProvider('provideExportableValues')]
     public function testIsExportableReturnsTrueForExportableValues(mixed $value)
     {
@@ -164,8 +153,6 @@ final class ValueInjectionTest extends TestCase
         $this->assertTrue($instance->isExportable());
     }
 
-    /**
-     */
     #[DataProvider('provideExportableValues')]
     public function testExportWithExportableValues(mixed $value)
     {

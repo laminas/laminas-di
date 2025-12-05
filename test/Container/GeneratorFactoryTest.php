@@ -8,11 +8,12 @@ use Laminas\Di\CodeGenerator\InjectorGenerator;
 use Laminas\Di\Config;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\GeneratorFactory;
+use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Injector;
 use Laminas\Di\Resolver\DependencyResolver;
-use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -20,8 +21,6 @@ use Psr\Log\NullLogger;
 use ReflectionClass;
 
 use function uniqid;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(GeneratorFactory::class)]
 final class GeneratorFactoryTest extends TestCase
@@ -122,9 +121,9 @@ final class GeneratorFactoryTest extends TestCase
         $mock = $this->createPartialMock(GeneratorFactory::class, ['create']);
 
         $container = $this->createMock(ContainerInterface::class);
-        
-        $config = new Config();
-        $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
+
+        $config    = new Config();
+        $resolver  = new DependencyResolver(new RuntimeDefinition(), $config);
         $generator = new InjectorGenerator($config, $resolver, uniqid('Test'));
 
         $mock->expects($this->once())

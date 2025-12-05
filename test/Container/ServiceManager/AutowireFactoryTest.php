@@ -6,11 +6,10 @@ namespace LaminasTest\Di\Container\ServiceManager;
 
 use Laminas\Di\Container\AutowireFactory as GenericAutowireFactory;
 use Laminas\Di\Container\ServiceManager\AutowireFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * AutowireFactory test case.

@@ -18,8 +18,9 @@ use Laminas\Di\Resolver\DependencyResolver;
 use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 use Traversable;
@@ -30,8 +31,6 @@ use function array_shift;
 use function basename;
 use function glob;
 use function uniqid;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(DependencyResolver::class)]
 final class DependencyResolverTest extends TestCase
@@ -200,8 +199,6 @@ final class DependencyResolverTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideClassesWithoutConstructionParams')]
     public function testResolveClassWithoutParameters(string $class): void
     {
@@ -263,8 +260,6 @@ final class DependencyResolverTest extends TestCase
         return $args;
     }
 
-    /**
-     */
     #[DataProvider('providePreferenceConfigs')]
     public function testResolveConfiguredPreference(
         ConfigInterface $config,
@@ -284,8 +279,6 @@ final class DependencyResolverTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideExplicitInjections')]
     public function testExplicitInjectionInConfigIsUsedWithoutAdditionalTypeChecks(object $expected): void
     {
@@ -318,8 +311,6 @@ final class DependencyResolverTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideUnusableParametersData')]
     public function testUnusableConfigParametersThrowsException(string $type, mixed $value, bool $builtin = false): void
     {
@@ -393,8 +384,6 @@ final class DependencyResolverTest extends TestCase
         // @codingStandardsIgnoreEnd
     }
 
-    /**
-     */
     #[DataProvider('provideUsableParametersData')]
     public function testUsableConfigParametersAreAccepted(string $type, mixed $value, bool $builtin = false)
     {
@@ -487,7 +476,6 @@ final class DependencyResolverTest extends TestCase
      * - The configuration defines this parameter to inject a type that implement Traversable
      *
      * In this case the resolver must accept it.
-     *
      */
     #[DataProvider('provideIterableClassNames')]
     public function testConfiguredTraversableTypeParameterSatisfiesIterable(string $iterableClassName)

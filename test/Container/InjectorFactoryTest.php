@@ -7,11 +7,10 @@ namespace LaminasTest\Di\Container;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\InjectorFactory;
 use Laminas\Di\InjectorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(InjectorFactory::class)]
 final class InjectorFactoryTest extends TestCase

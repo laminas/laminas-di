@@ -8,10 +8,10 @@ use Laminas\Di\CodeGenerator\InjectorGenerator;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\ConfigProvider;
 use Laminas\Di\InjectorInterface;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\CoversClass;
 use Laminas\Di\Module;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Module::class)]
 final class ConfigProviderTest extends TestCase
@@ -45,8 +45,6 @@ final class ConfigProviderTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideExpectedServicesWithFactory')]
     public function testProvidesFactoryDefinition(string $serviceName): void
     {

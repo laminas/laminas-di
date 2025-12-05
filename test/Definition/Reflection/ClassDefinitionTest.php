@@ -9,6 +9,8 @@ use Laminas\Di\Definition\Reflection\ClassDefinition;
 use LaminasTest\Di\TestAsset\ClassDefinitionRedundantUaSortTestDependency;
 use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionParameter;
@@ -17,9 +19,6 @@ use function array_values;
 use function assert;
 use function sort;
 use function uasort;
-
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 #[CoversClass(ClassDefinition::class)]
 final class ClassDefinitionTest extends TestCase

@@ -7,8 +7,9 @@ namespace LaminasTest\Di\Resolver;
 use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -18,8 +19,6 @@ use function sprintf;
 use function uniqid;
 
 use const E_USER_DEPRECATED;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(TypeInjection::class)]
 final class TypeInjectionTest extends TestCase
@@ -59,8 +58,6 @@ final class TypeInjectionTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideTypeNames')]
     public function testIsExportableIsAlwaysTrue(string $typeName)
     {

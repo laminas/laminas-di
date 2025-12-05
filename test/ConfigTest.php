@@ -6,13 +6,12 @@ namespace LaminasTest\Di;
 
 use Laminas\Di\Config;
 use Laminas\Di\Exception;
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function uniqid;
-
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Config::class)]
 final class ConfigTest extends TestCase
@@ -130,8 +129,6 @@ final class ConfigTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideValidClassNames')]
     public function testSetAlias(string $className): void
     {
@@ -155,8 +152,6 @@ final class ConfigTest extends TestCase
         ];
     }
 
-    /**
-     */
     #[DataProvider('provideInvalidClassNames')]
     public function testSetAliasThrowsExceptionForInvalidClass(string $invalidClass): void
     {
