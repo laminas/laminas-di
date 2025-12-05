@@ -8,6 +8,7 @@ use Laminas\Di\Definition\Reflection\Parameter;
 use Laminas\Di\Exception\UnsupportedReflectionTypeException;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionParameter;
@@ -34,8 +35,8 @@ final class ParameterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideGeneralParameters
      */
+    #[DataProvider('provideGeneralParameters')]
     public function testParamterReflectedCorrectly(
         ReflectionParameter $reflection,
         string $expectedName,
@@ -57,8 +58,8 @@ final class ParameterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTypehintedParameterReflections
      */
+    #[DataProvider('provideTypehintedParameterReflections')]
     public function testTypehintedParameter(ReflectionParameter $reflection, ?string $expectedType)
     {
         $required = new Parameter($reflection);
@@ -67,8 +68,8 @@ final class ParameterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTypelessParameterReflections
      */
+    #[DataProvider('provideTypelessParameterReflections')]
     public function testTypelessParamter(ReflectionParameter $reflection)
     {
         $param = new Parameter($reflection);
@@ -82,8 +83,8 @@ final class ParameterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideBuiltinTypehintedReflections
      */
+    #[DataProvider('provideBuiltinTypehintedReflections')]
     public function testBuiltinTypehintedParameters(ReflectionParameter $reflection, string $expectedType)
     {
         $param = new Parameter($reflection);
@@ -92,8 +93,8 @@ final class ParameterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideScalarTypehintedReflections
      */
+    #[DataProvider('provideScalarTypehintedReflections')]
     public function testScalarTypehintedParameters(ReflectionParameter $reflection, string $expectedType)
     {
         $param = new Parameter($reflection);
@@ -110,9 +111,7 @@ final class ParameterTest extends TestCase
         $this->assertSame('iterable', $param->getType());
     }
 
-    /**
-     * @requires PHP >= 8.0
-     */
+    #[\PHPUnit\Framework\Attributes\RequiresPhp('>= 8.0')]
     public function testIsBuiltinGivenUnionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
@@ -124,9 +123,7 @@ final class ParameterTest extends TestCase
         $param->isBuiltin();
     }
 
-    /**
-     * @requires PHP >= 8.1
-     */
+    #[\PHPUnit\Framework\Attributes\RequiresPhp('>= 8.1')]
     public function testIsBuiltinGivenIntersectionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
@@ -139,9 +136,7 @@ final class ParameterTest extends TestCase
         $param->isBuiltin();
     }
 
-    /**
-     * @requires PHP >= 8.0
-     */
+    #[\PHPUnit\Framework\Attributes\RequiresPhp('>= 8.0')]
     public function testGetTypeGivenUnionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);
@@ -153,9 +148,7 @@ final class ParameterTest extends TestCase
         $param->getType();
     }
 
-    /**
-     * @requires PHP >= 8.1
-     */
+    #[\PHPUnit\Framework\Attributes\RequiresPhp('>= 8.1')]
     public function testGetTypeGivenIntersectionTypeExpectedUnsupportedReflectionTypeExceptionThrown(): void
     {
         $this->expectException(UnsupportedReflectionTypeException::class);

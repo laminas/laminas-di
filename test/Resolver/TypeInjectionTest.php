@@ -8,6 +8,7 @@ use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -18,9 +19,9 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/**
- * @covers \Laminas\Di\Resolver\TypeInjection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(TypeInjection::class)]
 final class TypeInjectionTest extends TestCase
 {
     public function testImplementsContract()
@@ -59,8 +60,8 @@ final class TypeInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTypeNames
      */
+    #[DataProvider('provideTypeNames')]
     public function testIsExportableIsAlwaysTrue(string $typeName)
     {
         $this->assertTrue((new TypeInjection($typeName))->isExportable());

@@ -11,9 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
 
-/**
- * @coversDefaultClass Laminas\Di\Container\InjectorFactory
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(InjectorFactory::class)]
 final class InjectorFactoryTest extends TestCase
 {
     public function testFactoryIsInvokable()
@@ -23,7 +23,7 @@ final class InjectorFactoryTest extends TestCase
 
     public function testCreateWillReturnAnInjectorInstance()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $result    = (new InjectorFactory())->create($container);
 
         $this->assertInstanceOf(InjectorInterface::class, $result);
@@ -31,7 +31,7 @@ final class InjectorFactoryTest extends TestCase
 
     public function testInvokeWillReturnAnInjectorInstance()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $factory   = new InjectorFactory();
         $result    = $factory($container);
 
@@ -40,8 +40,8 @@ final class InjectorFactoryTest extends TestCase
 
     public function testUsesConfigServiceFromContainer()
     {
-        $container  = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $configMock = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
+        $container  = $this->createMock(ContainerInterface::class);
+        $configMock = $this->createMock(ConfigInterface::class);
         $container->expects($this->atLeastOnce())
             ->method('has')
             ->with(ConfigInterface::class)

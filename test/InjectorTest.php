@@ -15,6 +15,7 @@ use Laminas\Di\Resolver\TypeInjection;
 use LaminasTest\Di\TestAsset\DependencyTree as TreeTestAsset;
 use PHPUnit\Framework\Constraint;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
@@ -24,9 +25,9 @@ use TypeError;
 use function array_map;
 use function uniqid;
 
-/**
- * @coversDefaultClass \Laminas\Di\Injector
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(Injector::class)]
 final class InjectorTest extends TestCase
 {
     /**
@@ -39,8 +40,8 @@ final class InjectorTest extends TestCase
 
     public function testSetContainerReplacesConstructed(): void
     {
-        $mock1 = $this->getMockForAbstractClass(ContainerInterface::class);
-        $mock2 = $this->getMockForAbstractClass(ContainerInterface::class);
+        $mock1 = $this->createMock(ContainerInterface::class);
+        $mock2 = $this->createMock(ContainerInterface::class);
 
         $injector = new Injector(null, $mock1);
         $injector->setContainer($mock2);
@@ -51,8 +52,8 @@ final class InjectorTest extends TestCase
 
     public function testConstructWithContainerPassesItToResolver(): void
     {
-        $container = $this->getMockForAbstractClass(ContainerInterface::class);
-        $resolver  = $this->getMockForAbstractClass(DependencyResolverInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $resolver  = $this->createMock(DependencyResolverInterface::class);
         $resolver->expects($this->once())
             ->method('setContainer')
             ->with($this->isIdentical($container))
@@ -64,8 +65,8 @@ final class InjectorTest extends TestCase
 
     public function testSetContainerPassesItToResolver(): void
     {
-        $container = $this->getMockForAbstractClass(ContainerInterface::class);
-        $resolver  = $this->getMockForAbstractClass(DependencyResolverInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $resolver  = $this->createMock(DependencyResolverInterface::class);
         $injector  = new Injector(null, null, null, $resolver);
 
         $resolver->expects($this->once())
@@ -90,8 +91,8 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClassNames
      */
+    #[DataProvider('provideClassNames')]
     public function testCanCreateReturnsTrueForClasses(string $className): void
     {
         $this->assertTrue((new Injector())->canCreate($className));
@@ -124,8 +125,8 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideValidAliases
      */
+    #[DataProvider('provideValidAliases')]
     public function testCanCreateReturnsTrueWithDefinedAndValidAliases(string $aliasName, string $className): void
     {
         $config = new Config([
@@ -197,8 +198,8 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideCircularClasses
      */
+    #[DataProvider('provideCircularClasses')]
     public function testCircularDependencyThrowsException(string $class): void
     {
         $this->expectException(Exception\CircularDependencyException::class);
@@ -227,7 +228,7 @@ final class InjectorTest extends TestCase
     public function testDeepDependencyUsesContainer(): void
     {
         $injector  = new Injector();
-        $container = $this->getMockForAbstractClass(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         // Mocks a container that always creates new instances
         $container->method('has')->willReturnCallback(static fn(string $class): bool => $injector->canCreate($class));
@@ -343,12 +344,9 @@ final class InjectorTest extends TestCase
 
     public function testKnownButInexistentClassThrowsException(): void
     {
-        $definition = $this->getMockBuilder(DefinitionInterface::class)
-            ->getMockForAbstractClass();
+        $definition = $this->createMock(DefinitionInterface::class);
 
-        $definition->expects($this->any())
-            ->method('hasClass')
-            ->willReturn(true);
+        $definition->method('hasClass')->willReturn(true);
 
         $this->expectException(Exception\ClassNotFoundException::class);
         (new Injector(null, null, $definition))->create('LaminasTest\Di\TestAsset\No\Such\Class');
@@ -368,11 +366,11 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideUnexpectedResolverValues
      */
+    #[DataProvider('provideUnexpectedResolverValues')]
     public function testUnexpectedResolverResultThrowsTypeError(mixed $unexpectedValue): void
     {
-        $resolver = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
+        $resolver = $this->createMock(DependencyResolverInterface::class);
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
             ->willReturn([$unexpectedValue]);
@@ -395,12 +393,12 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideContainerTypeNames
      */
+    #[DataProvider('provideContainerTypeNames')]
     public function testContainerItselfIsInjectedIfHasReturnsFalse(string $typeName): void
     {
-        $resolver  = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $resolver  = $this->createMock(DependencyResolverInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
             ->willReturn([new TypeInjection($typeName)]);
@@ -418,8 +416,8 @@ final class InjectorTest extends TestCase
     {
         $expectedMessage = 'Exception from container';
 
-        $resolver  = $this->getMockBuilder(DependencyResolverInterface::class)->getMockForAbstractClass();
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $resolver  = $this->createMock(DependencyResolverInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
 
         $resolver->expects($this->atLeastOnce())
             ->method('resolveParameters')
@@ -470,9 +468,9 @@ final class InjectorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideManyArguments
      * @param array<string, mixed> $parameters
      */
+    #[DataProvider('provideManyArguments')]
     public function testConstructionWithManyParameters(string $class, array $parameters): void
     {
         $result = (new Injector())->create($class, $parameters);

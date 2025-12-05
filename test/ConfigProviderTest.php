@@ -9,10 +9,11 @@ use Laminas\Di\ConfigInterface;
 use Laminas\Di\ConfigProvider;
 use Laminas\Di\InjectorInterface;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Laminas\Di\Module;
 
-/**
- * @coversDefaultClass Laminas\Di\Module
- */
+#[CoversClass(Module::class)]
 final class ConfigProviderTest extends TestCase
 {
     public function testInstanceIsInvokable(): void
@@ -45,8 +46,8 @@ final class ConfigProviderTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExpectedServicesWithFactory
      */
+    #[DataProvider('provideExpectedServicesWithFactory')]
     public function testProvidesFactoryDefinition(string $serviceName): void
     {
         $result = (new ConfigProvider())->getDependencyConfig();

@@ -10,16 +10,17 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+
 /**
  * AutowireFactory test case.
- *
- * @coversDefaultClass \Laminas\Di\Container\ServiceManager\AutowireFactory
  */
+#[CoversClass(AutowireFactory::class)]
 final class AutowireFactoryTest extends TestCase
 {
     public function testInvokeIsPassedToGenericFactory()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $mock      = $this->createMock(GenericAutowireFactory::class);
         $expected  = new stdClass();
         $className = 'AnyClassName';
@@ -40,7 +41,7 @@ final class AutowireFactoryTest extends TestCase
 
     public function testCanCreateIsPassedToGenericFactory()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $mock      = $this->createMock(GenericAutowireFactory::class);
         $className = 'AnyClassName';
 

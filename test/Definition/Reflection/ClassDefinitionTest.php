@@ -18,9 +18,10 @@ use function assert;
 use function sort;
 use function uasort;
 
-/**
- * @covers \Laminas\Di\Definition\Reflection\ClassDefinition
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+
+#[CoversClass(ClassDefinition::class)]
 final class ClassDefinitionTest extends TestCase
 {
     public function testGetReflection(): void
@@ -96,9 +97,9 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClassesWithParameters
      * @param class-string $class
      */
+    #[DataProvider('provideClassesWithParameters')]
     public function testGetParametersReturnsAllParameters(string $class, int $expectedItemCount): void
     {
         $result = (new ClassDefinition($class))->getParameters();
@@ -127,9 +128,9 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideParameterlessClasses
      * @param class-string $class
      */
+    #[DataProvider('provideParameterlessClasses')]
     public function testGetParametersReturnsAnArray(string $class): void
     {
         $result = (new ClassDefinition($class))->getParameters();

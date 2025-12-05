@@ -9,6 +9,8 @@ use Laminas\Di\Config;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\GeneratorFactory;
 use Laminas\Di\Injector;
+use Laminas\Di\Resolver\DependencyResolver;
+use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
@@ -19,9 +21,9 @@ use ReflectionClass;
 
 use function uniqid;
 
-/**
- * @covers Laminas\Di\Container\GeneratorFactory
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(GeneratorFactory::class)]
 final class GeneratorFactoryTest extends TestCase
 {
     public function testInvokeCreatesGenerator(): void
@@ -35,7 +37,7 @@ final class GeneratorFactoryTest extends TestCase
 
     public function testFactoryUsesDiConfigContainer(): void
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturnCallback(static fn($type): bool => $type === ConfigInterface::class);
 
         $container->expects($this->atLeastOnce())
@@ -95,8 +97,7 @@ final class GeneratorFactoryTest extends TestCase
 
     public function testSetsLoggerFromConfig(): void
     {
-        $logger    = $this->getMockBuilder(LoggerInterface::class)
-            ->getMockForAbstractClass();
+        $logger    = $this->createMock(LoggerInterface::class);
         $container = new ServiceManager();
         $container->setService('MyCustomLogger', $logger);
         $container->setService('config', [
@@ -118,17 +119,18 @@ final class GeneratorFactoryTest extends TestCase
 
     public function testInvokeCallsCreate(): void
     {
-        $mock = $this->getMockBuilder(GeneratorFactory::class)
-            ->onlyMethods(['create'])
-            ->enableProxyingToOriginalMethods()
-            ->getMock();
+        $mock = $this->createPartialMock(GeneratorFactory::class, ['create']);
 
-        $container = $this->getMockBuilder(ContainerInterface::class)
-            ->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
+        
+        $config = new Config();
+        $resolver = new DependencyResolver(new RuntimeDefinition(), $config);
+        $generator = new InjectorGenerator($config, $resolver, uniqid('Test'));
 
         $mock->expects($this->once())
             ->method('create')
-            ->with($container);
+            ->with($container)
+            ->willReturn($generator);
 
         $result = $mock($container);
         $this->assertInstanceOf(InjectorGenerator::class, $result);

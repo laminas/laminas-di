@@ -19,6 +19,7 @@ use Laminas\Di\Resolver\TypeInjection;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 use stdClass;
 use Traversable;
@@ -30,9 +31,9 @@ use function basename;
 use function glob;
 use function uniqid;
 
-/**
- * @coversDefaultClass Laminas\Di\Resolver\DependencyResolver
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(DependencyResolver::class)]
 final class DependencyResolverTest extends TestCase
 {
     /**
@@ -40,7 +41,7 @@ final class DependencyResolverTest extends TestCase
      */
     private function getEmptyContainerMock(): ContainerInterface
     {
-        $container = $this->getMockForAbstractClass(ContainerInterface::class);
+        $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->any())->method('has')->withAnyParameters()->willReturn(false);
         $container->expects($this->never())->method('get')->withAnyParameters();
 
@@ -56,7 +57,7 @@ final class DependencyResolverTest extends TestCase
             'required' => true,
         ], $options);
 
-        $mock = $this->getMockForAbstractClass(ParameterInterface::class);
+        $mock = $this->createMock(ParameterInterface::class);
         $mock->method('getName')->willReturn($name);
         $mock->method('getPosition')->willReturn($position);
         $mock->method('getDefault')->willReturn($definition['default']);
@@ -73,7 +74,7 @@ final class DependencyResolverTest extends TestCase
         array $interfaces = [],
         array $supertypes = []
     ): ClassDefinitionInterface {
-        $mock = $this->getMockForAbstractClass(ClassDefinitionInterface::class);
+        $mock = $this->createMock(ClassDefinitionInterface::class);
 
         $mock->method('getInterfaces')->willReturn($interfaces);
         $mock->method('getSupertypes')->willReturn($supertypes);
@@ -115,7 +116,7 @@ final class DependencyResolverTest extends TestCase
      */
     private function mockDefinition(array $definition)
     {
-        $mock = $this->getMockForAbstractClass(DefinitionInterface::class);
+        $mock = $this->createMock(DefinitionInterface::class);
 
         $mock->method('getClasses')->willReturn(array_keys($definition));
         foreach ($definition as $class => $options) {
@@ -200,8 +201,8 @@ final class DependencyResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClassesWithoutConstructionParams
      */
+    #[DataProvider('provideClassesWithoutConstructionParams')]
     public function testResolveClassWithoutParameters(string $class): void
     {
         $resolver = new DependencyResolver(new RuntimeDefinition(), new Config());
@@ -263,8 +264,8 @@ final class DependencyResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider providePreferenceConfigs
      */
+    #[DataProvider('providePreferenceConfigs')]
     public function testResolveConfiguredPreference(
         ConfigInterface $config,
         string $requestClass,
@@ -284,8 +285,8 @@ final class DependencyResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExplicitInjections
      */
+    #[DataProvider('provideExplicitInjections')]
     public function testExplicitInjectionInConfigIsUsedWithoutAdditionalTypeChecks(object $expected): void
     {
         $config = new Config([
@@ -318,13 +319,13 @@ final class DependencyResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideUnusableParametersData
      */
+    #[DataProvider('provideUnusableParametersData')]
     public function testUnusableConfigParametersThrowsException(string $type, mixed $value, bool $builtin = false): void
     {
         $class      = uniqid('MockedTestClass');
         $paramName  = uniqid('param');
-        $config     = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
+        $config     = $this->createMock(ConfigInterface::class);
         $definition = $this->mockDefinition([
             $class => [
                 'parameters' => [
@@ -393,8 +394,8 @@ final class DependencyResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provideUsableParametersData
      */
+    #[DataProvider('provideUsableParametersData')]
     public function testUsableConfigParametersAreAccepted(string $type, mixed $value, bool $builtin = false)
     {
         $class      = uniqid('MockedTestClass');
@@ -487,8 +488,8 @@ final class DependencyResolverTest extends TestCase
      *
      * In this case the resolver must accept it.
      *
-     * @dataProvider provideIterableClassNames
      */
+    #[DataProvider('provideIterableClassNames')]
     public function testConfiguredTraversableTypeParameterSatisfiesIterable(string $iterableClassName)
     {
         $class      = TestAsset\IterableDependency::class;

@@ -8,9 +8,9 @@ use Laminas\Di\ConfigProvider;
 use Laminas\Di\Module;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Laminas\Di\Module
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(Module::class)]
 final class ModuleTest extends TestCase
 {
     public function testModuleProvidesServiceConfiguration(): void

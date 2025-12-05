@@ -12,9 +12,9 @@ use stdClass;
 
 use function uniqid;
 
-/**
- * @coversDefaultClass Laminas\Di\DefaultContainer
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(DefaultContainer::class)]
 final class DefaultContainerTest extends TestCase
 {
     /**
@@ -22,7 +22,7 @@ final class DefaultContainerTest extends TestCase
      */
     private function mockInjector()
     {
-        return $this->getMockForAbstractClass(InjectorInterface::class);
+        return $this->createMock(InjectorInterface::class);
     }
 
     /**

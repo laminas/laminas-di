@@ -9,6 +9,7 @@ use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
@@ -22,9 +23,9 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/**
- * @covers \Laminas\Di\Resolver\ValueInjection
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(ValueInjection::class)]
 final class ValueInjectionTest extends TestCase
 {
     /** @var false|resource */
@@ -66,8 +67,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideConstructionValues
      */
+    #[DataProvider('provideConstructionValues')]
     public function testSetStateConstructsInstance(mixed $value)
     {
         $container = $this->createMock(ContainerInterface::class);
@@ -77,8 +78,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideConstructionValues
      */
+    #[DataProvider('provideConstructionValues')]
     public function testToValueBypassesContainer(mixed $value)
     {
         $result    = new ValueInjection($value);
@@ -135,8 +136,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideUnexportableItems
      */
+    #[DataProvider('provideUnexportableItems')]
     public function testExportThrowsExceptionForUnexportable(mixed $value)
     {
         $instance = new ValueInjection($value);
@@ -146,8 +147,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideUnexportableItems
      */
+    #[DataProvider('provideUnexportableItems')]
     public function testIsExportableReturnsFalseForUnexportable(mixed $value)
     {
         $instance = new ValueInjection($value);
@@ -155,8 +156,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExportableValues
      */
+    #[DataProvider('provideExportableValues')]
     public function testIsExportableReturnsTrueForExportableValues(mixed $value)
     {
         $instance = new ValueInjection($value);
@@ -164,8 +165,8 @@ final class ValueInjectionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExportableValues
      */
+    #[DataProvider('provideExportableValues')]
     public function testExportWithExportableValues(mixed $value)
     {
         $instance = new ValueInjection($value);

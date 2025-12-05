@@ -9,11 +9,12 @@ use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Exception;
 use LaminasTest\Di\TestAsset;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;
 
-/**
- * @coversDefaultClass Laminas\Di\Definition\RuntimeDefinition
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(RuntimeDefinition::class)]
 final class RuntimeDefinitionTest extends TestCase
 {
     public function testSetExplicitClasses()
@@ -73,8 +74,8 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInvalidClasses
      */
+    #[DataProvider('provideInvalidClasses')]
     public function testSetInvalidExplicitClassThrowsException(string $class)
     {
         $definition = new RuntimeDefinition();
@@ -101,8 +102,8 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInvalidClasses
      */
+    #[DataProvider('provideInvalidClasses')]
     public function testAddInvalidExplicitClassThrowsException(string $class)
     {
         $definition = new RuntimeDefinition();
@@ -111,7 +112,7 @@ final class RuntimeDefinitionTest extends TestCase
         $definition->addExplicitClass($class);
     }
 
-    /** @dataProvider provideExistingClasses */
+    #[DataProvider('provideExistingClasses')]
     public function testHasClassReturnsTrueDynamically(string $class): void
     {
         $this->assertTrue(
@@ -120,8 +121,8 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInvalidClasses
      */
+    #[DataProvider('provideInvalidClasses')]
     public function testHasClassReturnsFalseForInvalidClasses(string $class)
     {
         $this->assertFalse(
@@ -130,9 +131,9 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExistingClasses
      * @param class-string $class
      */
+    #[DataProvider('provideExistingClasses')]
     public function testGetClassDefinition(string $class): void
     {
         $definition = new RuntimeDefinition();
@@ -144,9 +145,9 @@ final class RuntimeDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExistingClasses
      * @param class-string $class
      */
+    #[DataProvider('provideExistingClasses')]
     public function testGetClassDefinitionAutoPopulatesClass(string $class): void
     {
         $definition = new RuntimeDefinition();

@@ -18,9 +18,9 @@ use stdClass;
 
 use function uniqid;
 
-/**
- * @covers \Laminas\Di\CodeGenerator\AbstractInjector
- */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(AbstractInjector::class)]
 final class AbstractInjectorTest extends TestCase
 {
     /** @var InjectorInterface&MockObject */
