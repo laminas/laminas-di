@@ -277,6 +277,7 @@
       <code><![CDATA[AbstractInjector]]></code>
       <code><![CDATA[AbstractInjector::class]]></code>
       <code><![CDATA[AbstractInjector::class]]></code>
+      <code><![CDATA[AbstractInjector::class]]></code>
       <code><![CDATA[parent::__construct($injector, $container)]]></code>
     </DeprecatedClass>
     <DeprecatedInterface>
@@ -376,19 +377,12 @@
     </MissingReturnType>
   </file>
   <file src="test/Container/ConfigFactoryTest.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testCreateRequestsContainerForConfigServiceGracefully]]></code>
       <code><![CDATA[testCreateUsesConfigFromContainer]]></code>
       <code><![CDATA[testInvokeCreatesConfigInstance]]></code>
       <code><![CDATA[testLegacyConfigIsRespected]]></code>
     </MissingReturnType>
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[null]]></code>
-    </PossiblyNullPropertyAssignmentValue>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! strstr($errstr, 'legacy DI config')]]></code>
       <code><![CDATA[strstr($errstr, 'legacy DI config')]]></code>
@@ -396,7 +390,8 @@
   </file>
   <file src="test/Container/GeneratorFactoryTest.php">
     <DeprecatedClass>
-      <code><![CDATA[$this->getMockBuilder(GeneratorFactory::class)]]></code>
+      <code><![CDATA[$this->createPartialMock(GeneratorFactory::class, ['create'])]]></code>
+      <code><![CDATA[GeneratorFactory::class]]></code>
       <code><![CDATA[GeneratorFactory::class]]></code>
       <code><![CDATA[InjectorGenerator::class]]></code>
       <code><![CDATA[InjectorGenerator::class]]></code>
@@ -406,10 +401,8 @@
       <code><![CDATA[new GeneratorFactory()]]></code>
       <code><![CDATA[new GeneratorFactory()]]></code>
       <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, uniqid('Test'))]]></code>
     </DeprecatedClass>
-    <DeprecatedMethod>
-      <code><![CDATA[setMethods]]></code>
-    </DeprecatedMethod>
     <InvalidFunctionCall>
       <code><![CDATA[$mock($container)]]></code>
     </InvalidFunctionCall>
@@ -485,6 +478,7 @@
   </file>
   <file src="test/LegacyConfigTest.php">
     <DeprecatedClass>
+      <code><![CDATA[LegacyConfig::class]]></code>
       <code><![CDATA[new LegacyConfig($config)]]></code>
       <code><![CDATA[new LegacyConfig($config)]]></code>
       <code><![CDATA[new LegacyConfig([
@@ -512,10 +506,6 @@
     </MissingOverrideAttribute>
   </file>
   <file src="test/Resolver/DependencyResolverTest.php">
-    <InternalMethod>
-      <code><![CDATA[toValue]]></code>
-      <code><![CDATA[toValue]]></code>
-    </InternalMethod>
     <InvalidCast>
       <code><![CDATA[$result['p']]]></code>
     </InvalidCast>
