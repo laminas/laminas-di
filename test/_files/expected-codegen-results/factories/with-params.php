@@ -39,7 +39,7 @@ final class MixedArgumentsFactory implements FactoryInterface
      * @param array<mixed>|string|null $name
      * @param array<mixed>|null $options
      */
-    public function __invoke(ContainerInterface $container, $name = null, array $options = null): \LaminasTest\Di\TestAsset\Constructor\MixedArguments
+    public function __invoke(ContainerInterface $container, $name = null, ?array $options = null): \LaminasTest\Di\TestAsset\Constructor\MixedArguments
     {
         if (is_array($name) && $options === null) {
             $options = $name;
