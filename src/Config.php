@@ -188,12 +188,8 @@ class Config implements ConfigInterface
      *
      * @see \Laminas\Di\ConfigInterface::getTypePreferencesForClass()
      */
-    private function getTypePreferenceForClass(string $type, ?string $context): ?string
+    private function getTypePreferenceForClass(string $type, string $context): ?string
     {
-        if ($context === null) {
-            return null;
-        }
-
         if (! isset($this->types[$context]['preferences'][$type])) {
             return null;
         }
