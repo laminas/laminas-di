@@ -16,7 +16,7 @@ use function str_replace;
 /**
  * FactoryGenerator test case.
  */
-class FactoryGeneratorTest extends TestCase
+final class FactoryGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
 

@@ -8,7 +8,10 @@ use Laminas\Di\CodeGenerator\FactoryInterface;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
-/** @template-implements FactoryInterface<stdClass> */
+/**
+ * @template-implements FactoryInterface<stdClass>
+ * @final This class should not be extended and will be marked final in version 4.0
+ */
 class StdClassFactory implements FactoryInterface
 {
     /** @inheritDoc */

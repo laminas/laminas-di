@@ -6,20 +6,20 @@ namespace LaminasTest\Di\Container\ServiceManager;
 
 use Laminas\Di\Container\AutowireFactory as GenericAutowireFactory;
 use Laminas\Di\Container\ServiceManager\AutowireFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
 /**
  * AutowireFactory test case.
- *
- * @coversDefaultClass \Laminas\Di\Container\ServiceManager\AutowireFactory
  */
+#[CoversClass(AutowireFactory::class)]
 final class AutowireFactoryTest extends TestCase
 {
     public function testInvokeIsPassedToGenericFactory()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $mock      = $this->createMock(GenericAutowireFactory::class);
         $expected  = new stdClass();
         $className = 'AnyClassName';
@@ -40,7 +40,7 @@ final class AutowireFactoryTest extends TestCase
 
     public function testCanCreateIsPassedToGenericFactory()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $mock      = $this->createMock(GenericAutowireFactory::class);
         $className = 'AnyClassName';
 

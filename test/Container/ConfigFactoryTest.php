@@ -6,7 +6,7 @@ namespace LaminasTest\Di\Container;
 
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\ConfigFactory;
-use PHPUnit\Framework\MockObject\MockBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -17,28 +17,12 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/** @covers \Laminas\Di\Container\ConfigFactory */
-class ConfigFactoryTest extends TestCase
+#[CoversClass(ConfigFactory::class)]
+final class ConfigFactoryTest extends TestCase
 {
-    /** @var MockBuilder<ContainerInterface> */
-    private $containerBuilder;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->containerBuilder = $this->getMockBuilder(ContainerInterface::class);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->containerBuilder = null;
-
-        parent::tearDown();
-    }
-
     public function testInvokeCreatesConfigInstance()
     {
-        $container = $this->containerBuilder->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturn(false);
 
         $factory = new ConfigFactory();
@@ -50,7 +34,7 @@ class ConfigFactoryTest extends TestCase
      */
     public function testCreateRequestsContainerForConfigServiceGracefully()
     {
-        $container = $this->containerBuilder->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->atLeastOnce())
             ->method('has')
             ->with('config')
@@ -66,7 +50,7 @@ class ConfigFactoryTest extends TestCase
 
     private function createContainerWithConfig(array $config): ContainerInterface
     {
-        $container = $this->containerBuilder->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->atLeastOnce())
             ->method('has')
             ->with('config')

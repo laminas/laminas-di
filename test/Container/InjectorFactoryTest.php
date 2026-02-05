@@ -7,14 +7,13 @@ namespace LaminasTest\Di\Container;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\InjectorFactory;
 use Laminas\Di\InjectorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
 
-/**
- * @coversDefaultClass Laminas\Di\Container\InjectorFactory
- */
-class InjectorFactoryTest extends TestCase
+#[CoversClass(InjectorFactory::class)]
+final class InjectorFactoryTest extends TestCase
 {
     public function testFactoryIsInvokable()
     {
@@ -23,7 +22,7 @@ class InjectorFactoryTest extends TestCase
 
     public function testCreateWillReturnAnInjectorInstance()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $result    = (new InjectorFactory())->create($container);
 
         $this->assertInstanceOf(InjectorInterface::class, $result);
@@ -31,7 +30,7 @@ class InjectorFactoryTest extends TestCase
 
     public function testInvokeWillReturnAnInjectorInstance()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $factory   = new InjectorFactory();
         $result    = $factory($container);
 
@@ -40,8 +39,8 @@ class InjectorFactoryTest extends TestCase
 
     public function testUsesConfigServiceFromContainer()
     {
-        $container  = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
-        $configMock = $this->getMockBuilder(ConfigInterface::class)->getMockForAbstractClass();
+        $container  = $this->createMock(ContainerInterface::class);
+        $configMock = $this->createMock(ConfigInterface::class);
         $container->expects($this->atLeastOnce())
             ->method('has')
             ->with(ConfigInterface::class)
@@ -56,8 +55,6 @@ class InjectorFactoryTest extends TestCase
 
         $reflection = new ReflectionObject($injector);
         $property   = $reflection->getProperty('config');
-
-        $property->setAccessible(true);
         $this->assertSame($configMock, $property->getValue($injector));
     }
 }

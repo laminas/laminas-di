@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 
-class GeneratedInjectorDelegatorTest extends TestCase
+final class GeneratedInjectorDelegatorTest extends TestCase
 {
     public function testProvidedNamespaceIsNotAString(): void
     {

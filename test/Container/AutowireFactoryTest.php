@@ -8,16 +8,16 @@ use Laminas\Di\Container\AutowireFactory;
 use Laminas\Di\Exception;
 use Laminas\Di\InjectorInterface;
 use LaminasTest\Di\TestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
 
 /**
  * AutowireFactory test case.
- *
- * @coversDefaultClass Laminas\Di\Container\AutowireFactory
  */
-class AutowireFactoryTest extends TestCase
+#[CoversClass(AutowireFactory::class)]
+final class AutowireFactoryTest extends TestCase
 {
     private AutowireFactory $instance;
 
@@ -32,7 +32,7 @@ class AutowireFactoryTest extends TestCase
 
     private function createContainerMock(InjectorInterface $injector): ContainerInterface
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->with(InjectorInterface::class)->willReturn(true);
         $container->method('get')
             ->with(InjectorInterface::class)
@@ -43,7 +43,7 @@ class AutowireFactoryTest extends TestCase
 
     public function testCanCreateUsesInjector()
     {
-        $injector = $this->getMockBuilder(InjectorInterface::class)->getMockForAbstractClass();
+        $injector = $this->createMock(InjectorInterface::class);
         $injector->expects($this->atLeastOnce())
             ->method('canCreate')
             ->willReturn(true);
@@ -56,7 +56,7 @@ class AutowireFactoryTest extends TestCase
 
     private function createContainerForCreateTest(string $className, object $expected): ContainerInterface
     {
-        $injector = $this->getMockBuilder(InjectorInterface::class)->getMockForAbstractClass();
+        $injector = $this->createMock(InjectorInterface::class);
         $injector->method('canCreate')
             ->willReturn(true);
 
@@ -91,7 +91,7 @@ class AutowireFactoryTest extends TestCase
 
     public function testCanCreateReturnsFalseWithoutInjector()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturn(false);
 
         $this->assertFalse($this->instance->canCreate($container, TestAsset\A::class));
@@ -99,7 +99,7 @@ class AutowireFactoryTest extends TestCase
 
     public function testCreateWithoutInjectorThrowsException()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturn(false);
 
         $this->expectException(Exception\RuntimeException::class);
@@ -108,7 +108,7 @@ class AutowireFactoryTest extends TestCase
 
     public function testCreateWithInvalidInjectorThrowsException()
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturn(true);
         $container->method('get')->willReturn(new stdClass());
 

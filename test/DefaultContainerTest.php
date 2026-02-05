@@ -6,23 +6,22 @@ namespace LaminasTest\Di;
 
 use Laminas\Di\DefaultContainer;
 use Laminas\Di\InjectorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function uniqid;
 
-/**
- * @coversDefaultClass Laminas\Di\DefaultContainer
- */
-class DefaultContainerTest extends TestCase
+#[CoversClass(DefaultContainer::class)]
+final class DefaultContainerTest extends TestCase
 {
     /**
      * @return MockObject&InjectorInterface
      */
     private function mockInjector()
     {
-        return $this->getMockForAbstractClass(InjectorInterface::class);
+        return $this->createMock(InjectorInterface::class);
     }
 
     /**

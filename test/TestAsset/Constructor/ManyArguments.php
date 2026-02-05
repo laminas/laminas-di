@@ -9,6 +9,9 @@ namespace LaminasTest\Di\TestAsset\Constructor;
 use function array_filter;
 use function compact;
 
+/**
+ * @final This class should not be extended and will be marked final in version 4.0
+ */
 class ManyArguments
 {
     public $result;

@@ -6,12 +6,11 @@ namespace LaminasTest\Di;
 
 use Laminas\Di\ConfigProvider;
 use Laminas\Di\Module;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Laminas\Di\Module
- */
-class ModuleTest extends TestCase
+#[CoversClass(Module::class)]
+final class ModuleTest extends TestCase
 {
     public function testModuleProvidesServiceConfiguration(): void
     {

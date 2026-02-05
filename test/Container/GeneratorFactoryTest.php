@@ -8,9 +8,12 @@ use Laminas\Di\CodeGenerator\InjectorGenerator;
 use Laminas\Di\Config;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\Container\GeneratorFactory;
+use Laminas\Di\Definition\RuntimeDefinition;
 use Laminas\Di\Injector;
+use Laminas\Di\Resolver\DependencyResolver;
 use Laminas\ServiceManager\ServiceManager;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -19,10 +22,8 @@ use ReflectionClass;
 
 use function uniqid;
 
-/**
- * @covers Laminas\Di\Container\GeneratorFactory
- */
-class GeneratorFactoryTest extends TestCase
+#[CoversClass(GeneratorFactory::class)]
+final class GeneratorFactoryTest extends TestCase
 {
     public function testInvokeCreatesGenerator(): void
     {
@@ -35,7 +36,7 @@ class GeneratorFactoryTest extends TestCase
 
     public function testFactoryUsesDiConfigContainer(): void
     {
-        $container = $this->getMockBuilder(ContainerInterface::class)->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
         $container->method('has')->willReturnCallback(static fn($type): bool => $type === ConfigInterface::class);
 
         $container->expects($this->atLeastOnce())
@@ -89,15 +90,13 @@ class GeneratorFactoryTest extends TestCase
         $generator  = (new GeneratorFactory())->create(new ServiceManager());
         $reflection = new ReflectionClass($generator);
         $property   = $reflection->getProperty('logger');
-        $property->setAccessible(true);
 
         $this->assertInstanceOf(NullLogger::class, $property->getValue($generator));
     }
 
     public function testSetsLoggerFromConfig(): void
     {
-        $logger    = $this->getMockBuilder(LoggerInterface::class)
-            ->getMockForAbstractClass();
+        $logger    = $this->createMock(LoggerInterface::class);
         $container = new ServiceManager();
         $container->setService('MyCustomLogger', $logger);
         $container->setService('config', [
@@ -113,24 +112,24 @@ class GeneratorFactoryTest extends TestCase
         $generator  = (new GeneratorFactory())->create($container);
         $reflection = new ReflectionClass($generator);
         $property   = $reflection->getProperty('logger');
-        $property->setAccessible(true);
 
         $this->assertNotInstanceOf(NullLogger::class, $property->getValue($generator));
     }
 
     public function testInvokeCallsCreate(): void
     {
-        $mock = $this->getMockBuilder(GeneratorFactory::class)
-            ->setMethods(['create'])
-            ->enableProxyingToOriginalMethods()
-            ->getMock();
+        $mock = $this->createPartialMock(GeneratorFactory::class, ['create']);
 
-        $container = $this->getMockBuilder(ContainerInterface::class)
-            ->getMockForAbstractClass();
+        $container = $this->createMock(ContainerInterface::class);
+
+        $config    = new Config();
+        $resolver  = new DependencyResolver(new RuntimeDefinition(), $config);
+        $generator = new InjectorGenerator($config, $resolver, uniqid('Test'));
 
         $mock->expects($this->once())
             ->method('create')
-            ->with($container);
+            ->with($container)
+            ->willReturn($generator);
 
         $result = $mock($container);
         $this->assertInstanceOf(InjectorGenerator::class, $result);

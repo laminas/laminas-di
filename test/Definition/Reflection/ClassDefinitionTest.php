@@ -9,6 +9,8 @@ use Laminas\Di\Definition\Reflection\ClassDefinition;
 use LaminasTest\Di\TestAsset\ClassDefinitionRedundantUaSortTestDependency;
 use LaminasTest\Di\TestAsset\Constructor as ConstructorAsset;
 use LaminasTest\Di\TestAsset\Hierarchy as HierarchyAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionParameter;
@@ -18,9 +20,7 @@ use function assert;
 use function sort;
 use function uasort;
 
-/**
- * @covers \Laminas\Di\Definition\Reflection\ClassDefinition
- */
+#[CoversClass(ClassDefinition::class)]
 final class ClassDefinitionTest extends TestCase
 {
     public function testGetReflection(): void
@@ -87,7 +87,7 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /** @return array<string, array{class-string, int}> */
-    public function provideClassesWithParameters(): array
+    public static function provideClassesWithParameters(): array
     {
         return [
             'optional' => [ConstructorAsset\OptionalArguments::class, 2],
@@ -96,9 +96,9 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideClassesWithParameters
      * @param class-string $class
      */
+    #[DataProvider('provideClassesWithParameters')]
     public function testGetParametersReturnsAllParameters(string $class, int $expectedItemCount): void
     {
         $result = (new ClassDefinition($class))->getParameters();
@@ -118,7 +118,7 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /** @return array<string, array<class-string>> */
-    public function provideParameterlessClasses(): array
+    public static function provideParameterlessClasses(): array
     {
         return [
             'noargs'      => [ConstructorAsset\EmptyConstructor::class],
@@ -127,9 +127,9 @@ final class ClassDefinitionTest extends TestCase
     }
 
     /**
-     * @dataProvider provideParameterlessClasses
      * @param class-string $class
      */
+    #[DataProvider('provideParameterlessClasses')]
     public function testGetParametersReturnsAnArray(string $class): void
     {
         $result = (new ClassDefinition($class))->getParameters();

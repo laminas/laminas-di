@@ -8,6 +8,8 @@ use Laminas\Di\Exception;
 use Laminas\Di\Resolver\InjectionInterface;
 use Laminas\Di\Resolver\ValueInjection;
 use LaminasTest\Di\TestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use stdClass;
@@ -22,8 +24,8 @@ use function uniqid;
 
 use const E_USER_DEPRECATED;
 
-/** @covers \Laminas\Di\Resolver\ValueInjection */
-class ValueInjectionTest extends TestCase
+#[CoversClass(ValueInjection::class)]
+final class ValueInjectionTest extends TestCase
 {
     /** @var false|resource */
     private $streamFixture;
@@ -52,7 +54,7 @@ class ValueInjectionTest extends TestCase
         $this->assertInstanceOf(InjectionInterface::class, new ValueInjection(null));
     }
 
-    public function provideConstructionValues(): array
+    public static function provideConstructionValues(): array
     {
         return [
             'string' => ['Hello World'],
@@ -63,9 +65,7 @@ class ValueInjectionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideConstructionValues
-     */
+    #[DataProvider('provideConstructionValues')]
     public function testSetStateConstructsInstance(mixed $value)
     {
         $container = $this->createMock(ContainerInterface::class);
@@ -74,9 +74,7 @@ class ValueInjectionTest extends TestCase
         $this->assertSame($value, $result->toValue($container));
     }
 
-    /**
-     * @dataProvider provideConstructionValues
-     */
+    #[DataProvider('provideConstructionValues')]
     public function testToValueBypassesContainer(mixed $value)
     {
         $result    = new ValueInjection($value);
@@ -89,7 +87,7 @@ class ValueInjectionTest extends TestCase
         $this->assertSame($value, $result->toValue($container));
     }
 
-    public function provideExportableValues(): array
+    public static function provideExportableValues(): array
     {
         return [
             'string'       => ['Testvalue'],
@@ -121,22 +119,18 @@ class ValueInjectionTest extends TestCase
         ];
     }
 
-    public function provideUnexportableItems(): array
+    public static function provideUnexportableItems(): array
     {
-        if (! $this->streamFixture) {
-            $this->streamFixture = fopen('php://temp', 'w+');
-        }
+        $streamFixture = fopen('php://temp', 'w+');
 
         return [
-            'stream'          => [$this->streamFixture],
+            'stream'          => [$streamFixture],
             'noSetState'      => [new TestAsset\Resolver\UnexportableValue1()],
             'arrayNoSetState' => [[new TestAsset\Resolver\UnexportableValue1()]],
         ];
     }
 
-    /**
-     * @dataProvider provideUnexportableItems
-     */
+    #[DataProvider('provideUnexportableItems')]
     public function testExportThrowsExceptionForUnexportable(mixed $value)
     {
         $instance = new ValueInjection($value);
@@ -145,27 +139,21 @@ class ValueInjectionTest extends TestCase
         $instance->export();
     }
 
-    /**
-     * @dataProvider provideUnexportableItems
-     */
+    #[DataProvider('provideUnexportableItems')]
     public function testIsExportableReturnsFalseForUnexportable(mixed $value)
     {
         $instance = new ValueInjection($value);
         $this->assertFalse($instance->isExportable());
     }
 
-    /**
-     * @dataProvider provideExportableValues
-     */
+    #[DataProvider('provideExportableValues')]
     public function testIsExportableReturnsTrueForExportableValues(mixed $value)
     {
         $instance = new ValueInjection($value);
         $this->assertTrue($instance->isExportable());
     }
 
-    /**
-     * @dataProvider provideExportableValues
-     */
+    #[DataProvider('provideExportableValues')]
     public function testExportWithExportableValues(mixed $value)
     {
         $instance = new ValueInjection($value);

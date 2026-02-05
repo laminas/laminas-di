@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * AutoloadGenerator test case.
  */
-class AutoloadGeneratorTest extends TestCase
+final class AutoloadGeneratorTest extends TestCase
 {
     use GeneratorTestTrait;
 

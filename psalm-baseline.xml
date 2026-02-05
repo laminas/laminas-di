@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/CodeGenerator/AbstractInjector.php">
     <DeprecatedInterface>
       <code><![CDATA[FactoryInterface]]></code>
@@ -13,9 +13,10 @@
     <InvalidReturnStatement>
       <code><![CDATA[$this->injector->create($name, $options)]]></code>
     </InvalidReturnStatement>
-    <MixedInferredReturnType>
-      <code><![CDATA[T]]></code>
-    </MixedInferredReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function canCreate(string $name): bool]]></code>
+      <code><![CDATA[public function create(string $name, array $options = [])]]></code>
+    </MissingOverrideAttribute>
     <MixedReturnStatement>
       <code><![CDATA[$this->getFactory($name)->create($this->container, $options)]]></code>
     </MixedReturnStatement>
@@ -29,6 +30,9 @@
     <DeprecatedTrait>
       <code><![CDATA[GeneratorTrait]]></code>
     </DeprecatedTrait>
+    <PossiblyNullOperand>
+      <code><![CDATA[preg_replace('~[^a-z0-9\\\\]+~i', '_', $name)]]></code>
+    </PossiblyNullOperand>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$namespace]]></code>
       <code><![CDATA[$paramsCode]]></code>
@@ -67,6 +71,14 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Config.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getClassForAlias(string $name): ?string]]></code>
+      <code><![CDATA[public function getConfiguredTypeNames(): array]]></code>
+      <code><![CDATA[public function getParameters(string $type): array]]></code>
+      <code><![CDATA[public function getTypePreference(string $type, ?string $contextClass = null): ?string]]></code>
+      <code><![CDATA[public function isAlias(string $name): bool]]></code>
+      <code><![CDATA[public function setParameters(string $type, array $params)]]></code>
+    </MissingOverrideAttribute>
     <MixedArrayAccess>
       <code><![CDATA[$this->types[$context]['preferences'][$type]]]></code>
     </MixedArrayAccess>
@@ -112,11 +124,46 @@
       <code><![CDATA[new InjectorGenerator($diConfig, $resolver, $namespace, $logger)]]></code>
     </DeprecatedClass>
   </file>
+  <file src="src/Container/ServiceManager/AutowireFactory.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)]]></code>
+      <code><![CDATA[public function canCreate(ContainerInterface $container, $requestedName)]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="src/DefaultContainer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function get($name)]]></code>
+      <code><![CDATA[public function has($name)]]></code>
+    </MissingOverrideAttribute>
     <ParamNameMismatch>
       <code><![CDATA[$name]]></code>
       <code><![CDATA[$name]]></code>
     </ParamNameMismatch>
+  </file>
+  <file src="src/Definition/Reflection/ClassDefinition.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getInterfaces(): array]]></code>
+      <code><![CDATA[public function getParameters(): array]]></code>
+      <code><![CDATA[public function getReflection(): ReflectionClass]]></code>
+      <code><![CDATA[public function getSupertypes(): array]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Definition/Reflection/Parameter.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getDefault()]]></code>
+      <code><![CDATA[public function getName(): string]]></code>
+      <code><![CDATA[public function getPosition(): int]]></code>
+      <code><![CDATA[public function getType(): ?string]]></code>
+      <code><![CDATA[public function isBuiltin(): bool]]></code>
+      <code><![CDATA[public function isRequired(): bool]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Definition/RuntimeDefinition.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getClassDefinition(string $class): ClassDefinitionInterface]]></code>
+      <code><![CDATA[public function getClasses(): array]]></code>
+      <code><![CDATA[public function hasClass(string $class): bool]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="src/Exception/InvalidParamNameException.php">
     <UnusedClass>
@@ -140,6 +187,10 @@
     <InvalidReturnType>
       <code><![CDATA[T]]></code>
     </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function canCreate(string $name): bool]]></code>
+      <code><![CDATA[public function create(string $name, array $options = [])]]></code>
+    </MissingOverrideAttribute>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$params]]></code>
     </MixedArgumentTypeCoercion>
@@ -177,6 +228,11 @@
       <code><![CDATA[$type]]></code>
       <code><![CDATA[$type]]></code>
     </ArgumentTypeCoercion>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function resolveParameters(string $requestedType, array $callTimeParameters = []): array]]></code>
+      <code><![CDATA[public function resolvePreference(string $type, ?string $context = null): ?string]]></code>
+      <code><![CDATA[public function setContainer(ContainerInterface $container)]]></code>
+    </MissingOverrideAttribute>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! $preference]]></code>
       <code><![CDATA[! $requiredType]]></code>
@@ -195,9 +251,22 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Resolver/TypeInjection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function __toString(): string]]></code>
+      <code><![CDATA[public function export(): string]]></code>
+      <code><![CDATA[public function isExportable(): bool]]></code>
+      <code><![CDATA[public function toValue(ContainerInterface $container)]]></code>
+    </MissingOverrideAttribute>
     <PossiblyUnusedReturnValue>
       <code><![CDATA[string]]></code>
     </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Resolver/ValueInjection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function export(): string]]></code>
+      <code><![CDATA[public function isExportable(): bool]]></code>
+      <code><![CDATA[public function toValue(ContainerInterface $container)]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/CodeGenerator/AbstractInjectorTest.php">
     <ArgumentTypeCoercion>
@@ -208,9 +277,12 @@
       <code><![CDATA[AbstractInjector]]></code>
       <code><![CDATA[AbstractInjector::class]]></code>
       <code><![CDATA[AbstractInjector::class]]></code>
+      <code><![CDATA[AbstractInjector::class]]></code>
       <code><![CDATA[parent::__construct($injector, $container)]]></code>
     </DeprecatedClass>
     <DeprecatedInterface>
+      <code><![CDATA[$this->createMock(FactoryInterface::class)]]></code>
+      <code><![CDATA[$this->createMock(FactoryInterface::class)]]></code>
       <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
       <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
       <code><![CDATA[callable():array<string, class-string<FactoryInterface>|FactoryInterface>]]></code>
@@ -218,10 +290,10 @@
     <InvalidArgument>
       <code><![CDATA[$invokable]]></code>
     </InvalidArgument>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function loadFactoryList(): void]]></code>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/CodeGenerator/AutoloadGeneratorTest.php">
     <DeprecatedClass>
@@ -284,11 +356,17 @@
     </DeprecatedClass>
   </file>
   <file src="test/ConfigTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$this->fixture]]></code>
     </MixedAssignment>
   </file>
   <file src="test/Container/AutowireFactoryTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testCanCreateReturnsFalseWithoutInjector]]></code>
       <code><![CDATA[testCanCreateUsesInjector]]></code>
@@ -305,9 +383,6 @@
       <code><![CDATA[testInvokeCreatesConfigInstance]]></code>
       <code><![CDATA[testLegacyConfigIsRespected]]></code>
     </MissingReturnType>
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[null]]></code>
-    </PossiblyNullPropertyAssignmentValue>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[! strstr($errstr, 'legacy DI config')]]></code>
       <code><![CDATA[strstr($errstr, 'legacy DI config')]]></code>
@@ -315,9 +390,8 @@
   </file>
   <file src="test/Container/GeneratorFactoryTest.php">
     <DeprecatedClass>
-      <code><![CDATA[$this->getMockBuilder(GeneratorFactory::class)
-            ->setMethods(['create'])
-            ->enableProxyingToOriginalMethods()]]></code>
+      <code><![CDATA[$this->createPartialMock(GeneratorFactory::class, ['create'])]]></code>
+      <code><![CDATA[GeneratorFactory::class]]></code>
       <code><![CDATA[GeneratorFactory::class]]></code>
       <code><![CDATA[InjectorGenerator::class]]></code>
       <code><![CDATA[InjectorGenerator::class]]></code>
@@ -327,20 +401,14 @@
       <code><![CDATA[new GeneratorFactory()]]></code>
       <code><![CDATA[new GeneratorFactory()]]></code>
       <code><![CDATA[new GeneratorFactory()]]></code>
+      <code><![CDATA[new InjectorGenerator($config, $resolver, uniqid('Test'))]]></code>
     </DeprecatedClass>
-    <DeprecatedMethod>
-      <code><![CDATA[setMethods]]></code>
-    </DeprecatedMethod>
     <InvalidFunctionCall>
       <code><![CDATA[$mock($container)]]></code>
     </InvalidFunctionCall>
     <MissingClosureParamType>
       <code><![CDATA[$type]]></code>
     </MissingClosureParamType>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
   </file>
   <file src="test/Container/InjectorFactoryTest.php">
     <MissingReturnType>
@@ -349,9 +417,6 @@
       <code><![CDATA[testInvokeWillReturnAnInjectorInstance]]></code>
       <code><![CDATA[testUsesConfigServiceFromContainer]]></code>
     </MissingReturnType>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
   </file>
   <file src="test/Container/ServiceManager/AutowireFactoryTest.php">
     <MissingReturnType>
@@ -379,20 +444,20 @@
       <code><![CDATA[testTypehintedParameter]]></code>
       <code><![CDATA[testTypelessParamter]]></code>
     </MissingReturnType>
-    <MixedInferredReturnType>
+    <MixedReturnStatement>
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
+    </MixedReturnStatement>
   </file>
   <file src="test/Definition/Reflection/ParameterTestTrait.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$classname]]></code>
     </ArgumentTypeCoercion>
-    <MixedInferredReturnType>
+    <MixedReturnStatement>
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
+    </MixedReturnStatement>
   </file>
   <file src="test/Definition/RuntimeDefinitionTest.php">
     <ArgumentTypeCoercion>
@@ -407,12 +472,13 @@
       <code><![CDATA[testSetExplicitClassesViaConstructor]]></code>
       <code><![CDATA[testSetInvalidExplicitClassThrowsException]]></code>
     </MissingReturnType>
-    <MixedInferredReturnType>
+    <MixedReturnStatement>
       <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
+    </MixedReturnStatement>
   </file>
   <file src="test/LegacyConfigTest.php">
     <DeprecatedClass>
+      <code><![CDATA[LegacyConfig::class]]></code>
       <code><![CDATA[new LegacyConfig($config)]]></code>
       <code><![CDATA[new LegacyConfig($config)]]></code>
       <code><![CDATA[new LegacyConfig([
@@ -433,17 +499,22 @@
       <code><![CDATA[include $file->getPathname()]]></code>
     </UnresolvableInclude>
   </file>
+  <file src="test/Resolver/AbstractInjectionTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function export(): string]]></code>
+      <code><![CDATA[public function isExportable(): bool]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="test/Resolver/DependencyResolverTest.php">
-    <InternalMethod>
-      <code><![CDATA[toValue]]></code>
-      <code><![CDATA[toValue]]></code>
-    </InternalMethod>
     <InvalidCast>
       <code><![CDATA[$result['p']]]></code>
     </InvalidCast>
     <MissingClosureParamType>
       <code><![CDATA[$class]]></code>
     </MissingClosureParamType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getIterator(): Traversable]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testConfiguredExtendedInterfaceParameterSatisfiesRequiredInterfaceType]]></code>
       <code><![CDATA[testConfiguredInvokableAliasParameterSatisfiesCallable]]></code>
@@ -467,6 +538,7 @@
     </MissingTemplateParam>
     <MixedArgument>
       <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configFile]]></code>
       <code><![CDATA[$options]]></code>
       <code><![CDATA[$options]]></code>
       <code><![CDATA[$options['interfaces']]]></code>
@@ -488,23 +560,26 @@
     </MixedArrayOffset>
     <MixedAssignment>
       <code><![CDATA[$config]]></code>
+      <code><![CDATA[$configFile]]></code>
       <code><![CDATA[$expectation]]></code>
       <code><![CDATA[$key]]></code>
       <code><![CDATA[$options]]></code>
       <code><![CDATA[$options]]></code>
       <code><![CDATA[[$requested, $expectedResult, $context]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[PHPUnit_Framework_MockObject_MockObject|ContainerInterface]]></code>
-      <code><![CDATA[array]]></code>
-      <code><![CDATA[array]]></code>
-      <code><![CDATA[array]]></code>
-      <code><![CDATA[array]]></code>
-      <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
     <MixedOperand>
       <code><![CDATA[$key]]></code>
     </MixedOperand>
+    <MixedReturnStatement>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
+    </MixedReturnStatement>
+    <PossiblyFalseIterator>
+      <code><![CDATA[glob(__DIR__ . '/../_files/preferences/*.php')]]></code>
+    </PossiblyFalseIterator>
     <PossiblyInvalidArgument>
       <code><![CDATA[$this->getEmptyContainerMock()]]></code>
     </PossiblyInvalidArgument>
@@ -532,9 +607,9 @@
       <code><![CDATA[testIsExportableIsAlwaysTrue]]></code>
       <code><![CDATA[testToValueUsesContainer]]></code>
     </MissingReturnType>
-    <MixedInferredReturnType>
+    <MixedReturnStatement>
       <code><![CDATA[iterable]]></code>
-    </MixedInferredReturnType>
+    </MixedReturnStatement>
   </file>
   <file src="test/Resolver/ValueInjectionTest.php">
     <DeprecatedMethod>
@@ -543,6 +618,10 @@
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->streamFixture]]></code>
     </InvalidPropertyAssignmentValue>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+      <code><![CDATA[protected function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
     <MissingReturnType>
       <code><![CDATA[testExportThrowsExceptionForUnexportable]]></code>
       <code><![CDATA[testExportWithExportableValues]]></code>
@@ -553,11 +632,11 @@
       <code><![CDATA[testSetStateConstructsInstance]]></code>
       <code><![CDATA[testToValueBypassesContainer]]></code>
     </MissingReturnType>
-    <MixedInferredReturnType>
+    <MixedReturnStatement>
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
-    </MixedInferredReturnType>
+    </MixedReturnStatement>
     <PossiblyNullPropertyAssignmentValue>
       <code><![CDATA[null]]></code>
     </PossiblyNullPropertyAssignmentValue>
@@ -570,63 +649,66 @@
       <code><![CDATA[arrayType]]></code>
       <code><![CDATA[callableType]]></code>
     </MissingReturnType>
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$p]]></code>
       <code><![CDATA[$r]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/A.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$b]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/B.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$a]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/C.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$d]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/D.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$e]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/E.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$c]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/X.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$x]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CircularClasses/Y.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$y]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/ClassDefinitionRedundantUaSortTestDependency.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$first]]></code>
       <code><![CDATA[$second]]></code>
       <code><![CDATA[$third]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/CodeGenerator/StdClassFactory.php">
     <DeprecatedInterface>
       <code><![CDATA[StdClassFactory]]></code>
     </DeprecatedInterface>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function create(ContainerInterface $container, array $options)]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/TestAsset/Config/SomeClass.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$a]]></code>
       <code><![CDATA[$b]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Constructor/ManyArguments.php">
     <MissingParamType>
@@ -642,30 +724,30 @@
     </MissingPropertyType>
   </file>
   <file src="test/TestAsset/Constructor/MixedArguments.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$anyDep]]></code>
       <code><![CDATA[$objectDep]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Constructor/OptionalArguments.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$bar]]></code>
       <code><![CDATA[$foo]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Constructor/Php7.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$callbacDep]]></code>
       <code><![CDATA[$numDep]]></code>
       <code><![CDATA[$stringDep]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Constructor/RequiredArguments.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$anyDep]]></code>
       <code><![CDATA[$internalClassDep]]></code>
       <code><![CDATA[$objectDep]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/GeneratedInjector.php">
     <InvalidReturnStatement>
@@ -674,6 +756,10 @@
     <InvalidReturnType>
       <code><![CDATA[T]]></code>
     </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function canCreate(string $name): bool]]></code>
+      <code><![CDATA[public function create(string $name, array $options = [])]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/TestAsset/InvokableInterface.php">
     <MissingReturnType>
@@ -681,9 +767,9 @@
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/IterableDependency.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$iterator]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Parameters.php">
     <MissingReturnType>
@@ -693,7 +779,7 @@
       <code><![CDATA[typelessOptional]]></code>
       <code><![CDATA[typelessRequired]]></code>
     </MissingReturnType>
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$a]]></code>
       <code><![CDATA[$b]]></code>
       <code><![CDATA[$bar]]></code>
@@ -701,27 +787,37 @@
       <code><![CDATA[$flag]]></code>
       <code><![CDATA[$foo]]></code>
       <code><![CDATA[$fooOpt]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Pseudotypes/IteratorAggregateImplementation.php">
     <InvalidReturnType>
       <code><![CDATA[Traversable]]></code>
     </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getIterator(): Traversable]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/TestAsset/Pseudotypes/IteratorImplementation.php">
     <InvalidReturnType>
       <code><![CDATA[bool]]></code>
     </InvalidReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[public function next(): void]]></code>
+      <code><![CDATA[public function rewind(): void]]></code>
+      <code><![CDATA[public function valid(): bool]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/TestAsset/RequiresA.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$p]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/Resolver/ExportableValue.php">
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$data]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/ScalarTypehintParameters.php">
     <MissingReturnType>
@@ -730,11 +826,11 @@
       <code><![CDATA[intType]]></code>
       <code><![CDATA[stringType]]></code>
     </MissingReturnType>
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$p]]></code>
       <code><![CDATA[$p]]></code>
       <code><![CDATA[$p]]></code>
       <code><![CDATA[$p]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
 </files>

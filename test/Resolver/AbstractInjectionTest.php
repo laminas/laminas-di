@@ -14,7 +14,7 @@ use function sprintf;
 
 use const E_USER_DEPRECATED;
 
-class AbstractInjectionTest extends TestCase
+final class AbstractInjectionTest extends TestCase
 {
     public function testUsageIsDeprecated(): void
     {

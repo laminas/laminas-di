@@ -8,12 +8,13 @@ use Laminas\Di\CodeGenerator\InjectorGenerator;
 use Laminas\Di\ConfigInterface;
 use Laminas\Di\ConfigProvider;
 use Laminas\Di\InjectorInterface;
+use Laminas\Di\Module;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Laminas\Di\Module
- */
-class ConfigProviderTest extends TestCase
+#[CoversClass(Module::class)]
+final class ConfigProviderTest extends TestCase
 {
     public function testInstanceIsInvokable(): void
     {
@@ -34,7 +35,7 @@ class ConfigProviderTest extends TestCase
      *
      * @return iterable<string, array{0: class-string}>
      */
-    public function provideExpectedServicesWithFactory(): iterable
+    public static function provideExpectedServicesWithFactory(): iterable
     {
         return [
             //               service name
@@ -44,9 +45,7 @@ class ConfigProviderTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideExpectedServicesWithFactory
-     */
+    #[DataProvider('provideExpectedServicesWithFactory')]
     public function testProvidesFactoryDefinition(string $serviceName): void
     {
         $result = (new ConfigProvider())->getDependencyConfig();

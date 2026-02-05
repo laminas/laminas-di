@@ -6,15 +6,15 @@ namespace LaminasTest\Di;
 
 use Laminas\Di\Config;
 use Laminas\Di\Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function uniqid;
 
-/**
- * @coversDefaultClass \Laminas\Di\Config
- */
-class ConfigTest extends TestCase
+#[CoversClass(Config::class)]
+final class ConfigTest extends TestCase
 {
     private array $fixture;
 
@@ -121,7 +121,7 @@ class ConfigTest extends TestCase
     /**
      * @return array<string, array{0: class-string}>
      */
-    public function provideValidClassNames(): array
+    public static function provideValidClassNames(): array
     {
         return [
             'class'     => [TestAsset\A::class],
@@ -129,9 +129,7 @@ class ConfigTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideValidClassNames
-     */
+    #[DataProvider('provideValidClassNames')]
     public function testSetAlias(string $className): void
     {
         $instance = new Config();
@@ -147,16 +145,14 @@ class ConfigTest extends TestCase
     /**
      * @return array<string, array{0: string}>
      */
-    public function provideInvalidClassNames(): array
+    public static function provideInvalidClassNames(): array
     {
         return [
             'badname' => ['Bad.Class.Name.For.PHP'],
         ];
     }
 
-    /**
-     * @dataProvider provideInvalidClassNames
-     */
+    #[DataProvider('provideInvalidClassNames')]
     public function testSetAliasThrowsExceptionForInvalidClass(string $invalidClass): void
     {
         $this->expectException(Exception\ClassNotFoundException::class);
