@@ -13,16 +13,13 @@ use function is_iterable;
 use function is_string;
 use function sprintf;
 
-/**
- * @readonly
- */
-final class TypePreferences
+final readonly class TypePreferences
 {
     /**
      * @param array<array-key, string> $preferences
      */
     public function __construct(
-        public readonly array $preferences = [],
+        public array $preferences = [],
     ) {
     }
 

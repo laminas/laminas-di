@@ -6,14 +6,12 @@ namespace Laminas\Di\Config;
 
 /**
  * Provides type configuration for a type alias (virtual type)
- *
- * @readonly
  */
-final class AliasConfig
+final readonly class AliasConfig
 {
     public function __construct(
-        public readonly string $name,
-        public readonly TypeConfig $type,
+        public string $name,
+        public TypeConfig $type,
     ) {
     }
 }

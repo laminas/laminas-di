@@ -20,22 +20,21 @@ use function is_string;
 use function sprintf;
 
 /**
- * @readonly
  * @psalm-type TypeConfigArray = array{
  *   typeOf?: class-string|null,
  *   preferences?: array<string, string>|null,
  *   parameters?: array<string, mixed>|null
  *  }
  */
-final class TypeConfig
+final readonly class TypeConfig
 {
     /**
      * @param string $name The name of the configured type.
      */
     public function __construct(
-        public readonly string $name,
-        public readonly TypePreferences $preferences = new TypePreferences(),
-        public readonly ParameterMap $parameters = new ParameterMap(),
+        public string $name,
+        public TypePreferences $preferences = new TypePreferences(),
+        public ParameterMap $parameters = new ParameterMap(),
     ) {
     }
 

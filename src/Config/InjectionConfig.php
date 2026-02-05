@@ -76,17 +76,15 @@ use function sprintf;
  *
  * @see \Laminas\Di\Resolver\ValueInjection A container to force injection of a value
  * @see \Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
- *
- * @readonly
  */
-final class InjectionConfig implements ConfigInterface
+final readonly class InjectionConfig implements ConfigInterface
 {
     /**
      * @param array<string, TypeConfig|AliasConfig> $types
      */
     public function __construct(
-        private readonly TypePreferences $preferences = new TypePreferences(),
-        private readonly array $types = []
+        private TypePreferences $preferences = new TypePreferences(),
+        private array $types = []
     ) {
     }
 

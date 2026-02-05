@@ -15,13 +15,10 @@ use function is_iterable;
 use function is_string;
 use function sprintf;
 
-/**
- * @readonly
- */
-final class ParameterMap
+final readonly class ParameterMap
 {
     /** @var array<string, Parameter> */
-    private readonly array $parameters;
+    private array $parameters;
 
     public function __construct(Parameter ...$parameters)
     {

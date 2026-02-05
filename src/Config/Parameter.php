@@ -11,14 +11,12 @@ use function is_string;
 
 /**
  * Parameter injection configuration
- *
- * @readonly
  */
-final class Parameter
+final readonly class Parameter
 {
     public function __construct(
-        public readonly string $name,
-        public readonly string|InjectionInterface $injection,
+        public string $name,
+        public string|InjectionInterface $injection,
     ) {
     }
 
