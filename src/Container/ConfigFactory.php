@@ -27,7 +27,6 @@ class ConfigFactory
 {
     /**
      * @psalm-suppress MixedArrayAccess
-     * @return Config
      */
     public function create(ContainerInterface $container): ConfigInterface
     {
@@ -55,7 +54,12 @@ class ConfigFactory
             $data         = array_merge_recursive($legacyConfig->toArray(), $data);
         }
 
-        return new Config($data);
+        /** @var mixed $mutable */
+        $mutable = $data['mutableConfig'] ?? false;
+
+        return $mutable === true
+            ? new Config($data)
+            : Config\InjectionConfig::fromConfigValue($data);
     }
 
     /**

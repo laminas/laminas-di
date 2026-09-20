@@ -15,6 +15,8 @@ interface ConfigInterface
     public function isAlias(string $name): bool;
 
     /**
+     * @deprecated Since 3.16.0, This method will be removed in version 4.0
+     *
      * @return string[]
      */
     public function getConfiguredTypeNames(): array;
@@ -24,7 +26,7 @@ interface ConfigInterface
      *
      * @return class-string|null
      */
-    public function getClassForAlias(string $name): ?string;
+    public function getClassForAlias(string $name): string|null;
 
     /**
      * Returns the instantiation parameters for the given type
@@ -37,6 +39,8 @@ interface ConfigInterface
     /**
      * Set the instantiation parameters for the given type
      *
+     * @deprecated Since 3.16.0. This method will be removed in version 4.0 where configuration objects are immutable
+     *
      * @param array<array-key, mixed> $params
      * @return mixed
      */
@@ -45,5 +49,5 @@ interface ConfigInterface
     /**
      * Configured type preference
      */
-    public function getTypePreference(string $type, ?string $contextClass = null): ?string;
+    public function getTypePreference(string $type, string|null $contextClass = null): string|null;
 }

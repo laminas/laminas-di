@@ -74,11 +74,13 @@ use function is_string;
  * For classes known from the definitions, a type preference might be the
  * better approach
  *
+ * @deprecated Since 3.16.0. This class will be removed in 4.0. Please use the immutable and typesafe
+ *             {@link Config\InjectionConfig} variant.
+ *
  * @see \Laminas\Di\Resolver\ValueInjection A container to force injection of a value
  * @see \Laminas\Di\Resolver\TypeInjection  A container to force looking up a specific type instance for injection
  *
  * @final
- *
  * @psalm-type TypeConfigArray = array{
  *  typeOf?: class-string|null,
  *  preferences?: array<string, string>|null,
