@@ -33,7 +33,7 @@ final class AbstractInjectionTest extends TestCase
         }, E_USER_DEPRECATED);
 
         try {
-            new class () extends AbstractInjection
+            new class extends AbstractInjection
             {
                 public function export(): string
                 {

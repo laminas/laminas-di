@@ -7,6 +7,7 @@
 /phpcs.xml export-ignore
 /phpstan.neon export-ignore
 /phpunit.xml.dist export-ignore
+/structarmed.php export-ignore
 /test/ export-ignore
 /phpbench.json export-ignore
 /benchmarks/ export-ignore
