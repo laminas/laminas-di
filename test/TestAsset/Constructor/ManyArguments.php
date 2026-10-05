@@ -24,6 +24,6 @@ class ManyArguments
         $e = null,
         $f = null
     ) {
-        $this->result = array_filter(compact('a', 'b', 'c', 'd', 'e', 'f'), fn($value) => $value !== null);
+        $this->result = array_filter(compact('a', 'b', 'c', 'd', 'e', 'f'), static fn($value) => $value !== null);
     }
 }
